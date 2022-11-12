@@ -1,14 +1,16 @@
 from .db import db, environment, SCHEMA
 from .user import User
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 
 Base=declarative_base()
 
+
 # join table from projects and skills
 project_skills = db.Table(
     "project_skills",
-    Base.metadata,
+    db.Model.metadata,
     db.Column(
         "project_id",
         db.Integer,
@@ -27,7 +29,7 @@ project_skills = db.Table(
 #  join table for coders and skills
 coder_skills = db.Table(
     "coder_skills",
-    Base.metadata,
+    db.Model.metadata,
     db.Column(
         "coder_id",
         db.Integer,
@@ -43,6 +45,24 @@ coder_skills = db.Table(
 )
 
 
+
+# class Coder(db.Model):
+#     __tablename__ = "coders"
+
+#     if environment == "production":
+#         __table_args__ = {'schema': SCHEMA}
+
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+#     daily_rate = db.Column(db.Float, nullable=False)
+#     bio = db.Column(db.String(2000), nullable=False)
+#     experience = db.Column(db.String(2000), nullable=False)
+
+#     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
+#     user = db.relationship("User", back_populates="coder")
+#     reviews = db.relationship("Review", back_populates="coder")
+#     projects = db.relationship("Project", back_populates="coder")
+#     skills = db.relationship("Skill", secondary=coder_skills, back_populates="coders")
 
 class Coder(db.Model):
     __tablename__ = "coders"
@@ -60,7 +80,8 @@ class Coder(db.Model):
     user = db.relationship("User", back_populates="coder")
     reviews = db.relationship("Review", back_populates="coder")
     projects = db.relationship("Project", back_populates="coder")
-    skills1 = db.relationship("Skill", secondary=coder_skills, back_populates="coders")
+
+    skills = db.relationship("Skill", secondary=coder_skills, back_populates = 'coders')
 
 
 
@@ -95,11 +116,20 @@ class Project(db.Model):
 # secondary takes in the mapping class/models
 
 
+# class Skill(db.Model):
+#     __tablename__ = "skills"
+
+#     id = db.Column(db.Integer, primary_key=True)
+#     skill_name = db.Column(db.String(2000), nullable=False, unique=True)
+
+#     coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills")
+#     projects = db.relationship("Project", secondary=project_skills, back_populates="skills")
+
 class Skill(db.Model):
     __tablename__ = "skills"
 
     id = db.Column(db.Integer, primary_key=True)
     skill_name = db.Column(db.String(2000), nullable=False, unique=True)
 
-    coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills1")
+    coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills")
     projects = db.relationship("Project", secondary=project_skills, back_populates="skills")

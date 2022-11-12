@@ -104,7 +104,7 @@ def seed_projects():
         start_date = datetime.date(2022,12,10),
         end_date=datetime.date(2022,12,20),
         completed=False,
-        skills=1
+      
     )
 
     project2 = Project(
@@ -114,7 +114,7 @@ def seed_projects():
         start_date=datetime.date(2021,4,10),
         end_date=datetime.date(2022,5,20),
         completed=True,
-        skills=2
+        
     )
     project3 = Project(
         user_id=3,
@@ -123,7 +123,7 @@ def seed_projects():
         start_date=datetime.date(2023,2,10),
         end_date=datetime.date(2023,3,15),
         completed=False,
-        skills=3
+        
     )
 
     db.session.add_all(
