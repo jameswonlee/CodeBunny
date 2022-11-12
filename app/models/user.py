@@ -5,6 +5,57 @@ from flask_login import UserMixin
 # from ..models import Coder
 
 
+coder_skills = db.Table(
+    "coder_skills",
+    db.Column(
+        "coder_id",
+        db.Integer,
+        db.ForeignKey("coders.id"),
+        primary_key=True
+    ),
+    db.Column(
+        "skill_id",
+        db.Integer,
+        db.ForeignKey("skills.id"),
+        primary_key=True
+    )
+)
+
+# class Coder_Skills(db.Model):
+#     __tablename__ = "coder_skills"
+
+#     id = db.Column(db.Integer, primary_key=True)
+#     coder_id = db.Column(db.Integer, db.ForeignKey(
+#         "coders.id"), nullable=False)
+#     skills_id = db.Column(db.Integer, db.ForeignKey(
+#         "skills.id"), nullable=False)
+
+project_skills = db.Table(
+    "project_skills",
+    db.Column(
+        "project_id",
+        db.Integer,
+        db.ForeignKey("projects.id"),
+        primary_key=True
+    ),
+    db.Column(
+        "skill_id",
+        db.Integer,
+        db.ForeignKey("skills.id"),
+        primary_key=True
+    )
+)
+
+# class Project_Skills(db.Model):
+#     __tablename__ = "project_skills"
+
+#     id = db.Column(db.Integer, primary_key=True)
+#     project_id = db.Column(db.Integer, db.ForeignKey(
+#         "projects.id"), nullable=False)
+#     skills_id = db.Column(db.Integer, db.ForeignKey(
+#         "skills.id"), nullable=False)
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -41,21 +92,6 @@ class User(db.Model, UserMixin):
         }
 
 
-class Coder_Skills(db.Model):
-    __tablename__ = "coder_skills"
-
-    id = db.Column(db.Integer, primary_key=True)
-    coder_id = db.Column(db.Integer, db.ForeignKey("coders.id"), nullable=False)
-    skills_id = db.Column(db.Integer, db.ForeignKey("skills.id"), nullable=False)
-
-
-
-class Project_Skills(db.Model):
-    __tablename__ = "project_skills"
-
-    id = db.Column(db.Integer, primary_key=True)
-    project_id = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
-    skills_id = db.Column(db.Integer, db.ForeignKey("skills.id"), nullable=False)
 
 
 
@@ -75,7 +111,7 @@ class Coder(db.Model):
     user = db.relationship("User", back_populates="coder")
     reviews = db.relationship("Review", back_populates="coder")
     projects = db.relationship("Project", back_populates="coder")
-    skills = db.relationship("Skill", secondary=Coder_Skills, back_populates="coders")
+    skills = db.relationship("Skill", secondary=coder_skills, back_populates="coders")
 
 
 
@@ -90,7 +126,7 @@ class Review(db.Model):
 
     coder = db.relationship("Coder", back_populates="reviews")
     user = db.relationship("User", back_populates="reviews")
-    
+
 
 
 class Project(db.Model):
@@ -105,7 +141,7 @@ class Project(db.Model):
 
     coder = db.relationship("Coder", back_populates="projects")
     user = db.relationship("User", back_populates="projects")
-    skills = db.relationship("Skill", secondary=Project_Skills, back_populates="projects")
+    skills = db.relationship("Skill", secondary=project_skills, back_populates="projects")
 
 
 
@@ -114,9 +150,9 @@ class Skill(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     skill_name = db.Column(db.String(2000), nullable=False, unique=True)
-    
-    coders = db.relationship("Coder", secondary=Coder_Skills, back_populates="skills")
-    projects = db.relationship("Project", secondary=Project_Skills, back_populates="skills")
+
+    coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills")
+    projects = db.relationship("Project", secondary=project_skills, back_populates="skills")
 
 
 
@@ -135,4 +171,3 @@ class Skill(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     project_id = db.Columm(db.Integer, db.ForeignKey("projects.id"), nullable=False)
 #     skills_id = db.Column(db.Integer, db.ForeignKey("skills.id"), nullable=False)
-
