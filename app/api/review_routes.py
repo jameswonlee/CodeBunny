@@ -53,7 +53,6 @@ def create_new_review():
         # new_review = Review()
         # new_review.populate_obj(review_data)
 
-
         coders = Coder.query.all()
         coder_id = 0
         if coders:
@@ -63,6 +62,8 @@ def create_new_review():
                     coder_id = coder_obj["id"]
                 continue
             return coder_id
+    else:
+        return {"message": "bad data"}
 
 
 
