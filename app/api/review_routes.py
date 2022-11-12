@@ -37,7 +37,7 @@ def get_all_reviews():
 
 # route to create a new review
 @review_bp.route("/new", methods=["POST"])
-@login_required
+# @login_required
 def create_new_review():
     # create a new instance of reviewform
     new_review_form = CreateReviewForm()
@@ -50,20 +50,33 @@ def create_new_review():
         print(new_review_form.data)
 
         # Create a NEW INSTANCE of a review and populate it with the user's saved review data
-        new_review = Review()
-        new_review.populate_obj(review_data)
+        # new_review = Review()
+        # new_review.populate_obj(review_data)
+
+
+        coders = Coder.query.all()
+        coder_id = 0
+        if coders:
+            for coder in coders:
+                coder_obj = coder.to_dict()
+                if coder_obj["name"] == review_data.coder:
+                    coder_id = coder_obj["id"]
+                continue
+            return coder_id
+
+
 
         # another way to do this:
-        # new_review = Review(rating= review_data["rating"],review=review_data["review"])
-
+        new_review = Review(rating= review_data["rating"],review=review_data["review"], user_id=1, coder=coder_id)
+        
         # add the newly created review and save it to the database
         db.session.add(new_review)
         db.session.commit()
 
         new_review_obj = new_review.to_dict()
-        response = {
-           new_review_obj
-        }
+        # response = {
+        #    new_review_obj
+        # }
 
         # return new_review
         # redirect to the homepage
