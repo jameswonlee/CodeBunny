@@ -1,5 +1,5 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users, seed_coders, undo_coders, seed_skills,undo_skills
+from .users import seed_users, undo_users, seed_coders, undo_coders, seed_skills,undo_skills, seed_projects, undo_projects, seed_reviews, undo_reviews
 
 from app.models.db import db, environment, SCHEMA
 
@@ -19,9 +19,13 @@ def seed():
         undo_users()
         undo_coders()
         undo_skills()
+        undo_projects()
+        undo_reviews()
     seed_users()
     seed_coders()
     seed_skills()
+    seed_projects()
+    seed_reviews()
     # Add other seed functions here
 
 
@@ -30,5 +34,7 @@ def seed():
 def undo():
     undo_users()
     undo_coders()
-    undo_skills
+    undo_skills()
+    undo_projects()
+    undo_reviews()
     # Add other undo functions here

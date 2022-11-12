@@ -1,13 +1,18 @@
 from .db import db, environment, SCHEMA
 from .user import User
+from sqlalchemy.ext.declarative import declarative_base
 
-#  join table for coders and skills
-coder_skills = db.Table(
-    "coder_skills",
+
+Base=declarative_base()
+
+# join table from projects and skills
+project_skills = db.Table(
+    "project_skills",
+    Base.metadata,
     db.Column(
-        "coder_id",
+        "project_id",
         db.Integer,
-        db.ForeignKey("coders.id"),
+        db.ForeignKey("projects.id"),
         primary_key=True
     ),
     db.Column(
@@ -18,13 +23,15 @@ coder_skills = db.Table(
     )
 )
 
-# join table from projects and skills
-project_skills = db.Table(
-    "project_skills",
+
+#  join table for coders and skills
+coder_skills = db.Table(
+    "coder_skills",
+    Base.metadata,
     db.Column(
-        "project_id",
+        "coder_id",
         db.Integer,
-        db.ForeignKey("projects.id"),
+        db.ForeignKey("coders.id"),
         primary_key=True
     ),
     db.Column(
@@ -53,7 +60,7 @@ class Coder(db.Model):
     user = db.relationship("User", back_populates="coder")
     reviews = db.relationship("Review", back_populates="coder")
     projects = db.relationship("Project", back_populates="coder")
-    skills = db.relationship("Skill", secondary=coder_skills, back_populates="coders")
+    skills1 = db.relationship("Skill", secondary=coder_skills, back_populates="coders")
 
 
 
@@ -75,6 +82,7 @@ class Project(db.Model):
     __tablename__ = "projects"
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     coder_id = db.Column(db.Integer, db.ForeignKey("coders.id"), nullable=False)
     start_date = db.Column(db.Date, nullable=False)
@@ -93,5 +101,5 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     skill_name = db.Column(db.String(2000), nullable=False, unique=True)
 
-    coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills")
+    coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills1")
     projects = db.relationship("Project", secondary=project_skills, back_populates="skills")

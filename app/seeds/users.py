@@ -1,5 +1,5 @@
-from app.models import db, User, Coder, Skill, environment, SCHEMA
-
+from app.models import db, User, Coder, Skill, Project, Review, environment, SCHEMA
+import datetime
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -90,5 +90,88 @@ def undo_skills():
         db.session.execute(f"TRUNCATE table {SCHEMA}.skills RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM skills")
+
+    db.session.commit()
+
+
+def seed_projects():
+    # datetime.date(year, month, day)
+
+    project1 = Project(
+        user_id=1,
+        coder_id=2,
+        name="Facebook clone",
+        start_date = datetime.date(2022,12,10),
+        end_date=datetime.date(2022,12,20),
+        completed=False,
+        skills=1
+    )
+
+    project2 = Project(
+        user_id=2,
+        coder_id=3,
+        name="Airbnb clone",
+        start_date=datetime.date(2021,4,10),
+        end_date=datetime.date(2022,5,20),
+        completed=True,
+        skills=2
+    )
+    project3 = Project(
+        user_id=3,
+        coder_id=1,
+        name="Youtube Clone & Debug",
+        start_date=datetime.date(2023,2,10),
+        end_date=datetime.date(2023,3,15),
+        completed=False,
+        skills=3
+    )
+
+    db.session.add_all(
+        [project1,project2,project3])
+    db.session.commit()
+
+def undo_projects():
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM projects")
+
+    db.session.commit()
+
+
+def seed_reviews():
+    review1 = Review(
+        user_id=2,
+        coder_id=1,
+        rating=9,
+        review="This coder was incredible and efficient! Highly recommend"
+    )
+
+
+    review2 = Review(
+        user_id=3,
+        coder_id=2,
+        rating=9,
+        review="I had a great experience working with this coder. Don't hesitate to book their services!"
+    )
+
+    review3 = Review(
+        user_id=1,
+        coder_id=3,
+        rating=9,
+        review="Efficient, Respectful, Creative, and precise! Had a great experience. Would book this service again!"
+    )
+
+    db.session.add_all(
+        [review1,review2,review3])
+    db.session.commit()
+
+def undo_reviews():
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM reviews")
 
     db.session.commit()
