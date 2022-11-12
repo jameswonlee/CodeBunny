@@ -1,6 +1,14 @@
 from app.models import db, User, Coder, Skill, Project, Review, environment, SCHEMA
 import datetime
 
+skills1 = Skill(skill_name = "Python")
+skills2 = Skill(skill_name = "Javascript")
+skills3 = Skill(skill_name = "C++" )
+skills4 = Skill(skill_name = "Ruby")
+skills5 = Skill(skill_name = "Java")
+skills6 = Skill(skill_name = "React")
+skills7 = Skill(skill_name = "Camel")
+
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
@@ -33,6 +41,15 @@ def undo_users():
 
 
 def seed_coders():
+
+    # skills1 = Skill(skill_name = "Python")
+    # skills2 = Skill(skill_name = "Javascript")
+    # skills3 = Skill(skill_name = "C++" )
+    # skills4 = Skill(skill_name = "Ruby")
+    # skills5 = Skill(skill_name = "Java")
+    # skills6 = Skill(skill_name = "React")
+    # skills7 = Skill(skill_name = "Camel")
+
     coder1 = Coder(
     user_id=2,
     daily_rate=35.00,
@@ -55,6 +72,10 @@ def seed_coders():
     experience="I have worked at Amazon and Facebook."
     )
 
+    coder1.skills.append(skills1)
+    coder2.skills.append(skills2)
+    coder3.skills.append(skills3)
+
     db.session.add(coder1)
     db.session.add(coder2)
     db.session.add(coder3)
@@ -73,17 +94,18 @@ def undo_coders():
 
 def seed_skills():
 # Create instances of Skill class/model
-    skills1 = Skill(skill_name = "Python")
+    # skills1 = Skill(skill_name = "Python")
 
-    skills2 = Skill(skill_name = "Javascript")
-    skills3 = Skill(skill_name = "C++" )
-    skills4 = Skill(skill_name = "Ruby")
-    skills5 = Skill(skill_name = "Java")
-    skills6 = Skill(skill_name = "React")
-    skills7 = Skill(skill_name = "Camel")
+    # skills2 = Skill(skill_name = "Javascript")
+    # skills3 = Skill(skill_name = "C++" )
+    # skills4 = Skill(skill_name = "Ruby")
+    # skills5 = Skill(skill_name = "Java")
+    # skills6 = Skill(skill_name = "React")
+    # skills7 = Skill(skill_name = "Camel")
 
-    db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
-    db.session.commit()
+    # db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
+    # db.session.commit()
+    pass
 
 def undo_skills():
     if environment == "production":
@@ -96,6 +118,13 @@ def undo_skills():
 
 def seed_projects():
     # datetime.date(year, month, day)
+    # skills1 = Skill(skill_name = "Python")
+    # skills2 = Skill(skill_name = "Javascript")
+    # skills3 = Skill(skill_name = "C++" )
+    # skills4 = Skill(skill_name = "Ruby")
+    # skills5 = Skill(skill_name = "Java")
+    # skills6 = Skill(skill_name = "React")
+    # skills7 = Skill(skill_name = "Camel")
 
     project1 = Project(
         user_id=1,
@@ -125,6 +154,11 @@ def seed_projects():
         completed=False,
         
     )
+
+    project1.skills.append(skills1)
+    project1.skills.append(skills2)
+    project2.skills.append(skills3)
+    project3.skills.append(skills5)
 
     db.session.add_all(
         [project1,project2,project3])
