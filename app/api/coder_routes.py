@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, jsonify
-from ..models import Coder, Project, Skill, User, Review
+from ..models import Coder, Project, Skill, User, Review, db
+from ..forms.create_coder import CreateCoderForm
+from flask_login import current_user, login_user, logout_user, login_required
 
 coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 
@@ -41,9 +43,38 @@ def get_coder_profile(coder_id):
     return "Coder not found", 404
 
 
-# Create coder
-@coder_bp.route("/")
-def new_coder():
+# Create new coder
+@coder_bp.route("/new", methods = ["POST"])
+# @login_required
+def create_coder():
+
+    print("did this run 1")
+    new_coder_form = CreateCoderForm()
+    print("did this run 2")
+    #ask what this means
+    new_coder_form['csrf_token'].data = request.cookies['csrf_token']
+
+    #why is invocation of validate_onsubmit not working??
+    if new_coder_form.validate_on_submit():
+        print("did this run")
+        coder_data = new_coder_form.data
+        print("Coder data is", coder_data)
+        new_coder = Coder()
+        new_coder_form.populate_obj(new_coder)
+        #hardcoded
+        new_coder.user_id = 2
+        #this will work if we have a user logged in. currently doesn't work on postman
+        # new_coder.user_id = current_user.id
+        db.session.add(new_coder)
+        print("did this run 4")
+        db.session.commit() #breaking here
+        print("did this run 5")
+
+        new_coder_obj = new_coder.to_dict()
+        return new_coder_obj, 201
+
+    return {"error": "validation error"}, 401
+
 
 
 
