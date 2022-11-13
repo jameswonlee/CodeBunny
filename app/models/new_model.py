@@ -73,7 +73,8 @@ class Coder(db.Model):
             'user_id': self.user_id,
             'daily_rate': self.daily_rate,
             'bio': self.bio,
-            'experience': self.experience
+            'experience': self.experience,
+            'skills': [skill.to_dict() for skill in self.skills]
         }
 
     def __repr__(self):

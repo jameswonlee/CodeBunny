@@ -27,6 +27,9 @@ def get_all_coder():
     # Needs better error handling
     return "404 NOT FOUND", 404
 
+def Convert(lst):
+    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    return res_dct
 
 # Get coder by coder_id
 @coder_bp.route("/<int:coder_id>", methods=["GET"])
@@ -35,8 +38,8 @@ def get_coder_profile(coder_id):
     # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     coder = Coder.query.filter(Coder.id == coder_id).first()
     coder_user = User.query.filter(User.id == coder_id).first()
-    # skills = Coder.query.filter.all()
-    # print('skills', skills)
+    skills = Coder.query.filter.all()
+    print('skills', skills)
 
     if coder:
         print('coder*********', coder)
