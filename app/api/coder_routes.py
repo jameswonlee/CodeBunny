@@ -1,8 +1,14 @@
 from flask import Blueprint, render_template, url_for, redirect, request, jsonify
-from ..models import Coder, Project, Skill, User, Review, db
+from ..models import Coder, Project, Skill, User, Review, db, coder_skills
 from ..forms.create_coder import CreateCoderForm
 from flask_login import current_user, login_user, logout_user, login_required
 from ..forms.create_review import CreateReviewForm
+from sqlalchemy.ext.declarative import declarative_base
+
+Base=declarative_base()
+
+
+
 coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 
 # Get all coders
@@ -21,15 +27,16 @@ def get_all_coder():
     # Needs better error handling
     return "404 NOT FOUND", 404
 
+
 # Get coder by coder_id
 @coder_bp.route("/<int:coder_id>", methods=["GET"])
 def get_coder_profile(coder_id):
     # print('coderId', coder_id)
     # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     coder = Coder.query.filter(Coder.id == coder_id).first()
-
-
     coder_user = User.query.filter(User.id == coder_id).first()
+    skills = Coder.query.filter.all()
+    print('skills', skills)
 
     if coder:
         print('coder*********', coder)
@@ -51,35 +58,30 @@ def get_coder_profile(coder_id):
 def create_coder():
 
     print("did this run 1")
-    new_coder_form = CreateCoderForm()
+    edit_coder_form = CreateCoderForm()
     print("did this run 2")
     #ask what this means
-    new_coder_form['csrf_token'].data = request.cookies['csrf_token']
+    edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
     #why is invocation of validate_onsubmit not working??
-    if new_coder_form.validate_on_submit():
-        print("did this run")
-        coder_data = new_coder_form.data
-        print("Coder data is", coder_data)
-        new_coder = Coder()
-        new_coder_form.populate_obj(new_coder)
+    if edit_coder_form.validate_on_submit():
+        # coder_data = edit_coder_form.data
+        coder = Coder()
+        edit_coder_form.populate_obj(coder)
         #hardcoded
-        new_coder.user_id = 2
+        coder.user_id = 2
         #this will work if we have a user logged in. currently doesn't work on postman
-        # new_coder.user_id = current_user.id
-        db.session.add(new_coder)
+        # coder.user_id = current_user.id
+        db.session.add(coder)
         print("did this run 4")
         db.session.commit() #breaking here
         print("did this run 5")
 
-        new_coder_obj = new_coder.to_dict()
+        new_coder_obj = coder.to_dict()
         # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return new_coder_obj, 201
 
     return {"error": "validation error"}, 401
-
-
-
 
 
 
@@ -121,14 +123,52 @@ def create_new_review(coder_id):
     return "Error with submission", 302
 
 
-# @review_bp.route("/reviews/<int:review_id>", methods=["DELETE"])
-# def delete_review(review_id):
+# Delete coder review
+@coder_bp.route("/reviews/<int:review_id>", methods=["DELETE"])
+def delete_review(review_id):
 
-#     current_review = Review.query.get(Review.id==review_id)
+    current_review = Review.query.get(Review.id==review_id)
 
-#     if current_review:
-#         db.session.delete(current_review)
-#         db.session.commit()
+    if current_review:
+        db.session.delete(current_review)
+        db.session.commit()
 
-#         return "succesfully deleted"
-#     return "404 review not found"
+        return "succesfully deleted"
+    return "404 review not found"
+
+
+# Edit coder profile by coder_id
+@coder_bp.route("/<int:coder_id>", methods=["PUT"])
+# @login_required
+def edit_coder(coder_id):
+
+    edit_coder_form = CreateCoderForm()
+    #ask what this means
+    edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
+
+    #why is invocation of validate_onsubmit not working??
+    if edit_coder_form.validate_on_submit():
+        coder = Coder.query.get(coder_id)
+        print('coder', coder)
+        edit_coder_form.populate_obj(coder)
+        #this will work if we have a user logged in. currently doesn't work on postman
+        # coder.user_id = current_user.id
+        db.session.add(coder)
+        db.session.commit() #breaking here
+
+        new_coder_obj = coder.to_dict()
+        # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return new_coder_obj, 201
+    return {"error": "validation error"}, 401
+
+
+# Delete coder profile
+@coder_bp.route("/<int:coder_id>", methods=["DELETE"])
+@login_required
+def delete_coder(coder_id):
+    coder = Coder.query.get(coder_id)
+    if coder:
+        db.session.delete(coder)
+        db.session.commit()
+        return "Coder succesfully deleted", 200
+    return "404 coder not found", 404

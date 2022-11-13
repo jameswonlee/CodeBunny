@@ -54,14 +54,14 @@ class Coder(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    daily_rate = db.Column(db.Float, nullable=False)
+    daily_rate = db.Column(db.Integer, nullable=False)
     bio = db.Column(db.String(2000), nullable=False)
     experience = db.Column(db.String(2000), nullable=False)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
     user = db.relationship("User", back_populates="coder")
-    reviews = db.relationship("Review", back_populates="coder")
-    projects = db.relationship("Project", back_populates="coder")
+    reviews = db.relationship("Review", back_populates="coder", cascade="all, delete-orphan")
+    projects = db.relationship("Project", back_populates="coder", cascade="all, delete-orphan")
 
     skills = db.relationship("Skill", secondary=coder_skills, back_populates = 'coders')
 
@@ -112,6 +112,7 @@ class Project(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(2000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     coder_id = db.Column(db.Integer, db.ForeignKey("coders.id"), nullable=False)
     start_date = db.Column(db.Date, nullable=False)
@@ -126,6 +127,7 @@ class Project(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            "description": self.description,
             'user_id': self.user_id,
             'coder_id': self.coder_id,
             'start_date': self.start_date,
