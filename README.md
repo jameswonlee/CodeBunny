@@ -1,10 +1,11 @@
 🚧🚧 This page is under construction 🚧🚧
 
-<br>
-<br>
 
+## Database Schema
 
+![codebunny-dbdiagram]
 
+[codebunny-dbdiagram]: ./assets/database-schema.png
 
 
 ## Connect with us!
