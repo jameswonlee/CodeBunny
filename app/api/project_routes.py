@@ -19,7 +19,7 @@ def all_projects():
 
 
 # # Get project by project_id
-# @project_bp.route("/<int:project_id>", methods=["GET"])
-# def get_project_details(project_id):
-#     project = Project.query.get(project_id)
-#     skills = Skill.query.all(project_id == )
+@project_bp.route("/<int:project_id>", methods=["GET"])
+def get_project_details(project_id):
+    project = Project.query.get(project_id)
+    skills = Skill.query.filter(project_id == Project.id).all()
