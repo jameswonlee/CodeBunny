@@ -73,6 +73,7 @@ def seed_coders():
     )
 
     coder1.skills.append(skills1)
+    coder1.skills.append(skills2)
     coder2.skills.append(skills2)
     coder3.skills.append(skills3)
 
