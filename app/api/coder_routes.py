@@ -35,8 +35,8 @@ def get_coder_profile(coder_id):
     # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     coder = Coder.query.filter(Coder.id == coder_id).first()
     coder_user = User.query.filter(User.id == coder_id).first()
-    skills = Coder.query.filter.all()
-    print('skills', skills)
+    # skills = Coder.query.filter.all()
+    # print('skills', skills)
 
     if coder:
         print('coder*********', coder)
