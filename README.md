@@ -9,7 +9,7 @@
 [codebunny-dbdiagram]: ./assets/database-schema.png
 
 
-## Connect with us!
+## Connect with the team!
 
 Keerthana Yellapragada:
 <br>
