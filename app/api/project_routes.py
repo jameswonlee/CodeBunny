@@ -93,7 +93,7 @@ def create_project():
     if create_project_form.validate_on_submit:
         new_project = Project()
         data = create_project_form.data
-    
+
 
         new_project = Project(name=data["name"],
                               description=data["description"],
@@ -117,25 +117,34 @@ def create_project():
 
 
 # Edit project by project_id
-# @project_bp.route("/<int:project_id>/", methods=["PUT"])
-# # @login_required
-# def edit_project(coder_id):
+@project_bp.route("/<int:project_id>/", methods=["PUT"])
+# @login_required
+def edit_project(project_id):
 
-#     edit_project_form = CreateProjectForm()
-#     #ask what this means
-#     edit_project_form['csrf_token'].data = request.cookies['csrf_token']
+    edit_project_form = CreateProjectForm()
+    #ask what this means
+    edit_project_form['csrf_token'].data = request.cookies['csrf_token']
 
-#     #why is invocation of validate_onsubmit not working??
-#     if edit_project_form.validate_on_submit():
-#         coder = Coder.query.get(coder_id)
-#         print('coder', coder)
-#         edit_project_form.populate_obj(coder)
-#         #this will work if we have a user logged in. currently doesn't work on postman
-#         # coder.user_id = current_user.id
-#         db.session.add(coder)
-#         db.session.commit() #breaking here
+    #why is invocation of validate_onsubmit not working??
+    if edit_project_form.validate_on_submit:
+        project = Project.query.get(project_id)
+        print("this is project!!!!!!!!!!!!!!!!!!!@#$!#$!", project)
+        data = edit_project_form.data
 
-#         new_project_obj = coder.to_dict()
-#         # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#         return new_project_obj, 201
-#     return {"error": "validation error"}, 401
+        project = Project(name=data["name"],
+                              description=data["description"],
+                            #   skills=[skill_options[data["skills"]]],
+                            skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+                              start_date=data["start_date"],
+                              end_date=data["end_date"])
+
+        #hardcoded
+        project.user_id = 2
+        project.coder_id = 3
+        db.session.add(project)
+        db.session.commit()
+
+        new_project_obj = project.to_dict()
+        # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return new_project_obj, 201
+    return {"error": "validation error"}, 401

@@ -1,13 +1,13 @@
 from app.models import db, User, Coder, Skill, Project, Review, environment, SCHEMA
 import datetime
 
-# skills1 = Skill(skill_name = "Python")
-# skills2 = Skill(skill_name = "Javascript")
-# skills3 = Skill(skill_name = "C++" )
-# skills4 = Skill(skill_name = "Ruby")
-# skills5 = Skill(skill_name = "Java")
-# skills6 = Skill(skill_name = "React")
-# skills7 = Skill(skill_name = "Camel")
+skills1 = Skill(skill_name = "Python")
+skills2 = Skill(skill_name = "Javascript")
+skills3 = Skill(skill_name = "C++" )
+skills4 = Skill(skill_name = "Ruby")
+skills5 = Skill(skill_name = "Java")
+skills6 = Skill(skill_name = "React")
+skills7 = Skill(skill_name = "Camel")
 
 
 
@@ -97,14 +97,14 @@ def undo_coders():
 
 def seed_skills():
 # Create instances of Skill class/model
-    skills1 = Skill(skill_name = "Python")
+    # skills1 = Skill(skill_name = "Python")
 
-    skills2 = Skill(skill_name = "Javascript")
-    skills3 = Skill(skill_name = "C++" )
-    skills4 = Skill(skill_name = "Ruby")
-    skills5 = Skill(skill_name = "Java")
-    skills6 = Skill(skill_name = "React")
-    skills7 = Skill(skill_name = "Camel")
+    # skills2 = Skill(skill_name = "Javascript")
+    # skills3 = Skill(skill_name = "C++" )
+    # skills4 = Skill(skill_name = "Ruby")
+    # skills5 = Skill(skill_name = "Java")
+    # skills6 = Skill(skill_name = "React")
+    # skills7 = Skill(skill_name = "Camel")
 
     db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
     db.session.commit()
