@@ -57,18 +57,31 @@ def create_coder():
     if create_coder_form.validate_on_submit:
 
         coder = Coder()
+        data = create_coder_form.data
+
+        # coder = Coder(
+        #                 user_id=1,
+        #                 bio = data["bio"],
+        #                 experience = data["experience"],
+        #                 daily_rate = data["daily_rate"],
+        #                 skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        #                 # user=current_user
+        #                 )
 
         create_coder_form.populate_obj(coder)
 
-        coder.user_id = 5
-        selected_skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in create_coder_form.data["skills"]]
-        coder.skills = selected_skills
+        coder.user_id=current_user.id
 
         new_coder_obj = coder.to_dict()
+
+        coder.skills[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
+        # coder_skills = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
+
         print("coder obj",new_coder_obj)
+
+        # coder["skills"].append(coder_skills)
         db.session.add(coder)
         db.session.commit()
-
 
         return new_coder_obj, 201
 
