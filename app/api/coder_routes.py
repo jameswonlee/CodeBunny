@@ -95,16 +95,18 @@ def create_coder():
                         bio = data["bio"],
                         experience = data["experience"],
                         daily_rate = data["daily_rate"],
-                        skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+                        # skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
                         )
 
 
         coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
-        new_coder_obj = coder.to_dict()
-        print("coder obj",new_coder_obj)
+
+
 
         db.session.add(coder)
         db.session.commit()
+        new_coder_obj = coder.to_dict()
+        print("coder obj",new_coder_obj)
         return new_coder_obj, 201
 
     return {"Error": "Validation Error"}, 401
@@ -152,9 +154,9 @@ def create_new_review(coder_id):
 
 # ***************************************   EDIT CODER BY CODER ID  ***************************************************
 
-# Edit coder profile by coder_id - NOT WORKING!!!!!!!
+# Edit coder profile by coder_id - WORKING
 
-@coder_bp.route("/<int:coder_id>", methods=["POST"])
+@coder_bp.route("/<int:coder_id>", methods=["PUT"])
 @login_required
 def edit_coder(coder_id):
 
@@ -170,15 +172,15 @@ def edit_coder(coder_id):
         # edit_coder_form.populate_obj(coder)
 
         data = edit_coder_form.data
-        coder = Coder(
-                        # id = coder.id,
-                        user_id=coder.user_id,
-                        bio = data["bio"],
-                        experience = data["experience"],
-                        daily_rate = data["daily_rate"],
-                        skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
-                        )
+        coder.id = coder.id
+        coder.user_id=coder.user_id,
+        coder.bio = data["bio"],
+        coder.experience = data["experience"],
+        coder.daily_rate = data["daily_rate"],
+        # coder.skills = coder.skills
+        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
 
+        db.session.autoflush = False
         db.session.commit()
 
         new_coder_obj = coder.to_dict()
