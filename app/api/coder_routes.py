@@ -5,16 +5,22 @@ from flask_login import current_user, login_user, logout_user, login_required
 from ..forms.create_review import CreateReviewForm
 from sqlalchemy.ext.declarative import declarative_base
 
+# ************************************************************************************************
+
 Base=declarative_base()
-
-
 
 coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 
-# Get all coders
+# ************************************ CODER ROUTES ***********************************************
+# *************************************************************************************************
+
+
+
+# ************************************ GET ALL CODERS ***********************************************
+
+# Get all coders - WORKING
 @coder_bp.route("/", methods=["GET"])
 def get_all_coder():
-
     all_coders = Coder.query.all()
     response = {}
 
@@ -22,10 +28,34 @@ def get_all_coder():
         for coder in all_coders:
             coder_obj = coder.to_dict()
             response[coder_obj["id"]] = coder_obj
-
         return response, 200
 
-    return {"error":"404 Not Found"}, 404
+    return {"Error":"404 Not Found"}, 404
+
+
+# ************************************ GET CODER DETAILS BY CODER ID ***********************************************
+
+# Get coder by coder_id - NOT WORKING
+@coder_bp.route("/<int:coder_id>", methods=["GET"])
+def get_coder_profile(coder_id):
+
+    coder = Coder.query.filter(Coder.id == coder_id).first()
+    coder_user = User.query.filter(User.id == coder.user_id).first()
+    # skills = Skill.query.filter.all()
+    # projects = Project.query.filter(Project.coder_id == coder_id).all()
+    # coder_projects = [project.to_dict() for project in projects]
+
+    if coder:
+        coder_obj = coder.to_dict()
+        coder_user_obj = coder_user.to_dict()
+        result = {**coder_obj, **coder_user_obj}
+        response = {}
+        response[coder_obj["id"]] = result
+        return response
+
+    return { "Error": "Coder not found" }, 404
+
+
 
 
 # # Get coder by coder_id
@@ -43,79 +73,39 @@ def get_all_coder():
 
 #     return {"error":"404 Not Found"}, 404
 
-# Get coder by coder_id
-@coder_bp.route("/<int:coder_id>", methods=["GET"])
-def get_coder_profile(coder_id):
-    # print('coderId', coder_id)
-    # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    coder = Coder.query.filter(Coder.id == coder_id).first()
-    coder_user = User.query.filter(User.id == coder.user_id).first()
-    # skills = Skill.query.filter.all()
-    # projects = Project.query.filter(Project.coder_id == coder_id).all()
-    # coder_projects = [project.to_dict() for project in projects]
 
-    if coder:
+# ************************************ CREATE NEW CODER ***********************************************
 
-        coder_obj = coder.to_dict()
-        coder_user_obj = coder_user.to_dict()
-
-        result = {**coder_obj, **coder_user_obj}
-        response = {}
-        response[coder_obj["id"]] = result
-
-        return response
-    # Need to redo error handling
-    return "Coder not found", 404
-
-
-# Create new coder
+# Create new coder - WORKING
 @coder_bp.route("/new", methods = ["POST"])
 @login_required
 def create_coder():
 
-    # NOT WORKING!!!!!!!!
-
     create_coder_form = CreateCoderForm()
-
     create_coder_form['csrf_token'].data = request.cookies['csrf_token']
-
-
-    if create_coder_form.validate_on_submit():
-
+    # Validate on submit not workin!!!!
+    if create_coder_form.validate_on_submit:
         coder = Coder()
         data = create_coder_form.data
-
         coder = Coder(
                         user_id=current_user.id,
                         bio = data["bio"],
                         experience = data["experience"],
                         daily_rate = data["daily_rate"],
                         skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
-                        # user=current_user
                         )
 
-        # create_coder_form.populate_obj(coder)
-
-        coder.user_id=current_user.id
-
         new_coder_obj = coder.to_dict()
-
-        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
-
-        print("coder obj",new_coder_obj)
-
-        # coder["skills"].append(coder_skills)
-
         db.session.add(coder)
         db.session.commit()
-
         return new_coder_obj, 201
 
-    return {"error": "validation error"}, 401
+    return {"Error": "Validation Error"}, 401
 
 
+# ************************************ CREATE A REVIEW BY CODER ID ***********************************************
 
-# route to create a new review
+# route to create a new review - WORKING
 @coder_bp.route("/<int:coder_id>/reviews/new", methods=["POST"])
 @login_required
 def create_new_review(coder_id):
@@ -123,77 +113,78 @@ def create_new_review(coder_id):
     # create a new instance of reviewform
     new_review_form = CreateReviewForm()
     new_review_form['csrf_token'].data = request.cookies['csrf_token']
-    # if the form passes all validations and is submitted succesfully...
+
     if new_review_form.validate_on_submit():
 
-        # key into form's response data(user's input) and save all the data to a variable
+
         review_data = new_review_form.data
         print(new_review_form.data)
 
-        # Create a NEW INSTANCE of a review and populate it with the user's saved review data
+
         new_review = Review()
         new_review_form.populate_obj(new_review)
 
 
-        # find the coder from db that matches the id from params
+
         current_coder = Coder.query.filter(Coder.id == coder_id).first()
         print("current coder",current_coder)
 
 
         new_review = Review(rating= review_data["rating"],review=review_data["review"], user_id=current_user.id, coder_id=current_coder.id)
 
-        # add the newly created review and save it to the database
+
         db.session.add(new_review)
         db.session.commit()
 
-    # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES and add to response obj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         new_review_obj = new_review.to_dict()
         return new_review_obj, 201
 
-    return "Error with submission", 302
+    return { "Error": "Validation Error" }, 400
 
 
-# Delete coder review
-@coder_bp.route("/reviews/<int:review_id>", methods=["DELETE"])
-@login_required
-def delete_review(review_id):
+# ***************************************   EDIT CODER BY CODER ID  ***************************************************
 
-    current_review = Review.query.get(Review.id==review_id)
-
-    if current_review:
-        db.session.delete(current_review)
-        db.session.commit()
-
-        return "succesfully deleted"
-    return "404 review not found"
-
-
-# Edit coder profile by coder_id
-@coder_bp.route("/<int:coder_id>", methods=["PUT"])
+#Edit Coder details
+@coder_bp.route("/<int:coder_id>", methods=["POST"])
 @login_required
 def edit_coder(coder_id):
 
     edit_coder_form = CreateCoderForm()
-    #ask what this means
+
     edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
-    #why is invocation of validate_onsubmit not working??
-    if edit_coder_form.validate_on_submit():
+    if edit_coder_form.validate_on_submit:
+        # coder = Coder.query.filter(Coder.id == coder_id).first()
         coder = Coder.query.get(coder_id)
+
         print('coder', coder)
-        edit_coder_form.populate_obj(coder)
-        #this will work if we have a user logged in. currently doesn't work on postman
-        # coder.user_id = current_user.id
-        db.session.add(coder)
-        db.session.commit() #breaking here
+        # coder_obj = coder.to_dict()
+        # edit_coder_form.populate_obj(coder_obj)
+
+        # coder = Coder()
+        data = edit_coder_form.data
+        coder = Coder(
+                        # id = coder.id,
+                        user_id = current_user.id,
+                        bio = data["bio"],
+                        experience = data["experience"],
+                        daily_rate = data["daily_rate"],
+                        skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+                        )
+
+        # edit_coder_form.populate_obj(coder)
+
+
+        # db.session.add(coder)
+        db.session.commit()
 
         new_coder_obj = coder.to_dict()
-        # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         return new_coder_obj, 201
-    return {"error": "validation error"}, 401
+    return {"Error": "Validation Error"}, 401
+# ************************************   DELETE CODER BY CODER ID   ******************************************************
 
-
-# Delete coder profile
+# Delete coder profile - WORKING
 @coder_bp.route("/<int:coder_id>", methods=["DELETE"])
 @login_required
 def delete_coder(coder_id):
@@ -204,6 +195,6 @@ def delete_coder(coder_id):
         db.session.delete(coder)
         db.session.commit()
 
-        return "Coder succesfully deleted", 200
+        return {"message" : "Coder succesfully deleted"}, 200
 
-    return "404 coder not found", 404
+    return {"Error": "404 Coder Not Found"}, 404
