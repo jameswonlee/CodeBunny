@@ -42,12 +42,36 @@ def get_coder_profile(coder_id):
         return response
 
     return {"error":"404 Not Found"}, 404
+# # Get coder by coder_id
+# @coder_bp.route("/<int:coder_id>", methods=["GET"])
+# def get_coder_profile(coder_id):
+#     # print('coderId', coder_id)
+#     # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#     coder = Coder.query.filter(Coder.id == coder_id).first()
+#     coder_user = User.query.filter(User.id == coder_id).first()
+#     skills = Coder.query.filter.all()
+#     print('skills', skills)
+
+#     if coder:
+#         print('coder*********', coder)
+#         coder_obj = coder.to_dict()
+#         coder_user_obj = coder_user.to_dict()
+#         print('coder_user_obj', coder_user_obj)
+#         result = {**coder_obj, **coder_user_obj}
+#         response = {}
+#         response[coder_obj["id"]] = result
+
+#         return response
+#     # Need to redo error handling
+#     return "Coder not found", 404
 
 
 # Create new coder
 @coder_bp.route("/new", methods = ["POST"])
-# @login_required
+@login_required
 def create_coder():
+
+    # NOT WORKING!!!!!!!!
 
     create_coder_form = CreateCoderForm()
 
@@ -74,7 +98,7 @@ def create_coder():
 
         new_coder_obj = coder.to_dict()
 
-        coder.skills[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
+        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
         # coder_skills = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
 
         print("coder obj",new_coder_obj)

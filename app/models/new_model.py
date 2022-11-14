@@ -74,7 +74,7 @@ class Coder(db.Model):
             'daily_rate': self.daily_rate,
             'bio': self.bio,
             'experience': self.experience,
-            'skills': [skill.to_dict() for skill in self.skills]
+            'skills': [skill.to_dict() for skill in self.skills],
             # 'user': self.user.to_dict()
         }
 
