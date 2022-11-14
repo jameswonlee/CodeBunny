@@ -84,7 +84,7 @@ def create_coder():
     create_coder_form = CreateCoderForm()
     create_coder_form['csrf_token'].data = request.cookies['csrf_token']
     # Validate on submit not workin!!!!
-    if create_coder_form.validate_on_submit:
+    if create_coder_form.validate_on_submit():
         coder = Coder()
         data = create_coder_form.data
         coder = Coder(
@@ -163,16 +163,19 @@ def edit_coder(coder_id):
 
         # coder = Coder()
         data = edit_coder_form.data
-        coder = Coder(
-                        # id = coder.id,
-                        user_id = current_user.id,
-                        bio = data["bio"],
-                        experience = data["experience"],
-                        daily_rate = data["daily_rate"],
-                        skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
-                        )
+        # coder = Coder(
+        #                 # id = coder.id,
+        #                 user_id = current_user.id,
+        #                 bio = data["bio"],
+        #                 experience = data["experience"],
+        #                 daily_rate = data["daily_rate"],
+        #                 skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        #                 )
+        coder.bio = bio = data["bio"],
+        coder.experience = data["experience"],
+        coder.daily_rate = daily_rate = data["daily_rate"],
+        coder.skills = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
 
-        # edit_coder_form.populate_obj(coder)
 
 
         # db.session.add(coder)
