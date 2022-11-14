@@ -74,7 +74,7 @@ class Coder(db.Model):
             'daily_rate': self.daily_rate,
             'bio': self.bio,
             'experience': self.experience,
-            'skills': [skill.to_dict() for skill in self.skills],
+            'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
             # 'user': self.user.to_dict()
         }
 
@@ -136,7 +136,7 @@ class Project(db.Model):
             'start_date': self.start_date,
             'end_date': self.end_date,
             'completed': self.completed,
-            'skills': [skill.to_dict() for skill in self.skills],
+            'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
             'user': self.user.to_dict()
         }
 
