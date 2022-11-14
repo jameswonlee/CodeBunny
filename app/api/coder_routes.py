@@ -28,42 +28,44 @@ def get_all_coder():
     return {"error":"404 Not Found"}, 404
 
 
-# Get coder by coder_id
-@coder_bp.route("/<int:coder_id>", methods=["GET"])
-def get_coder_profile(coder_id):
-
-    coder = Coder.query.filter(Coder.id == coder_id).first()
-
-    if coder:
-        coder_obj = coder.to_dict()
-        response = {}
-        response[coder_obj["id"]] = coder_obj
-
-        return response
-
-    return {"error":"404 Not Found"}, 404
 # # Get coder by coder_id
 # @coder_bp.route("/<int:coder_id>", methods=["GET"])
 # def get_coder_profile(coder_id):
-#     # print('coderId', coder_id)
-#     # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 #     coder = Coder.query.filter(Coder.id == coder_id).first()
-#     coder_user = User.query.filter(User.id == coder_id).first()
-#     skills = Coder.query.filter.all()
-#     print('skills', skills)
 
 #     if coder:
-#         print('coder*********', coder)
 #         coder_obj = coder.to_dict()
-#         coder_user_obj = coder_user.to_dict()
-#         print('coder_user_obj', coder_user_obj)
-#         result = {**coder_obj, **coder_user_obj}
 #         response = {}
-#         response[coder_obj["id"]] = result
+#         response[coder_obj["id"]] = coder_obj
 
 #         return response
-#     # Need to redo error handling
-#     return "Coder not found", 404
+
+#     return {"error":"404 Not Found"}, 404
+
+# Get coder by coder_id
+@coder_bp.route("/<int:coder_id>", methods=["GET"])
+def get_coder_profile(coder_id):
+    # print('coderId', coder_id)
+    # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    coder = Coder.query.filter(Coder.id == coder_id).first()
+    coder_user = User.query.filter(User.id == coder.user_id).first()
+    # skills = Skill.query.filter.all()
+    # projects = Project.query.filter(Project.coder_id == coder_id).all()
+    # coder_projects = [project.to_dict() for project in projects]
+
+    if coder:
+
+        coder_obj = coder.to_dict()
+        coder_user_obj = coder_user.to_dict()
+
+        result = {**coder_obj, **coder_user_obj}
+        response = {}
+        response[coder_obj["id"]] = result
+
+        return response
+    # Need to redo error handling
+    return "Coder not found", 404
 
 
 # Create new coder
