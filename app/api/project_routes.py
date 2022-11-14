@@ -2,8 +2,20 @@ from flask import Blueprint, render_template, url_for, redirect, request, jsonif
 from ..models import Coder, Project, Skill, User, Review, db
 from flask_login import current_user, login_user, logout_user, login_required
 from ..forms.create_project import CreateProjectForm
+# from app.seeds.users import skills1, skills2, skills3, skills4, skills5, skills6, skills7
 
 project_bp = Blueprint("project_routes", __name__, url_prefix="/api/projects")
+
+
+skill_options = {
+    "Python":{'id':1,'skill_name':'Python'},
+    "Javascript":{'id':2, 'skill_name':'Javascript'},
+    "C++":{'id':3, 'skill_name':'C++'},
+    "Ruby":{'id':4, 'skill_name':'Ruby'},
+    "Java":{'id':5, 'skill_name':'Java'},
+    "React":{'id':6, 'skill_name':'React'},
+    "Camel":{'id':7, 'skill_name':'Camel'}
+}
 
 # Get all projects
 @project_bp.route("/", methods=["GET"])
@@ -80,9 +92,24 @@ def create_project():
     #why is invocation of validate_onsubmit not working??
     if create_project_form.validate_on_submit:
         new_project = Project()
-        new_project.skills.append(skills1)
-        create_project_form.populate_obj(new_project)
+        data = create_project_form.data
+        print("this is data", data["skills"])
+        print("THIS IS TYPE",type(data["skills"]))
+        print("this is a string", type("hi"))
+        print("this is skill_options python", skill_options["Python"])
+        # form_skill = Skill.query.like(skill_name = form.skill)
+        # create_project_form.populate_obj(new_project)
+        new_project = Project(name=data["name"],
+                              description=data["description"],
+                            #   skills=[skill_options[data["skills"]]],
+                              start_date=data["start_date"],
+                              end_date=data["end_date"])
+        # skill_object= skill_options[data["skills"]].pop('_sa_instance_state')
 
+        new_project.skills.append(skill_options[data["skills"]])
+        #hardcoded
+        new_project.user_id = 2
+        new_project.coder_id = 3
         db.session.add(new_project)
         db.session.commit()
 

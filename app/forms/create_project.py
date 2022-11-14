@@ -3,23 +3,17 @@ from app.models import db, User, Review, Coder, Skill
 from wtforms import StringField, SelectField, SubmitField, IntegerField, FloatField, DateField
 from wtforms.validators import DataRequired, ValidationError
 from flask_login import current_user, login_user, logout_user, login_required
-# from seeds.users import *
-skills1 = Skill(skill_name = "Python")
-skills2 = Skill(skill_name = "Javascript")
-skills3 = Skill(skill_name = "C++" )
-skills4 = Skill(skill_name = "Ruby")
-skills5 = Skill(skill_name = "Java")
-skills6 = Skill(skill_name = "React")
-skills7 = Skill(skill_name = "Camel")
+# from app.seeds.users import skills1, skills2, skills3, skills4, skills5, skills6, skills7
+
 
 skill_options = {
-    "Python":skills1,
-    "Javascript":skills2,
-    "C++":skills3,
-    "Ruby":skills4,
-    "Java":skills5,
-    "React":skills6,
-    "Camel":skills7
+    "Python":{'id':1,'skill_name':'Python'},
+    "Javascript":{'id':2, 'skill_name':'Javascript'},
+    "C++":{'id':3, 'skill_name':'C++'},
+    "Ruby":{'id':4, 'skill_name':'Ruby'},
+    "Java":{'id':5, 'skill_name':'Java'},
+    "React":{'id':6, 'skill_name':'React'},
+    "Camel":{'id':7, 'skill_name':'Camel'}
 }
 
 class CreateProjectForm(FlaskForm):
