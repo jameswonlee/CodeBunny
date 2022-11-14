@@ -40,8 +40,18 @@ def get_all_reviews():
     return { "Error": "404 NOT FOUND" }, 404
 
 
+# ******************************    GET  REVIEW DETAILS BY REVIEW ID   ************************************
 
-# ************************************ DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ***********************************************
+# Get review by id - WORKS!
+@review_bp.route("/<int:review_id>", methods=["GET"])
+def get_review_details(review_id):
+    current_review = Review.query.get(review_id)
+    if current_review:
+        return current_review.to_dict(), 200
+    return { "Error": "404 NOT FOUND" }, 404
+
+
+# ************************************ DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ************
 
 # Delete a coder's review
 @review_bp.route("/<int:review_id>", methods=["DELETE"])
