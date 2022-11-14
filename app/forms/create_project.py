@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from app.models import db, User, Review, Coder, Skill
-from wtforms import StringField, SelectField, SubmitField, IntegerField, FloatField, DateField
+from wtforms import StringField, SelectMultipleField, SubmitField, IntegerField, FloatField, DateField
 from wtforms.validators import DataRequired, ValidationError
 from flask_login import current_user, login_user, logout_user, login_required
 # from app.seeds.users import skills1, skills2, skills3, skills4, skills5, skills6, skills7
@@ -19,7 +19,7 @@ skill_options = {
 class CreateProjectForm(FlaskForm):
     name = StringField("Name of Project", validators = [DataRequired()])
     description = StringField("Describe the Project", validators = [DataRequired()])
-    skills = SelectField("Skills required", choices=[('skills1', 'Python'), ('skills2', 'Javascript'), ('skills3', 'C++'), ('skills4', 'Ruby'), ('skills5', 'Java'), ('skills6', 'React'), ('skills7', 'Camel')], validators = [DataRequired()])
+    skills = SelectMultipleField("Skills required", choices=[('skills1', 'Python'), ('skills2', 'Javascript'), ('skills3', 'C++'), ('skills4', 'Ruby'), ('skills5', 'Java'), ('skills6', 'React'), ('skills7', 'Camel')], validators = [DataRequired()])
     start_date = DateField('Start Date', validators = [DataRequired()])
     end_date  = DateField('End Date', validators = [DataRequired()])
     submit = SubmitField('Create your Project')

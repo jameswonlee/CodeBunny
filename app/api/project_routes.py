@@ -93,20 +93,17 @@ def create_project():
     if create_project_form.validate_on_submit:
         new_project = Project()
         data = create_project_form.data
-        print("this is data", data["skills"])
-        print("THIS IS TYPE",type(data["skills"]))
-        print("this is a string", type("hi"))
-        print("this is skill_options python", skill_options["Python"])
-        # form_skill = Skill.query.like(skill_name = form.skill)
-        # create_project_form.populate_obj(new_project)
+    
+
         new_project = Project(name=data["name"],
                               description=data["description"],
                             #   skills=[skill_options[data["skills"]]],
+                            skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
                               start_date=data["start_date"],
                               end_date=data["end_date"])
-        # skill_object= skill_options[data["skills"]].pop('_sa_instance_state')
 
-        new_project.skills.append(skill_options[data["skills"]])
+
+
         #hardcoded
         new_project.user_id = 2
         new_project.coder_id = 3
