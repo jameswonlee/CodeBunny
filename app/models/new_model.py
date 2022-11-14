@@ -74,7 +74,8 @@ class Coder(db.Model):
             'daily_rate': self.daily_rate,
             'bio': self.bio,
             'experience': self.experience,
-            'skills': [skill.to_dict() for skill in self.skills]
+            'skills': [skill.to_dict() for skill in self.skills],
+            'user': self.user.to_dict()
         }
 
     def __repr__(self):
@@ -101,11 +102,12 @@ class Review(db.Model):
             'user_id': self.user_id,
             'coder_id': self.coder_id,
             'rating': self.rating,
-            'review': self.review
+            'review': self.review,
+            'user': self.user.to_dict()
         }
 
     def __repr__(self):
-        return f'<Review, id={self.id}, user_id={self.user_id}, coder={self.coder_id},rating={self.rating}, review={self.review}>'
+        return f'<Review, id={self.id}, user_id={self.user_id}, coder={self.coder_id},rating={self.rating}, review={self.review}, user={self.user}>'
 
 
 class Project(db.Model):
@@ -134,11 +136,12 @@ class Project(db.Model):
             'start_date': self.start_date,
             'end_date': self.end_date,
             'completed': self.completed,
-            'skills': [skill.to_dict() for skill in self.skills]
+            'skills': [skill.to_dict() for skill in self.skills],
+            'user': self.user.to_dict()
         }
 
     def __repr__(self):
-        return f'<Project, id={self.id}, name={self.name}, user_id={self.user_id}, coder_id={self.coder_id},start_date={self.start_date}, end_date={self.end_date}, completed={self.completed}>'
+        return f'<Project, id={self.id}, name={self.name}, user_id={self.user_id}, coder_id={self.coder_id},start_date={self.start_date}, end_date={self.end_date}, completed={self.completed}, owner={self.user}>'
 
 
 # secondary takes in the mapping class/models

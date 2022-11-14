@@ -46,10 +46,11 @@ def get_all_reviews():
     response = {}
     if all_reviews:
         for review in all_reviews:
-            review_user = User.query.filter(User.id == review.user_id).first()
-            print(review_user)
+            print(review.to_dict())
+            # review_user = User.query.filter(User.id == review.user_id).first()
+            # print(review_user)
             review_obj = review.to_dict()
-            review_obj["User"] = review_user.to_dict()
+            # review_obj["User"] = review_user.to_dict()
             response[review_obj["id"]] = review_obj
         return response, 200
     return "404 NOT FOUND", 404
@@ -57,5 +58,4 @@ def get_all_reviews():
 # open_orders = Order.query.filter(
 #         Order.finished == False and Order.employee_id == current_user.id
 #     ).options(joinedload(Order.table)).options(joinedload(Order.details, OrderDetail.menu_item))
-
 #     foods = MenuItem.query.join(MenuItemType).order_by(MenuItemType.name, MenuItem.name).options(joinedload(MenuItem.type))

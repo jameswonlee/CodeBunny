@@ -34,21 +34,22 @@ def Convert(lst):
 # Get coder by coder_id
 @coder_bp.route("/<int:coder_id>", methods=["GET"])
 def get_coder_profile(coder_id):
-    # print('coderId', coder_id)
+
     # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     coder = Coder.query.filter(Coder.id == coder_id).first()
-    coder_user = User.query.filter(User.id == coder_id).first()
-    skills = Coder.query.filter.all()
-    print('skills', skills)
+    # coder_user = User.query.filter(User.id == coder_id).first()
+    # skills = Coder.query.filter.all()
+    # print('skills', skills)
 
     if coder:
-        print('coder*********', coder)
+
         coder_obj = coder.to_dict()
-        coder_user_obj = coder_user.to_dict()
-        print('coder_user_obj', coder_user_obj)
-        result = {**coder_obj, **coder_user_obj}
+        # coder_user_obj = coder_user.to_dict()
+
+        # skills= coder_obj.skills
+        # result = {**coder_obj, **coder_user_obj}
         response = {}
-        response[coder_obj["id"]] = result
+        response[coder_obj["id"]] = coder_obj
 
         return response
     # Need to redo error handling
@@ -57,7 +58,7 @@ def get_coder_profile(coder_id):
 
 # Create new coder
 @coder_bp.route("/new", methods = ["POST"])
-# @login_required
+@login_required
 def create_coder():
 
     print("did this run 1")
@@ -90,8 +91,11 @@ def create_coder():
 
 # route to create a new review
 @coder_bp.route("/<int:coder_id>/reviews/new", methods=["POST"])
-# @login_required
+@login_required
 def create_new_review(coder_id):
+
+    # if not current_user:
+    #     return {"Error": "Unauthorized - Must be logged in"}, 401
 
     # create a new instance of reviewform
     new_review_form = CreateReviewForm()
@@ -113,7 +117,7 @@ def create_new_review(coder_id):
         print("current coder",current_coder)
 
 
-        new_review = Review(rating= review_data["rating"],review=review_data["review"], user_id=1, coder_id=current_coder.id)
+        new_review = Review(rating= review_data["rating"],review=review_data["review"], user_id=current_user.id, coder_id=current_coder.id)
 
         # add the newly created review and save it to the database
         db.session.add(new_review)
@@ -128,6 +132,7 @@ def create_new_review(coder_id):
 
 # Delete coder review
 @coder_bp.route("/reviews/<int:review_id>", methods=["DELETE"])
+@login_required
 def delete_review(review_id):
 
     current_review = Review.query.get(Review.id==review_id)
@@ -142,7 +147,7 @@ def delete_review(review_id):
 
 # Edit coder profile by coder_id
 @coder_bp.route("/<int:coder_id>", methods=["PUT"])
-# @login_required
+@login_required
 def edit_coder(coder_id):
 
     edit_coder_form = CreateCoderForm()
