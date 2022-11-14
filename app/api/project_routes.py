@@ -22,4 +22,30 @@ def all_projects():
 @project_bp.route("/<int:project_id>", methods=["GET"])
 def get_project_details(project_id):
     project = Project.query.get(project_id)
-    skills = Skill.query.filter(project_id == Project.id).all()
+    # project_skills = Skill.query.filter(project_id == Project.id).all()
+    current_project_skills = Project.query.filter.all()
+    print('skills', skills)
+
+    if project:
+        project_obj = project.to_dict()
+        current_project_skills_obj = current_project_skills_obj.to_dict()
+
+        result = {**project_obj, ** current_project_skills_obj}
+
+        response = {
+            project_obj["id"]: result
+        }
+
+        return response
+    return "404 Project not found", 404
+
+
+@project_bp.route("//<int:project_id>/", methods=["DELETE"])
+def delete_project(project_id):
+    current_project = Project.query.get(project_id)
+    if current_project:
+        # print("IS IT HITTING THIS DELETE")
+        db.session.delete(current_project)
+        db.session.commit()
+        return "succesfully deleted"
+    return "404 review not found"

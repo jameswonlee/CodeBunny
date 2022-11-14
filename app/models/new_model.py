@@ -133,7 +133,8 @@ class Project(db.Model):
             'coder_id': self.coder_id,
             'start_date': self.start_date,
             'end_date': self.end_date,
-            'completed': self.completed
+            'completed': self.completed,
+            'skills': [skill.to_dict() for skill in self.skills]
         }
 
     def __repr__(self):
