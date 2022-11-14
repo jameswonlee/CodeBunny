@@ -19,6 +19,7 @@ coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 # ************************************ GET ALL CODERS ***********************************************
 
 # Get all coders - WORKING
+
 @coder_bp.route("/", methods=["GET"])
 def get_all_coder():
     all_coders = Coder.query.all()
@@ -36,6 +37,7 @@ def get_all_coder():
 # ************************************ GET CODER DETAILS BY CODER ID ***********************************************
 
 # Get coder by coder_id - NOT WORKING
+
 @coder_bp.route("/<int:coder_id>", methods=["GET"])
 def get_coder_profile(coder_id):
 
@@ -77,6 +79,7 @@ def get_coder_profile(coder_id):
 # ************************************ CREATE NEW CODER ***********************************************
 
 # Create new coder - NOT WORKING
+
 @coder_bp.route("/new", methods = ["POST"])
 @login_required
 def create_coder():
@@ -110,12 +113,13 @@ def create_coder():
 # ************************************ CREATE A REVIEW BY CODER ID ***********************************************
 
 # route to create a new review - WORKING
+
 @coder_bp.route("/<int:coder_id>/reviews/new", methods=["POST"])
 @login_required
 def create_new_review(coder_id):
 
-    # create a new instance of reviewform
     new_review_form = CreateReviewForm()
+
     new_review_form['csrf_token'].data = request.cookies['csrf_token']
 
     if new_review_form.validate_on_submit():
@@ -148,8 +152,9 @@ def create_new_review(coder_id):
 
 # ***************************************   EDIT CODER BY CODER ID  ***************************************************
 
-# Edit coder profile by coder_id
-@coder_bp.route("/<int:coder_id>", methods=["PUT"])
+# Edit coder profile by coder_id - NOT WORKING!!!!!!!
+
+@coder_bp.route("/<int:coder_id>", methods=["POST"])
 @login_required
 def edit_coder(coder_id):
 
@@ -157,23 +162,34 @@ def edit_coder(coder_id):
 
     edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
+    if edit_coder_form.validate_on_submit:
 
-    if edit_coder_form.validate_on_submit():
-        coder = Coder.query.get(coder_id)
-        print('coder', coder)
-        edit_coder_form.populate_obj(coder)
+        coder = Coder.query.filter(Coder.id==coder_id).first()
+        print("coder edit", coder)
 
-        db.session.add(coder)
+        # edit_coder_form.populate_obj(coder)
+
+        data = edit_coder_form.data
+        coder = Coder(
+                        # id = coder.id,
+                        user_id=coder.user_id,
+                        bio = data["bio"],
+                        experience = data["experience"],
+                        daily_rate = data["daily_rate"],
+                        skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+                        )
+
         db.session.commit()
 
         new_coder_obj = coder.to_dict()
-
         return new_coder_obj, 201
+
     return {"Error": "Validation Error"}, 401
 
 # ************************************   DELETE CODER BY CODER ID   ******************************************************
 
-# Delete coder profile
+# Delete coder profile - WORKING
+
 @coder_bp.route("/<int:coder_id>", methods=["DELETE"])
 @login_required
 def delete_coder(coder_id):
@@ -187,3 +203,6 @@ def delete_coder(coder_id):
         return {"message" : "Coder succesfully deleted"}, 200
 
     return {"Error": "404 Coder Not Found"}, 404
+
+
+# ************************************************************************************************************************
