@@ -137,7 +137,7 @@ class Project(db.Model):
             'end_date': self.end_date,
             'completed': self.completed,
             'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
-            'user': self.user.to_dict()
+            'user': self.user.to_dict() if self.user else None
         }
 
     def __repr__(self):
