@@ -144,17 +144,6 @@ class Project(db.Model):
         return f'<Project, id={self.id}, name={self.name}, user_id={self.user_id}, coder_id={self.coder_id},start_date={self.start_date}, end_date={self.end_date}, completed={self.completed}, owner={self.user}>'
 
 
-# secondary takes in the mapping class/models
-
-
-# class Skill(db.Model):
-#     __tablename__ = "skills"
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     skill_name = db.Column(db.String(2000), nullable=False, unique=True)
-
-#     coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills")
-#     projects = db.relationship("Project", secondary=project_skills, back_populates="skills")
 
 class Skill(db.Model):
     __tablename__ = "skills"

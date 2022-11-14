@@ -9,6 +9,8 @@ skills5 = Skill(skill_name = "Java")
 skills6 = Skill(skill_name = "React")
 skills7 = Skill(skill_name = "Camel")
 
+
+
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
@@ -95,18 +97,18 @@ def undo_coders():
 
 def seed_skills():
 # Create instances of Skill class/model
-    # skills1 = Skill(skill_name = "Python")
+    skills1 = Skill(skill_name = "Python")
 
-    # skills2 = Skill(skill_name = "Javascript")
-    # skills3 = Skill(skill_name = "C++" )
-    # skills4 = Skill(skill_name = "Ruby")
-    # skills5 = Skill(skill_name = "Java")
-    # skills6 = Skill(skill_name = "React")
-    # skills7 = Skill(skill_name = "Camel")
+    skills2 = Skill(skill_name = "Javascript")
+    skills3 = Skill(skill_name = "C++" )
+    skills4 = Skill(skill_name = "Ruby")
+    skills5 = Skill(skill_name = "Java")
+    skills6 = Skill(skill_name = "React")
+    skills7 = Skill(skill_name = "Camel")
 
-    # db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
-    # db.session.commit()
-    pass
+    db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
+    db.session.commit()
+
 
 def undo_skills():
     if environment == "production":
@@ -135,7 +137,7 @@ def seed_projects():
         start_date = datetime.date(2022,12,10),
         end_date=datetime.date(2022,12,20),
         completed=False,
-      
+
     )
 
     project2 = Project(
@@ -146,7 +148,7 @@ def seed_projects():
         start_date=datetime.date(2021,4,10),
         end_date=datetime.date(2022,5,20),
         completed=True,
-        
+
     )
     project3 = Project(
         user_id=3,
@@ -156,7 +158,7 @@ def seed_projects():
         start_date=datetime.date(2023,2,10),
         end_date=datetime.date(2023,3,15),
         completed=False,
-        
+
     )
 
     project1.skills.append(skills1)

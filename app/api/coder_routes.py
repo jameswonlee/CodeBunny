@@ -14,75 +14,62 @@ coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 # Get all coders
 @coder_bp.route("/", methods=["GET"])
 def get_all_coder():
-    # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     all_coders = Coder.query.all()
     response = {}
+
     if all_coders:
         for coder in all_coders:
-            # print('coder', coder)
             coder_obj = coder.to_dict()
-            # print('coder_obj', coder_obj)
             response[coder_obj["id"]] = coder_obj
-        return response, 200
-    # Needs better error handling
-    return "404 NOT FOUND", 404
 
-def Convert(lst):
-    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
-    return res_dct
+        return response, 200
+
+    return {"error":"404 Not Found"}, 404
+
 
 # Get coder by coder_id
 @coder_bp.route("/<int:coder_id>", methods=["GET"])
 def get_coder_profile(coder_id):
 
-    # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     coder = Coder.query.filter(Coder.id == coder_id).first()
-    # coder_user = User.query.filter(User.id == coder_id).first()
-    # skills = Coder.query.filter.all()
-    # print('skills', skills)
 
     if coder:
-
         coder_obj = coder.to_dict()
-        # coder_user_obj = coder_user.to_dict()
-
-        # skills= coder_obj.skills
-        # result = {**coder_obj, **coder_user_obj}
         response = {}
         response[coder_obj["id"]] = coder_obj
 
         return response
-    # Need to redo error handling
-    return "Coder not found", 404
+
+    return {"error":"404 Not Found"}, 404
 
 
 # Create new coder
 @coder_bp.route("/new", methods = ["POST"])
-@login_required
+# @login_required
 def create_coder():
 
-    print("did this run 1")
-    edit_coder_form = CreateCoderForm()
-    print("did this run 2")
-    #ask what this means
-    edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
+    create_coder_form = CreateCoderForm()
 
-    #why is invocation of validate_onsubmit not working??
-    if edit_coder_form.validate_on_submit():
-        # coder_data = edit_coder_form.data
+    create_coder_form['csrf_token'].data = request.cookies['csrf_token']
+
+
+    if create_coder_form.validate_on_submit:
+
         coder = Coder()
-        edit_coder_form.populate_obj(coder)
-        #hardcoded
-        coder.user_id = 2
-        #this will work if we have a user logged in. currently doesn't work on postman
-        # coder.user_id = current_user.id
-        db.session.add(coder)
-        print("did this run 4")
-        db.session.commit() #breaking here
-        print("did this run 5")
+
+        create_coder_form.populate_obj(coder)
+
+        coder.user_id = 5
+        selected_skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in create_coder_form.data["skills"]]
+        coder.skills = selected_skills
 
         new_coder_obj = coder.to_dict()
-        # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        print("coder obj",new_coder_obj)
+        db.session.add(coder)
+        db.session.commit()
+
+
         return new_coder_obj, 201
 
     return {"error": "validation error"}, 401
@@ -93,9 +80,6 @@ def create_coder():
 @coder_bp.route("/<int:coder_id>/reviews/new", methods=["POST"])
 @login_required
 def create_new_review(coder_id):
-
-    # if not current_user:
-    #     return {"Error": "Unauthorized - Must be logged in"}, 401
 
     # create a new instance of reviewform
     new_review_form = CreateReviewForm()
@@ -174,9 +158,13 @@ def edit_coder(coder_id):
 @coder_bp.route("/<int:coder_id>", methods=["DELETE"])
 @login_required
 def delete_coder(coder_id):
+
     coder = Coder.query.get(coder_id)
+
     if coder:
         db.session.delete(coder)
         db.session.commit()
+
         return "Coder succesfully deleted", 200
+
     return "404 coder not found", 404
