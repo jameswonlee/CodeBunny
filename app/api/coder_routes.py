@@ -171,7 +171,7 @@ def edit_coder(coder_id):
         #                 daily_rate = data["daily_rate"],
         #                 skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
         #                 )
-        coder.bio = bio = data["bio"],
+        coder.bio = data["bio"],
         coder.experience = data["experience"],
         coder.daily_rate = daily_rate = data["daily_rate"],
         coder.skills = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
