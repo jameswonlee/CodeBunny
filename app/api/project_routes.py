@@ -80,6 +80,10 @@ def delete_project(project_id):
         return "succesfully deleted"
     return "404 review not found"
 
+#function to convert datetime obj to integer value so we can compare
+def to_integer(dt_time):
+    return 10000*dt_time.year + 100*dt_time.month + dt_time.day
+
 # Create project
 @project_bp.route("/new/", methods=["POST"])
 # @login_required
@@ -94,7 +98,6 @@ def create_project():
         new_project = Project()
         data = create_project_form.data
 
-
         new_project = Project(name=data["name"],
                               description=data["description"],
                             #   skills=[skill_options[data["skills"]]],
@@ -102,17 +105,37 @@ def create_project():
                               start_date=data["start_date"],
                               end_date=data["end_date"])
 
-
-
         #hardcoded
-        new_project.user_id = 2
-        new_project.coder_id = 3
-        db.session.add(new_project)
-        db.session.commit()
+        new_project.user_id = 1
+        new_project.coder_id = 2
 
-        new_project_obj = new_project.to_dict()
+        all_projects = Project.query.filter(Project.coder_id == new_project.coder_id).all()
+        print("all projects is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", all_projects)
+        print("is it of type", type(all_projects))
+        startDate = to_integer(data["start_date"])
+        # print("THIS IS START DATE", startDate)
+        endDate = to_integer(data["end_date"])
+        for project in all_projects:
+            if((to_integer(project.start_date) >= startDate and to_integer(project.end_date) <= endDate)
+                or (to_integer(project.start_date) <= startDate and to_integer(project.end_date) >= endDate)
+                # or (to_integer(project.start_date) >= startDate and to_integer(project.end_date) >= endDate)
+                or (to_integer(project.start_date)<= startDate and to_integer(project.end_date) <= endDate)):
+
+                return {"error": "The coder is booked for these dates"}, 401
+                # print("THIS IS INPUTED START DATE", to_integer(project.start_date))
+               
+                
+        
+            else:
+                db.session.add(new_project)
+                db.session.commit()
+
+                new_project_obj = new_project.to_dict()
+                return new_project_obj, 201
         # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        return new_project_obj, 201
+                
+
+
     return {"error": "validation error"}, 401
 
 
