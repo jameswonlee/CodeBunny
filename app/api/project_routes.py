@@ -18,29 +18,47 @@ def all_projects():
     return {"Error": "Project Not Found"}, 404
 
 
+# Get all of a coder's projects
+@project_bp.route("/current", methods=["GET"])
+def users_projects():
+    projects = Project.query.filter(current_user.id == Project.user_id).all()
+
+    response = {}
+    if projects:
+        for project in projects:
+
+            project_obj = project.to_dict()
+
+            print("currentuser", current_user)
+            user_details = User.query.filter(User.id == current_user.id).first()
+            coder_details = Coder.query.filter(Coder.id == project.coder_id).first()
+
+            project_obj["User"]=user_details.to_dict()
+            project_obj["Coder"]=coder_details.to_dict()
+
+            response = {
+                project_obj["id"]: project_obj,
+            }
+
+        return response, 200
+    return {"Error": "Your Projects Not Found"}, 404
+
+
 # # Get project by project_id
-@project_bp.route("/<int:project_id>", methods=["GET"])
+@project_bp.route("/<int:project_id>/", methods=["GET"])
 def get_project_details(project_id):
-    project = Project.query.get(project_id)
-    # project_skills = Skill.query.filter(project_id == Project.id).all()
-    current_project_skills = Project.query.filter.all()
-    print('skills', skills)
+
+    project = Project.query.filter(project_id == Project.id).first()
 
     if project:
         project_obj = project.to_dict()
-        current_project_skills_obj = current_project_skills_obj.to_dict()
+        # we get projecT_skills' skills automatically
+        return project_obj
 
-        result = {**project_obj, ** current_project_skills_obj}
-
-        response = {
-            project_obj["id"]: result
-        }
-
-        return response
     return "404 Project not found", 404
 
 
-@project_bp.route("//<int:project_id>/", methods=["DELETE"])
+@project_bp.route("/<int:project_id>/", methods=["DELETE"])
 def delete_project(project_id):
     current_project = Project.query.get(project_id)
     if current_project:
