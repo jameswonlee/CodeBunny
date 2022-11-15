@@ -1,6 +1,10 @@
 // frontend/src/store/index.js
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+
+import session from './session'
+import reviews from './reviews'
+
 import sessionReducer from './session.js'
 
 
@@ -9,7 +13,12 @@ import sessionReducer from './session.js'
 // part of this file. You will add your reducers here to work with your various
 // components.
 const rootReducer = combineReducers({
+
+  session,
+  reviews
+
   session: sessionReducer,
+
 });
 
 // `enhancer` allows you to alter the store and add functionality such as the

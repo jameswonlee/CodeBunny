@@ -23,3 +23,4 @@ class CreateCoderForm(FlaskForm):
     daily_rate = IntegerField("Daily Rate", validators= [DataRequired()])
     submit = SubmitField('Create your Profile'),
     skills = SelectMultipleField('Select Skills', validators=[DataRequired()], choices=['Python', 'Javascript', 'C++', 'Ruby', 'Java', 'React','Camel'])
+
