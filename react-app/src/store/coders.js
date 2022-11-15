@@ -1,6 +1,8 @@
 // store > coders.js
 
-import { csrfFetch } from "./csrf"
+import {
+    csrfFetch
+} from "./csrf"
 // *****************************************************************************
 //****************************** ACTION CREATORS *******************************
 
@@ -13,6 +15,7 @@ import { csrfFetch } from "./csrf"
 ///*************************************************************************** */
 const GET_ALLCODERS = 'coders/getAllCoders'
 const GET_ONECODER = 'coders/getOneCoder'
+const CREATE_CODER = 'coders/createCoder'
 const UPDATE_CODER = 'coders/updateCoder'
 const DELETE_CODER = 'coders/removeCoder'
 
@@ -20,106 +23,119 @@ const DELETE_CODER = 'coders/removeCoder'
 // **** GET ALL CODERS ****
 const getAllCoders = coders => ({
     type: GET_ALLCODERS,
-    coders
+    payload: coders
 })
 ///*************************************************************************** */
 // **** GET ONE CODER DETAILS ****
 const getOneCoder = coder => ({
     type: GET_ONECODER,
-    coder
+    payload: coder
 })
 
 ///*************************************************************************** */
 // **** CREATE A CODER ****
 
-const createOneCoder = coder => ({
+const createCoder = coder => ({
     type: CREATE_CODER,
-    coder
+    payload: coder
 })
 ///*************************************************************************** */
 // **** EDIT/UPDATE A CODER ****
 
 const updateCoder = coder => ({
     type: UPDATE_CODER,
-    coder
+    payload: coder
 })
 ///*************************************************************************** */
 // **** DELETE A CODER ****
 
 const removeCoder = coderId => ({
     type: DELETE_CODER,
-    coderId
+    payload: coderId
 })
 
 // *****************************************************************************
 //************************************ THUNKS **********************************
+
 // -------------------------  LOAD ALL CODERS   ----------------------------------
 export const loadAllCoders = () => async dispatch => {
-    const response = await fetch('/api/coders')
+    const response = await fetch('/api/coders/')
     if (response.ok) {
-        const coders = await response.json();
-        dispatch(GET(coders))
+        const codersList = await response.json();
+        dispatch(getAllCoders(codersList))
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  LOAD ONE CODER's DETAILS   ----------------------------------
+// -------------------------  LOAD ONE CODER's DETAILS   -------------------------
 
 
+export const loadOneCoder = (coderId) => async dispatch => {
+    const response = await fetch(`/api/coders/${coderId}/`);
 
-
-
+    if (response.ok){
+        const coderInfo = await response.json();
+        dispatch(getOneCoder(coderInfo))
+    }
+}
 
 
 //*************************************************************************** */
 
 // -------------------------  CREATE A CODER   ----------------------------------
 
-export const createCoder = (payload) => async dispatch => {
-
-    const response = await csrfFetch('/api/coders/new', {
+export const createNewCoder = (payload) => async dispatch => {
+    console.log("did this reach?")
+    console.log("this is the payload", payload)
+    const response = await csrfFetch('/api/coders/new/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-
-    if(response.ok){
-        dispatch(create(coder))
-        return coder
+    console.log("did it reach here? after response?")
+    if (response.ok) {
+        const coder = await response.json()
+        dispatch(createCoder(coder))
+        return response
     }
 }
 
+//*************************************************************************** */
 
+// -------------------------  EDIT A CODER    ----------------------------------
 
-export const editCoder = (payload) => async dispatch => {
+export const editCoder = (editCoderInfo) => async dispatch => {
 
-    const response = await csrfFetch(`/api/spots/${payload.id}`, {
-        method: 'POST',
+    const response = await csrfFetch(`/api/coders/${editCoderInfo.id}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(editCoderInfo)
     })
 
-    if(response.ok) {
-        const spot = await response.json();
-        dispatch(create(spot))
-        return spot
+    if (response.ok) {
+        const editedCoder = await response.json();
+        dispatch(updateCoder(editedCoder))
+        return editedCoder
     }
 }
 
+//*************************************************************************** */
+
+// -------------------------  DELETE A CODER    --------------------------------
 export const deleteCoder = (coderId) => async dispatch => {
-    const response = await csrfFetch(`/api/coders/${coderId}`, {
+    const response = await csrfFetch(`/api/coders/${coderId}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        dispatch(deleteAction(coderId))
+        dispatch(removeCoder(coderId))
         return response
     }
 }
@@ -134,29 +150,54 @@ const initialState = {}
 
 const coderReducer = (state = initialState, action) => {
 
-    let newState = {}
-    switch(action.type) {
-        case GET:
-            newState = {...state}
-            action.coders.forEach((coder) => {
-                newState[coders.id] = coder
+    let newState;
+    // *****************************************************************************
+    switch (action.type) {
+        case GET_ALLCODERS:
+            newState = {
+                ...state
+            }
+            action.payload.Coders.forEach((coder) => {
+                newState[coder.id] = coder
             });
             return newState
+            // *****************************************************************************
+            case GET_ONECODER:
+                newState = {}
 
-        case CREATE:
-            newState = {...state}
-            newState[action.coder.id] = action.coder
+                newState[action.payload.id] = action.payload
+
+                return { ...newState }
+
+            // *****************************************************************************
+        case CREATE_CODER:
+            newState = {
+                ...state
+            }
+            newState[action.payload.id] = action.payload
             return newState
+            // *****************************************************************************
+        case UPDATE_CODER:
+            newState = {
+                ...state
+            }
+            newState[action.payload.id] = action.payload
 
-        case DELETE:
-            newState = {...state}
-            delete newState[action.coderId]
+            return newState;
+
+
+            // *****************************************************************************
+        case DELETE_CODER:
+            newState = {
+                ...state
+            }
+            delete newState[action.payload]
             return newState
-
+            // *****************************************************************************
         default:
             return state
 
     }
 }
-
+// *****************************************************************************
 export default coderReducer

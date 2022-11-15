@@ -6,6 +6,7 @@ import session from './session'
 import reviews from './reviews'
 
 import sessionReducer from './session.js'
+import coderReducer from './coders';
 
 
 // `combineReducers` combines all the reducer functions into one big reducer
@@ -15,7 +16,8 @@ import sessionReducer from './session.js'
 const rootReducer = combineReducers({
 
   reviews: reviews,
-  session: sessionReducer
+  session: sessionReducer,
+  coders: coderReducer
 
 });
 
