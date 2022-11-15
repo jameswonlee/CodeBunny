@@ -1,39 +1,80 @@
 // store > coders.js
 
 import { csrfFetch } from "./csrf"
+// *****************************************************************************
+//****************************** ACTION CREATORS *******************************
 
-const READ = 'coders/READ'
-const READ_ONE = 'coders/READ_ONE'
-const CREATE = 'coders/CREATE'
-const DELETE = 'coders/DELETE'
+// CRUD:
+// Create a Coder
+// GET a Coder
+// Update/Edit a Coder
+// Delete a Coder
 
-const read = coders => ({
-    type: READ,
+///*************************************************************************** */
+const GET_ALLCODERS = 'coders/getAllCoders'
+const GET_ONECODER = 'coders/getOneCoder'
+const UPDATE_CODER = 'coders/updateCoder'
+const DELETE_CODER = 'coders/removeCoder'
+
+///*************************************************************************** */
+// **** GET ALL CODERS ****
+const getAllCoders = coders => ({
+    type: GET_ALLCODERS,
     coders
 })
-
-const create = coder => ({
-    type: CREATE,
+///*************************************************************************** */
+// **** GET ONE CODER DETAILS ****
+const getOneCoder = coder => ({
+    type: GET_ONECODER,
     coder
 })
 
-const deleteAction = coderId => ({
-    type: DELETE,
+///*************************************************************************** */
+// **** CREATE A CODER ****
+
+const createOneCoder = coder => ({
+    type: CREATE_CODER,
+    coder
+})
+///*************************************************************************** */
+// **** EDIT/UPDATE A CODER ****
+
+const updateCoder = coder => ({
+    type: UPDATE_CODER,
+    coder
+})
+///*************************************************************************** */
+// **** DELETE A CODER ****
+
+const removeCoder = coderId => ({
+    type: DELETE_CODER,
     coderId
 })
 
-export const deleteCoder = (coderId) => async dispatch => {
-    const response = await csrfFetch(`/api/coders/${coderId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    if(response.ok) {
-        dispatch(deleteAction(coderId))
-        return response
+// *****************************************************************************
+//************************************ THUNKS **********************************
+// -------------------------  LOAD ALL CODERS   ----------------------------------
+export const loadAllCoders = () => async dispatch => {
+    const response = await fetch('/api/coders')
+    if (response.ok) {
+        const coders = await response.json();
+        dispatch(GET(coders))
     }
 }
+
+//*************************************************************************** */
+
+// -------------------------  LOAD ONE CODER's DETAILS   ----------------------------------
+
+
+
+
+
+
+
+//*************************************************************************** */
+
+// -------------------------  CREATE A CODER   ----------------------------------
 
 export const createCoder = (payload) => async dispatch => {
 
@@ -51,7 +92,9 @@ export const createCoder = (payload) => async dispatch => {
     }
 }
 
-export const updateCoder = (payload) => async dispatch => {
+
+
+export const editCoder = (payload) => async dispatch => {
 
     const response = await csrfFetch(`/api/spots/${payload.id}`, {
         method: 'POST',
@@ -68,13 +111,24 @@ export const updateCoder = (payload) => async dispatch => {
     }
 }
 
-export const getCoders = () => async dispatch => {
-    const response = await fetch('/api/coders')
-    if(response.ok) {
-        const coders = await response.json();
-        dispatch(read(coders))
+export const deleteCoder = (coderId) => async dispatch => {
+    const response = await csrfFetch(`/api/coders/${coderId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok) {
+        dispatch(deleteAction(coderId))
+        return response
     }
 }
+
+
+
+
+// *****************************************************************************
+// ******************************* REDUCERS ************************************
 
 const initialState = {}
 
@@ -82,7 +136,7 @@ const coderReducer = (state = initialState, action) => {
 
     let newState = {}
     switch(action.type) {
-        case READ:
+        case GET:
             newState = {...state}
             action.coders.forEach((coder) => {
                 newState[coders.id] = coder
