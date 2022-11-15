@@ -25,7 +25,7 @@ const GetAllSpots = () => {
     return (
         <div className="home-container">
             <div className= "image-one-container">
-                <img src= {groupcoding} ></img>
+                <img className= "group-coding" src= {groupcoding} ></img>
             </div>
             <div><SearchBar/></div>
         </div>

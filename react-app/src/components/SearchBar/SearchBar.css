@@ -1,0 +1,31 @@
+.search-bar-container{
+    display: flex;
+    /* border-color: rgb(255, 77, 0);
+    border-style: solid; */
+
+}
+
+
+.search-bar{
+display: flex;
+/* border-color: rgb(0, 255, 76);
+border-style: solid; */
+margin-top: 500px;
+margin-left: 700px;
+z-index: 1;
+}
+
+.icon-container{
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: white;
+cursor: pointer;
+}
+
+.search-input{
+    width: 500px;
+    height: 50px;
+    border: hidden;
+    font-size:larger;
+}

@@ -72,10 +72,10 @@ if (user){
           <div>{user.email}</div>
           </div> */}
           <div>
-          <div className="my-spots" onClick={mySpots}>My Spots</div>
+          <div className="my-spots" onClick={mySpots}>My Profile</div>
           </div>
           <div>
-          <div className="my-reviews" onClick={myReviews}>My Reviews</div>
+          <div className="my-reviews" onClick={myReviews}>My Projects</div>
           </div>
           <div>
             <div className="log-out" onClick={logout}>Log Out</div>
