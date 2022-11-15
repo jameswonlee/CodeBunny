@@ -75,7 +75,7 @@ class Coder(db.Model):
             'bio': self.bio,
             'experience': self.experience,
             'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
-            # 'user': self.user.to_dict()
+            'user': self.user.to_dict()
         }
 
     def __repr__(self):
@@ -103,7 +103,7 @@ class Review(db.Model):
             'coder_id': self.coder_id,
             'rating': self.rating,
             'review': self.review,
-            'user': self.user.to_dict()
+            'user': self.user.to_dict() #added
         }
 
     def __repr__(self):
@@ -117,7 +117,7 @@ class Project(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    coder_id = db.Column(db.Integer, db.ForeignKey("coders.id"), nullable=False)
+    coder_id = db.Column(db.Integer, db.ForeignKey("coders.id"), nullable=True)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     completed = db.Column(db.Boolean, nullable=False, default=False)
@@ -137,8 +137,23 @@ class Project(db.Model):
             'end_date': self.end_date,
             'completed': self.completed,
             'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
-            'user': self.user.to_dict() if self.user else None
+            'owner': self.user.to_dict(),
+            'coder': self.coder.to_dict() #added
         }
+
+    def to_dict_without_coder(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            "description": self.description,
+            'user_id': self.user_id,
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'completed': self.completed,
+            'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
+            'owner': self.user.to_dict(),
+        }
+
 
     def __repr__(self):
         return f'<Project, id={self.id}, name={self.name}, user_id={self.user_id}, coder_id={self.coder_id},start_date={self.start_date}, end_date={self.end_date}, completed={self.completed}, owner={self.user}>'
