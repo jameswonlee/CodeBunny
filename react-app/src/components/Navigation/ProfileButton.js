@@ -95,8 +95,8 @@ if (user){
       </button>
       {showMenu && (
         <div className="dropdown-content">
-        <div className="sign-up-text" onClick={() => setShowSignUpModal(true)}>Sign Up</div>
-        <div className="log-in-text" onClick={() => setShowLogInModal(true)}>Log In</div>
+        <div className="sign-up-text" style={{zIndex:3}} onClick={() => setShowSignUpModal(true)}>Sign Up</div>
+        <div className="log-in-text"  style={{zIndex:3}} onClick={() => setShowLogInModal(true)}>Log In</div>
         </div>
         )}
         {showSignUpModal && (
