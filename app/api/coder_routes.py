@@ -50,8 +50,8 @@ def get_coder_profile(coder_id):
         coder_obj = coder.to_dict()
         coder_user_obj = coder_user.to_dict()
         result = {**coder_obj, **coder_user_obj}
-        response = {}
-        response[coder_obj["id"]] = result
+
+        response={**result}
         return response
 
     return { "Error": "Coder not found" }, 404

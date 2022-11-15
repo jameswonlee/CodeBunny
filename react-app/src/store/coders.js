@@ -73,9 +73,13 @@ export const loadAllCoders = () => async dispatch => {
 
 export const loadOneCoder = (coderId) => async dispatch => {
     const response = await fetch(`/api/coders/${coderId}/`);
+    console.log("DID TI REACH GET ONE CODER THUNK")
+
+
 
     if (response.ok){
         const coderInfo = await response.json();
+         console.log("CODER INFO IN THUNK", coderInfo)
         dispatch(getOneCoder(coderInfo))
     }
 }
@@ -163,11 +167,11 @@ const coderReducer = (state = initialState, action) => {
             return newState
             // *****************************************************************************
             case GET_ONECODER:
-                newState = {}
+                // newState = {}
 
-                newState[action.payload.id] = action.payload
+                // newState[action.payload.id] = action.payload
 
-                return { ...newState }
+                return { ...state, ...action.payload}
 
             // *****************************************************************************
         case CREATE_CODER:
