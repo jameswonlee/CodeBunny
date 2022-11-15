@@ -24,7 +24,7 @@ from sqlalchemy.orm import joinedload
 review_bp = Blueprint("review_routes", __name__, url_prefix='/api/reviews')
 
 
-# ******************************    GET ALL REVIEWS   ************************************
+# ****************************** GET ALL REVIEWS *********************************
 # Get all reviews
 @review_bp.route("/")
 def get_all_reviews():
@@ -41,7 +41,7 @@ def get_all_reviews():
 
 
 
-# ******************************    GET  REVIEW DETAILS BY REVIEW ID   ************************************
+# ********************* GET REVIEW DETAILS BY REVIEW ID *************************
 # Get review by id - WORKS!
 @review_bp.route("/<int:review_id>", methods=["GET"])
 def get_review_details(review_id):
@@ -50,7 +50,7 @@ def get_review_details(review_id):
         return current_review.to_dict(), 200
     return { "Error": "404 NOT FOUND" }, 404
 
-## ******************************   EDIT REVIEW ************************************
+## ****************************** EDIT REVIEW ************************************
 
 @review_bp.route("/<int:review_id>", methods=["PUT"])
 def edit_review(review_id):
@@ -74,7 +74,7 @@ def edit_review(review_id):
     return { "Error": "Validation Error" }, 401
 
 
-# ************************************ DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ************
+# ******************** DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ****************
 
 @review_bp.route("/<int:review_id>", methods=["DELETE"])
 @login_required
