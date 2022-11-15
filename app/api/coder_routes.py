@@ -147,12 +147,11 @@ def edit_coder(coder_id):
     if edit_coder_form.validate_on_submit():
         data = edit_coder_form.data
         new_skills_query = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
-        new_skills = new_skills_query[0]
         coder = Coder.query.get(coder_id)
 
         coder_obj = coder.to_dict()
 
-        coder.skills = new_skills
+        coder.skills = new_skills_query
         coder.bio = data["bio"]
         coder.experience = data["experience"]
         coder.daily_rate = data["daily_rate"]
