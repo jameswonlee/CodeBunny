@@ -19,7 +19,8 @@ skill_options = {
 class CreateProjectForm(FlaskForm):
     name = StringField("Name of Project", validators = [DataRequired()])
     description = StringField("Describe the Project", validators = [DataRequired()])
-    skills = SelectMultipleField("Skills required", choices=[('skills1', 'Python'), ('skills2', 'Javascript'), ('skills3', 'C++'), ('skills4', 'Ruby'), ('skills5', 'Java'), ('skills6', 'React'), ('skills7', 'Camel')], validators = [DataRequired()])
+    # skills = SelectMultipleField("Skills required", choices=[('skills1', 'Python'), ('skills2', 'Javascript'), ('skills3', 'C++'), ('skills4', 'Ruby'), ('skills5', 'Java'), ('skills6', 'React'), ('skills7', 'Camel')], validators = [DataRequired()])
+    skills = SelectMultipleField("Skills required", choices=["Python", "Javascript"], validators = [DataRequired()])
     start_date = DateField('Start Date', validators = [DataRequired()])
     end_date  = DateField('End Date', validators = [DataRequired()])
     submit = SubmitField('Create your Project')
