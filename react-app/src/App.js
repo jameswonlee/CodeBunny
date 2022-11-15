@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Navigation from "./components/Navigation";
+import HomePage from "./components/HomePage"
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -34,14 +35,17 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route> */}
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path='/createProject' exact={true} >
+          {/* this is to create a project */}
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+          {/* this is to see User Profile */}
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <HomePage/>
+        </Route>
+        <Route path='/listofusers' exact={true} >
+          <UsersList/>
         </Route>
       </Switch>
       </>

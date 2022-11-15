@@ -30,7 +30,7 @@ console.log("this is password",password)
 
       <div className="User-Email-Container">
       <div className="title-log-container">
-        <h2>Welcome to AirBnb2</h2>
+        <h2>Welcome to CodeBunny</h2>
         </div>
         <div className="errors">
         {errors.map((error, idx) => (
