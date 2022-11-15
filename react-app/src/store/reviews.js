@@ -1,62 +1,44 @@
 import thunk from "redux-thunk"
-// import {
-//     csrfFetch
-// } from "./csrf"
+// import { csrfFetch } from "./csrf"
 
+/* ***************************** ACTION TYPES ******************************** */
 
-// *****************************************************************************
-//****************************** ACTION CREATORS *****************************
-
-// Create a Review
-// Read a Review
-// Read all Reviews
-// Delete a Review
-
-///*************************************************************************** */
-
-const GET_ALLREVIEWS = 'reviews/getAllReviews'
+const GET_ALL_REVIEWS = 'reviews/getAllReviews'
 const GET_REVIEW = 'reviews/getReview'
 const CREATE_REVIEW = 'reviews/createReview'
 const REMOVE_REVIEW = 'reviews/removeReview'
-//  do we get a get review details route in our backend?
 
-///*************************************************************************** */
-// -------------------------  LOAD ALL REVIEWS   ---------------------------------
 
-// Get/Load All Reviews
+/* **************************** ACTION CREATORS ****************************** */
+
+// -------------------------  LOAD ALL REVIEWS   ------------------------------
+
 const getAllReviews = (reviews) => {
     return {
-        type: GET_ALLREVIEWS,
+        type: GET_ALL_REVIEWS,
         reviews
     }
 }
-/*************************************************************************** */
-// -------------------------  GET REVIEW'S DETAILS   -----------------------------
+// -------------------------  GET REVIEW'S DETAILS   -------------------------
 
-// Get a review and its info
 const getReview = (review) => {
     return {
         type: GET_REVIEW,
         payload: review
     }
 }
-///*************************************************************************** */
 // -------------------------  CREATE A REVIEW  ----------------------------------
 
-//create a review
-const createReview = (review) => {
+const createReview = (reviewData) => {
     return {
         type: CREATE_REVIEW,
-        payload: review
-
+        payload: reviewData
     }
 }
 
-///*************************************************************************** */
-// -------------------------  DELETE A REVIEW   ----------------------------------
-//delete/remove a review
+// -------------------------  DELETE A REVIEW   -------------------------------
 
-const removeReview = reviewId => {
+const removeReview = (reviewId) => {
     return {
         type: REMOVE_REVIEW,
         payload: reviewId
@@ -64,11 +46,10 @@ const removeReview = reviewId => {
     }
 }
 
-///*************************************************************************** */
 
 
-// *****************************************************************************
-//************************************ THUNKS **********************************
+/* ******************************** THUNKS ************************************ */
+
 // -------------------------  LOAD ALL REVIEWS---------------------------------
 
 export const loadAllReviews = () => async dispatch => {
@@ -80,12 +61,20 @@ export const loadAllReviews = () => async dispatch => {
     }
 }
 
-///*************************************************************************** */
+// ---------------------------- LOAD REVIEW -------------------------------------
+
+export const loadOneReview = (reviewId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}`);
+
+    if (response.ok) {
+        const review = await response.json();
+        dispatch(getReview(review))
+    }
+}
+
 // -------------------------  CREATE A REVIEW   ----------------------------------
-export const createNewReview = (reviewData) => async dispatch => {
-
-    let coderId = reviewData.coderId
-
+export const createNewReview = (reviewData) => async (dispatch) => {
+    let coderId = reviewData.coder_id
     const response = await fetch(`/api/coders/${coderId}/reviews/new`, {
         method: 'POST',
         headers: {
@@ -94,18 +83,13 @@ export const createNewReview = (reviewData) => async dispatch => {
         body: JSON.stringify(reviewData)
     });
 
-    let reviewInfo = await response.json();
-
-    //get reviewId from newly created review obj
-    let reviewId = reviewInfo.id
-    dispatch(createReview(reviewInfo))
-
-
+    if (response.ok) {
+        const newReview = await response.json();
+        dispatch(createReview(newReview))
+    }
 };
 
-
-///*************************************************************************** */
-// -------------------------  DELETE A REVIEW  ----------------------------------
+// -------------------------  DELETE A REVIEW  ---------------------------------
 
 export const deleteReview = reviewId => async dispatch => {
     const response = await fetch(`/api/reviews/${reviewId}`, {
@@ -118,65 +102,64 @@ export const deleteReview = reviewId => async dispatch => {
 
 
 
-// *****************************************************************************
-// ******************************* REDUCERS ********************************
 
-const initialState = {}
+/* ******************************** REDUCER *********************************** */
 
+const initialState = {
+    reviews: {}
+}
 
 const reviews = (state = initialState, action) => {
-
-    let allReviews = {}
-
+    let newState = {}
     switch (action.type) {
- ///*************************************************************************** */
+        case GET_ALL_REVIEWS: {
+            let newReviews = {};
+            action.reviews.Reviews.forEach(review => newReviews[review.id] = review)
+            newState = {
+                ...state,
+                reviews: newReviews
+            }
+            return newState;
+        }
 
-        case GET_ALLREVIEWS:
+        case GET_REVIEW: {
+            newState = {
+                ...state
+            }
+            newState[action.payload.id] = action.payload
+            return newState
+        }
 
-
-            console.log("action.reviews", action.reviews)
-            //normalize our data
-            action.reviews.forEach(review => {
-                allReviews[review.id] = review
-            })
-            return {
-                ...state, ...allReviews
-            } //return a new updated state for reviews
-
-///*************************************************************************** */
-
-            case CREATE_REVIEW:
-
-                const newState = {
-                    ...state
+        case CREATE_REVIEW: {
+            newState = {
+                ...state
+            }
+            newState = {
+                ...state,
+                reviews: {
+                    ...state.reviews,
+                    [action.review.id]: {
+                        ...action.review,
+                    }
                 }
+            }
+            return newState;
+        }
 
-                newState[action.payload.id] = action.payload // normalize and add data
+        case REMOVE_REVIEW: {
+            newState = {
+                ...state
+            }
+            delete newState[action.payload]
+            return newState
+        }
 
-                return newState;
-  ///*************************************************************************** */
-
-            case GET_REVIEW:
-                const newState2 = { ...state}
-
-                newState2[action.payload.id] = action.payload
-                return newState2
-///*************************************************************************** */
-
-            case REMOVE_REVIEW:
-                const modifiedState = {
-                    ...state
-                }
-
-                delete modifiedState[action.payload]
-
-                return modifiedState
-///*************************************************************************** */
-
-            default:
-                return state;
+        default:
+            return state;
     }
 }
+
+
 
 ///*************************************************************************** */
 export default reviews

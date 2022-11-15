@@ -8,16 +8,18 @@ project_bp = Blueprint("project_routes", __name__, url_prefix="/api/projects")
 
 
 skill_options = {
-    "Python":{'id':1,'skill_name':'Python'},
-    "Javascript":{'id':2, 'skill_name':'Javascript'},
-    "C++":{'id':3, 'skill_name':'C++'},
-    "Ruby":{'id':4, 'skill_name':'Ruby'},
-    "Java":{'id':5, 'skill_name':'Java'},
-    "React":{'id':6, 'skill_name':'React'},
-    "Camel":{'id':7, 'skill_name':'Camel'}
+    "Python": {'id': 1, 'skill_name': 'Python'},
+    "Javascript": {'id': 2, 'skill_name': 'Javascript'},
+    "C++": {'id': 3, 'skill_name': 'C++'},
+    "Ruby": {'id': 4, 'skill_name': 'Ruby'},
+    "Java": {'id': 5, 'skill_name': 'Java'},
+    "React": {'id': 6, 'skill_name': 'React'},
+    "Camel": {'id': 7, 'skill_name': 'Camel'}
 }
 
 # Get all projects
+
+
 @project_bp.route("/", methods=["GET"])
 def all_projects():
     projects = Project.query.all()
@@ -80,63 +82,112 @@ def delete_project(project_id):
         return "succesfully deleted"
     return "404 review not found"
 
-#function to convert datetime obj to integer value so we can compare
-def to_integer(dt_time):
-    return 10000*dt_time.year + 100*dt_time.month + dt_time.day
+# function to convert datetime obj to integer value so we can compare
 
-# Create project
-@project_bp.route("/new/", methods=["POST"])
-# @login_required
-def create_project():
 
+def to_integer(date_time):
+    return 10000*date_time.year + 100*date_time.month + date_time.day
+
+
+#Create project part 1 - only description, skills, start date, end date
+
+@project_bp.route("/new-1/", methods = ["POST"]) # CODER ID = NONE
+#@login_required
+def create_project_part1():
     create_project_form = CreateProjectForm()
-    #ask what this means
     create_project_form['csrf_token'].data = request.cookies['csrf_token']
-
-    #why is invocation of validate_onsubmit not working??
+    print("current user is !!!!!", current_user)
     if create_project_form.validate_on_submit:
-        new_project = Project()
         data = create_project_form.data
-
         new_project = Project(name=data["name"],
                               description=data["description"],
-                            #   skills=[skill_options[data["skills"]]],
-                            skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+                              skills=[Skill.query.filter(
+                                  Skill.skill_name == skill).first() for skill in data["skills"]],
                               start_date=data["start_date"],
-                              end_date=data["end_date"])
-
-        #hardcoded
-        new_project.user_id = 1
-        new_project.coder_id = 2
-
-        all_projects = Project.query.filter(Project.coder_id == new_project.coder_id).all()
-        print("all projects is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", all_projects)
-        print("is it of type", type(all_projects))
-        startDate = to_integer(data["start_date"])
-        # print("THIS IS START DATE", startDate)
-        endDate = to_integer(data["end_date"])
-        for project in all_projects:
-            if((to_integer(project.start_date) >= startDate and to_integer(project.end_date) <= endDate)
-                or (to_integer(project.start_date) <= startDate and to_integer(project.end_date) >= endDate)
-                # or (to_integer(project.start_date) >= startDate and to_integer(project.end_date) >= endDate)
-                or (to_integer(project.start_date)<= startDate and to_integer(project.end_date) <= endDate)):
-
-                return {"error": "The coder is booked for these dates"}, 401
-                # print("THIS IS INPUTED START DATE", to_integer(project.start_date))
-               
-                
-        
-            else:
-                db.session.add(new_project)
-                db.session.commit()
-
-                new_project_obj = new_project.to_dict()
-                return new_project_obj, 201
-        # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                
+                              end_date=data["end_date"],
+                              user_id = current_user.id)
 
 
-    return {"error": "validation error"}, 401
+        db.session.add(new_project)
+        db.session.commit()
+
+        new_project_obj = new_project.to_dict_without_coder()
+        return new_project_obj, 201
+
+@project_bp.route("/new-2/<int:project_id>/<int:coder_id>/", methods = ["POST"]) # HAS CODER ID NOW
+#@login_required
+def create_project_part2(project_id, coder_id):
+    current_project = Project.query.get(project_id)
+    current_project.coder_id = coder_id
+
+    db.session.commit()
+    current_project_obj = current_project.to_dict()
+    return current_project_obj, 201
+
+
+
+
+
+
+
+# Create project
+
+# @project_bp.route("/new/", methods=["POST"])
+# # @login_required
+# def create_project():
+
+#     create_project_form = CreateProjectForm()
+#     # ask what this means
+#     create_project_form['csrf_token'].data = request.cookies['csrf_token']
+
+#     # why is invocation of validate_onsubmit not working??
+#     if create_project_form.validate_on_submit:
+
+#         data = create_project_form.data
+
+#         all_projects = Project.query.filter(
+#             Project.coder_id == new_project.coder_id).all() #hardcoded
+#         print("all projects is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", all_projects)
+#         print("is it of type", type(all_projects))
+#         startDate = to_integer(data["start_date"])
+#         print("THIS IS START DATE", startDate)
+#         print("This is other start date",
+#               to_integer(all_projects[0].start_date))
+#         endDate = to_integer(data["end_date"])
+#         for one_project in all_projects:
+#             print("this is a start date in db",
+#                   to_integer(one_project.start_date))
+#             if ((to_integer(one_project.start_date) == startDate)
+#                     or (to_integer(one_project.end_date) == endDate)
+#                     or (startDate >= to_integer(one_project.start_date) and endDate <= to_integer(one_project.end_date))
+#                     or (startDate <= to_integer(one_project.start_date) and endDate >= to_integer(one_project.end_date))
+#                     or (startDate >= to_integer(one_project.start_date) and startDate <= to_integer(one_project.end_date) and endDate >= to_integer(one_project.end_date))
+#                     or (startDate <= to_integer(one_project.start_date) and endDate >= to_integer(one_project.start_date) and endDate <= to_integer(one_project.end_date))
+#                     ):
+#                 print("IS THIS HITTING")
+#                 return {"error": "The coder is booked for these dates"}, 401
+#                 # print("THIS IS INPUTED START DATE", to_integer(project.start_date))
+#             else:
+#                 new_project = Project(name=data["name"],
+#                                       description=data["description"],
+#                                       #   skills=[skill_options[data["skills"]]],
+#                                       skills=[Skill.query.filter(
+#                                           Skill.skill_name == skill).first() for skill in data["skills"]],
+#                                       start_date=data["start_date"],
+#                                       end_date=data["end_date"])
+
+#                 # hardcoded
+#                 new_project.user_id = 1
+#                 # new_project.coder_id = 2
+
+#                 db.session.add(new_project)
+#                 db.session.commit()
+
+#                 new_project_obj = new_project.to_dict()
+#                 return new_project_obj, 201
+#         # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+#     return {"error": "validation error"}, 401
 
 
 # Edit project by project_id
@@ -145,29 +196,51 @@ def create_project():
 def edit_project(project_id):
 
     edit_project_form = CreateProjectForm()
-    #ask what this means
+    # ask what this means
     edit_project_form['csrf_token'].data = request.cookies['csrf_token']
 
-    #why is invocation of validate_onsubmit not working??
+    # why is invocation of validate_onsubmit not working??
     if edit_project_form.validate_on_submit:
-        project = Project.query.get(project_id)
-        print("this is project!!!!!!!!!!!!!!!!!!!@#$!#$!", project)
+
+
         data = edit_project_form.data
+        new_skills_query = [Skill.query.filter(
+            Skill.skill_name == skill).first() for skill in data["skills"]]
 
-        project = Project(name=data["name"],
-                              description=data["description"],
-                            #   skills=[skill_options[data["skills"]]],
-                            skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
-                              start_date=data["start_date"],
-                              end_date=data["end_date"])
 
-        #hardcoded
-        project.user_id = 2
-        project.coder_id = 3
-        db.session.add(project)
-        db.session.commit()
+        project = Project.query.get(project_id)
 
-        new_project_obj = project.to_dict()
+        #availability logic
+        all_projects = Project.query.filter(Project.coder_id == project.coder_id).all()
+        print("all projects is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", all_projects)
+        print("is it of type", type(all_projects))
+        startDate = to_integer(data["start_date"])
+        # print("THIS IS START DATE", startDate)
+        endDate = to_integer(data["end_date"])
+        for one_project in all_projects:
+            print("this is a start date in db",
+                  to_integer(one_project.start_date))
+            if ((to_integer(one_project.start_date) == startDate)
+                    or (to_integer(one_project.end_date) == endDate)
+                    or (startDate >= to_integer(one_project.start_date) and endDate <= to_integer(one_project.end_date))
+                    or (startDate <= to_integer(one_project.start_date) and endDate >= to_integer(one_project.end_date))
+                    or (startDate >= to_integer(one_project.start_date) and startDate <= to_integer(one_project.end_date) and endDate >= to_integer(one_project.end_date))
+                    or (startDate <= to_integer(one_project.start_date) and endDate >= to_integer(one_project.start_date) and endDate <= to_integer(one_project.end_date))
+                    ):
+                print("IS THIS HITTING")
+                return {"error": "The coder is booked for these dates"}, 401
+
+            else:
+                # db.session.add(project)
+                project.name = data["name"]
+                project.description = data["description"]
+                project.skills = new_skills_query
+                project.start_date = data["start_date"]
+                project.end_date = data["end_date"]
+                db.session.commit()
+
+                new_project_obj = project.to_dict()
+                return new_project_obj, 201
         # ADD EAGER LOADING OF FIRSTNAME LAST NAME FROM USERS TABLES/logged in user session and ADD TO RESPONSE OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        return new_project_obj, 201
+
     return {"error": "validation error"}, 401
