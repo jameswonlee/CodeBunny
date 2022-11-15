@@ -19,7 +19,6 @@ coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 # ************************************ GET ALL CODERS ***********************************************
 
 # Get all coders - WORKING
-
 @coder_bp.route("/", methods=["GET"])
 def get_all_coder():
     all_coders = Coder.query.all()
@@ -37,7 +36,6 @@ def get_all_coder():
 # ************************************ GET CODER DETAILS BY CODER ID ***********************************************
 
 # Get coder by coder_id - NOT WORKING
-
 @coder_bp.route("/<int:coder_id>", methods=["GET"])
 def get_coder_profile(coder_id):
 
@@ -58,8 +56,6 @@ def get_coder_profile(coder_id):
     return { "Error": "Coder not found" }, 404
 
 
-
-
 # # Get coder by coder_id
 # @coder_bp.route("/<int:coder_id>", methods=["GET"])
 # def get_coder_profile(coder_id):
@@ -78,8 +74,7 @@ def get_coder_profile(coder_id):
 
 # ************************************ CREATE NEW CODER ***********************************************
 
-# Create new coder - NOT WORKING
-
+# Create new coder - WORKING
 @coder_bp.route("/new", methods = ["POST"])
 @login_required
 def create_coder():
@@ -87,7 +82,7 @@ def create_coder():
     create_coder_form = CreateCoderForm()
     create_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
-    if create_coder_form.validate_on_submit:
+    if create_coder_form.validate_on_submit():
         coder = Coder()
         data = create_coder_form.data
         coder = Coder(
@@ -95,18 +90,12 @@ def create_coder():
                         bio = data["bio"],
                         experience = data["experience"],
                         daily_rate = data["daily_rate"],
-                        # skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+                        skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
                         )
 
-
-        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
-
-
-
+        new_coder_obj = coder.to_dict()
         db.session.add(coder)
         db.session.commit()
-        new_coder_obj = coder.to_dict()
-        print("coder obj",new_coder_obj)
         return new_coder_obj, 201
 
     return {"Error": "Validation Error"}, 401
@@ -115,33 +104,26 @@ def create_coder():
 # ************************************ CREATE A REVIEW BY CODER ID ***********************************************
 
 # route to create a new review - WORKING
-
 @coder_bp.route("/<int:coder_id>/reviews/new", methods=["POST"])
 @login_required
 def create_new_review(coder_id):
 
+    # create a new instance of reviewform
     new_review_form = CreateReviewForm()
-
     new_review_form['csrf_token'].data = request.cookies['csrf_token']
 
     if new_review_form.validate_on_submit():
 
-
         review_data = new_review_form.data
         print(new_review_form.data)
-
 
         new_review = Review()
         new_review_form.populate_obj(new_review)
 
-
-
         current_coder = Coder.query.filter(Coder.id == coder_id).first()
         print("current coder",current_coder)
 
-
         new_review = Review(rating= review_data["rating"],review=review_data["review"], user_id=current_user.id, coder_id=current_coder.id)
-
 
         db.session.add(new_review)
         db.session.commit()
@@ -151,46 +133,33 @@ def create_new_review(coder_id):
 
     return { "Error": "Validation Error" }, 400
 
-
 # ***************************************   EDIT CODER BY CODER ID  ***************************************************
 
-# Edit coder profile by coder_id - WORKING
-
+#Edit Coder details - WORKING
 @coder_bp.route("/<int:coder_id>", methods=["PUT"])
 @login_required
 def edit_coder(coder_id):
-
     edit_coder_form = CreateCoderForm()
 
+    edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
-
-    if edit_coder_form.validate_on_submit:
-        edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
-        coder = Coder.query.filter(Coder.id==coder_id).first()
-        print("coder edit", coder)
-
-        # edit_coder_form.populate_obj(coder)
-        # new_coder = Coder()
+    if edit_coder_form.validate_on_submit():
         data = edit_coder_form.data
+        new_skills_query = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        new_skills = new_skills_query[0]
+        coder = Coder.query.get(coder_id)
 
-        edit_coder_form.populate_obj(coder)
-        new_experience = data["experience"]
-        new_rate = data["daily_rate"]
-        new_bio = data["bio"]
+        coder_obj = coder.to_dict()
 
-        coder.id = coder.id
-        coder.user_id=coder.user_id,
-        coder.bio = new_bio,
-        coder.experience = new_experience,
-        coder.daily_rate = new_rate,
-        # coder.skills = coder.skills
-        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
+        coder.skills = new_skills
+        coder.bio = data["bio"]
+        coder.experience = data["experience"]
+        coder.daily_rate = data["daily_rate"]
 
-        # db.session.autoflush = False
-        print("coder's skills", coder.skills)
         db.session.commit()
 
         new_coder_obj = coder.to_dict()
+
         return new_coder_obj, 201
 
     return {"Error": "Validation Error"}, 401
@@ -198,7 +167,6 @@ def edit_coder(coder_id):
 # ************************************   DELETE CODER BY CODER ID   ******************************************************
 
 # Delete coder profile - WORKING
-
 @coder_bp.route("/<int:coder_id>", methods=["DELETE"])
 @login_required
 def delete_coder(coder_id):
@@ -212,6 +180,3 @@ def delete_coder(coder_id):
         return {"message" : "Coder succesfully deleted"}, 200
 
     return {"Error": "404 Coder Not Found"}, 404
-
-
-# ************************************************************************************************************************

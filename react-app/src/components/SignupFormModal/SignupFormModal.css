@@ -1,0 +1,14 @@
+.sign-up-text{
+    padding: 5px;
+}
+
+
+.sign-up-text:hover{
+    background-color: rgb(230, 30,77);
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* padding: 5px; */
+    width:125px;
+    border-radius: 2px;
+}

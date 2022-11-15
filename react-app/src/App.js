@@ -1,3 +1,4 @@
+// frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -8,46 +9,53 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+
 import ReviewsBrowser from './components/Review/index'
+
+import Navigation from "./components/Navigation";
+import HomePage from "./components/HomePage"
+import * as sessionActions from "./store/session";
+
 function App() {
-  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     (async() => {
-      await dispatch(authenticate());
-      setLoaded(true);
+      await dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     })();
   }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <BrowserRouter>
-      <NavBar />
+    // <BrowserRouter>
+    <>
+      {/* <NavBar /> */}
+      <Navigation isLoaded={isLoaded}/>
       <Switch>
-        <Route path='/login' exact={true}>
+        {/* <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        </Route> */}
+        <ProtectedRoute path='/createProject' exact={true} >
+          {/* this is to create a project */}
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+          {/* this is to see User Profile */}
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <HomePage/>
+        </Route>
+        <Route path='/listofusers' exact={true} >
+          <UsersList/>
         </Route>
         <Route path='/reviews'>
           <ReviewsBrowser />
         </Route>
       </Switch>
-    </BrowserRouter>
+      </>
+    // </BrowserRouter>
   );
 }
 
