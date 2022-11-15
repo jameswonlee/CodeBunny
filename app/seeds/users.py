@@ -9,6 +9,8 @@ skills5 = Skill(skill_name = "Java")
 skills6 = Skill(skill_name = "React")
 skills7 = Skill(skill_name = "Camel")
 
+
+
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
@@ -52,7 +54,7 @@ def seed_coders():
 
     coder1 = Coder(
     user_id=2,
-    daily_rate=35.00,
+    daily_rate=35,
     bio="Hi! I love coding especially in Python. I have been coding for about 6 years now and love learning new languages!",
     experience="I have worked at Amazon and Apple.",
 
@@ -60,19 +62,20 @@ def seed_coders():
 
     coder2 = Coder(
     user_id=3,
-    daily_rate=40.00,
+    daily_rate=40,
     bio="Hello there! I enjoy coding in Javascript and specialize in front-end development. Reach out to me if you are looking for creative assistance!",
     experience="I have worked at Google and Facebook."
     )
 
     coder3 = Coder(
     user_id=1,
-    daily_rate=50.00,
+    daily_rate=50,
     bio="Hello there! I enjoy coding in Javascript, Python, and C++ and specialize in back-end development. Reach out to me if you are looking for precise and efficient help!",
     experience="I have worked at Amazon and Facebook."
     )
 
     coder1.skills.append(skills1)
+    coder1.skills.append(skills2)
     coder2.skills.append(skills2)
     coder3.skills.append(skills3)
 
@@ -103,9 +106,9 @@ def seed_skills():
     # skills6 = Skill(skill_name = "React")
     # skills7 = Skill(skill_name = "Camel")
 
-    # db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
-    # db.session.commit()
-    pass
+    db.session.add_all([skills1,skills2,skills3,skills4,skills5,skills6,skills7])
+    db.session.commit()
+
 
 def undo_skills():
     if environment == "production":
@@ -134,7 +137,7 @@ def seed_projects():
         start_date = datetime.date(2022,12,10),
         end_date=datetime.date(2022,12,20),
         completed=False,
-      
+
     )
 
     project2 = Project(
@@ -145,7 +148,7 @@ def seed_projects():
         start_date=datetime.date(2021,4,10),
         end_date=datetime.date(2022,5,20),
         completed=True,
-        
+
     )
     project3 = Project(
         user_id=3,
@@ -155,7 +158,7 @@ def seed_projects():
         start_date=datetime.date(2023,2,10),
         end_date=datetime.date(2023,3,15),
         completed=False,
-        
+
     )
 
     project1.skills.append(skills1)

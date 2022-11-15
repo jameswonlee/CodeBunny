@@ -1,63 +1,40 @@
-// constants
-const SET_USER = 'session/SET_USER';
-const REMOVE_USER = 'session/REMOVE_USER';
+// frontend/src/store/session.js
+import { csrfFetch } from './csrf';
 
-const setUser = (user) => ({
-  type: SET_USER,
-  payload: user
-});
+const SET_USER = 'session/setUser';
+const REMOVE_USER = 'session/removeUser';
 
-const removeUser = () => ({
-  type: REMOVE_USER,
-})
+const setUser = (user) => {
+  return {
+    type: SET_USER,
+    payload: user,
+  };
+};
 
-const initialState = { user: null };
+const removeUser = () => {
+  return {
+    type: REMOVE_USER,
+  };
+};
 
-export const authenticate = () => async (dispatch) => {
-  const response = await fetch('/api/auth/', {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
-    }
-  
-    dispatch(setUser(data));
-  }
-}
-
-export const login = (email, password) => async (dispatch) => {
-  const response = await fetch('/api/auth/login', {
+export const login = (user) => async (dispatch) => {
+  const { email, password } = user;
+  const response = await csrfFetch('/api/auth/login', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
     body: JSON.stringify({
       email,
-      password
-    })
+      password,
+    }),
   });
-  
-  
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data))
-    return null;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ['An error occurred. Please try again.']
-  }
-
-}
+  // console.log("this is the response from our server", response)
+  const data = await response.json();
+  console.log("this iss data of the user", data)
+  dispatch(setUser(data));
+  return response;
+};
 
 export const logout = () => async (dispatch) => {
+  console.log("made it to session js logout")
   const response = await fetch('/api/auth/logout', {
     headers: {
       'Content-Type': 'application/json',
@@ -70,19 +47,33 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
-  const response = await fetch('/api/auth/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export const restoreUser = () => async (dispatch) => {
+  const response = await fetch('/api/auth/');
+  console.log("this is response", response)
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(setUser(data));
+  }
+}
+
+
+export const signup = (user) => async (dispatch) => {
+  const { username, email, password, first_name, last_name } = user;
+  const response = await csrfFetch("/api/auth/signup", {
+    method: "POST",
     body: JSON.stringify({
       username,
       email,
       password,
+      first_name,
+      last_name
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -95,15 +86,25 @@ export const signUp = (username, email, password) => async (dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
-}
+};
 
-export default function reducer(state = initialState, action) {
+
+const initialState = { user: null };
+
+const sessionReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload }
+      newState = Object.assign({}, state);
+      newState.user = action.payload;
+      return newState;
     case REMOVE_USER:
-      return { user: null }
+      newState = Object.assign({}, state);
+      newState.user = null;
+      return newState;
     default:
       return state;
   }
-}
+};
+
+export default sessionReducer;

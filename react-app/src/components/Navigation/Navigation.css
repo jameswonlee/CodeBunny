@@ -1,0 +1,82 @@
+.navbar-main{
+display: flex;
+flex-direction: row;
+/* position: sticky; this is suppose to maintain the container stuck to thee top but not working */
+border-color: rgb(164, 165, 165);
+border-bottom-style: solid;
+justify-content: center;
+position:sticky;
+top:0px;
+background-color: white;
+}
+
+.navbar-inner-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* border-color: grey; */
+    /* border-style: solid; */
+    width:80%;
+}
+
+
+.Home-Container{
+    display: flex;
+    align-items: center;
+    /* margin-left: 8% */
+}
+
+.logo{
+    max-height: 125px;
+    max-width: 125px;
+    /* border-color: rgb(255, 0, 144);
+    border-style: solid; */
+}
+
+
+.profile-button{
+    display: flex;
+}
+
+.Create-a-spot-Button{
+    display: flex;
+
+/* border-color: rgb(255, 0, 144);
+    border-style: solid; */
+}
+
+.logged-out-profile-container{
+    display: flex;
+    justify-content: flex-end;
+    /* border-style: solid;
+    border-color: green; */
+    width: 100%;
+}
+
+
+.Right-Side-Container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* margin-right: 300px; */
+    /* border-color: rgb(255, 0, 144);
+    border-style: solid; */
+    width: 25%;
+    justify-content: space-between;
+
+}
+
+.become-host-button{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius:12px;
+    padding: 15px;
+    border: 0 solid #ddd;
+    cursor: pointer;
+}
+
+.become-host-button:hover{
+    background-color: rgb(230, 30,77);
+    color: white;
+    border: none;
+}

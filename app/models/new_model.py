@@ -73,7 +73,9 @@ class Coder(db.Model):
             'user_id': self.user_id,
             'daily_rate': self.daily_rate,
             'bio': self.bio,
-            'experience': self.experience
+            'experience': self.experience,
+            'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
+            # 'user': self.user.to_dict()
         }
 
     def __repr__(self):
@@ -100,11 +102,12 @@ class Review(db.Model):
             'user_id': self.user_id,
             'coder_id': self.coder_id,
             'rating': self.rating,
-            'review': self.review
+            'review': self.review,
+            'user': self.user.to_dict()
         }
 
     def __repr__(self):
-        return f'<Review, id={self.id}, user_id={self.user_id}, coder={self.coder_id},rating={self.rating}, review={self.review}>'
+        return f'<Review, id={self.id}, user_id={self.user_id}, coder={self.coder_id},rating={self.rating}, review={self.review}, user={self.user}>'
 
 
 class Project(db.Model):
@@ -132,24 +135,15 @@ class Project(db.Model):
             'coder_id': self.coder_id,
             'start_date': self.start_date,
             'end_date': self.end_date,
-            'completed': self.completed
+            'completed': self.completed,
+            'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
+            'user': self.user.to_dict() if self.user else None
         }
 
     def __repr__(self):
-        return f'<Project, id={self.id}, name={self.name}, user_id={self.user_id}, coder_id={self.coder_id},start_date={self.start_date}, end_date={self.end_date}, completed={self.completed}>'
+        return f'<Project, id={self.id}, name={self.name}, user_id={self.user_id}, coder_id={self.coder_id},start_date={self.start_date}, end_date={self.end_date}, completed={self.completed}, owner={self.user}>'
 
 
-# secondary takes in the mapping class/models
-
-
-# class Skill(db.Model):
-#     __tablename__ = "skills"
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     skill_name = db.Column(db.String(2000), nullable=False, unique=True)
-
-#     coders = db.relationship("Coder", secondary=coder_skills, back_populates="skills")
-#     projects = db.relationship("Project", secondary=project_skills, back_populates="skills")
 
 class Skill(db.Model):
     __tablename__ = "skills"
