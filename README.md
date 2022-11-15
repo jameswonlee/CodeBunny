@@ -2,14 +2,52 @@
 
 <br></br>
 
-## Database Schema
+# About
+CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https://www.taskrabbit.com/dashboard) website. CodeBunny is a platform where users go to hire Coders to build simple web applications in a 1 to 4 week time period.
+
+[**https://codebunny.onrender.com**](https://codebunny.onrender.com/)
+
+
+# Database Schema
 
 ![codebunny-dbdiagram]
 
 [codebunny-dbdiagram]: ./assets/database-schema.png
 
+# Wiki Links
+* [API Documentation](https://github.com/jameswonlee/CodeBunny/wiki/API-Routes)
+* [Database Schema](https://github.com/jameswonlee/CodeBunny/wiki/Database-Schema)
+* [Features List](https://github.com/jameswonlee/CodeBunny/wiki/Features-List)
+* [Redux State Shape](https://github.com/jameswonlee/CodeBunny/wiki/Redux-Store-Shape)
 
-## Connect with the team!
+# Tech Stack
+## 🚧🚧 This section is still construction 🚧🚧
+### Frameworks, Platforms & Libraries:
+
+
+### Database:
+
+
+### Hosting:
+
+
+### IDEs/Editors/Other:
+
+<br>
+
+# Sample Features:
+### 🚧🚧 This section is still construction 🚧🚧
+
+<br>
+
+# Roadmap of Features:
+### 🚧🚧 This section is still construction 🚧🚧
+
+
+
+<br>
+
+# Connect with the team!
 
 Keerthana Yellapragada:
 <br>
