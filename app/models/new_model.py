@@ -177,3 +177,4 @@ class Skill(db.Model):
 
     def __repr__(self):
         return f'<Skill, id={self.id}, skill_name={self.skill_name}'
+        
