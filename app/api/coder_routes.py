@@ -22,13 +22,14 @@ coder_bp = Blueprint("coder_routes", __name__, url_prefix="/api/coders")
 @coder_bp.route("/", methods=["GET"])
 def get_all_coder():
     all_coders = Coder.query.all()
-    response = {}
+    response = []
 
     if all_coders:
         for coder in all_coders:
             coder_obj = coder.to_dict()
-            response[coder_obj["id"]] = coder_obj
-        return response, 200
+            response.append(coder_obj)
+
+        return{"Coders": response}, 200
 
     return {"Error":"404 Not Found"}, 404
 
@@ -145,7 +146,7 @@ def edit_coder(coder_id):
 
     if edit_coder_form.validate_on_submit():
         data = edit_coder_form.data
-        new_skills_query = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        new_skills_query = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
         new_skills = new_skills_query[0]
         coder = Coder.query.get(coder_id)
 
