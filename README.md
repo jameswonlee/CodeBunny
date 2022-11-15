@@ -1,4 +1,4 @@
-## 🚧🚧 This page is under construction 🚧🚧
+## 🚧🚧 This page is still under construction 🚧🚧
 
 <br></br>
 
@@ -7,6 +7,7 @@ CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https:
 
 [**https://codebunny.onrender.com**](https://codebunny.onrender.com/)
 
+<br> 
 
 # Database Schema
 
@@ -14,14 +15,18 @@ CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https:
 
 [codebunny-dbdiagram]: ./assets/database-schema.png
 
+<br>
+
 # Wiki Links
 * [API Documentation](https://github.com/jameswonlee/CodeBunny/wiki/API-Routes)
 * [Database Schema](https://github.com/jameswonlee/CodeBunny/wiki/Database-Schema)
 * [Features List](https://github.com/jameswonlee/CodeBunny/wiki/Features-List)
 * [Redux State Shape](https://github.com/jameswonlee/CodeBunny/wiki/Redux-Store-Shape)
 
+<br>
+
 # Tech Stack
-## 🚧🚧 This section is still construction 🚧🚧
+## 🚧🚧 This section is still under construction 🚧🚧
 ### Frameworks, Platforms & Libraries:
 
 
@@ -36,16 +41,16 @@ CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https:
 <br>
 
 # Sample Features:
-### 🚧🚧 This section is still construction 🚧🚧
+### 🚧🚧 This section is still under construction 🚧🚧
 
 <br>
 
 # Roadmap of Features:
-### 🚧🚧 This section is still construction 🚧🚧
+### 🚧🚧 This section is still under construction 🚧🚧
 
 
 
-<br>
+<br></br>
 
 # Connect with the team!
 
