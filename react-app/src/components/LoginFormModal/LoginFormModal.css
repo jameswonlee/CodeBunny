@@ -1,0 +1,19 @@
+/* .modal-container{
+    border-color: rgb(227, 24, 24);
+    border-style: solid;
+    border-radius: 25px;
+} */
+
+.log-in-text{
+    padding: 5px;
+}
+
+.log-in-text:hover{
+    background-color: rgb(230, 30,77);
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* padding: 5px; */
+    width:125px;
+    border-radius: 2px;
+}
