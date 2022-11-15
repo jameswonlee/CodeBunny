@@ -54,7 +54,7 @@ def seed_coders():
 
     coder1 = Coder(
     user_id=2,
-    daily_rate=35.00,
+    daily_rate=35,
     bio="Hi! I love coding especially in Python. I have been coding for about 6 years now and love learning new languages!",
     experience="I have worked at Amazon and Apple.",
 
@@ -62,14 +62,14 @@ def seed_coders():
 
     coder2 = Coder(
     user_id=3,
-    daily_rate=40.00,
+    daily_rate=40,
     bio="Hello there! I enjoy coding in Javascript and specialize in front-end development. Reach out to me if you are looking for creative assistance!",
     experience="I have worked at Google and Facebook."
     )
 
     coder3 = Coder(
     user_id=1,
-    daily_rate=50.00,
+    daily_rate=50,
     bio="Hello there! I enjoy coding in Javascript, Python, and C++ and specialize in back-end development. Reach out to me if you are looking for precise and efficient help!",
     experience="I have worked at Amazon and Facebook."
     )

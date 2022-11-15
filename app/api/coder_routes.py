@@ -56,8 +56,6 @@ def get_coder_profile(coder_id):
     return { "Error": "Coder not found" }, 404
 
 
-
-
 # # Get coder by coder_id
 # @coder_bp.route("/<int:coder_id>", methods=["GET"])
 # def get_coder_profile(coder_id):
@@ -83,7 +81,7 @@ def create_coder():
 
     create_coder_form = CreateCoderForm()
     create_coder_form['csrf_token'].data = request.cookies['csrf_token']
-    # Validate on submit not workin!!!!
+
     if create_coder_form.validate_on_submit():
         coder = Coder()
         data = create_coder_form.data
@@ -116,22 +114,16 @@ def create_new_review(coder_id):
 
     if new_review_form.validate_on_submit():
 
-
         review_data = new_review_form.data
         print(new_review_form.data)
-
 
         new_review = Review()
         new_review_form.populate_obj(new_review)
 
-
-
         current_coder = Coder.query.filter(Coder.id == coder_id).first()
         print("current coder",current_coder)
 
-
         new_review = Review(rating= review_data["rating"],review=review_data["review"], user_id=current_user.id, coder_id=current_coder.id)
-
 
         db.session.add(new_review)
         db.session.commit()
@@ -141,50 +133,37 @@ def create_new_review(coder_id):
 
     return { "Error": "Validation Error" }, 400
 
-
 # ***************************************   EDIT CODER BY CODER ID  ***************************************************
 
-#Edit Coder details
-@coder_bp.route("/<int:coder_id>", methods=["POST"])
+#Edit Coder details - WORKING
+@coder_bp.route("/<int:coder_id>", methods=["PUT"])
 @login_required
 def edit_coder(coder_id):
-
     edit_coder_form = CreateCoderForm()
 
     edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
-    if edit_coder_form.validate_on_submit:
-        # coder = Coder.query.filter(Coder.id == coder_id).first()
+    if edit_coder_form.validate_on_submit():
+        data = edit_coder_form.data
+        new_skills_query = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        new_skills = new_skills_query[0]
         coder = Coder.query.get(coder_id)
 
-        print('coder', coder)
-        # coder_obj = coder.to_dict()
-        # edit_coder_form.populate_obj(coder_obj)
+        coder_obj = coder.to_dict()
 
-        # coder = Coder()
-        data = edit_coder_form.data
-        # coder = Coder(
-        #                 # id = coder.id,
-        #                 user_id = current_user.id,
-        #                 bio = data["bio"],
-        #                 experience = data["experience"],
-        #                 daily_rate = data["daily_rate"],
-        #                 skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
-        #                 )
-        coder.bio = data["bio"],
-        coder.experience = data["experience"],
-        coder.daily_rate = daily_rate = data["daily_rate"],
-        coder.skills = [Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        coder.skills = new_skills
+        coder.bio = data["bio"]
+        coder.experience = data["experience"]
+        coder.daily_rate = data["daily_rate"]
 
-
-
-        # db.session.add(coder)
         db.session.commit()
 
         new_coder_obj = coder.to_dict()
 
         return new_coder_obj, 201
+
     return {"Error": "Validation Error"}, 401
+
 # ************************************   DELETE CODER BY CODER ID   ******************************************************
 
 # Delete coder profile - WORKING
