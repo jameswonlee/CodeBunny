@@ -77,9 +77,7 @@ export const createNewReview = (reviewData) => async (dispatch) => {
     let coderId = reviewData.coder_id
     const response = await fetch(`/api/coders/${coderId}/reviews/new`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData)
     });
 
@@ -105,9 +103,7 @@ export const deleteReview = reviewId => async dispatch => {
 
 /* ******************************** REDUCER *********************************** */
 
-const initialState = {
-    reviews: {}
-}
+const initialState = { reviews: {} }
 
 const reviews = (state = initialState, action) => {
     let newState = {}
@@ -115,30 +111,22 @@ const reviews = (state = initialState, action) => {
         case GET_ALL_REVIEWS: {
             let newReviews = {};
             action.reviews.Reviews.forEach(review => newReviews[review.id] = review)
-            newState = {
-                ...state,
-                reviews: newReviews
-            }
+            newState = { ...state, reviews: newReviews }
             return newState;
         }
 
         case GET_REVIEW: {
-            newState = {
-                ...state
-            }
+            newState = { ...state }
             newState[action.payload.id] = action.payload
             return newState
         }
 
         case CREATE_REVIEW: {
-            newState = {
-                ...state
-            }
+            newState = { ...state }
             newState = {
                 ...state,
                 reviews: {
-                    ...state.reviews,
-                    [action.review.id]: {
+                    ...state.reviews, [action.review.id]: {
                         ...action.review,
                     }
                 }
@@ -147,9 +135,7 @@ const reviews = (state = initialState, action) => {
         }
 
         case REMOVE_REVIEW: {
-            newState = {
-                ...state
-            }
+            newState = { ...state }
             delete newState[action.payload]
             return newState
         }
