@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, jsonif
 from flask_login import current_user, login_user, logout_user, login_required
 from ..forms.create_review import CreateReviewForm
 from sqlalchemy.orm import joinedload
+
 #REVIEWS
 # Create a Review for a Coder					POST- "/reviews"
 # Eager Load: Users, Coders
@@ -49,6 +50,31 @@ def get_review_details(review_id):
     if current_review:
         return current_review.to_dict(), 200
     return { "Error": "404 NOT FOUND" }, 404
+
+## ******************************   EDIT REVIEW ************************************
+@review_bp.route("/<int:review_id>", methods=["PUT"])
+def edit_review(review_id):
+    curr_review = Review.query.get(review_id)
+
+    create_review_form = CreateReviewForm()
+    create_review_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if create_review_form.validate_on_submit:
+        # review = Review()
+        data = create_review_form.data
+
+        print("curr review form rating", create_review_form.data["rating"])
+        new_rating=create_review_form.data["rating"]
+        new_reviewinfo = create_review_form.data["review"]
+        curr_review.rating=new_rating
+        curr_review.review=new_reviewinfo
+
+
+        db.session.commit()
+
+        return curr_review.to_dict(), 201
+    return {"Error": "Validation Error"}, 401
+
 
 
 # ************************************ DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ************

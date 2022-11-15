@@ -1,7 +1,7 @@
 import thunk from "redux-thunk"
-import {
-    csrfFetch
-} from "./csrf"
+// import {
+//     csrfFetch
+// } from "./csrf"
 
 
 // *****************************************************************************
@@ -51,15 +51,6 @@ const createReview = (review) => {
 
     }
 }
-///*************************************************************************** */
-// -------------------------  EDIT A REVIEW  ----------------------------------
-//edit/update a review
-// const updateReview = (review) => {
-//     return {
-//         type: UPDATE_REVIEW,
-//         payload: review
-//     }
-// }
 
 ///*************************************************************************** */
 // -------------------------  DELETE A REVIEW   ----------------------------------
@@ -78,40 +69,24 @@ const removeReview = reviewId => {
 
 // *****************************************************************************
 //************************************ THUNKS **********************************
-// -------------------------  LOAD ALL REVIEWS OF A SPOT   ---------------------------------
+// -------------------------  LOAD ALL REVIEWS---------------------------------
 
-export const loadAllReviews = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/coder/${coderId}/reviews`);
+export const loadAllReviews = () => async dispatch => {
+    const response = await fetch(`/api/reviews/`);
     // console.log(response)
     if (response.ok) {
         const reviewsList = await response.json();
-
-        // const filteredReviews = reviewsList.find(review=>reviewsList.review.coderId ===coderId)
-
-        dispatch(getAllReviews(reviewsList)) // dispatch using out action creator from above to get all reviews
+        dispatch(getAllReviews(reviewsList))
     }
 }
-///*************************************************************************** */
-// // -------------------------  GET USER REVIEWS   ----------------------------------
-// export const loadUserReviews = () => async dispatch => {
-//     const response = await csrfFetch(`/api/reviews/current`);
-//     // console.log(response)
-//     if (response.ok) {
-//         const reviews = await response.json();
-
-//         // const filteredReviews = reviewsList.find(review=>reviewsList.review.spotId ===spotId)
-//         dispatch(getAllReviews(reviews)) // dispatch using out action creator from above to get all reviews
-//     }
-// }
-
 
 ///*************************************************************************** */
 // -------------------------  CREATE A REVIEW   ----------------------------------
 export const createNewReview = (reviewData) => async dispatch => {
 
-    let spotId = reviewData.spotId
+    let coderId = reviewData.coderId
 
-    const response = await csrfFetch(`/api/coders/${coderId}/reviews`, {
+    const response = await fetch(`/api/coders/${coderId}/reviews/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -120,9 +95,10 @@ export const createNewReview = (reviewData) => async dispatch => {
     });
 
     let reviewInfo = await response.json();
+
     //get reviewId from newly created review obj
     let reviewId = reviewInfo.id
-
+    dispatch(createReview(reviewInfo))
 
 
 };
@@ -132,11 +108,11 @@ export const createNewReview = (reviewData) => async dispatch => {
 // -------------------------  DELETE A REVIEW  ----------------------------------
 
 export const deleteReview = reviewId => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    const response = await fetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
 
-    dispatch(removeReview(reviewId)) // dispatch the action create to remove a user
+    dispatch(removeReview(reviewId))
     return response;
 }
 
@@ -148,31 +124,26 @@ export const deleteReview = reviewId => async dispatch => {
 const initialState = {}
 
 
-const reviewsReducer = (state = initialState, action) => {
+const reviews = (state = initialState, action) => {
+
     let allReviews = {}
+
     switch (action.type) {
-        ///*************************************************************************** */
+ ///*************************************************************************** */
+
         case GET_ALLREVIEWS:
 
+
+            console.log("action.reviews", action.reviews)
             //normalize our data
-            action.reviews.Reviews.forEach(review => {
+            action.reviews.forEach(review => {
                 allReviews[review.id] = review
             })
             return {
                 ...state, ...allReviews
             } //return a new updated state for reviews
-            ///*************************************************************************** */
-            // case GET_USER_REVIEWS:
 
-            // //normalize our data
-            // action.reviews.Reviews.forEach(review => {
-            //     allReviews[review.id] = review
-            // })
-            // return {
-            //     ...state, ...allReviews
-            // }
-
-            ///*************************************************************************** */
+///*************************************************************************** */
 
             case CREATE_REVIEW:
 
@@ -183,16 +154,14 @@ const reviewsReducer = (state = initialState, action) => {
                 newState[action.payload.id] = action.payload // normalize and add data
 
                 return newState;
-                ///*************************************************************************** */
-            // case UPDATE_REVIEW:
-            //     const anotherState = {
-            //         ...state
-            //     }
+  ///*************************************************************************** */
 
-            //     anotherState[action.payload.id] = action.payload
+            case GET_REVIEW:
+                const newState2 = { ...state}
 
-            //     return anotherState
-                ///*************************************************************************** */
+                newState2[action.payload.id] = action.payload
+                return newState2
+///*************************************************************************** */
 
             case REMOVE_REVIEW:
                 const modifiedState = {
@@ -202,12 +171,12 @@ const reviewsReducer = (state = initialState, action) => {
                 delete modifiedState[action.payload]
 
                 return modifiedState
+///*************************************************************************** */
 
-                ///*************************************************************************** */
             default:
                 return state;
     }
 }
 
 ///*************************************************************************** */
-export default reviewsReducer
+export default reviews

@@ -162,25 +162,32 @@ def edit_coder(coder_id):
 
     edit_coder_form = CreateCoderForm()
 
-    edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
+
 
     if edit_coder_form.validate_on_submit:
-
+        edit_coder_form['csrf_token'].data = request.cookies['csrf_token']
         coder = Coder.query.filter(Coder.id==coder_id).first()
         print("coder edit", coder)
 
         # edit_coder_form.populate_obj(coder)
-
+        # new_coder = Coder()
         data = edit_coder_form.data
+
+        edit_coder_form.populate_obj(coder)
+        new_experience = data["experience"]
+        new_rate = data["daily_rate"]
+        new_bio = data["bio"]
+
         coder.id = coder.id
         coder.user_id=coder.user_id,
-        coder.bio = data["bio"],
-        coder.experience = data["experience"],
-        coder.daily_rate = data["daily_rate"],
+        coder.bio = new_bio,
+        coder.experience = new_experience,
+        coder.daily_rate = new_rate,
         # coder.skills = coder.skills
-        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]],
+        coder.skills=[Skill.query.filter(Skill.skill_name == skill).first() for skill in data["skills"]]
 
-        db.session.autoflush = False
+        # db.session.autoflush = False
+        print("coder's skills", coder.skills)
         db.session.commit()
 
         new_coder_obj = coder.to_dict()
