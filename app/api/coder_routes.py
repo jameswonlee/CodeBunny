@@ -83,7 +83,7 @@ def create_coder():
     create_coder_form = CreateCoderForm()
     create_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
-    if create_coder_form.validate_on_submit():
+    if create_coder_form.validate_on_submit:
         coder = Coder()
         data = create_coder_form.data
         coder = Coder(

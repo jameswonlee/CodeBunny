@@ -1,37 +1,37 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
-// import {CreateSpot} from "../../store/spotsReducer"
-// import {getAllSpots} from '../../store/spotsReducer'
+import {useDispatch, useSelector } from "react-redux"
+import {createNewCoder} from "../../store/coders"
+
 import "./CreateCoderForm.css";
 
 function CoderForm() {
   const history = useHistory()
   const dispatch = useDispatch();
+
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
   const [dailyRate, setDailyRate] = useState('')
   const [skills, setSkills] = useState([])
 
-  const handleSelect = function(selectedSkills) {
-    console.log("this is selected skills", selectedSkills)
-    const chosenSkills = [];
-    console.log("this is chosen Skills", chosenSkills)
-    for (let i=0; i<selectedSkills.length; i++) {
-      chosenSkills.push(selectedSkills[i].value);
+  const currentUser = useSelector(state => state.session.user)
+  console.log("this is currentUser", currentUser)
+
+  console.log("this is skills", skills)
+  const handleSelect = (value) => {
+    if(skills.includes(value)){
+      skills.pop()
+      setSkills(skills)
+    } else {
+      setSkills(skills => skills.concat(value))
     }
-    setSkills(chosenSkills);
+
 }
 
   const [validationErrors, setValidationErrors] = useState([])
 
 
-//   useEffect(() => {
-//     dispatch(getAllSpots())
-// }, [dispatch])
-
-
-const submitHandler = async (e) => {
+const submitHandler = (e) => {
   e.preventDefault()
 
     const errors = []
@@ -44,7 +44,7 @@ const submitHandler = async (e) => {
 
 
 
-    setValidationErrors(errors)
+    // setValidationErrors(errors)
 
   const payload = {
     bio,
@@ -54,16 +54,16 @@ const submitHandler = async (e) => {
 }
 
 
-if(errors.length){
-  return null
-}
+// if(errors.length){
+//   return null
+// }
 
-// let createdSpot;
+let createdCoder;
 
-// // console.log("this is created spot", createdSpot)
-// createdSpot = await dispatch(CreateSpot(payload, imagePayload))
+// console.log("this is created coder", createdCoder)
+createdCoder = dispatch(createNewCoder(payload))
 
-// history.push(`/spots/${createdSpot.id}`)
+// history.push(`/`)
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
 //   // history.push(`/api/spots/${createdSpot.id}`)
 }
@@ -123,8 +123,19 @@ if(errors.length){
           placeholder="How much per day?"
         />
       </label>
-
-      <label>
+      {/* <label>
+        Coding Skill selections!
+      <select multiple={true} value={skills} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>
+                <option value="Python">Python</option>
+                <option value="Javascript">Javascript</option>
+                <option value="C++">C++</option>
+                <option value="Ruby">Ruby</option>
+                <option value="Java">Java</option>
+                <option value="React">React</option>
+                <option value="Camel">Camel</option>
+      </select>
+      </label> */}
+<label>
       Your Selected Coding Skills
         <input
         className="form-inputs"
@@ -136,18 +147,23 @@ if(errors.length){
           placeholder="Select Skills"
         />
       </label>
-      <label>
-        Coding Skill selections!
-      <select multiple={true} value={skills} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>
-                <option value="Python">Python</option>
-                <option value="Javascript">Javascript</option>
-                <option value="C++">C++</option>
-                <option value="Ruby">Ruby</option>
-                <option value="Java">Java</option>
-                <option value="React">React</option>
-                <option value="Camel">Camel</option>
-      </select>
-      </label>
+
+  <input type="checkbox" id="Python" name="Python" value="Python" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> Python</label>
+  <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> Javascript</label>
+  <input type="checkbox" id="C++" name="C++" value="C++" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> C++</label>
+  <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> Ruby</label>
+  <input type="checkbox" id="Java" name="Java" value="Java" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> Java</label>
+  <input type="checkbox" id="React" name="React" value="React" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> React</label>
+  <input type="checkbox" id="Camel" name="Camel" value="Camel" onChange={(e)=> handleSelect(e.target.value)}/>
+  <label> Camel</label>
+
+
       </div>
       <div className="button-container">
       <button className="Create-Spot-button"
