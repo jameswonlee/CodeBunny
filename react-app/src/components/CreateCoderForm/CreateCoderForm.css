@@ -1,0 +1,66 @@
+.Outer-Container{
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+    /* border-color: rgb(0, 255, 76);
+    border-style: solid; */
+
+}
+
+.Inner-Container{
+justify-content: center;
+width: 40%;
+border-color: rgb(0, 0, 0);
+    border-style: solid;
+    border-radius: 25px;
+     border-width: thin;
+     border: none;
+}
+
+.title-box{
+    border-color: rgb(203, 207, 207);
+    border-bottom-style: solid;
+    text-align: center
+}
+
+
+.errors{
+    justify-content: center;
+    color: red;
+    padding: 10px;
+}
+
+.form-sign-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.form-inputs{
+    box-sizing: border-box;
+    width: 100%;
+    font-family: "Montserrat";
+    padding: 10px;
+    border-radius: 12px;
+    border-width: thin
+}
+
+.button-container{
+    text-align: center;
+    /* border-color: rgb(255, 0, 247);
+    border-style: solid; */
+    /* align-content: center;
+    align-items: center; */
+}
+
+.Create-Spot-button{
+    width: 100%;
+    background-color: rgb(230, 30,77);
+    color: white;
+    border-radius:12px;
+    border-width: thin;
+    padding:10px;
+    margin-top:2%;
+    border: none
+}

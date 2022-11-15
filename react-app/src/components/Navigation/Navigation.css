@@ -1,3 +1,5 @@
+* {-webkit-font-smoothing: antialiased;}
+
 .navbar-main{
 display: flex;
 flex-direction: row;
@@ -74,6 +76,7 @@ background-color: white;
     font-size: larger;
     border: 0 solid #ddd;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .become-host-button:hover{
