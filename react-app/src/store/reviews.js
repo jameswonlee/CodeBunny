@@ -7,8 +7,6 @@ const GET_ALL_REVIEWS = 'reviews/getAllReviews'
 const GET_REVIEW = 'reviews/getReview'
 const CREATE_REVIEW = 'reviews/createReview'
 const REMOVE_REVIEW = 'reviews/removeReview'
-//  do we get a get review details route in our backend?
-
 
 
 /* **************************** ACTION CREATORS ****************************** */
@@ -31,12 +29,10 @@ const getReview = (review) => {
 }
 // -------------------------  CREATE A REVIEW  ----------------------------------
 
-const createReview = (review, sessionUser) => {
+const createReview = (reviewData) => {
     return {
         type: CREATE_REVIEW,
-        payload: review,
-        user: sessionUser
-
+        payload: reviewData
     }
 }
 
@@ -77,16 +73,17 @@ export const loadOneReview = (reviewId) => async (dispatch) => {
 }
 
 // -------------------------  CREATE A REVIEW   ----------------------------------
-export const createNewReview = (review, rating, coderId, sessionUser) => async (dispatch) => {
+export const createNewReview = (reviewData) => async (dispatch) => {
+    let coderId = reviewData.coder_id
     const response = await fetch(`/api/coders/${coderId}/reviews/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ review, rating })
+        body: JSON.stringify(reviewData)
     });
 
     if (response.ok) {
         const newReview = await response.json();
-        dispatch(createReview(newReview, sessionUser))
+        dispatch(createReview(newReview))
     }
 };
 
@@ -113,7 +110,7 @@ const reviews = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_REVIEWS: {
             let newReviews = {};
-            action.reviews.forEach(review => newReviews[review.id] = review)
+            action.reviews.Reviews.forEach(review => newReviews[review.id] = review)
             newState = { ...state, reviews: newReviews }
             return newState;
         }
@@ -131,7 +128,6 @@ const reviews = (state = initialState, action) => {
                 reviews: {
                     ...state.reviews, [action.review.id]: {
                         ...action.review,
-                        User: action.user
                     }
                 }
             }

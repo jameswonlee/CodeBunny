@@ -14,10 +14,8 @@ import sessionReducer from './session.js'
 // components.
 const rootReducer = combineReducers({
 
-  session,
-  reviews
-
-  session: sessionReducer,
+  reviews: reviews,
+  session: sessionReducer
 
 });
 

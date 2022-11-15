@@ -30,13 +30,13 @@ review_bp = Blueprint("review_routes", __name__, url_prefix='/api/reviews')
 def get_all_reviews():
     all_reviews = Review.query.all()
 
-    response = {}
+    response = []
     if all_reviews:
         for review in all_reviews:
             print(review.to_dict())
             review_obj = review.to_dict()
-            response[review_obj["id"]] = review_obj
-        return response, 200
+            response.append(review_obj)
+        return {"Reviews": response}, 200
     return { "Error": "404 NOT FOUND" }, 404
 
 

@@ -10,7 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
-import ReviewsBrowser from './components/Review/index'
+import Reviews from './components/Reviews'
 
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage"
@@ -51,7 +51,7 @@ function App() {
           <UsersList/>
         </Route>
         <Route path='/reviews'>
-          <ReviewsBrowser />
+          <Reviews />
         </Route>
       </Switch>
       </>

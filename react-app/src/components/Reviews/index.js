@@ -6,7 +6,7 @@ import { loadAllReviews } from '../../store/reviews';
 // import './ReviewsBrowser.css'
 
 // REVIEWS FOR EACH SPOT
-const ReviewsBrowser = () => {
+const Reviews = () => {
     const dispatch = useDispatch(); // invoke dispatch
     let { coderId } = useParams(); // use params
     coderId = parseInt(coderId)
@@ -54,4 +54,4 @@ const ReviewsBrowser = () => {
 }
 
 
-export default ReviewsBrowser
+export default Reviews
