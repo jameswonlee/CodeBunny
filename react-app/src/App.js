@@ -14,6 +14,7 @@ import Reviews from './components/Reviews'
 
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage"
+import CreateCoderForm from "./components/CreateCoderForm"
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
         <Route path='/' exact={true} >
           <HomePage/>
         </Route>
+        <Route path="/coder/new">
+            <CreateCoderForm/>
+          </Route>
         <Route path='/listofusers' exact={true} >
           <UsersList/>
         </Route>
