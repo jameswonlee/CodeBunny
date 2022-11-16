@@ -23,13 +23,17 @@ skill_options = {
 @project_bp.route("/", methods=["GET"])
 def all_projects():
     projects = Project.query.all()
-    response = {}
+    response = []
     if projects:
         for project in projects:
             project_obj = project.to_dict()
-            response[project_obj["id"]] = project_obj
-        return response, 200
+            response.append(project_obj)
+        print("THIS IS PROJECTS FROM BACKEND",response )
+        return {
+            "Projects":response
+        }, 200
     return {"Error": "Project Not Found"}, 404
+
 
 
 # Get all of a coder's projects
@@ -105,7 +109,8 @@ def create_project_part1():
                                   Skill.skill_name == skill).first() for skill in data["skills"]],
                               start_date=data["start_date"],
                               end_date=data["end_date"],
-                              user_id = current_user.id)
+                              user_id = current_user.id,
+                              coder_id = 0)
 
 
         db.session.add(new_project)
@@ -213,7 +218,7 @@ def edit_project(project_id):
         #availability logic
         all_projects = Project.query.filter(Project.coder_id == project.coder_id).all()
         print("all projects is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", all_projects)
-        print("is it of type", type(all_projects))
+        # print("is it of type", type(all_projects))
         startDate = to_integer(data["start_date"])
         # print("THIS IS START DATE", startDate)
         endDate = to_integer(data["end_date"])
