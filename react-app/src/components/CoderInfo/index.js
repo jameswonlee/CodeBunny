@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, Route, useParams } from 'react-router-dom';
-import { loadOneCoder, loadAllCoders } from '../../store/coders';
+import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
+import { loadOneCoder, loadAllCoders, deleteCoder } from '../../store/coders';
 import './CoderInfo.css'
+
 
 const CoderInfo = () => {
     const dispatch = useDispatch();
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
     coderId = parseInt(coderId)
-
+    const sessionUser = useSelector(state => state.session.user);
+    // console.log("this is UserId", sessionUser.id)
+    const CodersUserId = useSelector(state => state.coders.user_id)
+    console.log("this is codersUserID", CodersUserId)
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadOneCoder(coderId))
@@ -17,7 +21,7 @@ const CoderInfo = () => {
 
     let girlNames = ['Marnie']
 
-
+    const history = useHistory()
     let coder = useSelector(state=> state.coders)
 
 
@@ -31,12 +35,44 @@ const CoderInfo = () => {
         return null
     }
 
+    // let sessionUserId
+    // if (sessionUser) {
+    //     sessionUserId = sessionUser.id
+    // }
+    const deleteHandler = async (e) => {
+
+        const payload = {
+            id: coderId
+        }
+        let deletedCoder;
+        deletedCoder = dispatch(deleteCoder(payload)).then(() => history.push("/")
+        )
+    }
+
+    let deleteButton;
+    if(sessionUser && sessionUser.id === CodersUserId) {
+        deleteButton = (
+            <div className= "Delete-spot-button">
+                <button className= "Edit-Delete-Button" onClick= {() => deleteHandler()}>DELETE Coder Profile</button>
+            </div>
+        )
+    } else {
+        deleteButton = (
+            <>
+            </>
+        )
+    }
+    
+
     return (
         <>
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
                     <div className='coder-header-name-container'>
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
+                    </div>
+                    <div>
+                    {deleteButton}
                     </div>
                     <div>
                        <img
