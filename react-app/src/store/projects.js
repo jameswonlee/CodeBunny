@@ -2,25 +2,35 @@
 
 import { csrfFetch } from "./csrf"
 
+//action types
+
 const READ = 'projects/READ'
-const READ_ONE = 'projects/READ_ONE'
 const CREATE = 'projects/CREATE'
 const DELETE = 'projects/DELETE'
+const UPDATE = 'projects/UPDATE'
 
+//action creators
 const read = projects => ({
     type: READ,
-    projects
+    payload: projects
 })
 
 const create = project => ({
     type: CREATE,
-    project
+    payload: project
+})
+
+const update = project => ({
+    type: UPDATE,
+    payload: project
 })
 
 const deleteAction = projectId => ({
     type: DELETE,
-    projectId
+    payload: projectId
 })
+
+//thunks
 
 export const deleteproject = (projectId) => async dispatch => {
     const response = await csrfFetch(`/api/projects/${projectId}`, {
@@ -35,9 +45,45 @@ export const deleteproject = (projectId) => async dispatch => {
     }
 }
 
-export const createproject = (payload) => async dispatch => {
+export const createproject = (projectData, coderData = []) => async dispatch => {
+    let response
+    if (!coderData) {
 
-    const response = await csrfFetch('/api/projects/new', {
+        response = await csrfFetch('/api/projects/new-1/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(projectData)
+        })
+    }
+    else {
+        let coderInfoResponse
+        let project
+
+        if (response.ok) {
+
+            coderInfoResponse = await csrfFetch('/api/projects/new-2/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(coderData)
+            })
+
+        }
+
+        if (coderInfoResponse.ok) {
+            project = await coderInfoResponse.json()
+            dispatch(create(project))
+            return project
+        }
+    }
+}
+
+export const updateproject = (payload) => async dispatch => {
+
+    const response = await csrfFetch(`/api/projects/${payload.id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,31 +91,15 @@ export const createproject = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
 
-    if(response.ok){
-        dispatch(create(project))
+    if(response.ok) {
+        const project = await response.json();
+        dispatch(update(project))
         return project
     }
 }
 
-export const updateproject = (payload) => async dispatch => {
-
-    const response = await csrfFetch(`/api/spots/${payload.id}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-
-    if(response.ok) {
-        const spot = await response.json();
-        dispatch(create(spot))
-        return spot
-    }
-}
-
 export const getprojects = () => async dispatch => {
-    const response = await fetch('/api/projects')
+    const response = await fetch('/api/projects/')
     if(response.ok) {
         const projects = await response.json();
         dispatch(read(projects))
@@ -84,21 +114,22 @@ const projectReducer = (state = initialState, action) => {
     switch(action.type) {
         case READ:
             newState = {...state}
-            action.projects.forEach((project) => {
-                newState[projects.id] = project
+            action.payload.Projects.forEach((project) => {
+                newState[project.id] = project
             });
             return newState
 
+        case UPDATE:
         case CREATE:
             newState = {...state}
-            newState[action.project.id] = action.project
+            newState[action.payload.id] = action.payload
             return newState
 
         case DELETE:
             newState = {...state}
-            delete newState[action.projectId]
+            delete newState[action.payload]
             return newState
-
+    
         default:
             return state
 
