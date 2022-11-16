@@ -14,11 +14,16 @@ function CoderForm() {
   const [daily_rate, setDailyRate] = useState('')
   const [skills, setSkills] = useState([])
 
+  useEffect(() => {
+    dispatch(loadAllCoders())
+}, [dispatch])
+
   const currentUser = useSelector(state => state.session.user)
-  console.log("this is currentUser", currentUser)
+  // console.log("this is currentUser", currentUser)
+  // console.log("this is currentUser.id", currentUser.id)
 
 
-  console.log("this is skills", skills)
+  // console.log("this is skills", skills)
   const handleSelect = (value) => {
     if(skills.includes(value)){
       skills.pop()
@@ -62,13 +67,13 @@ const submitHandler = async (e) => {
 let createdCoder;
 
 // console.log("this is created coder", createdCoder)
-createdCoder = dispatch(createNewCoder(payload))
+createdCoder = await dispatch(createNewCoder(payload))
 
-// history.push(`/`)
-// // console.log("THIS IS OUR CREATED SPOT", createdSpot)
+
+console.log("THIS IS OUR CREATED coder", createdCoder)
+dispatch(loadAllCoders())
   history.push(`/coders/${createdCoder.id}`)
 }
-//return spot from teh THUNK
 
 
 

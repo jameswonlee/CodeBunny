@@ -17,6 +17,27 @@ function UpdateCoderForm() {
   }, [dispatch])
 
   const coderInfo = useSelector(state => state.coders[coderId])
+  console.log('coderInfo', coderInfo)
+  // const coderSkills = coderInfo.skills
+  // let coderSkillsArr = []
+  // for (let key in coderInfo) {
+  //   if (key === "skills") {
+  //     coderSkillsArr.push(coderInfo[key])
+  //     console.log('coderSkillsArr', coderSkillsArr)
+  //   }
+  //   let coderSkills = []
+  //   coderSkillsArr.forEach(obj => {
+  //     console.log(obj)
+  //     for (let key in obj) {
+        // if (skill_name) {
+        //   coderSkills.push(key["skill_name"])
+        //   console.log('coderSkills', coderSkills)
+        // }
+
+  //     }
+  //   })
+  // }
+
 
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
@@ -24,9 +45,12 @@ function UpdateCoderForm() {
   const [skills, setSkills] = useState([])
   const [validationErrors, setValidationErrors] = useState([])
 
+ 
+ 
+
   // const currentUser = useSelector(state => state.session.user)
   // console.log("this is currentUser", currentUser)
-  console.log("this is skills", skills)
+  // console.log("this is skills", skills)
 
   // useEffect(() => {
   //   dispatch(loadOneCoder(coderId))
