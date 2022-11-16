@@ -206,4 +206,3 @@ const coderReducer = (state = initialState, action) => {
 // *****************************************************************************
 
 export default coderReducer
-

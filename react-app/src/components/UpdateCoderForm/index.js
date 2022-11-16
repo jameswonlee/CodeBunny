@@ -27,11 +27,18 @@ function UpdateCoderForm() {
     dispatch(loadOneCoder(coderId))
   }, [dispatch])
 
+
+  let viewSkills = []
+  for (let view of coderInfo.skills){
+    viewSkills.push(view.skill_name)
+  }
+
+
   useEffect(() => {
     setBio(coderInfo && coderInfo.bio)
     setExperience(coderInfo && coderInfo.experience)
     setDailyRate(coderInfo && coderInfo.daily_rate)
-    setSkills(coderInfo&& coderInfo.skills)
+    setSkills(coderInfo&& viewSkills)
   }, [coderInfo])
 
   if(!coderInfo) return null

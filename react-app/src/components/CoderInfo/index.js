@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { loadOneCoder, loadAllCoders, deleteCoder } from '../../store/coders';
+import Reviews from '../Reviews';
 import './CoderInfo.css'
 
 
@@ -62,7 +63,7 @@ const CoderInfo = () => {
             </>
         )
     }
-    
+
 
     return (
         <>
@@ -107,6 +108,10 @@ const CoderInfo = () => {
                         })}
                     </div>
 
+                </div>
+
+                <div>
+                    <Reviews />
                 </div>
             </div>
 

@@ -19,6 +19,7 @@ import CreateProjectForm from "./components/CreateProjectForm"
 import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
+import UserProjects from './components/UserProjects';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,10 +66,13 @@ function App() {
         </Route>
         <Route path="/project/new">
             <CreateProjectForm/>
-          </Route>
-          <Route path='/coder/:coderId/edit'>
+        </Route>
+        <Route path='/coder/:coderId/edit'>
             <UpdateCoderForm/>
-          </Route>
+        </Route>
+        <Route path='/projects/current'>
+          <UserProjects />
+        </Route>
       </Switch>
       </>
     // </BrowserRouter>

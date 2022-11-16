@@ -14,9 +14,10 @@ function CoderForm() {
   const [daily_rate, setDailyRate] = useState('')
   const [skills, setSkills] = useState([])
 
+
   const currentUser = useSelector(state => state.session.user)
   console.log("this is currentUser", currentUser)
-  
+
 
   console.log("this is skills", skills)
   const handleSelect = (value) => {
@@ -32,7 +33,7 @@ function CoderForm() {
   const [validationErrors, setValidationErrors] = useState([])
 
 
-const submitHandler = (e) => {
+const submitHandler = async (e) => {
   e.preventDefault()
 
     const errors = []
@@ -62,7 +63,7 @@ const submitHandler = (e) => {
 let createdCoder;
 
 // console.log("this is created coder", createdCoder)
-createdCoder = dispatch(createNewCoder(payload))
+createdCoder = await dispatch(createNewCoder(payload))
 
 history.push(`/`)
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
