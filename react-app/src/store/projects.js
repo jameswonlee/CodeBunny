@@ -129,7 +129,7 @@ const projectReducer = (state = initialState, action) => {
             newState = {...state}
             delete newState[action.payload]
             return newState
-
+    
         default:
             return state
 

@@ -18,6 +18,7 @@ import CreateCoderForm from "./components/CreateCoderForm"
 import CreateProjectForm from "./components/CreateProjectForm"
 import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
+import CoderInfo from './components/CoderInfo';
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,9 @@ function App() {
           </Route>
         <Route path='/listofusers' exact={true} >
           <UsersList/>
+        </Route>
+        <Route path='/coders/:coderId'>
+          <CoderInfo />
         </Route>
         <Route path='/reviews'>
           <Reviews />
