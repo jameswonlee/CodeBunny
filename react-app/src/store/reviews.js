@@ -53,7 +53,8 @@ const removeReview = (reviewId) => {
 // -------------------------  LOAD ALL REVIEWS---------------------------------
 
 export const loadAllReviews = () => async dispatch => {
-    const response = await fetch(`/api/reviews/`);
+
+    const response = await csrfFetch(`/api/reviews/`);
 
     if (response.ok) {
         const reviews = await response.json();
@@ -64,7 +65,7 @@ export const loadAllReviews = () => async dispatch => {
 // ---------------------------- LOAD REVIEW -------------------------------------
 
 export const loadOneReview = (reviewId) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${reviewId}`);
+    const response = await csrfFetch(`/api/reviews/${reviewId}`);
 
     if (response.ok) {
         const review = await response.json();
@@ -73,9 +74,11 @@ export const loadOneReview = (reviewId) => async (dispatch) => {
 }
 
 // -------------------------  CREATE A REVIEW   ----------------------------------
-export const createNewReview = (coderId, payload) => async (dispatch) => {
 
-    const response = await fetch(`/api/coders/${coderId}/reviews/new`, {
+export const createNewReview = (reviewData) => async (dispatch) => {
+    let coderId = reviewData.coder_id
+    const response = await csrfFetch(`/api/coders/${coderId}/reviews/new`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -91,7 +94,7 @@ export const createNewReview = (coderId, payload) => async (dispatch) => {
 // -------------------------  DELETE A REVIEW  ---------------------------------
 
 export const deleteReview = reviewId => async dispatch => {
-    const response = await fetch(`/api/reviews/${reviewId}`, {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
 
@@ -121,22 +124,10 @@ const reviews = (state = initialState, action) => {
             newState[action.payload.id] = action.payload
             return newState
 
-
-        // case CREATE_REVIEW:
-        //     newState = { ...state }
-        //     newState = {
-        //         reviews: {
-        //             ...state.reviews, [action.review.id]: {
-        //                 ...action.review,
-        //             }
-        //         }
-        //     }
-        //     return newState;
-            case CREATE_REVIEW:
+        case CREATE_REVIEW:
                 newState = { ...state }
                 newState[action.payload.id]= action.payload
                 return newState;
-
 
         case REMOVE_REVIEW:
             newState = { ...state }
