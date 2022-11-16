@@ -1,42 +1,39 @@
 // store > projects.js
 
-import { csrfFetch } from "./csrf"
-// *****************************************************************************
-//****************************** ACTION CREATORS *******************************
+import {
+    csrfFetch
+} from "./csrf"
+
 //action types
 
 const READ = 'projects/READ'
 const CREATE = 'projects/CREATE'
 const DELETE = 'projects/DELETE'
 const UPDATE = 'projects/UPDATE'
-///*************************************************************************** */
+
 //action creators
 const read = projects => ({
     type: READ,
     payload: projects
 })
-///*************************************************************************** */
+
 const create = project => ({
     type: CREATE,
     payload: project
 })
-///*************************************************************************** */
+
 const update = project => ({
     type: UPDATE,
     payload: project
 })
-///*************************************************************************** */
+
 const deleteAction = projectId => ({
     type: DELETE,
     payload: projectId
 })
 
+//thunks
 
-// *****************************************************************************
-//************************************ THUNKS **********************************
-//*************************************************************************** */
-
-// -------------------------  DELETE PROJECT   -------------------------
 export const deleteproject = (projectId) => async dispatch => {
     const response = await csrfFetch(`/api/projects/${projectId}`, {
         method: 'DELETE',
@@ -44,17 +41,16 @@ export const deleteproject = (projectId) => async dispatch => {
             'Content-Type': 'application/json'
         }
     })
-    if(response.ok) {
+    if (response.ok) {
         dispatch(deleteAction(projectId))
         return response
     }
 }
-//*************************************************************************** */
 
-// -------------------------  CREATE PROJECT  -------------------------
-export const createproject = (projectData, coderData = []) => async dispatch => {
+export const createproject = (projectData, coderId, projectId) => async dispatch => {
+    let newproject
     let response
-    if (!coderData) {
+    if (coderId === 0) {
 
         response = await csrfFetch('/api/projects/new-1/', {
             method: 'POST',
@@ -63,22 +59,24 @@ export const createproject = (projectData, coderData = []) => async dispatch => 
             },
             body: JSON.stringify(projectData)
         })
-    }
-    else {
+
+        newproject = await response.json()
+        console.log("The new project is ", newproject)
+        return newproject
+    } else if (coderId && projectId) {
+        console.log("did this reach 2nd thunk create proj")
         let coderInfoResponse
         let project
 
-        if (response.ok) {
+        coderInfoResponse = await csrfFetch(`/api/projects/new-2/${projectId}/${coderId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(coderId)
+        })
 
-            coderInfoResponse = await csrfFetch('/api/projects/new-2/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(coderData)
-            })
 
-        }
 
         if (coderInfoResponse.ok) {
             project = await coderInfoResponse.json()
@@ -87,9 +85,7 @@ export const createproject = (projectData, coderData = []) => async dispatch => 
         }
     }
 }
-//*************************************************************************** */
 
-// -------------------------  UPDATE PROJECT   -------------------------
 export const updateproject = (payload) => async dispatch => {
 
     const response = await csrfFetch(`/api/projects/${payload.id}`, {
@@ -100,65 +96,55 @@ export const updateproject = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
 
-    if(response.ok) {
+    if (response.ok) {
         const project = await response.json();
         dispatch(update(project))
         return project
     }
 }
 
-//*************************************************************************** */
-
-// ------------------------- GET ALL PROJECTS  -------------------------
 export const getprojects = () => async dispatch => {
     const response = await csrfFetch('/api/projects/')
-    if(response.ok) {
+    if (response.ok) {
         const projects = await response.json();
         dispatch(read(projects))
     }
 }
-
-
-
-// *****************************************************************************
-// ******************************* REDUCERS ************************************
 
 const initialState = {}
 
 const projectReducer = (state = initialState, action) => {
 
     let newState = {}
-        // *****************************************************************************
-    switch(action.type) {
-
+    switch (action.type) {
         case READ:
-            newState = {...state}
-            console.log("THIS IS proj payload reducer", action.payload.Projects)
+            newState = {
+                ...state
+            }
             action.payload.Projects.forEach((project) => {
                 newState[project.id] = project
             });
-
             return newState
-    // *****************************************************************************
-        // case UPDATE:
-        //     break
-    // *****************************************************************************
+
+        case UPDATE:
         case CREATE:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             newState[action.payload.id] = action.payload
             return newState
-    // *****************************************************************************
+
         case DELETE:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             delete newState[action.payload]
             return newState
-    // *****************************************************************************
+
         default:
             return state
-    // *****************************************************************************
+
     }
 }
-
-// *****************************************************************************
 
 export default projectReducer
