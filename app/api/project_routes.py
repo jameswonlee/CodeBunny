@@ -23,12 +23,15 @@ skill_options = {
 @project_bp.route("/", methods=["GET"])
 def all_projects():
     projects = Project.query.all()
-    response = {}
+    response = []
     if projects:
         for project in projects:
             project_obj = project.to_dict()
-            response[project_obj["id"]] = project_obj
-        return response, 200
+            response.append(project_obj)
+        print("THIS IS PROJECTS FROM BACKEND",response )
+        return {
+            "Projects":response
+        }, 200
     return {"Error": "Project Not Found"}, 404
 
 

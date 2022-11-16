@@ -33,3 +33,39 @@ h1 {
     text-decoration: underline;
     padding: 2% 0%;
 }
+
+.coder-detail-page-container{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.user-photo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-image{
+    padding-right: 5%
+}
+
+.review-user-name{
+    font-weight: bolder;
+}
+
+.review-card{
+    border: 2px solid green;
+    padding: 5%;
+    margin:5%
+}
+
+.review-header {
+        margin-top: 10%;
+        padding: 5%;
+        text-decoration: underline;
+        text-align: center;
+
+}

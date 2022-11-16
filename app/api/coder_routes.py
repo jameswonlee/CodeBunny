@@ -182,3 +182,5 @@ def delete_coder(coder_id):
         return {"message" : "Coder succesfully deleted"}, 200
 
     return {"Error": "404 Coder Not Found"}, 404
+
+#*****************************************************************************************************************************
