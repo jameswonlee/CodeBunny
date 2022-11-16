@@ -24,6 +24,7 @@ function SelectCoderForProject() {
         console.log("project id being sent in is ", projectId)
 
         dispatch(createproject(0, coderId, projectId ))
+        history.push(`/projects/confirmation/${projectId}`)
     }
 
     return (

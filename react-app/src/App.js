@@ -20,6 +20,7 @@ import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
 import SelectCoderForProject from './components/SelectCoderForProject';
+import NewProjectConfirmation from './components/NewProjectConfirmation';
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +73,9 @@ function App() {
         </Route>
           <Route path='/coder/:coderId/edit'>
             <UpdateCoderForm/>
+          </Route>
+          <Route patch = "/projects/confirmation/:projectId">
+            <NewProjectConfirmation/>
           </Route>
       </Switch>
       </>

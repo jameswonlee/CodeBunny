@@ -107,6 +107,7 @@ export const getprojects = () => async dispatch => {
     if(response.ok) {
         const projects = await response.json();
         dispatch(read(projects))
+        return response
     }
 }
 
