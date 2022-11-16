@@ -19,14 +19,17 @@ import CreateProjectForm from "./components/CreateProjectForm"
 import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
+import SelectCoderForProject from './components/SelectCoderForProject';
+import NewProjectConfirmation from './components/NewProjectConfirmation';
 import UserProjects from './components/UserProjects';
+
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     })();
   }, [dispatch]);
@@ -35,7 +38,7 @@ function App() {
     // <BrowserRouter>
     <>
       {/* <NavBar /> */}
-      <Navigation isLoaded={isLoaded}/>
+      <Navigation isLoaded={isLoaded} />
       <Switch>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
@@ -50,13 +53,13 @@ function App() {
           {/* this is to see User Profile */}
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <HomePage/>
+          <HomePage />
         </Route>
         <Route path="/coder/new">
-            <CreateCoderForm/>
-          </Route>
+          <CreateCoderForm />
+        </Route>
         <Route path='/listofusers' exact={true} >
-          <UsersList/>
+          <UsersList />
         </Route>
         <Route path='/coders/:coderId'>
           <CoderInfo />
@@ -65,16 +68,19 @@ function App() {
           <Reviews />
         </Route>
         <Route path="/project/new">
-            <CreateProjectForm/>
+          <CreateProjectForm />
         </Route>
         <Route path='/coder/:coderId/edit'>
-            <UpdateCoderForm/>
+          <UpdateCoderForm />
         </Route>
-        <Route path='/current/user/projects'>
-          <UserProjects />
+        <Route path="/projects/new/:projectId">
+          <SelectCoderForProject />
+        </Route>
+        <Route path="/projects/confirmation/:projectId">
+          <NewProjectConfirmation />
         </Route>
       </Switch>
-      </>
+    </>
     // </BrowserRouter>
   );
 }
