@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
-import {editCoder, loadOneCoder} from '../../store/coders'
-
+import {editCoder, loadOneCoder, loadAllCoders} from '../../store/coders'
+// INTERESTEDING THAT LOADONECODER DOESNT Worker, BUT I CAN WORK WITH LOAD ALL CODESR
 import "./UpdateCoderForm.css"
 
 function UpdateCoderForm() {
   const { coderId } = useParams()
-
-  const history = useHistory()
   const dispatch = useDispatch();
+  const history = useHistory()
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const coderInfo = useSelector(state => state.coder[coderId])
+  useEffect(() => {
+    dispatch(loadAllCoders(coderId))
+    .then(() => setIsLoaded(true))
+  }, [dispatch])
+
+  const coderInfo = useSelector(state => state.coders[coderId])
 
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
@@ -21,11 +26,13 @@ function UpdateCoderForm() {
 
   // const currentUser = useSelector(state => state.session.user)
   // console.log("this is currentUser", currentUser)
-  // console.log("this is skills", skills)
+  console.log("this is skills", skills)
 
-  useEffect(() => {
-    dispatch(loadOneCoder(coderId))
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(loadOneCoder(coderId))
+  // }, [dispatch])
+
+
 
   useEffect(() => {
     setBio(coderInfo && coderInfo.bio)
@@ -82,7 +89,7 @@ let createdCoder;
 // console.log("this is created coder", createdCoder)
 createdCoder = dispatch(editCoder(payload))
 
-history.push(`/coder/${coderId}`)
+history.push(`/coders/${coderId}`)
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
 //   // history.push(`/api/spots/${createdSpot.id}`)
 }
@@ -166,7 +173,7 @@ history.push(`/coder/${coderId}`)
           placeholder="Select Skills"
         />
       </label>
-
+<label>Your Skills BELOW</label>
   <input type="checkbox" id="Python" name="Python" value="Python" onChange={(e)=> handleSelect(e.target.value)}/>
   <label> Python</label>
   <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" onChange={(e)=> handleSelect(e.target.value)}/>

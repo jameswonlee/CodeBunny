@@ -5,6 +5,7 @@ import { loadOneCoder, loadAllCoders, deleteCoder } from '../../store/coders';
 import './CoderInfo.css'
 
 
+
 const CoderInfo = () => {
     const dispatch = useDispatch();
     // const [isLoaded, setIsLoaded] = useState(false)
@@ -70,6 +71,9 @@ const CoderInfo = () => {
                 <div className='coder-container'>
                     <div className='coder-header-name-container'>
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
+                    </div>
+                    <div>
+                    {deleteButton}
                     </div>
                     <div>
                     {deleteButton}

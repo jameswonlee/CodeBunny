@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
-import {createNewCoder} from "../../store/coders"
+import {createNewCoder, loadAllCoders} from "../../store/coders"
 
 import "./CreateCoderForm.css";
 
@@ -16,7 +16,7 @@ function CoderForm() {
 
   const currentUser = useSelector(state => state.session.user)
   console.log("this is currentUser", currentUser)
-  
+
 
   console.log("this is skills", skills)
   const handleSelect = (value) => {
@@ -32,7 +32,7 @@ function CoderForm() {
   const [validationErrors, setValidationErrors] = useState([])
 
 
-const submitHandler = (e) => {
+const submitHandler = async (e) => {
   e.preventDefault()
 
     const errors = []
@@ -64,9 +64,9 @@ let createdCoder;
 // console.log("this is created coder", createdCoder)
 createdCoder = dispatch(createNewCoder(payload))
 
-history.push(`/`)
+// history.push(`/`)
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
-//   // history.push(`/api/spots/${createdSpot.id}`)
+  history.push(`/coders/${createdCoder.id}`)
 }
 //return spot from teh THUNK
 
