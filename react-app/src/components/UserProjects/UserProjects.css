@@ -2,16 +2,19 @@
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
-    /* border: 2px solid green */
+    background-color: rgb(255, 255, 255);
+
+
 }
 
 .projects-container{
-    border: 2px solid green;
+    border: 2px solid rgb(3, 97, 66);
     padding: 5%;
     margin: 5%;
     display:flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 .upcoming-container {
@@ -24,14 +27,19 @@
 
 
 .completed-container{
-     border-top: 2px solid rgb(3, 97, 66);
+     border-top: 3px solid rgb(4, 98, 65);
      padding: 4%;
      display: flex;
      flex-direction: column;
      justify-content: center;
 }
-
-h1,  h2,  user-projects-header{
+.user-projects-header, h1, h2{
     display:block;
     text-align: center;
+
+}
+
+.projects-title{
+    border-bottom: 2px solid rgb(3, 97, 66);
+    padding-bottom: 10%;
 }

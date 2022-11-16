@@ -41,17 +41,17 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
             <div className='my-projects-page-container'>
                 <div className='projects-container'>
                     <div className='upcoming-container'>
-                        <h1>Your Upcoming Projects</h1>
+                        <h1 className='projects-title'>Upcoming Projects</h1>
                         <div>
                             {upcomingProjects.length? upcomingProjects.map(project=>{
 
                                 return(
                                     <>
                                         <div>
-                                            <div>Project Name: {project.name}</div>
-                                            <div>Start-Date:{project.start_date}</div>
-                                            <div>End-Date: {project.end_date}</div>
-                                            <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
+                                            <div>Project Name:</div><div>{project.name}</div>
+                                            <div>Start-Date:</div><div>{project.start_date}</div>
+                                            <div>End-Date</div><div>{project.end_date}</div>
+                                            <div>Owner</div><div>{project.owner.first_name} {project.owner.last_name}</div>
                                             <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
                                             <div>Coder's Contact Info: {project.coder.user.email}</div>
                                         </div>
@@ -62,7 +62,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
 
                     </div>
                     <div className='completed-container'>
-                        <h1>Your Completed Projects</h1>
+                        <h1 className = 'projects-title' >Completed Projects </h1>
                         {completedProjects.length? completedProjects.map(project=>{
 
                             return(
@@ -83,7 +83,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                 </div>
                 <div className='projects-container'>
                     < div className = 'upcoming-container' >
-                        <h1>Your Upcoming Jobs</h1>
+                        <h1 className = 'projects-title' >Upcoming Jobs </h1>
                         {upcomingJobs.length? upcomingJobs.map(project=>{
 
                             return(
@@ -104,7 +104,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
 
                     </div>
                     < div className = 'completed-container' >
-                        <h1>Your Completed Jobs</h1>
+                        <h1 className = 'projects-title' >Completed Jobs </h1>
                         {completedJobs.length? completedJobs.map(project=>{
 
                             return(
