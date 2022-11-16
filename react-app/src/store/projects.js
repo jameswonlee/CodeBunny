@@ -45,10 +45,10 @@ export const deleteproject = (projectId) => async dispatch => {
     }
 }
 
-export const createproject = (projectData, coderData = []) => async dispatch => {
+export const createproject = (projectData, coderId) => async dispatch => {
     let response
-    if (!coderData) {
-
+    if (coderId === null) {
+        
         response = await csrfFetch('/api/projects/new-1/', {
             method: 'POST',
             headers: {
@@ -56,22 +56,26 @@ export const createproject = (projectData, coderData = []) => async dispatch => 
             },
             body: JSON.stringify(projectData)
         })
+
+        console.log("did this reach")
+        return response
     }
     else {
+        console.log("did this reach as well")
         let coderInfoResponse
         let project
 
-        if (response.ok) {
+       
 
             coderInfoResponse = await csrfFetch('/api/projects/new-2/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(coderData)
+                body: JSON.stringify(coderId)
             })
 
-        }
+        
 
         if (coderInfoResponse.ok) {
             project = await coderInfoResponse.json()

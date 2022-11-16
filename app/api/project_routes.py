@@ -213,7 +213,7 @@ def edit_project(project_id):
         #availability logic
         all_projects = Project.query.filter(Project.coder_id == project.coder_id).all()
         print("all projects is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", all_projects)
-        print("is it of type", type(all_projects))
+        # print("is it of type", type(all_projects))
         startDate = to_integer(data["start_date"])
         # print("THIS IS START DATE", startDate)
         endDate = to_integer(data["end_date"])

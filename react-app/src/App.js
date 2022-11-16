@@ -42,9 +42,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route> */}
-        <ProtectedRoute path='/createProject' exact={true} >
-          {/* this is to create a project */}
-        </ProtectedRoute>
+        <Route path='/createProject' exact={true} >
+          <CreateProjectForm/>
+        </Route>
         <ProtectedRoute path='/users/:userId' exact={true} >
           {/* this is to see User Profile */}
         </ProtectedRoute>

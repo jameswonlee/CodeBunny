@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
 import {createproject} from "../../store/projects"
-
 import "./CreateProjectForm.css";
+import { loadAllCoders } from "../../store/coders";
+import SelectCoderForProject from "../SelectCoderForProject";
 
 function ProjectForm() {
   const history = useHistory()
@@ -14,9 +15,16 @@ function ProjectForm() {
   const [start_date, setStartDate] = useState('')
   const [end_date, setEndDate] = useState('')
   const [skills, setSkills] = useState([])
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
+  useEffect(() => {
+    dispatch(loadAllCoders())
+  },[dispatch])
 
   const currentUser = useSelector(state => state.session.user)
   console.log("this is currentUser", currentUser)
+  console.log("the start date is ", start_date)
+  console.log("end date is ", end_date)
 
 
   console.log("this is skills", skills)
@@ -66,9 +74,14 @@ const submitHandler = (e) => {
 let createdProject;
 
 // console.log("this is created coder", createdCoder)
-createdProject = dispatch(createproject(payload))
+createdProject = dispatch(createproject(payload, null))
+if (createdProject) {
+  setFormSubmitted(true)
+}
 
-history.push(`/`)
+const projectId = createdProject.id
+console.log("projectId is ", projectId)
+
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
 //   // history.push(`/api/spots/${createdSpot.id}`)
 }
@@ -77,6 +90,7 @@ history.push(`/`)
 
 
   return (
+    
     <div className="Outer-Container">
       <div className="Inner-Container">
     <form
@@ -174,10 +188,11 @@ history.push(`/`)
         // disable={setValidationErrors.length > 0 ? true : false}
           // disabled={!!validationErrors.length}
       >
-        Create Your Project!
+        Select your Coder!
       </button>
       </div>
     </form>
+    {formSubmitted && <SelectCoderForProject/>}
       </div>
     </div>
   );
