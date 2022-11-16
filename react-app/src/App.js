@@ -16,6 +16,7 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage"
 import CreateCoderForm from "./components/CreateCoderForm"
 import CreateProjectForm from "./components/CreateProjectForm"
+import CreateReviewForm from "./components/CreateReviewForm"
 import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
@@ -56,8 +57,13 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/coder/new">
-          <CreateCoderForm />
-        </Route>
+
+            <CreateCoderForm/>
+          </Route>
+          <Route path="/review/:coderId/new">
+            <CreateReviewForm/>
+          </Route>
+
         <Route path='/listofusers' exact={true} >
           <UsersList />
         </Route>
