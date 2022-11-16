@@ -53,6 +53,7 @@ const removeReview = (reviewId) => {
 // -------------------------  LOAD ALL REVIEWS---------------------------------
 
 export const loadAllReviews = () => async dispatch => {
+
     const response = await csrfFetch(`/api/reviews/`);
 
     if (response.ok) {
@@ -73,16 +74,19 @@ export const loadOneReview = (reviewId) => async (dispatch) => {
 }
 
 // -------------------------  CREATE A REVIEW   ----------------------------------
+
 export const createNewReview = (reviewData) => async (dispatch) => {
     let coderId = reviewData.coder_id
     const response = await csrfFetch(`/api/coders/${coderId}/reviews/new`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reviewData)
+        body: JSON.stringify(payload)
     });
 
     if (response.ok) {
         const newReview = await response.json();
+        console.log("this is newReview in teh thunk", newReview)
         dispatch(createReview(newReview))
     }
 };
@@ -120,18 +124,10 @@ const reviews = (state = initialState, action) => {
             newState[action.payload.id] = action.payload
             return newState
 
-
         case CREATE_REVIEW:
-            newState = { ...state }
-            newState = {
-                reviews: {
-                    ...state.reviews, [action.payload.id]: {
-                        ...action.payload,
-                    }
-                }
-            }
-            return newState;
-
+                newState = { ...state }
+                newState[action.payload.id]= action.payload
+                return newState;
 
         case REMOVE_REVIEW:
             newState = { ...state }
