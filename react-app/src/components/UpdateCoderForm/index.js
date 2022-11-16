@@ -11,12 +11,6 @@ function UpdateCoderForm() {
   const dispatch = useDispatch();
   const history = useHistory()
   const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    dispatch(loadAllCoders(coderId))
-    .then(() => setIsLoaded(true))
-  }, [dispatch])
-
   const coderInfo = useSelector(state => state.coders[coderId])
 
   const [bio, setBio] = useState('')
@@ -26,12 +20,10 @@ function UpdateCoderForm() {
   const [validationErrors, setValidationErrors] = useState([])
 
 
-
-  let viewSkills = []
-  for (let view of coderInfo.skills){
-    viewSkills.push(view.skill_name)
-  }
-
+  useEffect(() => {
+    dispatch(loadAllCoders(coderId))
+    .then(() => setIsLoaded(true))
+  }, [dispatch])
 
   useEffect(() => {
     setBio(coderInfo && coderInfo.bio)
@@ -40,8 +32,11 @@ function UpdateCoderForm() {
     setSkills(coderInfo && coderInfo.skills.map(({ skill_name }) => {
       return skill_name
     }))
-    setSkills(coderInfo&& viewSkills)
   }, [coderInfo])
+
+
+
+
 
   if(!coderInfo) return null
 
