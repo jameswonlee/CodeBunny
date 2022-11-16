@@ -1,38 +1,44 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
-import {createNewCoder} from "../../store/coders"
+import {createNewCoder, loadAllCoders} from "../../store/coders"
 
 import "./CreateCoderForm.css";
 
 function CoderForm() {
   const history = useHistory()
   const dispatch = useDispatch();
+  // const { coderId } = useParams()
+  // const coderInfo = useSelector(state => state.coders[coderId])
+  const currentUser = useSelector(state => state.session.user)
 
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
   const [daily_rate, setDailyRate] = useState('')
   const [skills, setSkills] = useState([])
 
-  const currentUser = useSelector(state => state.session.user)
-  console.log("this is currentUser", currentUser)
-  
+  useEffect(() => {
+    dispatch(loadAllCoders())
+    // setSkills(coderInfo && coderInfo.skills.map(({ skill_name }) => {
+    //   return skill_name
+    // }))
+}, [dispatch])
 
-  console.log("this is skills", skills)
+
   const handleSelect = (value) => {
     if(skills.includes(value)){
-      skills.pop()
-      setSkills(skills)
+      setSkills(skills.filter((skill) => {
+        return skill !== value
+      }))
     } else {
       setSkills(skills => skills.concat(value))
     }
-
 }
 
   const [validationErrors, setValidationErrors] = useState([])
 
 
-const submitHandler = (e) => {
+const submitHandler = async (e) => {
   e.preventDefault()
 
     const errors = []
@@ -62,13 +68,13 @@ const submitHandler = (e) => {
 let createdCoder;
 
 // console.log("this is created coder", createdCoder)
-createdCoder = dispatch(createNewCoder(payload))
+createdCoder = await dispatch(createNewCoder(payload))
 
-history.push(`/`)
-// // console.log("THIS IS OUR CREATED SPOT", createdSpot)
-//   // history.push(`/api/spots/${createdSpot.id}`)
+
+console.log("THIS IS OUR CREATED coder", createdCoder)
+dispatch(loadAllCoders())
+  history.push(`/coders/${createdCoder.id}`)
 }
-//return spot from teh THUNK
 
 
 
@@ -149,19 +155,19 @@ history.push(`/`)
         />
       </label>
 
-  <input type="checkbox" id="Python" name="Python" value="Python" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> Python</label>
-  <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> Javascript</label>
-  <input type="checkbox" id="C++" name="C++" value="C++" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> C++</label>
-  <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> Ruby</label>
-  <input type="checkbox" id="Java" name="Java" value="Java" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> Java</label>
-  <input type="checkbox" id="React" name="React" value="React" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> React</label>
-  <input type="checkbox" id="Camel" name="Camel" value="Camel" onChange={(e)=> handleSelect(e.target.value)}/>
+  <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e)=> handleSelect(e.target.value)}/>
   <label> Camel</label>
 
 

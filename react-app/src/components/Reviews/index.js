@@ -6,7 +6,6 @@ import { loadAllReviews } from '../../store/reviews';
 
 const Reviews = () => {
     const dispatch = useDispatch();
-    let { coderId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const reviewsData = useSelector(state => state.reviews);
     const reviews = Object.values(reviewsData);
@@ -20,7 +19,7 @@ const Reviews = () => {
 
     return (
         <div className="reviews-container">
-            <h3>Reviews for </h3>
+            <h2 className='review-header'>Reviews</h2>
             <div className="reviews">{reviews?.map((review, index) => (
                 <div key={review.id} className="review-card">
                     <div className="user-photo">

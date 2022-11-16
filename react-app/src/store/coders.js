@@ -78,6 +78,7 @@ export const loadOneCoder = (coderId) => async dispatch => {
 
 
 
+
     if (response.ok){
         const coderInfo = await response.json();
          console.log("CODER INFO IN THUNK", coderInfo)
@@ -91,8 +92,8 @@ export const loadOneCoder = (coderId) => async dispatch => {
 // -------------------------  CREATE A CODER   ----------------------------------
 
 export const createNewCoder = (payload) => async dispatch => {
-    console.log("did this reach?")
-    console.log("this is the payload", payload)
+    // console.log("did this reach?")
+    // console.log("this is the payload", payload)
     const response = await csrfFetch('/api/coders/new/', {
         method: 'POST',
         headers: {
@@ -100,11 +101,13 @@ export const createNewCoder = (payload) => async dispatch => {
         },
         body: JSON.stringify(payload)
     })
-    console.log("did it reach here? after response?")
+    // console.log("did it reach here? after response?")
+
     if (response.ok) {
-        const coder = await response.json()
+        let coder = await response.json()
+        console.log("this is the coder if response.ok", coder)
         dispatch(createCoder(coder))
-        return response
+        return coder
     }
 }
 
@@ -132,15 +135,15 @@ export const editCoder = (editCoderInfo) => async dispatch => {
 //*************************************************************************** */
 
 // -------------------------  DELETE A CODER    --------------------------------
-export const deleteCoder = (coderId) => async dispatch => {
-    const response = await csrfFetch(`/api/coders/${coderId}/`, {
+export const deleteCoder = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/coders/${payload.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        dispatch(removeCoder(coderId))
+        dispatch(removeCoder(payload.id))
         return response
     }
 }

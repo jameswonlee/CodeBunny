@@ -3,15 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import "./HomePage.css"
 import groupcoding from './Images/groupcoding.png'
 import SearchBar from '../SearchBar/SearchBar'
+import {loadAllCoders} from '../../store/coders'
 
 const GetAllSpots = () => {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
 
-    // useEffect(() => {
-    //     dispatch(getAllSpots())
-    //         .then(() => setIsLoaded(true))
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(loadAllCoders())
+            .then(() => setIsLoaded(true))
+    }, [dispatch])
 
     // const allSpots = useSelector(state => state.spots)
     // // console.log("this is state of spots", allSpots)
