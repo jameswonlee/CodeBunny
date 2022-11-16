@@ -1,5 +1,5 @@
 import thunk from "redux-thunk"
-// import { csrfFetch } from "./csrf"
+import { csrfFetch } from "./csrf"
 
 /* ***************************** ACTION TYPES ******************************** */
 
@@ -53,7 +53,7 @@ const removeReview = (reviewId) => {
 // -------------------------  LOAD ALL REVIEWS---------------------------------
 
 export const loadAllReviews = () => async dispatch => {
-    const response = await fetch(`/api/reviews/`);
+    const response = await csrfFetch(`/api/reviews/`);
 
     if (response.ok) {
         const reviews = await response.json();
@@ -64,7 +64,7 @@ export const loadAllReviews = () => async dispatch => {
 // ---------------------------- LOAD REVIEW -------------------------------------
 
 export const loadOneReview = (reviewId) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${reviewId}`);
+    const response = await csrfFetch(`/api/reviews/${reviewId}`);
 
     if (response.ok) {
         const review = await response.json();
@@ -75,7 +75,7 @@ export const loadOneReview = (reviewId) => async (dispatch) => {
 // -------------------------  CREATE A REVIEW   ----------------------------------
 export const createNewReview = (reviewData) => async (dispatch) => {
     let coderId = reviewData.coder_id
-    const response = await fetch(`/api/coders/${coderId}/reviews/new`, {
+    const response = await csrfFetch(`/api/coders/${coderId}/reviews/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData)
@@ -90,7 +90,7 @@ export const createNewReview = (reviewData) => async (dispatch) => {
 // -------------------------  DELETE A REVIEW  ---------------------------------
 
 export const deleteReview = reviewId => async dispatch => {
-    const response = await fetch(`/api/reviews/${reviewId}`, {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
 
