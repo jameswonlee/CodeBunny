@@ -47,7 +47,7 @@ export const deleteproject = (projectId) => async dispatch => {
 
 export const createproject = (projectData, coderId) => async dispatch => {
     let response
-    if (coderId === null) {
+    if (coderId === 0) {
         
         response = await csrfFetch('/api/projects/new-1/', {
             method: 'POST',
@@ -65,9 +65,10 @@ export const createproject = (projectData, coderId) => async dispatch => {
         let coderInfoResponse
         let project
 
-       
+       let projectId = 0
+       let coderId = 1
 
-            coderInfoResponse = await csrfFetch('/api/projects/new-2/', {
+            coderInfoResponse = await csrfFetch(`/api/projects/new-2/${projectId}/${coderId}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

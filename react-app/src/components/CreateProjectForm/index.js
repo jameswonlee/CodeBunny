@@ -74,13 +74,12 @@ const submitHandler = (e) => {
 let createdProject;
 
 // console.log("this is created coder", createdCoder)
-createdProject = dispatch(createproject(payload, null))
+createdProject = dispatch(createproject(payload, 0))
 if (createdProject) {
   setFormSubmitted(true)
+  console.log("created Project is", createdProject)
 }
 
-const projectId = createdProject.id
-console.log("projectId is ", projectId)
 
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
 //   // history.push(`/api/spots/${createdSpot.id}`)
