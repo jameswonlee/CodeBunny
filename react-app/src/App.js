@@ -70,7 +70,7 @@ function App() {
         <Route path='/coder/:coderId/edit'>
             <UpdateCoderForm/>
         </Route>
-        <Route path='/projects/current'>
+        <Route path='/current/user/projects'>
           <UserProjects />
         </Route>
       </Switch>

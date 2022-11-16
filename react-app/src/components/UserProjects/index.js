@@ -12,28 +12,42 @@ let dispatch = useDispatch();
 useEffect(()=>{
     dispatch(getprojects())
 }, [])
+let allProjects = useSelector(state => Object.values(state.projects))
+
 
  let user = useSelector(state => state.session.user)
  console.log("SESSIONUSER", user)
- let userId = user.id
- console.log("SESSIONUSER id", userId)
+//  let userId = user.id
+ console.log("SESSIONUSER id", user.id)
+
+if (!user) {
+    return null
+}
 
 
-let allProjects = useSelector(state=>Object.values(state.projects))
-let userProjects = allProjects.filter(project => project.user_id == userId)
-let projects = useSelector(state=>state.projects)
+let userProjects = allProjects.filter(project => project.user_id == user.id)
+
 // console.log(projects)
-
 
 
  return (
     <>
-    <div>
-        <h1>MY PROJECTS</h1>
+        <div>
+            <h1>MY PROJECTS</h1>
+            {userProjects.map(project=>{
+                return(
+                    <>
+                        <div>
+                            {project.name}
+                        </div>
+                    </>
+                )
+            })}
 
-    </div>
 
-    </>
+        </div>
+
+</>
  )
 
 

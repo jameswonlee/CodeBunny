@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
-import {createNewCoder} from "../../store/coders"
+import {createNewCoder, loadAllCoders} from "../../store/coders"
 
 import "./CreateCoderForm.css";
 
@@ -14,12 +14,16 @@ function CoderForm() {
   const [daily_rate, setDailyRate] = useState('')
   const [skills, setSkills] = useState([])
 
+  useEffect(() => {
+    dispatch(loadAllCoders())
+}, [dispatch])
 
   const currentUser = useSelector(state => state.session.user)
-  console.log("this is currentUser", currentUser)
+  // console.log("this is currentUser", currentUser)
+  // console.log("this is currentUser.id", currentUser.id)
 
 
-  console.log("this is skills", skills)
+  // console.log("this is skills", skills)
   const handleSelect = (value) => {
     if(skills.includes(value)){
       skills.pop()
@@ -65,11 +69,11 @@ let createdCoder;
 // console.log("this is created coder", createdCoder)
 createdCoder = await dispatch(createNewCoder(payload))
 
-history.push(`/`)
-// // console.log("THIS IS OUR CREATED SPOT", createdSpot)
-//   // history.push(`/api/spots/${createdSpot.id}`)
+
+console.log("THIS IS OUR CREATED coder", createdCoder)
+dispatch(loadAllCoders())
+  history.push(`/coders/${createdCoder.id}`)
 }
-//return spot from teh THUNK
 
 
 
