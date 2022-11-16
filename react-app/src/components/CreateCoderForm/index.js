@@ -38,14 +38,14 @@ function CoderForm() {
     e.preventDefault()
     const errors = []
 
-    // if (!bio) errors.push("Please provide your bio");
-    // if (!experience) errors.push("Please tell us about your prior experience");
-    // if (!daily_rate) errors.push("Please set your daily rate");
-    // if (!skills) errors.push("Please select your areas of expertise");
+    if (!bio) errors.push("Please provide your bio");
+    if (!experience) errors.push("Please tell us about your prior experience");
+    if (!daily_rate) errors.push("Please set your daily rate");
+    if (!skills.length) errors.push("Please select your areas of expertise");
 
     setValidationErrors(errors)
 
-    // if (!errors) {
+    if (!validationErrors.length) {
       const payload = {
         bio,
         experience,
@@ -54,10 +54,8 @@ function CoderForm() {
       }
 
       const createdCoder = await dispatch(createNewCoder(payload))
-
-      dispatch(loadAllCoders())
       history.push(`/coders/${createdCoder.id}`)
-    // }
+    }
   }
 
   return (
@@ -80,7 +78,7 @@ function CoderForm() {
               Bio
               <input
                 className="form-inputs"
-                // required
+                required
                 type="text"
                 name="bio"
                 onChange={(e) => setBio(e.target.value)}
@@ -92,7 +90,7 @@ function CoderForm() {
               Experience
               <input
                 className="form-inputs"
-                // required
+                required
                 type="text"
                 name="experience"
                 onChange={(e) => setExperience(e.target.value)}
@@ -104,7 +102,7 @@ function CoderForm() {
               Daily Rate
               <input
                 className="form-inputs"
-                // required
+                required
                 type="number"
                 name="daily rate"
                 onChange={(e) => setDailyRate(e.target.value)}
@@ -126,15 +124,15 @@ function CoderForm() {
       </label> */}
             <label>
               Your Selected Coding Skills
-              <input
+              {/* <input
                 className="form-inputs"
-                required
+                // required
                 type="text"
                 name="skills"
                 onChange={(e) => setSkills(e.target.value)}
                 value={skills}
                 placeholder="Select Skills"
-              />
+              /> */}
             </label>
 
             <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => handleSelect(e.target.value)} />
