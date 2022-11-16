@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
-import {createNewCoder} from "../../store/coders"
+import {createproject} from "../../store/projects"
 
-import "./CreateCoderForm.css";
+import "./CreateProjectForm.css";
 
-function CoderForm() {
+function ProjectForm() {
   const history = useHistory()
   const dispatch = useDispatch();
 
-  const [bio, setBio] = useState('')
-  const [experience, setExperience] = useState('')
-  const [daily_rate, setDailyRate] = useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [start_date, setStartDate] = useState('')
+  const [end_date, setEndDate] = useState('')
   const [skills, setSkills] = useState([])
 
   const currentUser = useSelector(state => state.session.user)
   console.log("this is currentUser", currentUser)
-  
+
 
   console.log("this is skills", skills)
+
+
+  const [validationErrors, setValidationErrors] = useState([])
+
+
   const handleSelect = (value) => {
     if(skills.includes(value)){
       skills.pop()
@@ -28,9 +34,6 @@ function CoderForm() {
     }
 
 }
-
-  const [validationErrors, setValidationErrors] = useState([])
-
 
 const submitHandler = (e) => {
   e.preventDefault()
@@ -48,10 +51,11 @@ const submitHandler = (e) => {
     // setValidationErrors(errors)
 
   const payload = {
-    bio,
-    experience,
-    daily_rate,
-    skills
+    name,
+    description,
+    skills,
+    start_date,
+    end_date
 }
 
 
@@ -59,10 +63,10 @@ const submitHandler = (e) => {
 //   return null
 // }
 
-let createdCoder;
+let createdProject;
 
 // console.log("this is created coder", createdCoder)
-createdCoder = dispatch(createNewCoder(payload))
+createdProject = dispatch(createproject(payload))
 
 history.push(`/`)
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
@@ -79,7 +83,7 @@ history.push(`/`)
       className="spot-form" onSubmit={submitHandler}
     >
       <div className="title-box">
-      <h2 className="title-words">Coder Details</h2>
+      <h2 className="title-words">Project Details</h2>
       </div>
       <div className="errors">
         {validationErrors.length > 0 &&
@@ -89,54 +93,52 @@ history.push(`/`)
       </div>
       <div className="form-container">
       <label>
-        Bio
+        Project Name
         <input
         className="form-inputs"
         required
           type="text"
-          name="bio"
-          onChange={(e)=> setBio(e.target.value)}
-          value={bio}
-          placeholder="Tell us about yourself"
+          name="name"
+          onChange={(e)=> setName(e.target.value)}
+          value={name}
+          placeholder="Project Name"
         />
       </label>
       <label>
-        Experience
+        Description
         <input
         className="form-inputs"
         required
           type="text"
-          name="experience"
-          onChange={(e)=> setExperience(e.target.value)}
-          value={experience}
-          placeholder="Tell us about all your coding experience!"
+          name="description"
+          onChange={(e)=> setDescription(e.target.value)}
+          value={description}
+          placeholder="Tell us about all your Project!"
         />
       </label>
       <label>
-        Daily Rate
+        Start Date
         <input
         className="form-inputs"
         required
-          type="number"
-          name="daily rate"
-          onChange={(e)=> setDailyRate(e.target.value)}
-          value={daily_rate}
-          placeholder="How much per day?"
+          type="date"
+          name="start_date"
+          onChange={(e)=> setStartDate(e.target.value)}
+          value={start_date}
         />
       </label>
-      {/* <label>
-        Coding Skill selections!
-      <select multiple={true} value={skills} onChange={(e)=> {handleSelect(e.target.selectedOptions)}}>
-                <option value="Python">Python</option>
-                <option value="Javascript">Javascript</option>
-                <option value="C++">C++</option>
-                <option value="Ruby">Ruby</option>
-                <option value="Java">Java</option>
-                <option value="React">React</option>
-                <option value="Camel">Camel</option>
-      </select>
-      </label> */}
-<label>
+      <label>
+        End Date
+        <input
+        className="form-inputs"
+        required
+          type="date"
+          name="end_date"
+          onChange={(e)=> setEndDate(e.target.value)}
+          value={end_date}
+        />
+      </label>
+      <label>
       Your Selected Coding Skills
         <input
         className="form-inputs"
@@ -172,7 +174,7 @@ history.push(`/`)
         // disable={setValidationErrors.length > 0 ? true : false}
           // disabled={!!validationErrors.length}
       >
-        Become a coder!
+        Create Your Project!
       </button>
       </div>
     </form>
@@ -181,4 +183,4 @@ history.push(`/`)
   );
 }
 
-export default CoderForm;
+export default ProjectForm;

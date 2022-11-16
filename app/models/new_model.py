@@ -75,7 +75,7 @@ class Coder(db.Model):
             'bio': self.bio,
             'experience': self.experience,
             'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
-            'user': self.user.to_dict()
+            'user': self.user.to_dict() if self.user else None
         }
 
     def __repr__(self):
@@ -177,4 +177,3 @@ class Skill(db.Model):
 
     def __repr__(self):
         return f'<Skill, id={self.id}, skill_name={self.skill_name}'
-        

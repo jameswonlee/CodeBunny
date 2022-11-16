@@ -1,6 +1,5 @@
 import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import {getAllSpots} from '../../store/spotsReducer'
 import "./HomePage.css"
 import groupcoding from './Images/groupcoding.png'
 import SearchBar from '../SearchBar/SearchBar'

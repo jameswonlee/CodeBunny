@@ -15,6 +15,8 @@ import Reviews from './components/Reviews'
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage"
 import CreateCoderForm from "./components/CreateCoderForm"
+import CreateProjectForm from "./components/CreateProjectForm"
+import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
 
@@ -61,6 +63,12 @@ function App() {
         <Route path='/reviews'>
           <Reviews />
         </Route>
+        <Route path="/project/new">
+            <CreateProjectForm/>
+          </Route>
+          <Route path='/coder/:coderId/edit'>
+            <UpdateCoderForm/>
+          </Route>
       </Switch>
       </>
     // </BrowserRouter>

@@ -1,24 +1,41 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import {useDispatch, useSelector } from "react-redux"
-import {createNewCoder} from "../../store/coders"
+import { useHistory, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import {editCoder, loadOneCoder} from '../../store/coders'
 
-import "./CreateCoderForm.css";
+import "./UpdateCoderForm.css"
 
-function CoderForm() {
+function UpdateCoderForm() {
+  const { coderId } = useParams()
+
   const history = useHistory()
   const dispatch = useDispatch();
+
+  const coderInfo = useSelector(state => state.coder[coderId])
 
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
   const [daily_rate, setDailyRate] = useState('')
   const [skills, setSkills] = useState([])
+  const [validationErrors, setValidationErrors] = useState([])
 
-  const currentUser = useSelector(state => state.session.user)
-  console.log("this is currentUser", currentUser)
-  
+  // const currentUser = useSelector(state => state.session.user)
+  // console.log("this is currentUser", currentUser)
+  // console.log("this is skills", skills)
 
-  console.log("this is skills", skills)
+  useEffect(() => {
+    dispatch(loadOneCoder(coderId))
+  }, [dispatch])
+
+  useEffect(() => {
+    setBio(coderInfo && coderInfo.bio)
+    setExperience(coderInfo && coderInfo.experience)
+    setDailyRate(coderInfo && coderInfo.daily_rate)
+    setSkills(coderInfo&& coderInfo.skills)
+  }, [coderInfo])
+
+  if(!coderInfo) return null
+
   const handleSelect = (value) => {
     if(skills.includes(value)){
       skills.pop()
@@ -29,7 +46,7 @@ function CoderForm() {
 
 }
 
-  const [validationErrors, setValidationErrors] = useState([])
+
 
 
 const submitHandler = (e) => {
@@ -48,6 +65,7 @@ const submitHandler = (e) => {
     // setValidationErrors(errors)
 
   const payload = {
+    id: coderId,
     bio,
     experience,
     daily_rate,
@@ -62,9 +80,9 @@ const submitHandler = (e) => {
 let createdCoder;
 
 // console.log("this is created coder", createdCoder)
-createdCoder = dispatch(createNewCoder(payload))
+createdCoder = dispatch(editCoder(payload))
 
-history.push(`/`)
+history.push(`/coder/${coderId}`)
 // // console.log("THIS IS OUR CREATED SPOT", createdSpot)
 //   // history.push(`/api/spots/${createdSpot.id}`)
 }
@@ -181,4 +199,4 @@ history.push(`/`)
   );
 }
 
-export default CoderForm;
+export default UpdateCoderForm;
