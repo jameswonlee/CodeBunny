@@ -1,6 +1,8 @@
 // store > coders.js
 
-import { csrfFetch } from "./csrf"
+import {
+    csrfFetch
+} from "./csrf"
 // *****************************************************************************
 //****************************** ACTION CREATORS *******************************
 
@@ -12,7 +14,7 @@ import { csrfFetch } from "./csrf"
 
 ///*************************************************************************** */
 const GET_ALLCODERS = 'coders/getAllCoders'
-// const GET_ONECODER = 'coders/getOneCoder'
+const GET_ONECODER = 'coders/getOneCoder'
 const CREATE_CODER = 'coders/createCoder'
 const UPDATE_CODER = 'coders/updateCoder'
 const DELETE_CODER = 'coders/removeCoder'
@@ -25,10 +27,10 @@ const getAllCoders = coders => ({
 })
 ///*************************************************************************** */
 // **** GET ONE CODER DETAILS ****
-// const getOneCoder = coder => ({
-//     type: GET_ONECODER,
-//     payload: coder
-// })
+const getOneCoder = coder => ({
+    type: GET_ONECODER,
+    payload: coder
+})
 
 ///*************************************************************************** */
 // **** CREATE A CODER ****
@@ -69,14 +71,18 @@ export const loadAllCoders = () => async dispatch => {
 // -------------------------  LOAD ONE CODER's DETAILS   -------------------------
 
 
-// export const loadOneCoder = (coderId) => async dispatch => {
-//     const response = await fetch(`/api/coders/${coderId}/`);
+export const loadOneCoder = (coderId) => async dispatch => {
+    const response = await fetch(`/api/coders/${coderId}/`);
+    console.log("DID TI REACH GET ONE CODER THUNK")
 
-//     if (response.ok){
-//         const coderInfo = await response.json();
-//         dispatch(getOneCoder(coderInfo))
-//     }
-// }
+
+
+    if (response.ok){
+        const coderInfo = await response.json();
+         console.log("CODER INFO IN THUNK", coderInfo)
+        dispatch(getOneCoder(coderInfo))
+    }
+}
 
 
 //*************************************************************************** */
@@ -94,7 +100,7 @@ export const createNewCoder = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
     console.log("did it reach here? after response?")
-    if(response.ok){
+    if (response.ok) {
         const coder = await response.json()
         dispatch(createCoder(coder))
         return response
@@ -115,8 +121,8 @@ export const editCoder = (editCoderInfo) => async dispatch => {
         body: JSON.stringify(editCoderInfo)
     })
 
-    if(response.ok) {
-        const editedCoder= await response.json();
+    if (response.ok) {
+        const editedCoder = await response.json();
         dispatch(updateCoder(editedCoder))
         return editedCoder
     }
@@ -149,43 +155,49 @@ const initialState = {}
 const coderReducer = (state = initialState, action) => {
 
     let newState;
-// *****************************************************************************
-    switch(action.type) {
+    // *****************************************************************************
+    switch (action.type) {
         case GET_ALLCODERS:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             action.payload.Coders.forEach((coder) => {
                 newState[coder.id] = coder
             });
             return newState
-// *****************************************************************************
-        // case GET_ONECODER:
-        //     newState = {}
+            // *****************************************************************************
+            case GET_ONECODER:
+                // newState = {}
 
-        //     newState[action.payload.id] = action.payload
+                // newState[action.payload.id] = action.payload
 
-        //     return { ...newState }
+                return { ...state, ...action.payload}
 
-// *****************************************************************************
+            // *****************************************************************************
         case CREATE_CODER:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             newState[action.payload.id] = action.payload
             return newState
-// *****************************************************************************
+            // *****************************************************************************
         case UPDATE_CODER:
-        newState = {
-            ...state
-        }
-        newState[action.payload.id] = action.payload
+            newState = {
+                ...state
+            }
+            newState[action.payload.id] = action.payload
 
-        return newState;
+            return newState;
 
 
-// *****************************************************************************
+            // *****************************************************************************
         case DELETE_CODER:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             delete newState[action.payload]
             return newState
-// *****************************************************************************
+            // *****************************************************************************
         default:
             return state
 

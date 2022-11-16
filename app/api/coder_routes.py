@@ -37,7 +37,7 @@ def get_all_coder():
 # ************************************ GET CODER DETAILS BY CODER ID ***********************************************
 
 # Get coder by coder_id - NOT WORKING
-@coder_bp.route("/<int:coder_id>", methods=["GET"])
+@coder_bp.route("/<int:coder_id>/", methods=["GET"])
 def get_coder_profile(coder_id):
 
     coder = Coder.query.filter(Coder.id == coder_id).first()
@@ -50,8 +50,8 @@ def get_coder_profile(coder_id):
         coder_obj = coder.to_dict()
         coder_user_obj = coder_user.to_dict()
         result = {**coder_obj, **coder_user_obj}
-        response = {}
-        response[coder_obj["id"]] = result
+
+        response={**result}
         return response
 
     return { "Error": "Coder not found" }, 404
@@ -76,14 +76,14 @@ def get_coder_profile(coder_id):
 # ************************************ CREATE NEW CODER ***********************************************
 
 # Create new coder - WORKING
-@coder_bp.route("/new", methods = ["POST"])
+@coder_bp.route("/new/", methods = ["POST"])
 @login_required
 def create_coder():
 
     create_coder_form = CreateCoderForm()
     create_coder_form['csrf_token'].data = request.cookies['csrf_token']
 
-    if create_coder_form.validate_on_submit:
+    if create_coder_form.validate_on_submit():
         coder = Coder()
         data = create_coder_form.data
         coder = Coder(
@@ -137,7 +137,7 @@ def create_new_review(coder_id):
 # ***************************************   EDIT CODER BY CODER ID  ***************************************************
 
 #Edit Coder details - WORKING
-@coder_bp.route("/<int:coder_id>", methods=["PUT"])
+@coder_bp.route("/<int:coder_id>/", methods=["PUT"])
 @login_required
 def edit_coder(coder_id):
     edit_coder_form = CreateCoderForm()
@@ -167,7 +167,7 @@ def edit_coder(coder_id):
 # ************************************   DELETE CODER BY CODER ID   ******************************************************
 
 # Delete coder profile - WORKING
-@coder_bp.route("/<int:coder_id>", methods=["DELETE"])
+@coder_bp.route("/<int:coder_id>/", methods=["DELETE"])
 @login_required
 def delete_coder(coder_id):
 
