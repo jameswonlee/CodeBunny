@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { loadOneCoder, loadAllCoders, deleteCoder } from '../../store/coders';
+import { loadAllReviews } from '../../store/reviews';
 import Reviews from '../Reviews';
 import './CoderInfo.css'
 
@@ -15,13 +16,24 @@ const CoderInfo = () => {
     const sessionUser = useSelector(state => state.session.user);
     // console.log("this is UserId", sessionUser.id)
     const CodersUserId = useSelector(state => state.coders.user_id)
-    console.log("this is codersUserID", CodersUserId)
+    // const reviewInfo = useSelector(state => state.reviews)
+    // const reviewInfoArray = Object.values(reviewInfo)
+    // const reviewsByUserId = reviewInfoArray.filter(item => item.coder_id === +coderId)
+    // const reviewOfUser = reviewsByUserId.find(element => element.userId === sessionUserId)
+    // console.log("this is codersUserID", CodersUserId)
+    // console.log("this is reviewInfo", reviewInfo)
+    // console.log("this is the Object values of review Info", reviewInfoArray)
     useEffect(() => {
         dispatch(loadAllCoders())
+        dispatch(loadAllReviews())
         dispatch(loadOneCoder(coderId))
     }, [dispatch, coderId])
 
     let girlNames = ['Marnie']
+    let sessionUserId
+    if (sessionUser) {
+        sessionUserId = sessionUser.id
+    }
 
     const history = useHistory()
     let coder = useSelector(state=> state.coders)
@@ -64,7 +76,12 @@ const CoderInfo = () => {
             </>
         )
     }
-
+    let seeCreateReviewButton;
+    seeCreateReviewButton = (
+        <div>
+            <button className="Create-Review-Button" type="submit">Create a New Review</button>
+        </div>
+    )
 
     return (
         <>
@@ -74,8 +91,15 @@ const CoderInfo = () => {
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
                     </div>
                     <div>
-                    {deleteButton}
+                    {/* <NavLink to={`/review/${coderId}/new`}>
+                                    {sessionUserId  && sessionUserId  !== spotInfoOwnerId && !reviewOfUser ? seeCreateReviewButton : null}
+                                    </NavLink> */}
                     </div>
+
+                    <NavLink to={`/review/${coderId}/new`}>
+                         {seeCreateReviewButton}
+                                    </NavLink>
+                    
                     <div>
                     {deleteButton}
                     </div>
