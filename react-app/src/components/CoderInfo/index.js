@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import { loadOneCoder, loadAllCoders } from '../../store/coders';
+import './CoderInfo.css'
 
 const CoderInfo = () => {
     const dispatch = useDispatch();
@@ -33,36 +34,36 @@ const CoderInfo = () => {
     return (
         <>
             <div className="coder-detail-page-container">
-                <div className='coder-header-container'>
-                    <div className='spot-header-name-container'>
-                        <h1>{coder.user.first_name} {coder.user.last_name}</h1>
+                <div className='coder-container'>
+                    <div className='coder-header-name-container'>
+                        <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
                     </div>
                     <div>
                        <img
-                                width={500}
-                                height={500}
+                                width={300}
+                                height={300}
                                 src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name)? "women" : "men"}/${coder.id}.jpg`}
                                 className="user-image">
                             </img>
                     </div>
-                    <div>
-                        <div>CONTACT:</div>
+                    <div className='coder-details'>
+                        <div className='coder-details-headings'>CONTACT:</div>
                         {coder.user.email}
                     </div>
-                    <div>
-                        <div>BIO:</div>
+                    <div className='coder-details'>
+                        <div className='coder-details-headings'>BIO:</div>
                         {coder.bio}
                     </div>
-                    <div>
-                        <div>EXPERIENCE:</div>
+                    <div className='coder-details'>
+                        <div className='coder-details-headings'>EXPERIENCE:</div>
                         {coder.experience}
                     </div>
-                    <div>
-                         <div>DAILY RATE:</div>
-                        {coder.daily_rate}
+                    <div className='coder-details'>
+                         <div className='coder-details-headings'>DAILY RATE:</div>
+                        {`$${coder.daily_rate}`}
                     </div>
-                    <div>
-                        <div>SKILLS:</div>
+                    <div className='coder-details'>
+                        <div className='coder-details-headings'>SKILLS:</div>
                         {coder.skills.map(skill => {
                             return (
                                 <div key={skill.id}>{skill.skill_name}</div>
