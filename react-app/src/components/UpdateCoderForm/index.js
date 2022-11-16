@@ -26,6 +26,13 @@ function UpdateCoderForm() {
   const [validationErrors, setValidationErrors] = useState([])
 
 
+
+  let viewSkills = []
+  for (let view of coderInfo.skills){
+    viewSkills.push(view.skill_name)
+  }
+
+
   useEffect(() => {
     setBio(coderInfo && coderInfo.bio)
     setExperience(coderInfo && coderInfo.experience)
@@ -33,6 +40,7 @@ function UpdateCoderForm() {
     setSkills(coderInfo && coderInfo.skills.map(({ skill_name }) => {
       return skill_name
     }))
+    setSkills(coderInfo&& viewSkills)
   }, [coderInfo])
 
   if(!coderInfo) return null

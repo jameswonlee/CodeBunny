@@ -21,6 +21,8 @@ import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
 import SelectCoderForProject from './components/SelectCoderForProject';
 import NewProjectConfirmation from './components/NewProjectConfirmation';
+import UserProjects from './components/UserProjects';
+
 
 function App() {
   const dispatch = useDispatch();
