@@ -103,7 +103,8 @@ export const createNewCoder = (payload) => async dispatch => {
     if (response.ok) {
         const coder = await response.json()
         dispatch(createCoder(coder))
-        return response
+        // return response
+        return coder
     }
 }
 
@@ -131,15 +132,15 @@ export const editCoder = (editCoderInfo) => async dispatch => {
 //*************************************************************************** */
 
 // -------------------------  DELETE A CODER    --------------------------------
-export const deleteCoder = (coderId) => async dispatch => {
-    const response = await csrfFetch(`/api/coders/${coderId}/`, {
+export const deleteCoder = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/coders/${payload.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        dispatch(removeCoder(coderId))
+        dispatch(removeCoder(payload.id))
         return response
     }
 }
@@ -206,4 +207,3 @@ const coderReducer = (state = initialState, action) => {
 // *****************************************************************************
 
 export default coderReducer
-
