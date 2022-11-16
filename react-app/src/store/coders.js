@@ -73,7 +73,7 @@ export const loadAllCoders = () => async dispatch => {
 
 export const loadOneCoder = (coderId) => async dispatch => {
     const response = await fetch(`/api/coders/${coderId}/`);
-    console.log("DID TI REACH GET ONE CODER THUNK")
+    // console.log("DID TI REACH GET ONE CODER THUNK")
 
 
 
@@ -90,8 +90,8 @@ export const loadOneCoder = (coderId) => async dispatch => {
 // -------------------------  CREATE A CODER   ----------------------------------
 
 export const createNewCoder = (payload) => async dispatch => {
-    console.log("did this reach?")
-    console.log("this is the payload", payload)
+    // console.log("did this reach?")
+    // console.log("this is the payload", payload)
     const response = await csrfFetch('/api/coders/new/', {
         method: 'POST',
         headers: {
@@ -99,11 +99,12 @@ export const createNewCoder = (payload) => async dispatch => {
         },
         body: JSON.stringify(payload)
     })
-    console.log("did it reach here? after response?")
+    // console.log("did it reach here? after response?")
+
     if (response.ok) {
-        const coder = await response.json()
+        let coder = await response.json()
+        console.log("this is the coder if response.ok", coder)
         dispatch(createCoder(coder))
-        // return response
         return coder
     }
 }
