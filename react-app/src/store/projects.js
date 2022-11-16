@@ -39,7 +39,7 @@ export const deleteproject = (projectId) => async dispatch => {
             'Content-Type': 'application/json'
         }
     })
-    if(response.ok) {
+    if (response.ok) {
         dispatch(deleteAction(projectId))
         return response
     }
@@ -49,7 +49,7 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
     let newproject
     let response
     if (coderId === 0) {
-        
+
         response = await csrfFetch('/api/projects/new-1/', {
             method: 'POST',
             headers: {
@@ -61,8 +61,10 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
         newproject = await response.json()
         console.log("The new project is ", newproject)
         return newproject
+
     }
     else if(coderId && projectId) {
+
         console.log("did this reach 2nd thunk create proj")
         let coderInfoResponse
         let project
@@ -76,6 +78,7 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
             })
 
         
+
 
         if (coderInfoResponse.ok) {
             project = await coderInfoResponse.json()
@@ -95,7 +98,7 @@ export const updateproject = (payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
 
-    if(response.ok) {
+    if (response.ok) {
         const project = await response.json();
         dispatch(update(project))
         return project
@@ -104,7 +107,7 @@ export const updateproject = (payload) => async dispatch => {
 
 export const getprojects = () => async dispatch => {
     const response = await csrfFetch('/api/projects/')
-    if(response.ok) {
+    if (response.ok) {
         const projects = await response.json();
         dispatch(read(projects))
         return response
@@ -116,9 +119,11 @@ const initialState = {}
 const projectReducer = (state = initialState, action) => {
 
     let newState = {}
+
     switch(action.type) {
         case READ:
             newState = {...state}
+
             action.payload.Projects.forEach((project) => {
                 newState[project.id] = project
             });
@@ -126,15 +131,19 @@ const projectReducer = (state = initialState, action) => {
 
         case UPDATE:
         case CREATE:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             newState[action.payload.id] = action.payload
             return newState
 
         case DELETE:
-            newState = {...state}
+            newState = {
+                ...state
+            }
             delete newState[action.payload]
             return newState
-    
+
         default:
             return state
 
@@ -143,5 +152,4 @@ const projectReducer = (state = initialState, action) => {
 
 
 export default projectReducer
-
 

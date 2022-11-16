@@ -20,7 +20,11 @@ function NewProjectConfirmation() {
     console.log("All projects are", allProjects)
 
     return (
-        <div>Hello</div>
+        <div>
+            <h1>Booked!</h1>
+            
+            
+        </div>
     )
 
 
