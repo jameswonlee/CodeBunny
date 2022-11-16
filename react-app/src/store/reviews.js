@@ -54,7 +54,7 @@ const removeReview = (reviewId) => {
 
 export const loadAllReviews = () => async dispatch => {
     const response = await fetch(`/api/reviews/`);
-    
+
     if (response.ok) {
         const reviews = await response.json();
         dispatch(getAllReviews(reviews))
@@ -113,31 +113,31 @@ const reviews = (state = initialState, action) => {
             action.reviews.Reviews.forEach(review => newReviews[review.id] = review)
             newState = { ...state, ...newReviews }
             return newState;
-        
+
 
         case GET_REVIEW:
             newState = { ...state }
             newState[action.payload.id] = action.payload
             return newState
-    
+
 
         case CREATE_REVIEW:
             newState = { ...state }
             newState = {
                 reviews: {
-                    ...state.reviews, [action.review.id]: {
-                        ...action.review,
+                    ...state.reviews, [action.payload.id]: {
+                        ...action.payload,
                     }
                 }
             }
             return newState;
-    
+
 
         case REMOVE_REVIEW:
             newState = { ...state }
             delete newState[action.payload]
             return newState
-    
+
 
         default:
             return state;
