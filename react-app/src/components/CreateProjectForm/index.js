@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
-import {createproject} from "../../store/projects"
-
+import {createproject, getprojects} from "../../store/projects"
 import "./CreateProjectForm.css";
+import { loadAllCoders } from "../../store/coders";
+// import SelectCoderForProject from "../SelectCoderForProject";
 
 function ProjectForm() {
   const history = useHistory()
@@ -14,9 +15,18 @@ function ProjectForm() {
   const [start_date, setStartDate] = useState('')
   const [end_date, setEndDate] = useState('')
   const [skills, setSkills] = useState([])
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
+  let createdProjectId
+
+  useEffect(() => {
+    dispatch(loadAllCoders())
+  },[dispatch])
 
   const currentUser = useSelector(state => state.session.user)
   console.log("this is currentUser", currentUser)
+  console.log("the start date is ", start_date)
+  console.log("end date is ", end_date)
 
 
   console.log("this is skills", skills)
@@ -35,7 +45,11 @@ function ProjectForm() {
 
 }
 
-const submitHandler = (e) => {
+let createdProject
+let test = 2
+let allCoders = useSelector(state => Object.values(state.coders))
+
+const submitHandler = async (e) => {
   e.preventDefault()
 
     const errors = []
@@ -63,20 +77,33 @@ const submitHandler = (e) => {
 //   return null
 // }
 
-let createdProject;
 
 // console.log("this is created coder", createdCoder)
-createdProject = dispatch(createproject(payload))
-
-history.push(`/`)
-// // console.log("THIS IS OUR CREATED SPOT", createdSpot)
-//   // history.push(`/api/spots/${createdSpot.id}`)
+createdProject = await dispatch(createproject(payload, 0, 0))
+if (createdProject) {
+  setFormSubmitted(true)
+  console.log("created Project is", createdProject)
+  console.log("and the id is", createdProject.id)
+  createdProjectId = createdProject.id
+  history.push(`/projects/new/${createdProjectId}`)
 }
-//return spot from teh THUNK
+
+}
+
+
+// const handleCoderSubmit = (coderId) => {
+
+//   console.log("Coder id being sent in is", coderId)
+//   console.log("project id being sent in is ", createdProjectId)
+//   console.log("test is", test)
+
+//   dispatch(createproject(0, coderId, createdProjectId ))
+// }
 
 
 
   return (
+    
     <div className="Outer-Container">
       <div className="Inner-Container">
     <form
@@ -174,13 +201,14 @@ history.push(`/`)
         // disable={setValidationErrors.length > 0 ? true : false}
           // disabled={!!validationErrors.length}
       >
-        Create Your Project!
+        Select your Coder!
       </button>
       </div>
     </form>
-      </div>
+    </div>
     </div>
   );
 }
 
 export default ProjectForm;
+

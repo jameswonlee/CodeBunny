@@ -36,7 +36,7 @@ const CoderInfo = () => {
     }
 
     const history = useHistory()
-    let coder = useSelector(state=> state.coders)
+    let coder = useSelector(state => state.coders)
 
 
     console.log("CODER IS", coder)
@@ -45,7 +45,7 @@ const CoderInfo = () => {
         return null
     }
 
-    if (!coder.user){
+    if (!coder.user) {
         return null
     }
 
@@ -64,10 +64,10 @@ const CoderInfo = () => {
     }
 
     let deleteButton;
-    if(sessionUser && sessionUser.id === CodersUserId) {
+    if (sessionUser && sessionUser.id === CodersUserId) {
         deleteButton = (
-            <div className= "Delete-spot-button">
-                <button className= "Edit-Delete-Button" onClick= {() => deleteHandler()}>DELETE Coder Profile</button>
+            <div className="Delete-spot-button">
+                <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>DELETE Coder Profile</button>
             </div>
         )
     } else {
@@ -91,9 +91,13 @@ const CoderInfo = () => {
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
                     </div>
                     <div>
+
                     {/* <NavLink to={`/review/${coderId}/new`}>
                                     {sessionUserId  && sessionUserId  !== spotInfoOwnerId && !reviewOfUser ? seeCreateReviewButton : null}
                                     </NavLink> */}
+
+                        {deleteButton}
+
                     </div>
 
                     <NavLink to={`/review/${coderId}/new`}>
@@ -101,15 +105,12 @@ const CoderInfo = () => {
                                     </NavLink>
                     
                     <div>
-                    {deleteButton}
-                    </div>
-                    <div>
-                       <img
-                                width={300}
-                                height={300}
-                                src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name)? "women" : "men"}/${coder.id}.jpg`}
-                                className="user-image">
-                            </img>
+                        <img
+                            width={300}
+                            height={300}
+                            src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name) ? "women" : "men"}/${coder.id}.jpg`}
+                            className="user-image">
+                        </img>
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>CONTACT:</div>
@@ -124,7 +125,7 @@ const CoderInfo = () => {
                         {coder.experience}
                     </div>
                     <div className='coder-details'>
-                         <div className='coder-details-headings'>DAILY RATE:</div>
+                        <div className='coder-details-headings'>DAILY RATE:</div>
                         {`$${coder.daily_rate}`}
                     </div>
                     <div className='coder-details'>
