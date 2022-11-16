@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { getprojects } from '../../store/projects';
-
+import './UserProjects.css'
 
 
 const UserProjects = () => {
@@ -16,9 +16,9 @@ let allProjects = useSelector(state => Object.values(state.projects))
 
 
  let user = useSelector(state => state.session.user)
- console.log("SESSIONUSER", user)
-//  let userId = user.id
- console.log("SESSIONUSER id", user.id)
+//  console.log("SESSIONUSER", user)
+// //  let userId = user.id
+//  console.log("SESSIONUSER id", user.id)
 
 if (!user) {
     return null
@@ -32,73 +32,100 @@ console.log("userJObs", userJobs)
 let completedProjects = userProjects.filter(project=> project.completed === true)
 let upcomingProjects = userProjects.filter(project => project.completed === false)
 
+let completedJobs = userJobs.filter(project => project.completed === true)
+let upcomingJobs = userJobs.filter(project => project.completed === false)
+
  return (
-    <>
-        <div>
-            <h1>{user.first_name}'s Upcoming Projects</h1>
-            <div>
-                {upcomingProjects.length? upcomingProjects.map(project=>{
-                    console.log("THIS IS my owner PROJECT id!!!!!!!!!", project.owner_id)
-                    return(
-                        <>
-                            <div>
-                                <div>Project Name: {project.name}</div>
-                                <div>Start-Date:{project.start_date}</div>
-                                <div>End-Date: {project.end_date}</div>
-                                <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
-                                <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-                                <div>Coder's Contact Info: {project.coder.user.email}</div>
-                            </div>
-                        </>
-                    )
-                }) : (<h2>No Upcoming Projects!</h2>)}
+<>
+         <h1 className='user-projects-header'>{user.first_name}'s Projects & Jobs</h1>
+            <div className='my-projects-page-container'>
+                <div className='projects-container'>
+                    <div className='upcoming-container'>
+                        <h1>Your Upcoming Projects</h1>
+                        <div>
+                            {upcomingProjects.length? upcomingProjects.map(project=>{
+
+                                return(
+                                    <>
+                                        <div>
+                                            <div>Project Name: {project.name}</div>
+                                            <div>Start-Date:{project.start_date}</div>
+                                            <div>End-Date: {project.end_date}</div>
+                                            <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
+                                            <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
+                                            <div>Coder's Contact Info: {project.coder.user.email}</div>
+                                        </div>
+                                    </>
+                                )
+                            }) : (<h2>No Upcoming Projects!</h2>)}
+                        </div>
+
+                    </div>
+                    <div className='completed-container'>
+                        <h1>Your Completed Projects</h1>
+                        {completedProjects.length? completedProjects.map(project=>{
+
+                            return(
+                                <>
+                                    <div>
+                                        <div>Project Name: {project.name}</div>
+                                        <div>Start-Date:{project.start_date}</div>
+                                        <div>End-Date: {project.end_date}</div>
+                                        <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
+                                        <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
+                                        <div>Coder's Contact Info: {project.coder.user.email}</div>
+                                    </div>
+                                </>
+                            )
+                        }) : (<h2>You Haven't Completed Any Projects Yet</h2>) }
+
+                    </div>
+                </div>
+                <div className='projects-container'>
+                    < div className = 'upcoming-container' >
+                        <h1>Your Upcoming Jobs</h1>
+                        {upcomingJobs.length? upcomingJobs.map(project=>{
+
+                            return(
+                                <>
+                                    <div>
+                                        <div>Project Name: {project.name}</div>
+                                        <div>Start-Date:{project.start_date}</div>
+                                        <div>End-Date: {project.end_date}</div>
+                                        <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
+                                        <div>Owner's Contact Info: {project.owner.email}</div>
+                                        <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
+
+                                    </div>
+                                </>
+                            )
+                        }) : (<h2>No Upcoming Jobs!</h2>) }
+
+
+                    </div>
+                    < div className = 'completed-container' >
+                        <h1>Your Completed Jobs</h1>
+                        {completedJobs.length? completedJobs.map(project=>{
+
+                            return(
+                                <>
+                                    <div>
+                                        <div>Project Name: {project.name}</div>
+                                        <div>Start-Date:{project.start_date}</div>
+                                        <div>End-Date: {project.end_date}</div>
+                                        <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
+                                        <div>Owner's Contact Info: {project.owner.email}</div>
+                                        <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
+
+                                    </div>
+                                </>
+                            )
+                        }) : (<h2>You haven't completed any jobs yet!</h2>) }
+
+
+                    </div>
+                </div>
             </div>
-
-
-
-        </div>
-         <div>
-            <h1>{user.first_name}'s Completed Projects</h1>
-            {completedProjects.map(project=>{
-
-                return(
-                    <>
-                        <div>
-                            <div>Project Name: {project.name}</div>
-                            <div>Start-Date:{project.start_date}</div>
-                            <div>End-Date: {project.end_date}</div>
-                            <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
-                            <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-                            <div>Coder's Contact Info: {project.coder.user.email}</div>
-                        </div>
-                    </>
-                )
-            })}
-
-
-        </div>
-        <div>
-            <h1>{user.first_name}'s Jobs</h1>
-            {userJobs.map(project=>{
-                console.log("THIS IS my jobs", project)
-                return(
-                    <>
-                        <div>
-                            <div>Project Name: {project.name}</div>
-                            <div>Start-Date:{project.start_date}</div>
-                            <div>End-Date: {project.end_date}</div>
-                            <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
-                            <div>Owner's Contact Info: {project.owner.email}</div>
-                            <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-
-                        </div>
-                    </>
-                )
-            })}
-
-
-        </div>
-
 </>
  )
 
