@@ -19,6 +19,7 @@ import CreateProjectForm from "./components/CreateProjectForm"
 import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
 import CoderInfo from './components/CoderInfo';
+import SelectCoderForProject from './components/SelectCoderForProject';
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +67,9 @@ function App() {
         <Route path="/project/new">
             <CreateProjectForm/>
           </Route>
+        <Route path = "/projects/new/:projectId">
+            <SelectCoderForProject/>
+        </Route>
           <Route path='/coder/:coderId/edit'>
             <UpdateCoderForm/>
           </Route>

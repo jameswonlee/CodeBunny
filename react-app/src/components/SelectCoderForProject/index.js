@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
-import {createproject} from "../../store/projects"
+import {createproject, getprojects} from "../../store/projects"
 import { loadAllCoders } from "../../store/coders";
+import { useParams } from 'react-router-dom';
 
 function SelectCoderForProject() {
     const history = useHistory()
     const dispatch = useDispatch();
+    const {projectId} = useParams();
 
-    // useEffect(() => {
-    //     dispatch(loadAllCoders())
-    //   },[dispatch])
+    useEffect(() => {
+        dispatch(loadAllCoders())
+      },[dispatch])
 
     let allCoders = useSelector(state => Object.values(state.coders))
 
@@ -19,8 +21,9 @@ function SelectCoderForProject() {
     const handleCoderSubmit = (coderId) => {
 
         console.log("Coder id being sent in is", coderId)
+        console.log("project id being sent in is ", projectId)
 
-        dispatch(createproject(null, coderId))
+        dispatch(createproject(0, coderId, projectId ))
     }
 
     return (
@@ -31,7 +34,7 @@ function SelectCoderForProject() {
                     return (
                     <div>
                         <div>{coder.user.first_name}</div>
-                        <button onClick = {handleCoderSubmit(coder.id)}>Choose this coder</button>
+                        <button onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
                     </div>
                     )
                 })}

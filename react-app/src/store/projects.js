@@ -45,7 +45,8 @@ export const deleteproject = (projectId) => async dispatch => {
     }
 }
 
-export const createproject = (projectData, coderId) => async dispatch => {
+export const createproject = (projectData, coderId, projectId) => async dispatch => {
+    let newproject
     let response
     if (coderId === 0) {
         
@@ -57,16 +58,14 @@ export const createproject = (projectData, coderId) => async dispatch => {
             body: JSON.stringify(projectData)
         })
 
-        console.log("did this reach")
-        return response
+        newproject = await response.json()
+        console.log("The new project is ", newproject)
+        return newproject
     }
-    else {
-        console.log("did this reach as well")
+    else if(coderId && projectId) {
+        console.log("did this reach 2nd thunk create proj")
         let coderInfoResponse
         let project
-
-       let projectId = 0
-       let coderId = 1
 
             coderInfoResponse = await csrfFetch(`/api/projects/new-2/${projectId}/${coderId}/`, {
                 method: 'POST',
@@ -104,7 +103,7 @@ export const updateproject = (payload) => async dispatch => {
 }
 
 export const getprojects = () => async dispatch => {
-    const response = await fetch('/api/projects/')
+    const response = await csrfFetch('/api/projects/')
     if(response.ok) {
         const projects = await response.json();
         dispatch(read(projects))
