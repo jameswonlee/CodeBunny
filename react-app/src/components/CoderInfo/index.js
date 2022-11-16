@@ -39,8 +39,8 @@ const CoderInfo = () => {
                     </div>
                     <div>
                        <img
-                                width={100}
-                                height={100}
+                                width={500}
+                                height={500}
                                 src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name)? "women" : "men"}/${coder.id}.jpg`}
                                 className="user-image">
                             </img>
