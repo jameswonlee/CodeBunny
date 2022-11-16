@@ -6,7 +6,6 @@ import { loadAllReviews } from '../../store/reviews';
 
 const Reviews = () => {
     const dispatch = useDispatch();
-    let { coderId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const reviewsData = useSelector(state => state.reviews);
     const reviews = Object.values(reviewsData);
