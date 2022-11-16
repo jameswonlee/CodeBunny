@@ -17,8 +17,8 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
        <div className= "Create-a-spot-Button">
-        <NavLink to="/spots/new">
-      <button className= "become-host-button">Become a Host</button>
+        <NavLink to="/coder/new">
+      <button className= "become-host-button">Become a Coder</button>
       </NavLink>
       </div>
       <div className= "profile-button">

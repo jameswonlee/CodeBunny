@@ -1,1 +1,19 @@
+.home-container{
+    display: flex;
+    width: 100%;
+    /* border-color: rgb(124, 0, 128);
+    border-style: solid; */
+}
 
+.image-one-container{
+    position:absolute;
+    width: 82%;
+    z-index: auto;
+    /* border-color: green;
+    border-style: solid; */
+}
+
+.group-coding{
+    width: 100%;
+    object-fit: fill;
+}

@@ -10,11 +10,16 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
-import ReviewsBrowser from './components/Review/index'
+import Reviews from './components/Reviews'
 
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage"
+import CreateCoderForm from "./components/CreateCoderForm"
+import CreateProjectForm from "./components/CreateProjectForm"
+import UpdateCoderForm from "./components/UpdateCoderForm"
 import * as sessionActions from "./store/session";
+import CoderInfo from './components/CoderInfo';
+import UserProjects from './components/UserProjects';
 
 function App() {
   const dispatch = useDispatch();
@@ -47,11 +52,26 @@ function App() {
         <Route path='/' exact={true} >
           <HomePage/>
         </Route>
+        <Route path="/coder/new">
+            <CreateCoderForm/>
+          </Route>
         <Route path='/listofusers' exact={true} >
           <UsersList/>
         </Route>
+        <Route path='/coders/:coderId'>
+          <CoderInfo />
+        </Route>
         <Route path='/reviews'>
-          <ReviewsBrowser />
+          <Reviews />
+        </Route>
+        <Route path="/project/new">
+            <CreateProjectForm/>
+        </Route>
+        <Route path='/coder/:coderId/edit'>
+            <UpdateCoderForm/>
+        </Route>
+        <Route path='/current/user/projects'>
+          <UserProjects />
         </Route>
       </Switch>
       </>

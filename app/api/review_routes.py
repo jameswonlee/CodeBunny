@@ -24,26 +24,24 @@ from sqlalchemy.orm import joinedload
 review_bp = Blueprint("review_routes", __name__, url_prefix='/api/reviews')
 
 
-# ******************************    GET ALL REVIEWS   ************************************
-
+# ****************************** GET ALL REVIEWS *********************************
 # Get all reviews
 @review_bp.route("/")
 def get_all_reviews():
     all_reviews = Review.query.all()
 
-    response = {}
+    response = []
     if all_reviews:
         for review in all_reviews:
             print(review.to_dict())
             review_obj = review.to_dict()
-            response[review_obj["id"]] = review_obj
-        return response, 200
+            response.append(review_obj)
+        return {"Reviews": response}, 200
     return { "Error": "404 NOT FOUND" }, 404
 
 
 
-# ******************************    GET  REVIEW DETAILS BY REVIEW ID   ************************************
-
+# ********************* GET REVIEW DETAILS BY REVIEW ID *************************
 # Get review by id - WORKS!
 @review_bp.route("/<int:review_id>", methods=["GET"])
 def get_review_details(review_id):
@@ -52,7 +50,8 @@ def get_review_details(review_id):
         return current_review.to_dict(), 200
     return { "Error": "404 NOT FOUND" }, 404
 
-## ******************************   EDIT REVIEW ************************************
+## ****************************** EDIT REVIEW ************************************
+
 @review_bp.route("/<int:review_id>", methods=["PUT"])
 def edit_review(review_id):
     curr_review = Review.query.get(review_id)
@@ -61,28 +60,22 @@ def edit_review(review_id):
     create_review_form['csrf_token'].data = request.cookies['csrf_token']
 
     if create_review_form.validate_on_submit:
-        # review = Review()
         data = create_review_form.data
 
-        print("curr review form rating", create_review_form.data["rating"])
         new_rating=create_review_form.data["rating"]
         new_reviewinfo = create_review_form.data["review"]
+
         curr_review.rating=new_rating
         curr_review.review=new_reviewinfo
-
 
         db.session.commit()
 
         return curr_review.to_dict(), 201
-    return {"Error": "Validation Error"}, 401
+    return { "Error": "Validation Error" }, 401
 
 
+# ******************** DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ****************
 
-# ************************************ DELETE REVIEW ON CODER'S PAGE BY REVIEW ID ************
-
-
-
-# Delete a coder's review
 @review_bp.route("/<int:review_id>", methods=["DELETE"])
 @login_required
 def delete_review(review_id):
@@ -94,4 +87,4 @@ def delete_review(review_id):
         db.session.commit()
 
         return "succesfully deleted"
-    return { "Error": "404 review not found" }, 404
+    return { "Error": "404 Review Not Found" }, 404

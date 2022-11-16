@@ -1,1 +1,7 @@
 /* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css?family=Inter');
+
+
+li, a, button, div{
+    font-family: "Inter";
+}

@@ -72,10 +72,10 @@ if (user){
           <div>{user.email}</div>
           </div> */}
           <div>
-          <div className="my-spots" onClick={mySpots}>My Spots</div>
+          <div className="my-spots" onClick={mySpots}>My Profile</div>
           </div>
           <div>
-          <div className="my-reviews" onClick={myReviews}>My Reviews</div>
+          <div className="my-reviews" onClick={myReviews}>My Projects</div>
           </div>
           <div>
             <div className="log-out" onClick={logout}>Log Out</div>
@@ -95,8 +95,8 @@ if (user){
       </button>
       {showMenu && (
         <div className="dropdown-content">
-        <div className="sign-up-text" onClick={() => setShowSignUpModal(true)}>Sign Up</div>
-        <div className="log-in-text" onClick={() => setShowLogInModal(true)}>Log In</div>
+        <div className="sign-up-text" style={{zIndex:3}} onClick={() => setShowSignUpModal(true)}>Sign Up</div>
+        <div className="log-in-text"  style={{zIndex:3}} onClick={() => setShowLogInModal(true)}>Log In</div>
         </div>
         )}
         {showSignUpModal && (

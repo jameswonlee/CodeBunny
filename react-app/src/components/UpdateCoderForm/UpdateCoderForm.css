@@ -1,31 +1,28 @@
-.outer-sign-container{
+.Outer-Container{
     display: flex;
-    justify-content:center;
-    width:100%
+    justify-content: center;
+    padding-top: 2%;
+    /* border-color: rgb(0, 255, 76);
+    border-style: solid; */
+
 }
 
-.inner-sign-container{
-    text-align: center;
+.Inner-Container{
 justify-content: center;
-/* padding: 30px; */
-padding-left: 30px;
-padding-right: 30px;
-padding-bottom: 10px;
-border-width: thin;
+width: 40%;
+border-color: rgb(0, 0, 0);
     border-style: solid;
     border-radius: 25px;
-    /* background-color: rgba(0,0,0,.7) */
+     border-width: thin;
+     border: none;
 }
 
 .title-box{
-    /* border-color: rgb(8, 0, 255);
-    border-style: solid; */
+    border-color: rgb(203, 207, 207);
+    border-bottom-style: solid;
     text-align: center
 }
 
-.inner-form-sign-container{
-    padding-top: 10px;
-}
 
 .errors{
     justify-content: center;
@@ -33,22 +30,14 @@ border-width: thin;
     padding: 10px;
 }
 
-
-.title-sign-container{
-    border-color: rgb(203, 207, 207);
-    border-bottom-style: solid;
-    text-align: center
-}
-
-.form-container{
+.form-sign-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-
 }
 
-.form-sign-inputs{
+.form-inputs{
     box-sizing: border-box;
     width: 100%;
     font-family: "Montserrat";
@@ -57,7 +46,7 @@ border-width: thin;
     border-width: thin
 }
 
-.button-sign-container{
+.button-container{
     text-align: center;
     /* border-color: rgb(255, 0, 247);
     border-style: solid; */
@@ -65,14 +54,13 @@ border-width: thin;
     align-items: center; */
 }
 
-.Sign-Up-button{
+.Create-Spot-button{
     width: 100%;
-    background-color: rgb(20, 42, 22);
+    background-color: rgb(230, 30,77);
     color: white;
     border-radius:12px;
     border-width: thin;
     padding:10px;
-    margin-top:5%;
-    margin-bottom: 5%;
+    margin-top:2%;
     border: none
 }

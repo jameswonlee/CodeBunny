@@ -1,18 +1,18 @@
 import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import {getAllSpots} from '../../store/spotsReducer'
 import "./HomePage.css"
 import groupcoding from './Images/groupcoding.png'
 import SearchBar from '../SearchBar/SearchBar'
+import {loadAllCoders} from '../../store/coders'
 
 const GetAllSpots = () => {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
 
-    // useEffect(() => {
-    //     dispatch(getAllSpots())
-    //         .then(() => setIsLoaded(true))
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(loadAllCoders())
+            .then(() => setIsLoaded(true))
+    }, [dispatch])
 
     // const allSpots = useSelector(state => state.spots)
     // // console.log("this is state of spots", allSpots)
@@ -25,7 +25,7 @@ const GetAllSpots = () => {
     return (
         <div className="home-container">
             <div className= "image-one-container">
-                <img src= {groupcoding} ></img>
+                <img className= "group-coding" src= {groupcoding} ></img>
             </div>
             <div><SearchBar/></div>
         </div>
