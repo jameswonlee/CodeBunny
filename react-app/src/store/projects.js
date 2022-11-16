@@ -140,7 +140,8 @@ const projectReducer = (state = initialState, action) => {
 
             return newState
     // *****************************************************************************
-        case UPDATE:
+        // case UPDATE:
+        //     break
     // *****************************************************************************
         case CREATE:
             newState = {...state}
@@ -161,4 +162,3 @@ const projectReducer = (state = initialState, action) => {
 // *****************************************************************************
 
 export default projectReducer
-

@@ -136,7 +136,7 @@ def seed_projects():
         description="This is a clone of Facebook",
         start_date = datetime.date(2022,12,10),
         end_date=datetime.date(2022,12,20),
-        completed=False,
+        completed=True,
 
     )
 
