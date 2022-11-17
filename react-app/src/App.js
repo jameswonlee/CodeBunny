@@ -82,7 +82,7 @@ function App() {
           <Route path='/coder/:coderId/edit'>
             <UpdateCoderForm/>
           </Route>
-          <Route patch = "/projects/confirmation/:projectId">
+          <Route path = "/projects/confirmation/:projectId">
             <NewProjectConfirmation/>
           </Route>
       </Switch>
