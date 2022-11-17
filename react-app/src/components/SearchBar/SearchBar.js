@@ -62,8 +62,9 @@ if (!codersArray){
                 <i className="icon fa fa-search fa-2x" onClick= {() => submitHandler()}></i>
                 </div>
                 <div>
-        <h1>See your Coders who have the skills you need!:</h1>
-            <div>
+        {search ==='' ? null: (<h2 className='search-header'>Here are coders that match your search results</h2>)}
+            <div className='search-results-cards'>
+
                 {filteredCoders.map(coder => {
                     return (
                     <div className="coder-shortbio-container">
