@@ -74,7 +74,7 @@ const CoderInfo = () => {
     let deleteButton;
     if (sessionUser && sessionUser.id === CodersUserId) {
         deleteButton = (
-            <div className="Delete-spot-button">
+            < div className = "Edit-Delete-Button-container" >
                 <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>Remove My Profile</button>
             </div>
         )
@@ -98,17 +98,6 @@ const CoderInfo = () => {
                     <div className='coder-header-name-container'>
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
                     </div>
-                    <div>
-
-                    {/* <NavLink to={`/review/${coderId}/new`}>
-                                    {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
-                                    </NavLink> */}
-
-                        {deleteButton}
-
-                    </div>
-
-
 
                     <div>
                         <img
@@ -147,11 +136,23 @@ const CoderInfo = () => {
                          {seeCreateReviewButton}
                     </NavLink>
 
+                     <div>
+
+                    {/* <NavLink to={`/review/${coderId}/new`}>
+                                    {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
+                                    </NavLink> */}
+
+                        {deleteButton}
+
+                </div>
+
                 </div>
 
                 <div>
                     <Reviews coderId={coderId}/>
                 </div>
+
+
             </div>
 
         </>

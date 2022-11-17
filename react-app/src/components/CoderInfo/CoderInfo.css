@@ -63,15 +63,18 @@ h1 {
 }
 
 .review-header {
-        margin-top: 10%;
+        margin: 5%;
         padding: 5%;
-        text-decoration: underline;
+        border-bottom: 2px solid black;
         text-align: center;
+        font-size: 35px;
 
 }
 
 
-.Create-Review-Button {
+.Create-Review-Button,
+.Edit-Delete-Button,
+.Review-Delete-Button {
     background-color: rgb(3, 85, 3);
     border: 1px solid black;
     color:white;
@@ -82,8 +85,7 @@ h1 {
     margin: 3%
 }
 
-.create-button-container,
-.Edit-Delete-Button {
+.create-button-container, .Edit-Delete-Button-container {
     display: flex;
     justify-content: center;
 }
