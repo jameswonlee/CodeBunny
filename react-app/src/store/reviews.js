@@ -1,5 +1,5 @@
 import thunk from "redux-thunk"
-// import { csrfFetch } from "./csrf"
+import { csrfFetch } from "./csrf"
 
 /* ***************************** ACTION TYPES ******************************** */
 
@@ -81,7 +81,7 @@ export const createNewReview = (reviewData) => async (dispatch) => {
 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(reviewData)
     });
 
     if (response.ok) {
