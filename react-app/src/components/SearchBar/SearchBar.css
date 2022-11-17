@@ -11,8 +11,8 @@ display: flex;
 position: relative;
 /* border-color: rgb(0, 255, 76);
 border-style: solid; */
-margin-top: 70%;
-margin-left: 90%;
+/* margin-top: 70%;
+margin-left: 90%; */
 z-index: 1;
 }
 
@@ -27,6 +27,7 @@ cursor: pointer;
 .search-input{
     width: 500px;
     height: 50px;
-    border: hidden;
+    /* border: hidden; */
+    border-color: black;
     font-size:larger;
 }

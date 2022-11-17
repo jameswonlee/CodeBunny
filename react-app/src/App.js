@@ -25,6 +25,8 @@ import NewProjectConfirmation from './components/NewProjectConfirmation';
 import UserProjects from './components/UserProjects';
 // import EditProjectForm from './components/EditProjectForm';
 import DeleteProjectForm from './components/DeleteProjectForm';
+import NotFound from './components/NotFound';
+import CoderJobs from './components/CoderJobs';
 
 
 function App() {
@@ -97,6 +99,12 @@ function App() {
           </Route>
           <Route path = "/projects/confirmation/:projectId">
             <NewProjectConfirmation/>
+          </Route>
+          <Route path = "/current/user/jobs">
+            <CoderJobs/>
+          </Route>
+          <Route>
+            <NotFound/>
           </Route>
 
       </Switch>
