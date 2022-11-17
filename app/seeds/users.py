@@ -76,8 +76,16 @@ def seed_coders():
 
     coder1.skills.append(skills1)
     coder1.skills.append(skills2)
+    coder1.skills.append(skills3)
     coder2.skills.append(skills2)
     coder3.skills.append(skills3)
+    coder3.skills.append(skills1)
+    coder2.skills.append(skills1)
+    coder2.skills.append(skills3)
+    coder2.skills.append(skills4)
+    coder2.skills.append(skills5)
+    coder2.skills.append(skills6)
+    coder2.skills.append(skills7)
 
     db.session.add(coder1)
     db.session.add(coder2)
