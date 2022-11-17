@@ -38,7 +38,11 @@ function SelectCoderForProject() {
             <div>
                 {allCoders.map(coder => {
                     return (
+
                     <div>
+
+                    <div className="coder-shortbio-container">
+
                         <div>{coder.user.first_name} {coder.user.last_name}</div>
                         <div>Bio: {coder.bio}</div>
                         <div>Experience: {coder.experience}</div>

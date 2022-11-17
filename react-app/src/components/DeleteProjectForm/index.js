@@ -27,6 +27,7 @@ const DeleteProjectForm = () => {
         if (deletedProject){
             dispatch(getprojects())
         }
+
     }
 
   

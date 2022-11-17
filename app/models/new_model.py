@@ -138,7 +138,7 @@ class Project(db.Model):
             'completed': self.completed,
             'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
             'owner': self.user.to_dict(),
-            'coder': self.coder.to_dict() #added
+            # 'coder': self.coder.to_dict() #added
         }
 
     def to_dict_without_coder(self):
@@ -152,6 +152,7 @@ class Project(db.Model):
             'completed': self.completed,
             'skills': [skill.to_dict() for skill in self.skills] if self.skills else None,
             'owner': self.user.to_dict(),
+            'coder': self.coder.to_dict() #added
         }
 
 

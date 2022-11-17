@@ -25,17 +25,19 @@ const Reviews = ({ coderId }) => {
     const deleteReviewHandler = async (id) => {
         // e.preventDefault()
         // if (sessionUser.id === userId){
-        const payload = {
-            reviewId: id
-        }
-        let reviewToDelete;
-        // reviewToDelete = dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews())).then(() => history.push(`/coders/${coderId}`))
-        reviewToDelete = dispatch(deleteReview(payload)).then(() => dispatch(loadAllReviews()))
+
+            const payload = {
+                reviewId: id
+            }
+            let reviewToDelete;
+            // reviewToDelete = dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews())).then(() => history.push(`/coders/${coderId}`))
+            reviewToDelete = await dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews()))
+
         // } else {
         //     alert("You do not have permission to Delete this review")
         // }
     }
-
+    console.log("reviews", reviews)
     return (
         <div className="reviews-container">
             <h2 className='review-header'>Reviews</h2>

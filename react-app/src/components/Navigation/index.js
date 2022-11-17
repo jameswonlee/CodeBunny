@@ -5,12 +5,15 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+// import cb from './Images/cb.png'
+import cb2 from './Images/cb2.png'
 import codebunny from './Images/codebunny.png'
 
 
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+
 
   let sessionLinks;
   if (sessionUser) {

@@ -29,8 +29,8 @@ background-color: white;
 }
 
 .logo{
-    max-height: 125px;
-    max-width: 125px;
+    max-height: 200px;
+    max-width: 200px;
     /* border-color: rgb(255, 0, 144);
     border-style: solid; */
 }
@@ -70,8 +70,8 @@ background-color: white;
 
 .become-host-button{
     background-color: white;
-    color: rgb(20, 42, 22);
-    border-radius:12px;
+    color: rgb(11, 58,13);
+    border-radius:0px;
     padding: 15px;
     font-size: larger;
     border: 0 solid #ddd;
@@ -80,7 +80,7 @@ background-color: white;
 }
 
 .become-host-button:hover{
-    background-color: rgb(20, 42, 22);
+    background-color: rgb(11, 58,13);
     color: white;
     border: none;
 }

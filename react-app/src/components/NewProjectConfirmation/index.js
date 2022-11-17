@@ -29,11 +29,12 @@ function NewProjectConfirmation() {
     console.log("All projects are", allProjects)
     let confirmProject = allProjects.filter(project => project.id === projectId)[0];
     console.log("current project is", confirmProject)
+    let allCoders = useSelector(state => Object.values(state.coders))
 
     //Date Conversion
     // let startDate = new Date(confirmProject.start_date).toLocaleDateString()
     // let endDate = new Date(confirmProject.end_date).toLocaleDateString()
-    // let projectDays = to_integer(endDate)- to_integer(startDate) 
+    // let projectDays = to_integer(endDate)- to_integer(startDate)
     // console.log("date converted to string is", startDate)
     if(!allProjects) return null
     if(!confirmProject) return null
@@ -41,13 +42,20 @@ function NewProjectConfirmation() {
     let endDate = new Date(confirmProject.end_date).getTime()
     let projectDays = ((endDate)-(startDate))/(1000 * 60 * 60 * 24)
     console.log("date converted to string is", projectDays)
-    
-  
+
+    let coderId = confirmProject.coder_id
+    console.log("coder id is", coderId)
+    let coderDetails = allCoders.filter(coder => coder.id === coderId)[0]
+    console.log("coder details is", coderDetails)
+
+
+
+
 
     const handleSubmit = () => {
-        history.push("/")
+        history.push("/current/user/projects")
     }
-  
+
 
     return (
         <div>
@@ -57,11 +65,12 @@ function NewProjectConfirmation() {
             <div>Description: {confirmProject.description}</div>
             <div>Start Date: {confirmProject.start_date}</div>
             <div>End Date: {confirmProject.end_date}</div>
-            <div>Coder Name: {confirmProject.coder.user.first_name} {confirmProject.coder.user.last_name}</div>
-            <div>Coder Contact: {confirmProject.coder.user.email}</div>
-            <div>Coder Rate: ${confirmProject.coder.daily_rate}</div>
+            <h3>Coder Details:</h3>
+            <div>Coder Name: {coderDetails.user.first_name} {coderDetails.user.last_name}</div>
+            <div>Coder Contact: {coderDetails.user.email}</div>
+            <div>Coder Rate: ${coderDetails.daily_rate}</div>
             <div>Total days: {projectDays}</div>
-            <div>Cost: ${confirmProject.coder.daily_rate * projectDays}</div> 
+            <div>Cost: ${coderDetails.daily_rate * projectDays}</div>
             <button onClick = {() => handleSubmit() }>Looks Great!</button>
         </div>
     )
