@@ -39,8 +39,6 @@ function ProjectForm() {
   // let test = 2
   // let allCoders = useSelector(state => Object.values(state.coders))
 
-  let startDate;
-  let endDate;
   let createdProject
 
   const submitHandler = async (e) => {
@@ -48,19 +46,17 @@ function ProjectForm() {
 
     const errors = [];
 
-    startDate = new Date(start_date).getTime();
-    endDate = new Date(end_date).getTime();
-
-    console.log("the start date is ", startDate)
-    console.log("end date is ", endDate)
+    console.log("the start date is ", start_date)
+    console.log("end date is ", end_date)
     if (!name.length) errors.push("Please choose a name for your project");
     if (!description.length) errors.push("Please provide a description of your project");
     if (!skills.length) errors.push("Please select the skills required for your project");
     if (!start_date) errors.push("Please select a start date");
     if (!end_date) errors.push("Please select an end date");
-
-    // NOT WORKING!!!!!
-    if (endDate < startDate) errors.push("Please select valid start and end dates")
+    if (new Date(end_date).getTime() < new Date(start_date).getTime()) errors.push("Please select valid start and end dates");
+    if (new Date(start_date).getTime() < new Date().getTime()) errors.push("Invalid start date. Coder must be given at least 24 hour notice prior to start date");
+    if (new Date(end_date).getTime() < new Date().getTime()) errors.push("Please select an end date in the future");
+    
 
     setValidationErrors(errors)
 
