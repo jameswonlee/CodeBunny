@@ -75,7 +75,7 @@ export const loadOneReview = (reviewId) => async (dispatch) => {
 // -------------------------  CREATE A REVIEW   ----------------------------------
 
 export const createNewReview = (coderId, payload) => async (dispatch) => {
-    
+
     const response = await csrfFetch(`/api/coders/${coderId}/reviews/new`, {
 
         method: 'POST',
@@ -85,19 +85,19 @@ export const createNewReview = (coderId, payload) => async (dispatch) => {
 
     if (response.ok) {
         const newReview = await response.json();
-        console.log("this is newReview in teh thunk", newReview)
+        // console.log("this is newReview in teh thunk", newReview)
         dispatch(createReview(newReview))
     }
 };
 
 // -------------------------  DELETE A REVIEW  ---------------------------------
 
-export const deleteReview = reviewId => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+export const deleteReview = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${payload.reviewId}`, {
         method: 'DELETE'
     });
 
-    dispatch(removeReview(reviewId))
+    dispatch(removeReview(payload.reviewId))
     return response;
 }
 
@@ -106,7 +106,7 @@ export const deleteReview = reviewId => async dispatch => {
 
 /* ******************************** REDUCER *********************************** */
 
-const initialState = { reviews: {} }
+const initialState = { }
 
 const reviews = (state = initialState, action) => {
     let newState = {}
@@ -131,7 +131,7 @@ const reviews = (state = initialState, action) => {
         case REMOVE_REVIEW:
             newState = { ...state }
             delete newState[action.payload]
-            return newState
+            return {...newState}
 
 
         default:

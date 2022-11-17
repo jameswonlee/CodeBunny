@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { loadOneCoder, loadAllCoders, deleteCoder } from '../../store/coders';
 import { loadAllReviews } from '../../store/reviews';
 import Reviews from '../Reviews';
@@ -12,17 +12,30 @@ const CoderInfo = () => {
     const dispatch = useDispatch();
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
-    coderId = parseInt(coderId)
+
+
     const sessionUser = useSelector(state => state.session.user);
+
+    coderId = parseInt(coderId)
+    let sessionUserId
+
+    if (sessionUser) {
+        sessionUserId = sessionUser.id
+    }
+
     // console.log("this is UserId", sessionUser.id)
     const CodersUserId = useSelector(state => state.coders.user_id)
-    // const reviewInfo = useSelector(state => state.reviews)
-    // const reviewInfoArray = Object.values(reviewInfo)
-    // const reviewsByUserId = reviewInfoArray.filter(item => item.coder_id === +coderId)
+    // const reviewsData = useSelector(state => state.reviews);
+    const reviewInfo = useSelector(state => state.reviews)
+    const reviewInfoArray = Object.values(reviewInfo)
+    const reviewsByUserId = reviewInfoArray.filter(item => item.user_id === sessionUserId)
+    const reviewsByCoderId = reviewsByUserId.filter(element => element.coder_id === +coderId)
     // const reviewOfUser = reviewsByUserId.find(element => element.userId === sessionUserId)
     // console.log("this is codersUserID", CodersUserId)
+    // console.log("this si reviewsByCoderId", reviewsByCoderId)
     // console.log("this is reviewInfo", reviewInfo)
     // console.log("this is the Object values of review Info", reviewInfoArray)
+    // console.log("this is reviewsByUserId", reviewsByUserId)
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
@@ -30,16 +43,14 @@ const CoderInfo = () => {
     }, [dispatch, coderId])
 
     let girlNames = ['Marnie']
-    let sessionUserId
-    if (sessionUser) {
-        sessionUserId = sessionUser.id
-    }
+
 
     const history = useHistory()
     let coder = useSelector(state => state.coders)
 
 
     console.log("CODER IS", coder)
+
 
     if (!coder) {
         return null
@@ -49,10 +60,7 @@ const CoderInfo = () => {
         return null
     }
 
-    // let sessionUserId
-    // if (sessionUser) {
-    //     sessionUserId = sessionUser.id
-    // }
+
     const deleteHandler = async (e) => {
 
         const payload = {
@@ -66,8 +74,8 @@ const CoderInfo = () => {
     let deleteButton;
     if (sessionUser && sessionUser.id === CodersUserId) {
         deleteButton = (
-            <div className="Delete-spot-button">
-                <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>DELETE Coder Profile</button>
+            < div className = "Edit-Delete-Button-container" >
+                <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>Remove My Profile</button>
             </div>
         )
     } else {
@@ -78,8 +86,8 @@ const CoderInfo = () => {
     }
     let seeCreateReviewButton;
     seeCreateReviewButton = (
-        <div>
-            <button className="Create-Review-Button" type="submit">Create a New Review</button>
+        <div className='create-button-container'>
+            <button className="Create-Review-Button" type="submit">Leave A Review!</button>
         </div>
     )
 
@@ -90,25 +98,13 @@ const CoderInfo = () => {
                     <div className='coder-header-name-container'>
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
                     </div>
-                    <div>
 
-                    {/* <NavLink to={`/review/${coderId}/new`}>
-                                    {sessionUserId  && sessionUserId  !== spotInfoOwnerId && !reviewOfUser ? seeCreateReviewButton : null}
-                                    </NavLink> */}
-
-                        {deleteButton}
-
-                    </div>
-
-                    <NavLink to={`/review/${coderId}/new`}>
-                         {seeCreateReviewButton}
-                                    </NavLink>
-                    
                     <div>
                         <img
                             width={300}
                             height={300}
                             src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name) ? "women" : "men"}/${coder.id}.jpg`}
+                            alt="random portrait"
                             className="user-image">
                         </img>
                     </div>
@@ -136,12 +132,28 @@ const CoderInfo = () => {
                             )
                         })}
                     </div>
+                    <NavLink to={`/review/${coderId}/new`}>
+                    {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
+                         {seeCreateReviewButton}
+                    </NavLink>
+
+                     <div>
+
+                    {/* <NavLink to={`/review/${coderId}/new`}>
+                                    {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
+                                    </NavLink> */}
+
+                        {deleteButton}
+
+                </div>
 
                 </div>
 
                 <div>
-                    <Reviews />
+                    <Reviews coderId={coderId}/>
                 </div>
+
+
             </div>
 
         </>

@@ -1,24 +1,15 @@
 .home-container{
     display: flex;
     width: 100%;
-    justify-content: center;
-    flex-direction: row;
     /* border-color: rgb(124, 0, 128);
     border-style: solid; */
 }
 
 .image-one-container{
-    /* position:absolute; */
+    position:absolute;
     width: 82%;
-    height: 100%;
-
-    margin-top: 20%;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -2
+    z-index: auto;
+    margin-top: 100px;
     /* border-color: green;
     border-style: solid; */
 }

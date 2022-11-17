@@ -39,7 +39,7 @@
 
 
 .username-container:hover{
-    background-color: rgb(20, 42, 22);
+    background-color: rgb(11, 58,13);
     color: white;
     border: none;
     cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 .log-out:hover{
-    background-color: rgb(20, 42, 22);
+    background-color: rgb(11, 58,13);
     color: white;
     border: none;
     cursor: pointer;
@@ -71,7 +71,7 @@
 }
 
 .my-reviews:hover{
-    background-color: rgb(20, 42, 22);
+    background-color: rgb(11, 58,13);
     color: white;
     border: none;
     cursor: pointer;
@@ -82,7 +82,7 @@
 
 
 .my-spots:hover{
-    background-color: rgb(20, 42, 22);
+    background-color: rgb(11, 58,13);
     color: white;
     border: none;
     cursor: pointer;
@@ -92,5 +92,33 @@
 }
 
 #pink:hover{
-    color: rgb(20, 42, 22)
+    color: rgb(11, 58,13)
+}
+
+.sign-up-text{
+    padding: 5px;
+}
+
+.sign-up-text:hover{
+    background-color: rgb(11, 58,13);
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* padding: 5px; */
+    width:125px;
+    border-radius: 2px;
+}
+
+.log-in-text{
+    padding: 5px;
+}
+
+.log-in-text:hover{
+    background-color: rgb(11, 58,13);
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* padding: 5px; */
+    width:125px;
+    border-radius: 2px;
 }

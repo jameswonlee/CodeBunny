@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
+import { useHistory} from "react-router-dom";
+import { useDispatch} from "react-redux"
 import { createNewCoder, loadAllCoders } from "../../store/coders"
 
 import "./CreateCoderForm.css";
@@ -8,7 +8,7 @@ import "./CreateCoderForm.css";
 function CoderForm() {
   const history = useHistory()
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.session.user)
+  // const currentUser = useSelector(state => state.session.user)
 
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
@@ -38,14 +38,14 @@ function CoderForm() {
     e.preventDefault()
     const errors = []
 
-    // if (!bio) errors.push("Please provide your bio");
-    // if (!experience) errors.push("Please tell us about your prior experience");
-    // if (!daily_rate) errors.push("Please set your daily rate");
-    // if (!skills) errors.push("Please select your areas of expertise");
+    if (!bio) errors.push("Please provide a bio");
+    if (!experience) errors.push("Please tell us about your prior experience");
+    if (!daily_rate) errors.push("Please set your daily rate");
+    if (!skills.length) errors.push("Please select your areas of expertise");
 
     setValidationErrors(errors)
 
-    // if (!errors) {
+    if (!validationErrors.length) {
       const payload = {
         bio,
         experience,
@@ -54,10 +54,8 @@ function CoderForm() {
       }
 
       const createdCoder = await dispatch(createNewCoder(payload))
-
-      dispatch(loadAllCoders())
       history.push(`/coders/${createdCoder.id}`)
-    // }
+    }
   }
 
   return (
@@ -80,7 +78,7 @@ function CoderForm() {
               Bio
               <input
                 className="form-inputs"
-                // required
+                required
                 type="text"
                 name="bio"
                 onChange={(e) => setBio(e.target.value)}
@@ -92,7 +90,7 @@ function CoderForm() {
               Experience
               <input
                 className="form-inputs"
-                // required
+                required
                 type="text"
                 name="experience"
                 onChange={(e) => setExperience(e.target.value)}
@@ -104,7 +102,7 @@ function CoderForm() {
               Daily Rate
               <input
                 className="form-inputs"
-                // required
+                required
                 type="number"
                 name="daily rate"
                 onChange={(e) => setDailyRate(e.target.value)}
@@ -126,31 +124,53 @@ function CoderForm() {
       </label> */}
             <label>
               Your Selected Coding Skills
-              <input
+              {/* <input
                 className="form-inputs"
-                required
+                // required
                 type="text"
                 name="skills"
                 onChange={(e) => setSkills(e.target.value)}
                 value={skills}
                 placeholder="Select Skills"
-              />
+              /> */}
             </label>
-
-            <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="Python"> Python</label>
-            <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="Javascript"> Javascript</label>
-            <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="C++"> C++</label>
-            <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="Ruby"> Ruby</label>
-            <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="Java"> Java</label>
-            <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="React"> React</label>
-            <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => handleSelect(e.target.value)} />
-            <label htmlFor="Camel"> Camel</label>
+              <div className= "check-box-box">
+            <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Python"> Python</label>
+            <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Javascript"> Javascript</label>
+            <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="C++"> C++</label>
+            <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Ruby"> Ruby</label>
+            <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Java"> Java</label>
+            <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="React"> React</label>
+            <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Camel"> Camel</label>
+            </div>
           </div>
           <div className="button-container">
             <button className="Create-Spot-button"

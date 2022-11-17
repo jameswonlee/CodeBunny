@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Modal } from '../../context/Modal'
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+// import LoginFormModal from '../LoginFormModal';
+// import SignupFormModal from '../SignupFormModal';
 import SignupForm from '../SignupFormModal/SignupForm'
 import LoginForm from '../LoginFormModal/LoginForm'
 
@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
-    console.log("made it to profilebutton logout handler")
+    // console.log("made it to profilebutton logout handler")
     dispatch(sessionActions.logout())
     history.push("/");
   };
@@ -53,6 +53,16 @@ function ProfileButton({ user }) {
     history.push(`/current/user/projects`);
   };
 
+  const myJobs = (e) => {
+    e.preventDefault();
+    history.push(`/current/user/jobs`);
+  };
+
+  const createProject = (e) => {
+    e.preventDefault();
+    history.push('/project/new');
+  };
+
 let loggedInOrNot;
 if (user){
   loggedInOrNot =(
@@ -65,17 +75,17 @@ if (user){
       </button>
       {showMenu && (
         <div className="dropdown-content">
-          {/* <div className="username-container">
-          <div>{user.username}</div>
-          </div>
-          <div className="username-container">
-          <div>{user.email}</div>
-          </div> */}
           <div>
           <div className="my-spots" onClick={mySpots}>My Profile</div>
           </div>
           <div>
           <div className="my-reviews" onClick={myProjects}>My Projects</div>
+          </div>
+          <div>
+          <div className="my-reviews" onClick={myJobs}>My Jobs</div>
+          </div>
+          <div>
+          <div className="my-reviews" onClick={createProject}>Create a Project</div>
           </div>
           <div>
             <div className="log-out" onClick={logout}>Log Out</div>

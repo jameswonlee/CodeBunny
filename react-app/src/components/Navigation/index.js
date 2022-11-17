@@ -5,12 +5,15 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+// import cb from './Images/cb.png'
+// import cb2 from './Images/cb2.png'
 import codebunny from './Images/codebunny.png'
 
 
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+
 
   let sessionLinks;
   if (sessionUser) {
@@ -43,7 +46,7 @@ function Navigation({ isLoaded }){
     <div className="navbar-main">
       <div className="navbar-inner-container">
     <div className= "Home-Container">
-        <NavLink exact to="/"><img className='logo' src={codebunny}/></NavLink>
+        <NavLink exact to="/"><img className='logo' src={codebunny} alt="logo here"/></NavLink>
     </div>
 
     <div className="Right-Side-Container">

@@ -1,14 +1,14 @@
 // frontend/src/components/SignupFormPage/SignupForm.js
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import{useHistory} from 'react-router-dom'
 import "./SignupForm.css"
 
 function SignupForm() {
   const dispatch = useDispatch();
   const history  = useHistory()
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,10 +35,10 @@ function SignupForm() {
 
   };
 
-  if (sessionUser){
-    console.log("session user create", sessionUser)
-    history.push("/")
-  }
+  // if (sessionUser){
+  //   console.log("session user create", sessionUser)
+  //   history.push("/")
+  // }
 
 
   return (

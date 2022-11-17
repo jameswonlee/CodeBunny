@@ -59,9 +59,10 @@ const removeCoder = coderId => ({
 
 // -------------------------  LOAD ALL CODERS   ----------------------------------
 export const loadAllCoders = () => async dispatch => {
-    const response = await fetch('/api/coders/')
+    const response = await csrfFetch('/api/coders/')
     if (response.ok) {
         const codersList = await response.json();
+        // console.log("this is coders list", codersList)
         dispatch(getAllCoders(codersList))
     }
 }
@@ -72,14 +73,15 @@ export const loadAllCoders = () => async dispatch => {
 
 
 export const loadOneCoder = (coderId) => async dispatch => {
-    const response = await fetch(`/api/coders/${coderId}/`);
+    const response = await csrfFetch(`/api/coders/${coderId}/`);
     // console.log("DID TI REACH GET ONE CODER THUNK")
+
 
 
 
     if (response.ok){
         const coderInfo = await response.json();
-         console.log("CODER INFO IN THUNK", coderInfo)
+        //  console.log("CODER INFO IN THUNK", coderInfo)
         dispatch(getOneCoder(coderInfo))
     }
 }
@@ -208,4 +210,3 @@ const coderReducer = (state = initialState, action) => {
 // *****************************************************************************
 
 export default coderReducer
-
