@@ -1,7 +1,8 @@
 import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "./HomePage.css"
-import groupcoding from './Images/groupcoding.png'
+// import groupcoding from './Images/groupcoding.png'
+import whitebackground from './Images/whitebackground.png'
 import SearchBar from '../SearchBar/SearchBar'
 import {loadAllCoders} from '../../store/coders'
 
@@ -25,7 +26,7 @@ const GetAllSpots = () => {
     return (
         <div className="home-container">
             <div className= "image-one-container">
-                <img className= "group-coding" src= {groupcoding} ></img>
+                <img className= "group-coding" src= {whitebackground} ></img>
             </div>
             <div><SearchBar/></div>
         </div>
