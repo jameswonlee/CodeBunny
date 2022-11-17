@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { getprojects } from '../../store/projects';
-import './UserProjects.css'
+import '../UserProjects/UserProjects.css'
+
 
 
 
@@ -97,7 +98,9 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
 
 
 
-}
+
+// }
+
 // let userJobs = allProjects.filter(project => project.coder.user_id === user.id)
 // // let coderUser = coder.user_id
 
