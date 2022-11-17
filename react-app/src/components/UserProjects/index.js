@@ -56,7 +56,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                                             <div className='detail-heading'>Coder: </div><div>{project.coder.user.first_name} {project.coder.user.last_name}</div>
                                             <div className = 'detail-heading' > Coder's Contact Info</div><div>{project.coder.user.email}</div>
                                         </div>
-                                        <DeleteProjectForm />
+                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
                                         {/* <EditProjectForm /> */}
                                     </>
                                 )
@@ -77,6 +77,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
                                         <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
                                         <div>Coder's Contact Info: {project.coder.user.email}</div>
+                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
                                     </div>
                                 </>
                             )
@@ -98,7 +99,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
                                         <div>Owner's Contact Info: {project.owner.email}</div>
                                         <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-
+                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
                                     </div>
                                 </>
                             )
@@ -119,6 +120,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
                                         <div>Owner's Contact Info: {project.owner.email}</div>
                                         <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
+                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
 
                                     </div>
                                 </>
