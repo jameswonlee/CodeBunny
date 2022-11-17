@@ -20,11 +20,11 @@ function EditProjectForm() {
     let allProjects = useSelector(state => console.log('state', state))
     // let currProject = allProjects.filter(project => project.id === projectId)
 
-    useEffect(() => {
+    // useEffect(() => {
         // currProject.skills.map(({skill_name}) => {
         //     return skill_name
         // })
-    })
+    // })
 
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -93,7 +93,8 @@ function EditProjectForm() {
             description,
             skills,
             start_date,
-            end_date
+            end_date,
+            projectId
         }
 
 

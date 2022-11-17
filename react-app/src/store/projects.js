@@ -91,8 +91,8 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
 
 export const updateproject = (payload) => async dispatch => {
 
-    const response = await csrfFetch(`/api/projects/${payload.id}`, {
-        method: 'POST',
+    const response = await csrfFetch(`/api/projects/${payload.projectId}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
