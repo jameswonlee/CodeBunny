@@ -23,10 +23,14 @@ export default function Search() {
 if (!codersArray){
     return null
 }
+
     const getCoderSkills = (coder) => {
         let skillArray = []
         // console.log("this is codersArray skills", coder.skills)
+
             let coderSkills = coder.skills
+            if (!coderSkills) return []
+
             for (let skill of coderSkills){
                 let skillName = skill.skill_name.toUpperCase()
 
@@ -40,6 +44,7 @@ if (!codersArray){
     const getFilteredItems = (search, codersArray) => {
         return codersArray.filter(coder => getCoderSkills(coder).includes(search.toUpperCase()) === true)
     }
+
 
     const submitHandler = async () => {
 

@@ -91,6 +91,27 @@ const CoderInfo = () => {
         </div>
     )
 
+    // let seeCreateUpdateButton;
+    // seeCreateUpdateButton = (
+    //     <div className='create-button-container'>
+    //         <button className="Create-Review-Button" type="submit">Edit Your Profile!</button>
+    //     </div>
+    // )
+
+    let editButton;
+    if (sessionUser && sessionUser.id === CodersUserId) {
+        editButton = (
+            < div className = "Edit-Delete-Button-container" >
+                <button className="Edit-Delete-Button" onClick={() => history.push(`/coder/${coderId}/edit`)}>Edit My Profile</button>
+            </div>
+        )
+    } else {
+        editButton = (
+            <>
+            </>
+        )
+    }
+
     return (
         <>
             <div className="coder-detail-page-container">
@@ -142,7 +163,7 @@ const CoderInfo = () => {
                     {/* <NavLink to={`/review/${coderId}/new`}>
                                     {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
                                     </NavLink> */}
-
+                        {editButton}
                         {deleteButton}
 
                 </div>
