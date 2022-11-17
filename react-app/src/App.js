@@ -23,7 +23,7 @@ import CoderInfo from './components/CoderInfo';
 import SelectCoderForProject from './components/SelectCoderForProject';
 import NewProjectConfirmation from './components/NewProjectConfirmation';
 import UserProjects from './components/UserProjects';
-import EditProjectForm from './components/EditProjectForm';
+// import EditProjectForm from './components/EditProjectForm';
 import DeleteProjectForm from './components/DeleteProjectForm';
 
 
@@ -85,9 +85,9 @@ function App() {
         < Route path = "/current/user/projects" >
           <UserProjects />
         </Route>
-        <Route path="/projects/:projectId/edit">
+        {/* <Route path="/projects/:projectId/edit">
           <EditProjectForm />
-        </Route>
+        </Route> */}
         < Route path = "/projects/:projectId/delete" >
           <DeleteProjectForm />
         </Route>

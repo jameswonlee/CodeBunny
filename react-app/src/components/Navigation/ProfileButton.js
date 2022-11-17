@@ -52,6 +52,12 @@ function ProfileButton({ user }) {
     e.preventDefault();
     history.push(`/current/user/projects`);
   };
+
+  const myJobs = (e) => {
+    e.preventDefault();
+    history.push(`/current/user/jobs`);
+  };
+
   const createProject = (e) => {
     e.preventDefault();
     history.push('/createProject');
@@ -74,6 +80,9 @@ if (user){
           </div>
           <div>
           <div className="my-reviews" onClick={myProjects}>My Projects</div>
+          </div>
+          <div>
+          <div className="my-reviews" onClick={myJobs}>My Jobs</div>
           </div>
           <div>
           <div className="my-reviews" onClick={createProject}>Create a Project</div>

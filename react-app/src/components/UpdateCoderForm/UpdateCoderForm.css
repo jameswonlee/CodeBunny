@@ -12,7 +12,7 @@ justify-content: center;
 width: 40%;
 border-color: rgb(0, 0, 0);
     border-style: solid;
-    border-radius: 25px;
+    border-radius: 0px;
      border-width: thin;
      border: none;
 }
@@ -42,7 +42,7 @@ border-color: rgb(0, 0, 0);
     width: 100%;
     font-family: "Montserrat";
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 0px;
     border-width: thin
 }
 
@@ -58,7 +58,7 @@ border-color: rgb(0, 0, 0);
     width: 100%;
     background-color: rgb(11, 58,13);
     color: white;
-    border-radius:12px;
+    border-radius:0px;
     border-width: thin;
     padding:10px;
     margin-top:2%;
