@@ -44,3 +44,15 @@
     border-bottom: 2px solid rgb(3, 97, 66);
     padding-bottom: 10%;
 }
+
+
+.coder-profile-button, .delete-project-button{
+    color: white;
+    background-color: rgb(2, 70, 2);
+    margin: 5%;
+    padding: 2%;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
