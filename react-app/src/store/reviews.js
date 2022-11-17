@@ -1,3 +1,4 @@
+
 import { csrfFetch } from "./csrf"
 
 /* ***************************** ACTION TYPES ******************************** */
@@ -80,7 +81,7 @@ export const createNewReview = (coderId, payload) => async (dispatch) => {
 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(reviewData)
     });
 
     if (response.ok) {

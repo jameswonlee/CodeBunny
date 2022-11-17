@@ -77,7 +77,7 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
                 body: JSON.stringify(coderId)
             })
 
-        
+
 
 
         if (coderInfoResponse.ok) {
@@ -90,8 +90,8 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
 
 export const updateproject = (payload) => async dispatch => {
 
-    const response = await csrfFetch(`/api/projects/${payload.id}`, {
-        method: 'POST',
+    const response = await csrfFetch(`/api/projects/${payload.id}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -152,4 +152,3 @@ const projectReducer = (state = initialState, action) => {
 
 
 export default projectReducer
-
