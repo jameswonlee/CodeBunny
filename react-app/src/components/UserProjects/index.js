@@ -99,7 +99,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
                                         <div>Owner's Contact Info: {project.owner.email}</div>
                                         <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
+                                        {/* <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink> */}
                                     </div>
                                 </>
                             )
@@ -107,7 +107,8 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
 
 
                     </div>
-                    < div className = 'completed-container' >
+
+                    <div className = 'completed-container' >
                         <h1 className = 'projects-title' >Completed Jobs </h1>
                         {completedJobs.length? completedJobs.map(project=>{
 
@@ -120,7 +121,7 @@ let upcomingJobs = userJobs.filter(project => project.completed === false)
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
                                         <div>Owner's Contact Info: {project.owner.email}</div>
                                         <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
+                                        {/* <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink> */}
 
                                     </div>
                                 </>
