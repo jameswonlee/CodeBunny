@@ -1,4 +1,4 @@
-import thunk from "redux-thunk"
+
 import { csrfFetch } from "./csrf"
 
 /* ***************************** ACTION TYPES ******************************** */
@@ -75,8 +75,8 @@ export const loadOneReview = (reviewId) => async (dispatch) => {
 
 // -------------------------  CREATE A REVIEW   ----------------------------------
 
-export const createNewReview = (reviewData) => async (dispatch) => {
-    let coderId = reviewData.coder_id
+export const createNewReview = (coderId, payload) => async (dispatch) => {
+
     const response = await csrfFetch(`/api/coders/${coderId}/reviews/new`, {
 
         method: 'POST',
@@ -93,12 +93,12 @@ export const createNewReview = (reviewData) => async (dispatch) => {
 
 // -------------------------  DELETE A REVIEW  ---------------------------------
 
-export const deleteReview = reviewId => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+export const deleteReview = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${payload.reviewId}`, {
         method: 'DELETE'
     });
 
-    dispatch(removeReview(reviewId))
+    dispatch(removeReview(payload.reviewId))
     return response;
 }
 

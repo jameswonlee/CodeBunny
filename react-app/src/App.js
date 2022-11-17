@@ -49,9 +49,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route> */}
-        <ProtectedRoute path='/createProject' exact={true} >
-          {/* this is to create a project */}
-        </ProtectedRoute>
+        <Route path='/createProject' exact={true} >
+          <CreateProjectForm/>
+        </Route>
         <ProtectedRoute path='/users/:userId' exact={true} >
           {/* this is to see User Profile */}
         </ProtectedRoute>
@@ -76,17 +76,12 @@ function App() {
           <Reviews />
         </Route>
         <Route path="/project/new">
-          <CreateProjectForm />
+            <CreateProjectForm/>
+          </Route>
+        <Route path = "/projects/new/:projectId">
+            <SelectCoderForProject/>
         </Route>
-        <Route path='/coder/:coderId/edit'>
-          <UpdateCoderForm />
-        </Route>
-        <Route path="/projects/new/:projectId">
-          <SelectCoderForProject />
-        </Route>
-        <Route path="/projects/confirmation/:projectId">
-          <NewProjectConfirmation />
-        </Route>
+
         < Route path = "/current/user/projects" >
           <UserProjects />
         </Route>
@@ -96,6 +91,14 @@ function App() {
         < Route path = "/projects/:projectId/delete" >
           <DeleteProjectForm />
         </Route>
+
+          <Route path='/coder/:coderId/edit'>
+            <UpdateCoderForm/>
+          </Route>
+          <Route path = "/projects/confirmation/:projectId">
+            <NewProjectConfirmation/>
+          </Route>
+
       </Switch>
     </>
     // </BrowserRouter>

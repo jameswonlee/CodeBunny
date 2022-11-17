@@ -12,9 +12,14 @@ function SelectCoderForProject() {
 
     useEffect(() => {
         dispatch(loadAllCoders())
+        dispatch(getprojects())
       },[dispatch])
 
     let allCoders = useSelector(state => Object.values(state.coders))
+    
+
+    if(!allCoders) return null
+
 
     console.log("ALL CODERS IS", allCoders)
 
