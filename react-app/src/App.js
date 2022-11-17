@@ -23,7 +23,7 @@ import CoderInfo from './components/CoderInfo';
 import SelectCoderForProject from './components/SelectCoderForProject';
 import NewProjectConfirmation from './components/NewProjectConfirmation';
 import UserProjects from './components/UserProjects';
-// import EditProjectForm from './components/EditProjectForm';
+import EditProjectForm from './components/EditProjectForm';
 import DeleteProjectForm from './components/DeleteProjectForm';
 import NotFound from './components/NotFound';
 import CoderJobs from './components/CoderJobs';
@@ -51,9 +51,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route> */}
-        <Route path='/createProject' exact={true} >
+        {/* <Route path='/createProject' exact={true} >
           <CreateProjectForm/>
-        </Route>
+        </Route> */}
         <ProtectedRoute path='/users/:userId' exact={true} >
           {/* this is to see User Profile */}
         </ProtectedRoute>
@@ -84,9 +84,9 @@ function App() {
         < Route path = "/current/user/projects" >
           <UserProjects />
         </Route>
-        {/* <Route path="/projects/:projectId/edit">
+        <Route path="/projects/:projectId/edit">
           <EditProjectForm />
-        </Route> */}
+        </Route>
         < Route path = "/projects/:projectId/delete" >
           <DeleteProjectForm />
         </Route>
