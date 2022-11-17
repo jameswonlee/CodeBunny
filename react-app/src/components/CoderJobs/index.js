@@ -6,6 +6,7 @@ import '../UserProjects/UserProjects.css'
 
 
 
+
 const CoderJobs = () => {
 let dispatch = useDispatch();
 
@@ -97,7 +98,9 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
 
 
 
+
 // }
+
 // let userJobs = allProjects.filter(project => project.coder.user_id === user.id)
 // // let coderUser = coder.user_id
 

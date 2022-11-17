@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
 import {createproject, getprojects} from "../../store/projects"
 import { loadAllCoders } from "../../store/coders";
@@ -16,7 +16,7 @@ function SelectCoderForProject() {
       },[dispatch])
 
     let allCoders = useSelector(state => Object.values(state.coders))
-    
+
 
     if(!allCoders) return null
 
@@ -25,8 +25,8 @@ function SelectCoderForProject() {
 
     const handleCoderSubmit = (coderId) => {
 
-        console.log("Coder id being sent in is", coderId)
-        console.log("project id being sent in is ", projectId)
+        // console.log("Coder id being sent in is", coderId)
+        // console.log("project id being sent in is ", projectId)
 
         dispatch(createproject(0, coderId, projectId ))
         history.push(`/projects/confirmation/${projectId}`)
@@ -38,8 +38,11 @@ function SelectCoderForProject() {
             <div>
                 {allCoders.map(coder => {
                     return (
-                    <div>
-                        <div>{coder.user.first_name}</div>
+                    <div className="coder-shortbio-container">
+                        <div>{coder.user.first_name} {coder.user.last_name}</div>
+                        <div>Bio: {coder.bio}</div>
+                        <div>Experience: {coder.experience}</div>
+                        <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
                         <button onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
                     </div>
                     )
