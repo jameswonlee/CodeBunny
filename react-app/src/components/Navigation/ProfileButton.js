@@ -52,6 +52,10 @@ function ProfileButton({ user }) {
     e.preventDefault();
     history.push(`/current/user/projects`);
   };
+  const createProject = (e) => {
+    e.preventDefault();
+    history.push('/createProject');
+  };
 
 let loggedInOrNot;
 if (user){
@@ -65,17 +69,14 @@ if (user){
       </button>
       {showMenu && (
         <div className="dropdown-content">
-          {/* <div className="username-container">
-          <div>{user.username}</div>
-          </div>
-          <div className="username-container">
-          <div>{user.email}</div>
-          </div> */}
           <div>
           <div className="my-spots" onClick={mySpots}>My Profile</div>
           </div>
           <div>
           <div className="my-reviews" onClick={myProjects}>My Projects</div>
+          </div>
+          <div>
+          <div className="my-reviews" onClick={createProject}>Create a Project</div>
           </div>
           <div>
             <div className="log-out" onClick={logout}>Log Out</div>
