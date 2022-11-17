@@ -81,7 +81,7 @@ export const createNewReview = (coderId, payload) => async (dispatch) => {
 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reviewData)
+        body: JSON.stringify(payload)
     });
 
     if (response.ok) {
