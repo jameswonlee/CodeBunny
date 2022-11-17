@@ -43,7 +43,9 @@ function NewProjectConfirmation() {
     
     if(!allProjects) return null
 
-
+    const handleSubmit = () => {
+        history.push("/")
+    }
   
 
     return (
@@ -59,6 +61,7 @@ function NewProjectConfirmation() {
             <div>Coder Rate: ${confirmProject.coder.daily_rate}</div>
             <div>Total days: {projectDays}</div>
             <div>Cost: ${confirmProject.coder.daily_rate * projectDays}</div> 
+            <button onClick = {() => handleSubmit() }>Looks Great!</button>
         </div>
     )
 
