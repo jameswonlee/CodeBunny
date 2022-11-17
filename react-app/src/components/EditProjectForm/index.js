@@ -21,9 +21,9 @@ function EditProjectForm() {
     // let currProject = allProjects.filter(project => project.id === projectId)
 
     // useEffect(() => {
-        // currProject.skills.map(({skill_name}) => {
-        //     return skill_name
-        // })
+    // currProject.skills.map(({skill_name}) => {
+    //     return skill_name
+    // })
     // })
 
     const [name, setName] = useState("")
@@ -31,13 +31,13 @@ function EditProjectForm() {
     const [start_date, setStartDate] = useState("")
     const [end_date, setEndDate] = useState("")
     const [skills, setSkills] = useState([])
-    const [formSubmitted, setFormSubmitted] = useState(false)
+    // const [formSubmitted, setFormSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
 
 
-    useEffect(()=>{
+    useEffect(() => {
         setDescription(allProjects && allProjects.description)
-    },[allProjects])
+    }, [allProjects])
 
     //      console.log("curr proj is", currProject)
 
@@ -81,39 +81,30 @@ function EditProjectForm() {
 
         const errors = []
 
-        // if (!bio.length) errors.push("Please provide a name")
-        // if (!experience.length) errors.push("Please provide an address");
-        // if (!daily.length) errors.push("Please provide a city");
-        // if (!skills) errors.push("Please provide a description")
-        // if (url.slice(0,5).toLowerCase() !== "https") errors.push("Url must start with https")
-        // setValidationErrors(errors)
+        if (!name) errors.push("Please provide a name for your project");
+        if (!description) errors.push("Please provide a description for your project");
+        if (!start_date) errors.push("Please provide a start date for your project");
+        if (!end_date) errors.push("Please provide an end date for your project");
+        if (!skills) errors.push("Please select the skills required for your project")
+        setValidationErrors(errors)
 
-        const editPayload = {
-            name,
-            description,
-            skills,
-            start_date,
-            end_date,
-            projectId
+        if (!validationErrors.length) {
+            const editPayload = {
+                name,
+                description,
+                skills,
+                start_date,
+                end_date,
+                projectId
+            }
+
+            let createdProject = await dispatch(updateproject(editPayload))
+            if (createdProject) {
+                // setFormSubmitted(true)
+                let createdProjectId = createdProject.id;
+                history.push(`/projects/${createdProjectId}`)
+            }
         }
-
-
-        // if(errors.length){
-        //   return null
-        // }
-
-
-        // console.log("this is created coder", createdCoder)
-        let createdProject = await dispatch(updateproject(editPayload))
-        if (createdProject) {
-            setFormSubmitted(true)
-            let createdProjectId = createdProject.id
-            console.log("created Project is", createdProject)
-            console.log("and the id is", createdProject.id)
-
-            history.push(`/projects/${createdProjectId}`)
-        }
-
     }
 
 
@@ -181,7 +172,7 @@ function EditProjectForm() {
                                 value={end_date}
                             />
                         </label>
-                        <label>
+                        {/* <label>
                             Your Selected Coding Skills
                             <input
                                 className="form-inputs"
@@ -192,7 +183,7 @@ function EditProjectForm() {
                                 value={skills}
                                 placeholder="Select Skills"
                             />
-                        </label>
+                        </label> */}
 
                         <input type="checkbox" id="Python" name="Python" value="Python" onChange={(e) => handleSelect(e.target.value)} />
                         <label> Python</label>

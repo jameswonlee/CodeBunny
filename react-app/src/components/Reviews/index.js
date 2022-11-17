@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useParams} from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
 import { loadAllReviews, deleteReview } from '../../store/reviews';
 
@@ -7,12 +8,15 @@ import { loadAllReviews, deleteReview } from '../../store/reviews';
 const Reviews = ({ coderId }) => {
     const dispatch = useDispatch();
     // const history = useHistory()
+    // let {coderId} = useParams()
+    // coderId = parseInt(coderId)
     const sessionUser = useSelector(state => state.session.user);
     const reviewsData = useSelector(state => state.reviews);
     const reviews = Object.values(reviewsData);
     const boyNames = ["Demo", "Marnie", "Bobbie"];
     // console.log('reviews', reviews)
 
+    let coderReviews = reviews.filter(review=>review.coder_id === coderId)
     useEffect(() => {
         dispatch(loadAllReviews());
     }, [dispatch]);
@@ -41,7 +45,7 @@ const Reviews = ({ coderId }) => {
     return (
         <div className="reviews-container">
             <h2 className='review-header'>Reviews</h2>
-            <div className="reviews">{reviews?.map((review, index) => (
+            <div className="reviews">{coderReviews?.map((review, index) => (
             <>
                 <div key={review.id} className="review-card">
                     <div className="user-photo">
@@ -71,3 +75,10 @@ const Reviews = ({ coderId }) => {
 
 
 export default Reviews
+
+
+
+
+
+
+
