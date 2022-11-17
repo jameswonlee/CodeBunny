@@ -132,7 +132,7 @@ function SelectCoderForProject() {
                         <div>{coder.user.first_name} {coder.user.last_name}</div>
                         <div>Bio: {coder.bio}</div>
                         <div>Experience: {coder.experience}</div>
-                        <button className="view-coder-profile-button"><NavLink className="view-coder-profile-button" to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+                        {/* <button className="view-coder-profile-button"><NavLink className="view-coder-profile-button" to={`/coders/${coder.id}`}>View Profile</NavLink></button> */}
                         <button className = 'choose-coder-profile-button' onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
                     </div>
 

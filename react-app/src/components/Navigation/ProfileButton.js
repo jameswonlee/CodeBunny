@@ -85,7 +85,7 @@ if (user){
           <div className="my-reviews" onClick={myJobs}>My Jobs</div>
           </div>
           <div>
-          <div className="my-reviews" onClick={createProject}>Create a Project</div>
+          <div className="my-reviews" onClick={createProject}>Start a Project</div>
           </div>
           <div>
             <div className="log-out" onClick={logout}>Log Out</div>

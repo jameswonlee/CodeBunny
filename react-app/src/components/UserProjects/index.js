@@ -56,8 +56,8 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                             {/* <div className='detail-heading'>Coder: </div><div>{project.coder.user.first_name} {project.coder.user.last_name}</div>
                                             <div className = 'detail-heading' > Coder's Contact Info</div><div>{project.coder.user.email}</div> */}
                                         </div>
-                                        <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink>
-                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
+                                        <button className='coder-profile-button'><NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink></button>
+                                        <button className='delete-project-button'><NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink></button>
                                         {/* <EditProjectForm /> */}
                                     </>
                                 )
