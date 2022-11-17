@@ -35,13 +35,14 @@ function NewProjectConfirmation() {
     // let endDate = new Date(confirmProject.end_date).toLocaleDateString()
     // let projectDays = to_integer(endDate)- to_integer(startDate) 
     // console.log("date converted to string is", startDate)
-
+    if(!allProjects) return null
+    if(!confirmProject) return null
     let startDate = new Date(confirmProject.start_date).getTime()
     let endDate = new Date(confirmProject.end_date).getTime()
     let projectDays = ((endDate)-(startDate))/(1000 * 60 * 60 * 24)
     console.log("date converted to string is", projectDays)
     
-    if(!allProjects) return null
+  
 
     const handleSubmit = () => {
         history.push("/")
