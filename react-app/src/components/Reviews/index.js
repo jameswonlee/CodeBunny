@@ -30,12 +30,12 @@ const Reviews = ({coderId}) => {
             }
             let reviewToDelete;
             // reviewToDelete = dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews())).then(() => history.push(`/coders/${coderId}`))
-            reviewToDelete = dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews()))
+            reviewToDelete = await dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews()))
         // } else {
         //     alert("You do not have permission to Delete this review")
         // }
     }
-
+    console.log("reviews", reviews)
     return (
         <div className="reviews-container">
             <h2 className='review-header'>Reviews</h2>
