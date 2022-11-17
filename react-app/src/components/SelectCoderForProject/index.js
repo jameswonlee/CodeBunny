@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
 import {createproject, getprojects} from "../../store/projects"
@@ -21,7 +21,7 @@ function SelectCoderForProject() {
     if(!allCoders) return null
 
 
-    console.log("ALL CODERS IS", allCoders)
+    // console.log("ALL CODERS IS", allCoders)
 
     const handleCoderSubmit = (coderId) => {
 
@@ -33,28 +33,29 @@ function SelectCoderForProject() {
     }
 
     return (
-        <div>
-        <h1>Select your coder:</h1>
+        <>
             <div>
-                {allCoders.map(coder => {
-                    return (
+            <h1>Select your coder:</h1>
+                <div>
+                    {allCoders.map(coder => {
+                        return (
 
-                    <div>
+                        // <div>
 
-                    <div className="coder-shortbio-container">
+                        <div className="coder-shortbio-container">
 
-                        <div>{coder.user.first_name} {coder.user.last_name}</div>
-                        <div>Bio: {coder.bio}</div>
-                        <div>Experience: {coder.experience}</div>
-                        <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
-                        <button onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
-                    </div>
-                    )
-                })}
+                            <div>{coder.user.first_name} {coder.user.last_name}</div>
+                            <div>Bio: {coder.bio}</div>
+                            <div>Experience: {coder.experience}</div>
+                            <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+                            <button onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
+                        </div>
+                        )
+                    })}
 
-        </div>
-        </div>
-
+            </div>
+            </div>
+        </>
     )
 
 }

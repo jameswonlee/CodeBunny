@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { loadOneCoder, loadAllCoders, deleteCoder } from '../../store/coders';
 import { loadAllReviews } from '../../store/reviews';
 import Reviews from '../Reviews';
@@ -25,17 +25,17 @@ const CoderInfo = () => {
 
     // console.log("this is UserId", sessionUser.id)
     const CodersUserId = useSelector(state => state.coders.user_id)
-    const reviewsData = useSelector(state => state.reviews);
+    // const reviewsData = useSelector(state => state.reviews);
     const reviewInfo = useSelector(state => state.reviews)
     const reviewInfoArray = Object.values(reviewInfo)
     const reviewsByUserId = reviewInfoArray.filter(item => item.user_id === sessionUserId)
     const reviewsByCoderId = reviewsByUserId.filter(element => element.coder_id === +coderId)
     // const reviewOfUser = reviewsByUserId.find(element => element.userId === sessionUserId)
     // console.log("this is codersUserID", CodersUserId)
-    console.log("this si reviewsByCoderId", reviewsByCoderId)
-    console.log("this is reviewInfo", reviewInfo)
+    // console.log("this si reviewsByCoderId", reviewsByCoderId)
+    // console.log("this is reviewInfo", reviewInfo)
     // console.log("this is the Object values of review Info", reviewInfoArray)
-    console.log("this is reviewsByUserId", reviewsByUserId)
+    // console.log("this is reviewsByUserId", reviewsByUserId)
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
@@ -118,6 +118,7 @@ const CoderInfo = () => {
                             width={300}
                             height={300}
                             src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name) ? "women" : "men"}/${coder.id}.jpg`}
+                            alt="random portrait"
                             className="user-image">
                         </img>
                     </div>

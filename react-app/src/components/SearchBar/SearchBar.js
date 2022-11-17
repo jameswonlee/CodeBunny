@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { loadAllCoders } from '../../store/coders';
 import "./SearchBar.css"
 
@@ -15,7 +15,7 @@ export default function Search() {
 
     const sessionUser = useSelector(state => state.session.user);
     const codersArray = useSelector(state => Object.values(state.coders))
-    console.log("this is codersArray", codersArray)
+    // console.log("this is codersArray", codersArray)
 
     const [search, setSearch] = useState('')
 
@@ -25,12 +25,12 @@ if (!codersArray){
 }
     const getCoderSkills = (coder) => {
         let skillArray = []
-        console.log("this is codersArray skills", coder.skills)
+        // console.log("this is codersArray skills", coder.skills)
             let coderSkills = coder.skills
             for (let skill of coderSkills){
                 let skillName = skill.skill_name.toUpperCase()
 
-                console.log("this is skill_name", skillName)
+                // console.log("this is skill_name", skillName)
                 skillArray.push(skillName)
             }
                 return skillArray
@@ -47,7 +47,7 @@ if (!codersArray){
     }
 
     const filteredCoders = getFilteredItems(search, codersArray)
-    console.log("this is filteredCoders", filteredCoders)
+    // console.log("this is filteredCoders", filteredCoders)
     return (
 
         <div className="search-bar-container">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
+import { useHistory} from "react-router-dom";
+import { useDispatch} from "react-redux"
 import { createNewCoder, loadAllCoders } from "../../store/coders"
 
 import "./CreateCoderForm.css";
@@ -8,7 +8,7 @@ import "./CreateCoderForm.css";
 function CoderForm() {
   const history = useHistory()
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.session.user)
+  // const currentUser = useSelector(state => state.session.user)
 
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')

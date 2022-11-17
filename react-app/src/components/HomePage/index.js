@@ -1,5 +1,5 @@
 import { useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import "./HomePage.css"
 // import groupcoding from './Images/groupcoding.png'
 import whitebackground from './Images/whitebackground.png'
@@ -26,7 +26,7 @@ const GetAllSpots = () => {
     return (
         <div className="home-container">
             <div className= "image-one-container">
-                <img className= "group-coding" src= {whitebackground} ></img>
+                <img className= "group-coding" src= {whitebackground} alt="coding background" ></img>
             </div>
             <div><SearchBar/></div>
         </div>

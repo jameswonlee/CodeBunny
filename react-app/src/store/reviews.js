@@ -85,7 +85,7 @@ export const createNewReview = (coderId, payload) => async (dispatch) => {
 
     if (response.ok) {
         const newReview = await response.json();
-        console.log("this is newReview in teh thunk", newReview)
+        // console.log("this is newReview in teh thunk", newReview)
         dispatch(createReview(newReview))
     }
 };

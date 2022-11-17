@@ -46,8 +46,8 @@ function ProjectForm() {
 
     const errors = [];
 
-    console.log("the start date is ", start_date)
-    console.log("end date is ", end_date)
+    // console.log("the start date is ", start_date)
+    // console.log("end date is ", end_date)
     if (!name.length) errors.push("Please choose a name for your project");
     if (!description.length) errors.push("Please provide a description of your project");
     if (!skills.length) errors.push("Please select the skills required for your project");
@@ -56,7 +56,7 @@ function ProjectForm() {
     if (new Date(end_date).getTime() < new Date(start_date).getTime()) errors.push("Please select valid start and end dates");
     if (new Date(start_date).getTime() < new Date().getTime()) errors.push("Invalid start date. Coder must be given at least 24 hour notice prior to start date");
     if (new Date(end_date).getTime() < new Date().getTime()) errors.push("Please select an end date in the future");
-    
+
 
     setValidationErrors(errors)
 

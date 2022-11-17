@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { loadAllCoders } from '../../store/coders';
 
 const SearchResultsPage = () => {
@@ -19,7 +19,7 @@ if (!allCoders) return null
 // FILTER QUERY:
 // let filteredCoders = allCoders.filter(coder=> coder.skills.includes(query) === True)
 
-console.log("ALL CODERS IS", allCoders)
+// console.log("ALL CODERS IS", allCoders)
 
 
 
