@@ -1,6 +1,8 @@
 // store > projects.js
 
-import { csrfFetch } from "./csrf"
+import {
+    csrfFetch
+} from "./csrf"
 
 //action types
 
@@ -33,15 +35,13 @@ const deleteAction = projectId => ({
 //thunks
 
 export const deleteproject = (projectId) => async dispatch => {
-    console.log("IS IT IN THUNK", projectId)
-    const response = await csrfFetch(`/api/projects/${projectId}/`, {
+    const response = await csrfFetch(`/api/projects/${projectId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        console.log("IS RESPONSE OK")
         dispatch(deleteAction(projectId))
         return response
     }
@@ -64,20 +64,19 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
         console.log("The new project is ", newproject)
         return newproject
 
-    }
-    else if(coderId && projectId) {
+    } else if (coderId && projectId) {
 
         console.log("did this reach 2nd thunk create proj")
         let coderInfoResponse
         let project
 
-            coderInfoResponse = await csrfFetch(`/api/projects/new-2/${projectId}/${coderId}/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(coderId)
-            })
+        coderInfoResponse = await csrfFetch(`/api/projects/new-2/${projectId}/${coderId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(coderId)
+        })
 
 
 
@@ -92,8 +91,8 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
 
 export const updateproject = (payload) => async dispatch => {
 
-    const response = await csrfFetch(`/api/projects/${payload.id}/`, {
-        method: 'PUT',
+    const response = await csrfFetch(`/api/projects/${payload.id}`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -122,9 +121,11 @@ const projectReducer = (state = initialState, action) => {
 
     let newState = {}
 
-    switch(action.type) {
+    switch (action.type) {
         case READ:
-            newState = {...state}
+            newState = {
+                ...state
+            }
 
             action.payload.Projects.forEach((project) => {
                 newState[project.id] = project

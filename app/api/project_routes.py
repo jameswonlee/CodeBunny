@@ -96,7 +96,7 @@ def to_integer(date_time):
 #Create project part 1 - only description, skills, start date, end date
 
 @project_bp.route("/new-1/", methods = ["POST"]) # CODER ID = NONE
-#@login_required
+@login_required
 def create_project_part1():
     create_project_form = CreateProjectForm()
     create_project_form['csrf_token'].data = request.cookies['csrf_token']
@@ -110,7 +110,7 @@ def create_project_part1():
                               start_date=data["start_date"],
                               end_date=data["end_date"],
                               user_id = current_user.id,
-                              coder_id = 0)
+                              coder_id = 1) #changed this to 1 from 0
 
 
         db.session.add(new_project)
