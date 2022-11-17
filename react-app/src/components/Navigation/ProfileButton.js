@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
 
   const createProject = (e) => {
     e.preventDefault();
-    history.push('/createProject');
+    history.push('/project/new');
   };
 
 let loggedInOrNot;
