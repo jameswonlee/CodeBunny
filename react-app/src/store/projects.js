@@ -33,13 +33,15 @@ const deleteAction = projectId => ({
 //thunks
 
 export const deleteproject = (projectId) => async dispatch => {
-    const response = await csrfFetch(`/api/projects/${projectId}`, {
+    console.log("IS IT IN THUNK", projectId)
+    const response = await csrfFetch(`/api/projects/${projectId}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
+        console.log("IS RESPONSE OK")
         dispatch(deleteAction(projectId))
         return response
     }
