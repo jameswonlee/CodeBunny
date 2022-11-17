@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import codebunny from './Images/codebunny.png'
+import cb from './Images/cb.png'
 
 
 
@@ -43,7 +43,7 @@ function Navigation({ isLoaded }){
     <div className="navbar-main">
       <div className="navbar-inner-container">
     <div className= "Home-Container">
-        <NavLink exact to="/"><img className='logo' src={codebunny}/></NavLink>
+        <NavLink exact to="/"><img className='logo' src={cb}/></NavLink>
     </div>
 
     <div className="Right-Side-Container">
