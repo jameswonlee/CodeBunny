@@ -4,7 +4,7 @@ import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { loadAllReviews, deleteReview } from '../../store/reviews';
 
 
-const Reviews = ({coderId}) => {
+const Reviews = ({ coderId }) => {
     const dispatch = useDispatch();
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
@@ -21,16 +21,18 @@ const Reviews = ({coderId}) => {
     if (sessionUser) {
         sessionUserId = sessionUser.id
     }
-    console.log("this is sessionUserId", sessionUserId)
+
     const deleteReviewHandler = async (id) => {
         // e.preventDefault()
         // if (sessionUser.id === userId){
+
             const payload = {
                 reviewId: id
             }
             let reviewToDelete;
             // reviewToDelete = dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews())).then(() => history.push(`/coders/${coderId}`))
             reviewToDelete = await dispatch(deleteReview(payload)).then(()=>dispatch(loadAllReviews()))
+
         // } else {
         //     alert("You do not have permission to Delete this review")
         // }
@@ -45,7 +47,7 @@ const Reviews = ({coderId}) => {
                         <img
                             width={50}
                             height={50}
-                            src={`https://randomuser.me/api/portraits/${boyNames.includes(review?.first_name) ? "women" : "men"}/${index + 1}.jpg`}
+                            src={`https://randomuser.me/api/portraits/${boyNames.includes(review?.first_name) ? "women" : "men"}/${index + 50}.jpg`}
                             className="user-image">
                         </img>
                         <span className="review-user-name">{review.user?.first_name}</span>
@@ -53,10 +55,7 @@ const Reviews = ({coderId}) => {
                     <div className="review">
                         {review.review}
                     </div>
-
-                            {sessionUser && sessionUserId === review.user_id ? <button className="Review-Delete-Button" onClick= {() => deleteReviewHandler(review.id)}>DELETE THIS Review</button>: null}
-
-                         {/* <button className="Review-Delete-Button" onClick= {() => deleteReviewHandler(review.id)}>DELETE THIS Review</button> */}
+                    {sessionUser && sessionUserId === review.user_id && <button className="Review-Delete-Button" onClick={() => deleteReviewHandler(review.id)}>Delete Your Review</button>}
                 </div>
             ))}
             </div>

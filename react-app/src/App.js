@@ -61,13 +61,11 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/coder/new">
-
             <CreateCoderForm/>
           </Route>
           <Route path="/review/:coderId/new">
             <CreateReviewForm/>
           </Route>
-
         <Route path='/listofusers' exact={true} >
           <UsersList />
         </Route>
@@ -83,7 +81,6 @@ function App() {
         <Route path = "/projects/new/:projectId">
             <SelectCoderForProject/>
         </Route>
-
         < Route path = "/current/user/projects" >
           <UserProjects />
         </Route>
@@ -93,7 +90,6 @@ function App() {
         < Route path = "/projects/:projectId/delete" >
           <DeleteProjectForm />
         </Route>
-
           <Route path='/coder/:coderId/edit'>
             <UpdateCoderForm/>
           </Route>
@@ -106,7 +102,6 @@ function App() {
           <Route>
             <NotFound/>
           </Route>
-
       </Switch>
     </>
     // </BrowserRouter>
