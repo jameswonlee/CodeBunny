@@ -4,4 +4,5 @@
 
 li, a, button, div{
     font-family: "Inter";
+    text-decoration: none;
 }

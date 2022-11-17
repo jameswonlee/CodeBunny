@@ -55,9 +55,7 @@ const Reviews = ({coderId}) => {
                         {review.review}
                     </div>
 
-                            {sessionUser && sessionUserId === review.user_id ? <button className="Review-Delete-Button" onClick= {() => deleteReviewHandler(review.id)}>Delete My Review</button>: null}
-
-                         {/* <button className="Review-Delete-Button" onClick= {() => deleteReviewHandler(review.id)}>DELETE THIS Review</button> */}
+                     {sessionUser && sessionUserId === review.user_id ? <button className="Review-Delete-Button" onClick= {() => deleteReviewHandler(review.id)}>Delete My Review</button>: null}
                 </div>
             </>
             ))}
