@@ -192,7 +192,7 @@ function UpdateCoderForm() {
               // disable={setValidationErrors.length > 0 ? true : false}
               disabled={!!validationErrors.length}
             >
-              Become a coder!
+              Edit your profile!
             </button>
           </div>
         </form>

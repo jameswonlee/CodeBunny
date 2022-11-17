@@ -1,4 +1,3 @@
-
 import { csrfFetch } from "./csrf"
 
 /* ***************************** ACTION TYPES ******************************** */
@@ -107,7 +106,7 @@ export const deleteReview = (payload) => async dispatch => {
 
 /* ******************************** REDUCER *********************************** */
 
-const initialState = { reviews: {} }
+const initialState = { }
 
 const reviews = (state = initialState, action) => {
     let newState = {}
@@ -132,7 +131,7 @@ const reviews = (state = initialState, action) => {
         case REMOVE_REVIEW:
             newState = { ...state }
             delete newState[action.payload]
-            return newState
+            return {...newState}
 
 
         default:
