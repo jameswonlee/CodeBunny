@@ -30,8 +30,6 @@ if (!allProjects) {
 
 
 let userProjects = allProjects.filter(project => project.user_id === user.id)
-
-
 let completedProjects = userProjects.filter(project=> project.completed === true)
 let upcomingProjects = userProjects.filter(project => project.completed === false)
 
@@ -39,7 +37,7 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
 
  return (
 <>
-         <h1 className='user-projects-header'>{user.first_name}'s Projects & Jobs</h1>
+         <h1 className='user-projects-header'>{user.first_name}'s Projects</h1>
             <div className='my-projects-page-container'>
                 <div className='projects-container'>
                     <div className='upcoming-container'>
