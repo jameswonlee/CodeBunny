@@ -38,7 +38,7 @@ function CoderForm() {
     e.preventDefault()
     const errors = []
 
-    if (!bio) errors.push("Please provide your bio");
+    if (!bio) errors.push("Please provide a bio");
     if (!experience) errors.push("Please tell us about your prior experience");
     if (!daily_rate) errors.push("Please set your daily rate");
     if (!skills.length) errors.push("Please select your areas of expertise");
