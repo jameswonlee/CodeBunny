@@ -94,7 +94,6 @@ function App() {
           <Route path = "/projects/confirmation/:projectId">
             <NewProjectConfirmation/>
           </Route>
-
       </Switch>
     </>
     // </BrowserRouter>
