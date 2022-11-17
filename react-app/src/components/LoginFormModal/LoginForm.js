@@ -10,7 +10,7 @@ function LoginForm() {
   const [email, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-console.log("this is password",password)
+// console.log("this is password",password)
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);

@@ -30,6 +30,8 @@ const DeleteProjectForm = () => {
 
     }
 
+  
+
     //HANDLE CANCEL BUTTON CLICK EVENT
     const handleCancelClick = (e) => {
         e.preventDefault();

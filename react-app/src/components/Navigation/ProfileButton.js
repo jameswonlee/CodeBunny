@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Modal } from '../../context/Modal'
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+// import LoginFormModal from '../LoginFormModal';
+// import SignupFormModal from '../SignupFormModal';
 import SignupForm from '../SignupFormModal/SignupForm'
 import LoginForm from '../LoginFormModal/LoginForm'
 
@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
-    console.log("made it to profilebutton logout handler")
+    // console.log("made it to profilebutton logout handler")
     dispatch(sessionActions.logout())
     history.push("/");
   };
@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
 
   const createProject = (e) => {
     e.preventDefault();
-    history.push('/createProject');
+    history.push('/project/new');
   };
 
 let loggedInOrNot;

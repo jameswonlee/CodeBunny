@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
-import { editCoder, loadOneCoder, loadAllCoders } from '../../store/coders'
+import { editCoder,loadAllCoders } from '../../store/coders'
 // INTERESTEDING THAT LOADONECODER DOESNT Worker, BUT I CAN WORK WITH LOAD ALL CODESR
 import "./UpdateCoderForm.css"
 
@@ -192,7 +192,7 @@ function UpdateCoderForm() {
               // disable={setValidationErrors.length > 0 ? true : false}
               disabled={!!validationErrors.length}
             >
-              Become a coder!
+              Edit your profile!
             </button>
           </div>
         </form>

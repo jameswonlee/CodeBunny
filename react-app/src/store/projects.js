@@ -61,12 +61,12 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
         })
 
         newproject = await response.json()
-        console.log("The new project is ", newproject)
+        // console.log("The new project is ", newproject)
         return newproject
 
     } else if (coderId && projectId) {
 
-        console.log("did this reach 2nd thunk create proj")
+        // console.log("did this reach 2nd thunk create proj")
         let coderInfoResponse
         let project
 
@@ -91,8 +91,8 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
 
 export const updateproject = (payload) => async dispatch => {
 
-    const response = await csrfFetch(`/api/projects/${payload.id}`, {
-        method: 'POST',
+    const response = await csrfFetch(`/api/projects/${payload.projectId}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
