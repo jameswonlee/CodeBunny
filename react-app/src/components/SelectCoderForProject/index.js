@@ -4,6 +4,7 @@ import {useDispatch, useSelector } from "react-redux"
 import {createproject, getprojects} from "../../store/projects"
 import { loadAllCoders } from "../../store/coders";
 import { useParams } from 'react-router-dom';
+import "./SelectCoderForProject.css"
 
 function SelectCoderForProject() {
     const history = useHistory()
@@ -24,7 +25,7 @@ function SelectCoderForProject() {
 
     if(!allCoders) return null
     if(!allProjects) return null
-    
+
 
     // console.log("All projects is", allProjects)
     let currProject = allProjects.filter(project => project.id === +projectId)[0]
@@ -71,7 +72,7 @@ function SelectCoderForProject() {
             skillarr.push(allCoders[i].skills[j].skill_name)
            allcodersskillsobj[allCoders[i].id] = skillarr
         }
-        
+
     }
 
     console.log("allcokerskillsobj", allcodersskillsobj)
@@ -81,7 +82,7 @@ function SelectCoderForProject() {
 
     let validCoderIds = []
 
-    //checks to see if an array is another array 
+    //checks to see if an array is another array
 
     for(let i = 0; i<entries.length; i++){
         const containsAll = neededSkills.sort().every(element => {
@@ -89,7 +90,7 @@ function SelectCoderForProject() {
         })
 
         if(containsAll) validCoderIds.push(parseInt(entries[i][0]))
-        
+
 
     }
 
@@ -122,7 +123,8 @@ function SelectCoderForProject() {
     return (
 
         <div className="select-coder-page-container">
-        <h1>Select your coder:</h1>
+        <h1 classname='select-a-coder-title'>Select A Coder</h1>
+
             <div className="coder-cards-container">
                 {validCoders.map(coder => {
                     return (
