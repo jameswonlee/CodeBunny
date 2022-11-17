@@ -12,17 +12,30 @@ const CoderInfo = () => {
     const dispatch = useDispatch();
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
-    coderId = parseInt(coderId)
+
+
     const sessionUser = useSelector(state => state.session.user);
+
+    coderId = parseInt(coderId)
+    let sessionUserId
+
+    if (sessionUser) {
+        sessionUserId = sessionUser.id
+    }
+
     // console.log("this is UserId", sessionUser.id)
     const CodersUserId = useSelector(state => state.coders.user_id)
-    // const reviewInfo = useSelector(state => state.reviews)
-    // const reviewInfoArray = Object.values(reviewInfo)
-    // const reviewsByUserId = reviewInfoArray.filter(item => item.coder_id === +coderId)
+    const reviewsData = useSelector(state => state.reviews);
+    const reviewInfo = useSelector(state => state.reviews)
+    const reviewInfoArray = Object.values(reviewInfo)
+    const reviewsByUserId = reviewInfoArray.filter(item => item.user_id === sessionUserId)
+    const reviewsByCoderId = reviewsByUserId.filter(element => element.coder_id === +coderId)
     // const reviewOfUser = reviewsByUserId.find(element => element.userId === sessionUserId)
     // console.log("this is codersUserID", CodersUserId)
-    // console.log("this is reviewInfo", reviewInfo)
+    console.log("this si reviewsByCoderId", reviewsByCoderId)
+    console.log("this is reviewInfo", reviewInfo)
     // console.log("this is the Object values of review Info", reviewInfoArray)
+    console.log("this is reviewsByUserId", reviewsByUserId)
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
@@ -30,16 +43,14 @@ const CoderInfo = () => {
     }, [dispatch, coderId])
 
     let girlNames = ['Marnie']
-    let sessionUserId
-    if (sessionUser) {
-        sessionUserId = sessionUser.id
-    }
+
 
     const history = useHistory()
     let coder = useSelector(state => state.coders)
 
 
     console.log("CODER IS", coder)
+
 
     if (!coder) {
         return null
@@ -49,10 +60,7 @@ const CoderInfo = () => {
         return null
     }
 
-    // let sessionUserId
-    // if (sessionUser) {
-    //     sessionUserId = sessionUser.id
-    // }
+
     const deleteHandler = async (e) => {
 
         const payload = {
@@ -93,7 +101,7 @@ const CoderInfo = () => {
                     <div>
 
                     {/* <NavLink to={`/review/${coderId}/new`}>
-                                    {sessionUserId  && sessionUserId  !== spotInfoOwnerId && !reviewOfUser ? seeCreateReviewButton : null}
+                                    {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
                                     </NavLink> */}
 
                         {deleteButton}
@@ -101,9 +109,10 @@ const CoderInfo = () => {
                     </div>
 
                     <NavLink to={`/review/${coderId}/new`}>
+                    {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
                          {seeCreateReviewButton}
                                     </NavLink>
-                    
+
                     <div>
                         <img
                             width={300}
@@ -140,7 +149,7 @@ const CoderInfo = () => {
                 </div>
 
                 <div>
-                    <Reviews />
+                    <Reviews coderId={coderId}/>
                 </div>
             </div>
 
