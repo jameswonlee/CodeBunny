@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux"
 import {createproject, getprojects} from "../../store/projects"
@@ -105,7 +105,7 @@ function SelectCoderForProject() {
 
     console.log("coder Skillsssss", coderSkillss)
 
-    console.log("ALL CODERS IS", allCoders)
+    // console.log("ALL CODERS IS", allCoders)
 
 
 
@@ -119,9 +119,9 @@ function SelectCoderForProject() {
     }
 
     return (
-        <div>
-        <h1>Select your coder:</h1>
+        <>
             <div>
+
                 {validCoders.map(coder => {
                     return (
 
@@ -141,6 +141,7 @@ function SelectCoderForProject() {
 
         </div>
         </div>
+
 
     )
 

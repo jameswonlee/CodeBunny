@@ -61,12 +61,12 @@ export const createproject = (projectData, coderId, projectId) => async dispatch
         })
 
         newproject = await response.json()
-        console.log("The new project is ", newproject)
+        // console.log("The new project is ", newproject)
         return newproject
 
     } else if (coderId && projectId) {
 
-        console.log("did this reach 2nd thunk create proj")
+        // console.log("did this reach 2nd thunk create proj")
         let coderInfoResponse
         let project
 

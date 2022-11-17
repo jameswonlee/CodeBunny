@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import {createNewReview } from "../../store/reviews"
 import {loadAllReviews} from "../../store/reviews"
 import { useParams } from "react-router-dom"
@@ -12,7 +12,7 @@ function ReviewForm() {
   const [review, setReview] = useState('')
   const [rating, setRating] = useState('')
   const { coderId } = useParams()
-console.log("this is coderId", coderId)
+// console.log("this is coderId", coderId)
   const [validationErrors, setValidationErrors] = useState([])
 
   useEffect(() => {
