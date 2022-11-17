@@ -57,7 +57,7 @@ h1 {
 }
 
 .review-card{
-    border: 2px solid green;
+    border: 2px solid rgb(3, 85, 3);
     padding: 5%;
     margin:5%
 }
@@ -68,4 +68,22 @@ h1 {
         text-decoration: underline;
         text-align: center;
 
+}
+
+
+.Create-Review-Button {
+    background-color: rgb(3, 85, 3);
+    border: 1px solid black;
+    color:white;
+    display: flex;
+    align-self:center;
+    justify-self: center;
+    padding:3%;
+    margin: 3%
+}
+
+.create-button-container,
+.Edit-Delete-Button {
+    display: flex;
+    justify-content: center;
 }
