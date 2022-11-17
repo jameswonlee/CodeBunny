@@ -42,6 +42,7 @@ const Reviews = ({ coderId }) => {
         <div className="reviews-container">
             <h2 className='review-header'>Reviews</h2>
             <div className="reviews">{reviews?.map((review, index) => (
+            <>
                 <div key={review.id} className="review-card">
                     <div className="user-photo">
                         <img
@@ -56,11 +57,15 @@ const Reviews = ({ coderId }) => {
                     <div className="review">
                         {review.review}
                     </div>
-                    {sessionUser && sessionUserId === review.user_id && <button className="Review-Delete-Button" onClick={() => deleteReviewHandler(review.id)}>Delete Your Review</button>}
+
+                     {sessionUser && sessionUserId === review.user_id ? <button className="Review-Delete-Button" onClick= {() => deleteReviewHandler(review.id)}>Delete My Review</button>: null}
+
                 </div>
+            </>
             ))}
             </div>
         </div>
+
     )
 }
 

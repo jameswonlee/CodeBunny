@@ -74,8 +74,8 @@ const CoderInfo = () => {
     let deleteButton;
     if (sessionUser && sessionUser.id === CodersUserId) {
         deleteButton = (
-            <div className="Delete-spot-button">
-                <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>DELETE Coder Profile</button>
+            < div className = "Edit-Delete-Button-container" >
+                <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>Remove My Profile</button>
             </div>
         )
     } else {
@@ -86,8 +86,8 @@ const CoderInfo = () => {
     }
     let seeCreateReviewButton;
     seeCreateReviewButton = (
-        <div>
-            <button className="Create-Review-Button" type="submit">Create a New Review</button>
+        <div className='create-button-container'>
+            <button className="Create-Review-Button" type="submit">Leave A Review!</button>
         </div>
     )
 
@@ -98,20 +98,6 @@ const CoderInfo = () => {
                     <div className='coder-header-name-container'>
                         <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
                     </div>
-                    <div>
-
-                    {/* <NavLink to={`/review/${coderId}/new`}>
-                                    {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
-                                    </NavLink> */}
-
-                        {deleteButton}
-
-                    </div>
-
-                    <NavLink to={`/review/${coderId}/new`}>
-                    {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
-                         {seeCreateReviewButton}
-                                    </NavLink>
 
                     <div>
                         <img
@@ -146,12 +132,28 @@ const CoderInfo = () => {
                             )
                         })}
                     </div>
+                    <NavLink to={`/review/${coderId}/new`}>
+                    {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
+                         {seeCreateReviewButton}
+                    </NavLink>
+
+                     <div>
+
+                    {/* <NavLink to={`/review/${coderId}/new`}>
+                                    {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
+                                    </NavLink> */}
+
+                        {deleteButton}
+
+                </div>
 
                 </div>
 
                 <div>
                     <Reviews coderId={coderId}/>
                 </div>
+
+
             </div>
 
         </>

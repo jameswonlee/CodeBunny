@@ -57,15 +57,44 @@ h1 {
 }
 
 .review-card{
-    border: 2px solid green;
+    border: 2px solid rgb(3, 85, 3);
     padding: 5%;
-    margin:5%
+    margin:5%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .review-header {
-        margin-top: 10%;
+        margin: 5%;
         padding: 5%;
-        text-decoration: underline;
+        border-bottom: 2px solid black;
         text-align: center;
+        font-size: 35px;
 
+}
+
+.Review-Delete-Button{
+    display: flex;
+
+    align-self: center;
+
+}
+
+.Create-Review-Button,
+.Edit-Delete-Button,
+.Review-Delete-Button {
+    background-color: rgb(3, 85, 3);
+    border: 1px solid black;
+    color:white;
+    display: flex;
+    align-self:center;
+    justify-self: center;
+    padding:3%;
+    margin: 3%
+}
+
+.create-button-container, .Edit-Delete-Button-container {
+    display: flex;
+    justify-content: center;
 }
