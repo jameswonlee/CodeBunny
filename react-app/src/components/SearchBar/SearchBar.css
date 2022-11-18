@@ -1,17 +1,22 @@
 .search-bar-container{
     display: flex;
-    /* border-color: rgb(255, 77, 0);
+    /* border-color: rgb(255, 0, 81);
     border-style: solid; */
-
+}
+.whole-container{
+    /* border-color: rgb(255, 0, 81);
+    border-style: solid; */
+    width: 100vh;
+    height: 100vh;
+    /* flex-wrap: wrap; */
 }
 
-
 .search-bar{
-margin: 5%;
+margin-top: 5%;
+margin-bottom: 5%;
 display: flex;
 position: relative;
-flex-direction: column;
-justify-content: space-center;
+flex-direction: row;
 align-items: center;
 /* border-color: rgb(0, 255, 76);
 border-style: solid; */
@@ -26,39 +31,81 @@ align-items: center;
 justify-content: center;
 background-color: white;
 cursor: pointer;
+/* border-color: rgb(255, 0, 111);
+border-style: solid; */
 }
 
 .search-input{
-    margin:10%;
+    /* margin:10%; */
     width: 500px;
     height: 50px;
     /* border: hidden; */
     border-color: black;
     font-size:larger;
+    /* border-color: rgb(72, 0, 255);
+border-style: solid; */
 }
 
 .search-results-cards{
     display:flex;
     flex-direction: column;
-    z-index:3;
+    position:absolute;
+    z-index:2;
     /* border: 4px solid green; */
-    align-items: center;
+    align-items: flex-start;
     color:white;
 
 }
 .coder-shortbio-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content:center;
     border: 2px solid black;
-    margin: 4%;
-    padding: 4%;
+    margin: 2%;
+    padding: 2%;
     background-color: rgb(1, 61, 1);
     color:white;
     width: 30%
 
-
-
 }
 
 .search-header{
-    background-color: white;
-    padding:5%;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.search-results-button-link{
+    color:black;
+
+}
+
+.search-results-button{
+    margin: 5%;
+    padding: 3%;
+    width:auto
+
+}
+
+.coder-details-title{
+    font-weight:bold;
+    margin: 3% 0%;
+    padding: 4%;
+}
+
+.coder-details{
+    margin:3%
+}
+
+.coder-results-name{
+text-align: center;
+padding: 4%;
+border-bottom: 2px solid white;
+}
+
+.button-profile{
+    background-color: grey;
+
 }

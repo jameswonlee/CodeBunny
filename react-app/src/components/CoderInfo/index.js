@@ -12,11 +12,11 @@ const CoderInfo = () => {
     const dispatch = useDispatch();
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
-
+    coderId = parseInt(coderId)
 
     const sessionUser = useSelector(state => state.session.user);
 
-    coderId = parseInt(coderId)
+
     let sessionUserId
 
     if (sessionUser) {
@@ -39,15 +39,16 @@ const CoderInfo = () => {
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
-        dispatch(loadOneCoder(coderId))
+        // dispatch(loadOneCoder(coderId))
     }, [dispatch, coderId])
 
     let girlNames = ['Marnie']
 
 
     const history = useHistory()
-    let coder = useSelector(state => state.coders)
-
+    let allCoders = useSelector(state => Object.values(state.coders))
+    let coder = allCoders.filter(coder => coder.id === coderId)
+    coder = coder[0]
 
     console.log("CODER IS", coder)
 
@@ -67,7 +68,7 @@ const CoderInfo = () => {
             id: coderId
         }
         let deletedCoder;
-        deletedCoder = dispatch(deleteCoder(payload)).then(() => history.push("/")
+        deletedCoder = dispatch(deleteCoder(payload)).then(() => dispatch(loadAllCoders())).then(() => history.push("/")
         )
     }
 
@@ -90,6 +91,27 @@ const CoderInfo = () => {
             <button className="Create-Review-Button" type="submit">Leave A Review!</button>
         </div>
     )
+
+    // let seeCreateUpdateButton;
+    // seeCreateUpdateButton = (
+    //     <div className='create-button-container'>
+    //         <button className="Create-Review-Button" type="submit">Edit Your Profile!</button>
+    //     </div>
+    // )
+
+    let editButton;
+    if (sessionUser && sessionUser.id === CodersUserId) {
+        editButton = (
+            < div className = "Edit-Delete-Button-container" >
+                <button className="Edit-Delete-Button" onClick={() => history.push(`/coder/${coderId}/edit`)}>Edit My Profile</button>
+            </div>
+        )
+    } else {
+        editButton = (
+            <>
+            </>
+        )
+    }
 
     return (
         <>
@@ -142,7 +164,7 @@ const CoderInfo = () => {
                     {/* <NavLink to={`/review/${coderId}/new`}>
                                     {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
                                     </NavLink> */}
-
+                        {editButton}
                         {deleteButton}
 
                 </div>
@@ -160,6 +182,7 @@ const CoderInfo = () => {
 
     )
 }
+
 
 
 export default CoderInfo;

@@ -46,8 +46,9 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                             {upcomingProjects.length > 0 ? upcomingProjects.map(project=>{
 
                                 return(
-                                    <>
-                                        <div>
+                                <>
+                                    <div className='project-card'>
+                                        <div className='project-details-container'>
                                             <div className='detail-heading'>Project Name:</div><div>{project.name}</div>
                                             <div className = 'detail-heading'>Start-Date:</div><div>{project.start_date}</div >
                                             <div className='detail-heading'>End-Date:</div><div>{project.end_date}</div>
@@ -56,10 +57,13 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                             {/* <div className='detail-heading'>Coder: </div><div>{project.coder.user.first_name} {project.coder.user.last_name}</div>
                                             <div className = 'detail-heading' > Coder's Contact Info</div><div>{project.coder.user.email}</div> */}
                                         </div>
-                                        <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink>
-                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
-                                        {/* <EditProjectForm /> */}
-                                    </>
+                                        <div className='projects-buttons-container'>
+                                        <button className='delete-project-button'><NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink></button>
+                                        <button className='edit-delete-button'><NavLink to={`/projects/${project.id}/edit`}>Edit</NavLink></button>
+                                        <button className='coder-profile-button'><NavLink to={`/coders/${project.coder_id}`}>See More Info About Your Coder</NavLink></button>
+                                        </div>
+                                    </div>
+                                </>
                                 )
                             }) : (<h2>No Upcoming Projects!</h2>)}
                         </div>
@@ -71,16 +75,20 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
 
                             return(
                                 <>
-                                    <div>
+                                    <div className='project-card'>
+                                        <div className='project-details-container'>
                                         <div>Project Name: {project.name}</div>
                                         <div>Start-Date:{project.start_date}</div>
                                         <div>End-Date: {project.end_date}</div>
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
-                                        {/* <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
-                                        <div>Coder's Contact Info: {project.coder.user.email}</div> */}
-                                        <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink>
-                                        <NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink>
                                     </div>
+                                        <div className='projects-buttons-container'>
+                                       <button className='coder-profile-button'> <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink></button>
+                                       <button className='edit-delete-button'><NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink></button>
+                                        </div>
+
+                                    </div>
+
                                 </>
                             )
                         }) : (<h2>You Haven't Completed Any Projects Yet</h2>) }

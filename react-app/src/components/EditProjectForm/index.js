@@ -1,76 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useHistory, useParams } from 'react-router-dom';
-import {
-    updateproject, getprojects
-} from '../../store/projects'
+import { updateproject, getprojects } from '../../store/projects'
 import { loadAllCoders } from '../../store/coders'
+
+
 
 function EditProjectForm() {
     let { projectId } = useParams()
-    projectId = parseInt(projectId)
+    projectId = parseInt(projectId, 10)
     const dispatch = useDispatch();
     const history = useHistory();
 
-    useEffect(() => {
-        dispatch(getprojects())
-    }, [])
+    let allProjects = useSelector(state => Object.values(state.projects));
+    let currProject = allProjects.filter(project => project.id === projectId);
 
-
-    let allProjects = useSelector(state => console.log('state', state))
-    // let currProject = allProjects.filter(project => project.id === projectId)
-
-    // useEffect(() => {
-        // currProject.skills.map(({skill_name}) => {
-        //     return skill_name
-        // })
-    // })
-
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [skills, setSkills] = useState()
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [start_date, setStartDate] = useState("")
     const [end_date, setEndDate] = useState("")
-    const [skills, setSkills] = useState([])
-    const [formSubmitted, setFormSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
 
-
-    useEffect(()=>{
-        setDescription(allProjects && allProjects.description)
-    },[allProjects])
-
-    //      console.log("curr proj is", currProject)
-
-    //         // useEffect(() => {
-    //         //     dispatch(loadAllCoders())
-    //         // }, [dispatch])
-
-    //         // const currentUser = useSelector(state => state.session.user)
-    //         // let allCoders = useSelector(state => Object.values(state.coders))
-
-    //         // console.log("this is currentUser", currentUser)
-    //         // console.log("the start date is ", start_date)
-    //         // console.log("end date is ", end_date)
-    //         console.log("this is skills", currProject.skills)
+    useEffect(() => {
+        setName(currProject[0]?.name)
+        setDescription(currProject[0]?.description)
+        setStartDate(currProject[0]?.start_date)
+        setEndDate(currProject[0]?.end_date)
+        setSkills(currProject[0]?.skills.map(({ skill_name }) => {
+            // console.log('skilllllls', currProject[0]?.skills)
+            return skill_name
+        }))
+    }, [projectId, isLoaded])
 
 
-    // useEffect(() => {
-    //     setName(currProject && currProject.name)
-    //     setDescription(currProject && currProject.description)
-    //     setStartDate(currProject && currProject.start_date)
-    //     setEndDate(currProject && currProject.end_date)
-    //     setSkills(currProject && currProject.skills.map(({skill_name}) => {
-    //         return skill_name
-    //     }))
-    // }, [currProject])
-    // // doesnt work
+ 
 
-    let handleSelect = (value) => {
-        if (skills.includes(value)) {
-            setSkills(skills.filter((skill) => {
+    // console.log('projectSkills', projectSkills)
+
+    console.log('currProject[0].name', currProject[0]?.name)
+
+    console.log('skills', skills)
+
+
+    useEffect(() => {
+        dispatch(getprojects())
+            .then(() => setIsLoaded(true))
+    }, [])
+
+    if (!currProject) {
+        return null
+    }
+
+    const handleSelect = (value) => {
+        if (skills?.includes(value)) {
+            setSkills(skills?.filter((skill) => {
                 return skill !== value
             }))
-        } else {
+        }
+        else {
             setSkills(skills => skills.concat(value))
         }
     }
@@ -81,39 +70,30 @@ function EditProjectForm() {
 
         const errors = []
 
-        // if (!bio.length) errors.push("Please provide a name")
-        // if (!experience.length) errors.push("Please provide an address");
-        // if (!daily.length) errors.push("Please provide a city");
-        // if (!skills) errors.push("Please provide a description")
-        // if (url.slice(0,5).toLowerCase() !== "https") errors.push("Url must start with https")
-        // setValidationErrors(errors)
+        if (!name) errors.push("Please provide a name for your project");
+        if (!description) errors.push("Please provide a description for your project");
+        if (!start_date) errors.push("Please provide a start date for your project");
+        if (!end_date) errors.push("Please provide an end date for your project");
+        if (!skills) errors.push("Please select the skills required for your project")
+        setValidationErrors(errors)
 
-        const editPayload = {
-            name,
-            description,
-            skills,
-            start_date,
-            end_date,
-            projectId
+        if (!errors.length) {
+            const editPayload = {
+                name,
+                description,
+                skills,
+                start_date,
+                end_date,
+                projectId
+            }
+
+            let createdProject = await dispatch(updateproject(editPayload))
+            if (createdProject) {
+                // setFormSubmitted(true)
+                let createdProjectId = createdProject.id;
+                history.push(`/current/user/projects`)
+            }
         }
-
-
-        // if(errors.length){
-        //   return null
-        // }
-
-
-        // console.log("this is created coder", createdCoder)
-        let createdProject = await dispatch(updateproject(editPayload))
-        if (createdProject) {
-            setFormSubmitted(true)
-            let createdProjectId = createdProject.id
-            console.log("created Project is", createdProject)
-            console.log("and the id is", createdProject.id)
-
-            history.push(`/projects/${createdProjectId}`)
-        }
-
     }
 
 
@@ -181,7 +161,7 @@ function EditProjectForm() {
                                 value={end_date}
                             />
                         </label>
-                        <label>
+                        {/* <label>
                             Your Selected Coding Skills
                             <input
                                 className="form-inputs"
@@ -192,24 +172,44 @@ function EditProjectForm() {
                                 value={skills}
                                 placeholder="Select Skills"
                             />
-                        </label>
+                        </label> */}
 
-                        <input type="checkbox" id="Python" name="Python" value="Python" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Python</label>
-                        <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Javascript</label>
-                        <input type="checkbox" id="C++" name="C++" value="C++" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }}
+                        />
                         <label> C++</label>
-                        <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Ruby</label>
-                        <input type="checkbox" id="Java" name="Java" value="Java" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Java</label>
-                        <input type="checkbox" id="React" name="React" value="React" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> React</label>
-                        <input type="checkbox" id="Camel" name="Camel" value="Camel" onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Camel</label>
-
-
                     </div>
                     <div className="button-container">
                         <button className="Create-Spot-button"

@@ -8,6 +8,7 @@ border-color: rgb(164, 165, 165);
 border-bottom-style: solid;
 justify-content: center;
 position:sticky;
+z-index:4;
 top:0px;
 background-color: white;
 }

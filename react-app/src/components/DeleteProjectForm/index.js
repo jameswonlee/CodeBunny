@@ -4,7 +4,7 @@ import { Link, NavLink, Redirect, Route, useHistory, useParams } from 'react-rou
 import {
     deleteproject,getprojects
 } from '../../store/projects';
-
+import './DeleteProjectForm.css'
 
 
 const DeleteProjectForm = () => {
@@ -30,7 +30,7 @@ const DeleteProjectForm = () => {
 
     }
 
-  
+
 
     //HANDLE CANCEL BUTTON CLICK EVENT
     const handleCancelClick = (e) => {
@@ -44,10 +44,10 @@ const DeleteProjectForm = () => {
     return (
         <>
             <form onSubmit={handleSubmit} className='delete-project-flex-container'>
-                <h1>Are you sure you want to delete this project?</h1>
+                <h1 className='delete-project-header'>Are you sure you want to delete this project?</h1>
                <div className='delete-project-button-container'>
-                    <button type="submit" >Yes, Remove This Project</button>
-                    <button type="button" onClick={handleCancelClick}>No, Cancel</button>
+                    <button className='delete-project-button' type="submit" >Yes, Remove This Project</button>
+                    <button className='cancel-delete-project-button'type="button" onClick={handleCancelClick}>No, Cancel</button>
                 </div>
 
             </form>

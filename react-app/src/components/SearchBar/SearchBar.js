@@ -23,10 +23,14 @@ export default function Search() {
 if (!codersArray){
     return null
 }
+
     const getCoderSkills = (coder) => {
         let skillArray = []
         // console.log("this is codersArray skills", coder.skills)
+
             let coderSkills = coder.skills
+            if (!coderSkills) return []
+
             for (let skill of coderSkills){
                 let skillName = skill.skill_name.toUpperCase()
 
@@ -41,6 +45,7 @@ if (!codersArray){
         return codersArray.filter(coder => getCoderSkills(coder).includes(search.toUpperCase()) === true)
     }
 
+
     const submitHandler = async () => {
 
         // history.push("/results")
@@ -49,37 +54,39 @@ if (!codersArray){
     const filteredCoders = getFilteredItems(search, codersArray)
     // console.log("this is filteredCoders", filteredCoders)
     return (
-
+<>
+<div className = "whole-container">
         <div className="search-bar-container">
-        <div className="search-bar">
+            <div className="search-bar">
                 <input className="search-input"
                     type="search"
-                    placeholder="Start your search!"
+                    placeholder="Search for coders with the coding skills you need!"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <div className="icon-container">
                 <i className="icon fa fa-search fa-2x" onClick= {() => submitHandler()}></i>
                 </div>
-                <div>
-        {search ==='' ? null: (<h2 className='search-header'>Here are coders that match your search results</h2>)}
-            <div className='search-results-cards'>
+            </div>
+        </div>
 
+
+            <div className='search-results-cards'>
+            {search ==='' ? null: (<div className='search-header'>Here are coders that match your search results</div>)}
                 {filteredCoders.map(coder => {
                     return (
                     <div className="coder-shortbio-container">
                         <div>{coder.user.first_name} {coder.user.last_name}</div>
                         <div>Bio: {coder.bio}</div>
                         <div>Experience: {coder.experience}</div>
-                        <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
-
+                        <button className="button-profile"><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
                     </div>
                     )
                 })}
-
-        </div>
-        </div>
-        </div>
-        </div>
+            </div>
+</div>
+        </>
     )
 }
+
+        // {search ==='' ? null: (<h2 className='search-header'>Here are coders that match your search results</h2>)}

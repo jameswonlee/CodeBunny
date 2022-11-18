@@ -4,7 +4,7 @@ import {useDispatch, useSelector } from "react-redux"
 import {createproject, getprojects} from "../../store/projects"
 import { loadAllCoders } from "../../store/coders";
 import { useParams } from 'react-router-dom';
-
+import './NewProjectConfirmation.css'
 function NewProjectConfirmation() {
 
     function to_integer(date){
@@ -58,20 +58,24 @@ function NewProjectConfirmation() {
 
 
     return (
-        <div>
+        <div className="confirmation-page-container">
             <h1>Booked!</h1>
+        <div className="project-details-confirmation-container">
             <h3>Project Details:</h3>
             <div>Project Name: {confirmProject.name}</div>
             <div>Description: {confirmProject.description}</div>
             <div>Start Date: {confirmProject.start_date}</div>
             <div>End Date: {confirmProject.end_date}</div>
+        </div>
+        <div className="project-details-confirmation-container">
             <h3>Coder Details:</h3>
             <div>Coder Name: {coderDetails.user.first_name} {coderDetails.user.last_name}</div>
             <div>Coder Contact: {coderDetails.user.email}</div>
             <div>Coder Rate: ${coderDetails.daily_rate}</div>
             <div>Total days: {projectDays}</div>
             <div>Cost: ${coderDetails.daily_rate * projectDays}</div>
-            <button onClick = {() => handleSubmit() }>Looks Great!</button>
+        </div>
+            <button className="looks-great-button" onClick = {() => handleSubmit() }>Looks Great!</button>
         </div>
     )
 

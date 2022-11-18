@@ -1,0 +1,30 @@
+.confirmation-page-container{
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-content:center;
+    justify-content:center;
+    align-items:center
+}
+
+.project-details-confirmation-container{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(1, 61, 3);
+    justify-self: center;
+    align-self: center;
+    width: 350px;
+    align-content: center;
+    justify-content: center;
+    margin: 5%;
+    padding: 5%;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+}
+
+.looks-great-button{
+    color: white;
+    background-color:rgb(2, 69, 2);
+    padding: 2%;
+    margin: 2%
+}
