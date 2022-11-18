@@ -122,7 +122,7 @@ function CoderForm() {
                 <option value="Camel">Camel</option>
       </select>
       </label> */}
-            <label>
+            <label className='select-coding-skillls-label'>
               Your Selected Coding Skills
               {/* <input
                 className="form-inputs"
@@ -173,7 +173,7 @@ function CoderForm() {
             </div>
           </div>
           <div className="button-container">
-            <button className="Create-Spot-button"
+            <button className="create-coder-button"
               type="submit"
 
             >

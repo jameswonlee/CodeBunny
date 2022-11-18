@@ -73,10 +73,12 @@ if (!codersArray){
                 {filteredCoders.map(coder => {
                     return (
                     <div className="coder-shortbio-container">
-                        <div>{coder.user.first_name} {coder.user.last_name}</div>
-                        <div>Bio: {coder.bio}</div>
-                        <div>Experience: {coder.experience}</div>
-                        <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+                        <div className='coder-details-title  coder-results-name' >{coder.user.first_name} {coder.user.last_name}</div>
+                        <div className='coder-details-title'>Bio:</div>
+                         <div className = 'coder-details' >{coder.bio}</div>
+                        <div className='coder-details-title'>Experience: </div>
+                         <div className = 'coder-details'>{coder.experience}</div>
+                        <button className="search-results-button"><NavLink className = 'search-results-button-link' to={`/coders/${coder.id}`}>View Profile</NavLink></button>
 
                     </div>
                     )
