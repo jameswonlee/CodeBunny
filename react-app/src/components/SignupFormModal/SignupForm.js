@@ -20,8 +20,8 @@ function SignupForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(email.includes("@") !== true || email.includes(".com") !== true){
-      return setErrors(["Please provide a valid email"])
+    if(email.includes("@") !== true){
+      return setErrors([`Please provide a valid email`])
     }
 
     if (password === confirmPassword){

@@ -57,11 +57,11 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/coder/new">
-            <CreateCoderForm/>
-          </Route>
-          <Route path="/review/:coderId/new">
-            <CreateReviewForm/>
-          </Route>
+          <CreateCoderForm />
+        </Route>
+        <Route path="/review/:coderId/new">
+          <CreateReviewForm />
+        </Route>
         <Route path='/listofusers' exact={true} >
           <UsersList />
         </Route>
@@ -72,33 +72,43 @@ function App() {
           <Reviews />
         </Route>
         <Route path="/project/new">
-            <CreateProjectForm/>
-          </Route>
-        <Route path = "/projects/new/:projectId">
-            <SelectCoderForProject/>
+          <CreateProjectForm />
         </Route>
-        < Route path = "/current/user/projects" >
+        <Route path="/projects/new/:projectId">
+          <SelectCoderForProject />
+        </Route>
+        < Route path="/current/user/projects" >
           <UserProjects />
         </Route>
         <Route path="/projects/:projectId/edit">
           <EditProjectForm />
         </Route>
-        < Route path = "/projects/:projectId/delete" >
+        < Route path="/projects/:projectId/delete" >
           <DeleteProjectForm />
         </Route>
-          <Route path='/coder/:coderId/edit'>
-            <UpdateCoderForm/>
-          </Route>
-          <Route path = "/projects/confirmation/:projectId">
-            <NewProjectConfirmation/>
-          </Route>
-          <Route path = "/current/user/jobs">
-            <CoderJobs/>
-          </Route>
-          <Route>
-            <NotFound/>
-          </Route>
+        <Route path='/coder/:coderId/edit'>
+          <UpdateCoderForm />
+        </Route>
+        <Route path="/projects/confirmation/:projectId">
+          <NewProjectConfirmation />
+        </Route>
+        <Route path="/current/user/jobs">
+          <CoderJobs />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
+      <footer className="footer">
+          <div className="footer-about">
+            <strong>CodeBunny, inspired by TaskRabbit: [ Keerthana, Ashwin, Jason, James ]</strong>
+          </div>
+          <div className="footer-links">
+            <a id="github" className="links-github" href="https://github.com/jameswonlee/CodeBunny">
+              <i className="fa-brands fa-github fa-xl"></i>
+            </a>
+          </div>
+      </footer>
     </>
     // </BrowserRouter>
   );
