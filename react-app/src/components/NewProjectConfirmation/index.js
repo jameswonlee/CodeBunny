@@ -4,7 +4,7 @@ import {useDispatch, useSelector } from "react-redux"
 import {createproject, getprojects} from "../../store/projects"
 import { loadAllCoders } from "../../store/coders";
 import { useParams } from 'react-router-dom';
-
+import './NewProjectConfirmation.css'
 function NewProjectConfirmation() {
 
     function to_integer(date){
@@ -58,7 +58,7 @@ function NewProjectConfirmation() {
 
 
     return (
-        <div>
+        <div className="confirmation-page-container">
             <h1>Booked!</h1>
             <h3>Project Details:</h3>
             <div>Project Name: {confirmProject.name}</div>
