@@ -37,13 +37,13 @@ const CoderInfo = () => {
 
 
 
-    // if (!currCoder){
-    //     return null
-    // }
-
-    if (!sessionUser){
+    if (!currCoder){
         return null
     }
+
+    // if (!sessionUser){
+    //     return null
+    // }
 
     let sessionUserId;
 
@@ -110,7 +110,7 @@ const CoderInfo = () => {
         )
     }
     let seeCreateReviewButton;
-    if (currCoder.user_id !== sessionUser.id) {
+    if (sessionUser && currCoder.user_id !== sessionUserId) {
         seeCreateReviewButton = (
             <div className='create-button-container'>
                 <button className="Create-Review-Button" type="submit">Leave A Review!</button>
@@ -141,43 +141,52 @@ const CoderInfo = () => {
             </>
         )
     }
+let currCoderfirst_name
+let currCoderId
+let currCoderDailyRate
+if(currCoder){
+    currCoderfirst_name = currCoder.user.first_name
+    currCoderId = currCoder.id
+    currCoderDailyRate = currCoder.daily_rate
+}
+
 
     return (
         <>
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
                     <div className='coder-header-name-container'>
-                        <h1 className="coder-info-title">{currCoder.user.first_name} {currCoder.user.last_name}</h1>
+                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
                     </div>
 
                     <div>
                         <img
                             width={300}
                             height={300}
-                            src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoder.user.first_name) ? "women" : "men"}/${currCoder.id}.jpg`}
+                            src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoderfirst_name) ? "women" : "men"}/${currCoderId}.jpg`}
                             alt="random portrait"
                             className="user-image">
                         </img>
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>CONTACT:</div>
-                        {currCoder.user.email}
+                        {currCoder && currCoder.user.email}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>BIO:</div>
-                        {currCoder.bio}
+                        {currCoder && currCoder.bio}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>EXPERIENCE:</div>
-                        {currCoder.experience}
+                        {currCoder && currCoder.experience}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>DAILY RATE:</div>
-                        {`$${currCoder.daily_rate}`}
+                        {`$${currCoderDailyRate}`}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>SKILLS:</div>
-                        {currCoder.skills.map(skill => {
+                        {currCoder && currCoder.skills.map(skill => {
                             return (
                                 <div key={skill.id}>{skill.skill_name}</div>
                             )
