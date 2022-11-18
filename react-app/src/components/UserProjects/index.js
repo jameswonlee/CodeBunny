@@ -77,15 +77,19 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                 <>
                                     <div className='project-card'>
                                         <div className='project-details-container'>
-                                        <div>Project Name: {project.name}</div>
-                                        <div>Start-Date:{project.start_date}</div>
-                                        <div>End-Date: {project.end_date}</div>
-                                        <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
+                                        <div className='detail-heading'>Project Name: </div>
+                                            <div>{project.name}</div>
+                                        <div className='detail-heading'>Start-Date: </div>
+                                            <div>{project.start_date}</div>
+                                        <div className='detail-heading'>End-Date: </div>
+                                            <div>{project.end_date}</div>
+                                        <div className='detail-heading'>Owner: </div>
+                                            <div>{project.owner.first_name} {project.owner.last_name}</div>
                                     </div>
-                                        <div className='projects-buttons-container'>
-                                       <button className='coder-profile-button'> <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink></button>
-                                       <button className='edit-delete-button'><NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink></button>
-                                        </div>
+                                            <div className='projects-buttons-container'>
+                                                    <button className='coder-profile-button'> <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink></button>
+                                                    <button className='edit-delete-button'><NavLink to={`/projects/${project.id}/delete`}>Delete</NavLink></button>
+                                            </div>
 
                                     </div>
 

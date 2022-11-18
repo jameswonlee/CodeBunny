@@ -1,16 +1,16 @@
-## 🚧🚧 This page is still under construction 🚧🚧
+<br>
 
-<br></br>
+![codebunny-logo]
+
+
+
 
 # About
 CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https://www.taskrabbit.com/dashboard) website. CodeBunny is a platform where users go to hire Coders to build simple web applications in a 1 to 4 week time period.
 
-<br>
 
 ### Live link: [**https://codebunny.onrender.com**](https://codebunny.onrender.com/)
 
-
-<br>
 
 # Wiki Links
 * [API Documentation](https://github.com/jameswonlee/CodeBunny/wiki/API-Routes)
@@ -18,7 +18,6 @@ CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https:
 * [Features List](https://github.com/jameswonlee/CodeBunny/wiki/Features-List)
 * [Redux State Shape](https://github.com/jameswonlee/CodeBunny/wiki/Redux-Store-Shape)
 
-<br>
 
 # Tech Stack
 
@@ -56,12 +55,32 @@ CodeBunny is a fullstack application 'clone' inspired by the [TaskRabbit](https:
 
 <br>
 
-# Roadmap of Features:
-### 🚧🚧 This section is still under construction 🚧🚧
+---------------------------------------------------------------
+## Roadmap of Features:
 
+- [x] Coders
+    - [x] Load all coders
+    - [x] Load details of single coder
+    - [x] Create a coder
+    - [x] Update coder details
+    - [x] Delete coder profile
+- [x] Reviews
+    - [x] Load all reviews for a coder
+    - [x] Create a review
+    - [ ] Update a review
+    - [x] Delete a review
+- [x] Projects
+    - [x] Create a project
+    - [x] List upcoming projects
+    - [x] List completed projects
+    - [x] Update project details
+    - [x] Delete a project
+- [x] Search Bar
+    - [x] Create a search query
+    - [x] List search results
 
+-------------------------------------------------------------------
 
-<br></br>
 
 # Connect with the team!
 
@@ -92,11 +111,19 @@ James Lee:
 <!-- Markdown Links and Icons -->
 [github-icon]: https://skillicons.dev/icons?i=github
 [linkedin-icon]: https://skillicons.dev/icons?i=linkedin
+
 [linkedin-url-keerthana]: https://www.linkedin.com/in/keerthana-yellapragada/
 [linkedin-url-ashwin]: https://www.linkedin.com/in/ashwin-ramakrishnan-4910b9b1/
 [linkedin-url-jason]: https://www.linkedin.com/in/jason-kong-39552922/
 [linkedin-url-james]: https://linkedin.com/in/jameswonlee
+
 [github-url-keerthana]: https://github.com/Keerthana-Yellapragada
 [github-url-ashwin]: https://github.com/ashramki96
 [github-url-jason]: https://github.com/jrkong216
 [github-url-james]: https://github.com/jameswonlee
+
+[codebunny-logo]: ./assets/codebunny.png
+
+
+
+<!-- ## 🚧🚧 This page is still under construction 🚧🚧 -->
