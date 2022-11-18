@@ -35,7 +35,7 @@ const deleteAction = projectId => ({
 //thunks
 
 export const deleteproject = (projectId) => async dispatch => {
-    const response = await csrfFetch(`/api/projects/${projectId}`, {
+    const response = await csrfFetch(`/api/projects/${projectId}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

@@ -10,23 +10,42 @@ import './CoderInfo.css'
 
 const CoderInfo = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
     coderId = parseInt(coderId)
-
+    console.log('coderId', coderId)
     const sessionUser = useSelector(state => state.session.user);
+    const reviewInfo = useSelector(state => state.reviews)
+    const CodersUserId = useSelector(state => state.coders.user_id)
+    let allCoders = useSelector(state => Object.values(state.coders))
+    let currCoder = allCoders.filter(coder => coder.id === coderId)[0]
+    console.log('currCoder', currCoder)
 
+    useEffect(() => {
+        dispatch(loadAllCoders())
+        dispatch(loadAllReviews())
+        // dispatch(loadOneCoder(coderId))
+    }, [dispatch, coderId])
 
-    let sessionUserId
+    if (!allCoders) {
+        return null
+    }
+
+    if (!sessionUser){
+        return null
+    }
+
+    let sessionUserId;
 
     if (sessionUser) {
         sessionUserId = sessionUser.id
     }
 
     // console.log("this is UserId", sessionUser.id)
-    const CodersUserId = useSelector(state => state.coders.user_id)
+
     // const reviewsData = useSelector(state => state.reviews);
-    const reviewInfo = useSelector(state => state.reviews)
+
     const reviewInfoArray = Object.values(reviewInfo)
     const reviewsByUserId = reviewInfoArray.filter(item => item.user_id === sessionUserId)
     const reviewsByCoderId = reviewsByUserId.filter(element => element.coder_id === +coderId)
@@ -36,17 +55,13 @@ const CoderInfo = () => {
     // console.log("this is reviewInfo", reviewInfo)
     // console.log("this is the Object values of review Info", reviewInfoArray)
     // console.log("this is reviewsByUserId", reviewsByUserId)
-    useEffect(() => {
-        dispatch(loadAllCoders())
-        dispatch(loadAllReviews())
-        // dispatch(loadOneCoder(coderId))
-    }, [dispatch, coderId])
+
 
     let girlNames = ['Marnie']
 
 
-    const history = useHistory()
-    let allCoders = useSelector(state => Object.values(state.coders))
+
+
     let coder = allCoders.filter(coder => coder.id === coderId)
     coder = coder[0]
 
@@ -73,9 +88,9 @@ const CoderInfo = () => {
     }
 
     let deleteButton;
-    if (sessionUser && sessionUser.id === CodersUserId) {
+    if (sessionUser && sessionUser.id === currCoder.user_id) {
         deleteButton = (
-            < div className = "Edit-Delete-Button-container" >
+            < div className="Edit-Delete-Button-container" >
                 <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>Remove My Profile</button>
             </div>
         )
@@ -86,11 +101,16 @@ const CoderInfo = () => {
         )
     }
     let seeCreateReviewButton;
-    seeCreateReviewButton = (
-        <div className='create-button-container'>
-            <button className="Create-Review-Button" type="submit">Leave A Review!</button>
-        </div>
-    )
+    if (currCoder.user_id !== sessionUser.id) {
+        seeCreateReviewButton = (
+            <div className='create-button-container'>
+                <button className="Create-Review-Button" type="submit">Leave A Review!</button>
+            </div>
+        )
+    } else {
+        <>
+        </>
+    }
 
     // let seeCreateUpdateButton;
     // seeCreateUpdateButton = (
@@ -100,9 +120,9 @@ const CoderInfo = () => {
     // )
 
     let editButton;
-    if (sessionUser && sessionUser.id === CodersUserId) {
+    if (sessionUser && sessionUser.id === currCoder.user_id) {
         editButton = (
-            < div className = "Edit-Delete-Button-container" >
+            < div className="Edit-Delete-Button-container" >
                 <button className="Edit-Delete-Button" onClick={() => history.push(`/coder/${coderId}/edit`)}>Edit My Profile</button>
             </div>
         )
@@ -155,24 +175,24 @@ const CoderInfo = () => {
                         })}
                     </div>
                     <NavLink to={`/review/${coderId}/new`}>
-                    {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
-                         {seeCreateReviewButton}
+                        {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
+                        {seeCreateReviewButton}
                     </NavLink>
 
-                     <div>
+                    <div>
 
-                    {/* <NavLink to={`/review/${coderId}/new`}>
+                        {/* <NavLink to={`/review/${coderId}/new`}>
                                     {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
                                     </NavLink> */}
                         {editButton}
                         {deleteButton}
 
-                </div>
+                    </div>
 
                 </div>
 
                 <div>
-                    <Reviews coderId={coderId}/>
+                    <Reviews coderId={coderId} />
                 </div>
 
 
@@ -182,8 +202,6 @@ const CoderInfo = () => {
 
     )
 }
-
-
 
 
 export default CoderInfo;
