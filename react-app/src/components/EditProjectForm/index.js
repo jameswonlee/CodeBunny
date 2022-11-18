@@ -35,7 +35,7 @@ function EditProjectForm() {
     }, [projectId, isLoaded])
 
 
- 
+
 
     // console.log('projectSkills', projectSkills)
 
@@ -74,7 +74,13 @@ function EditProjectForm() {
         if (!description) errors.push("Please provide a description for your project");
         if (!start_date) errors.push("Please provide a start date for your project");
         if (!end_date) errors.push("Please provide an end date for your project");
-        if (!skills) errors.push("Please select the skills required for your project")
+        if (!skills) errors.push("Please select the skills required for your project");
+        if (!start_date) errors.push("Please select a start date");
+        if (!end_date) errors.push("Please select an end date");
+        if (new Date(end_date).getTime() < new Date(start_date).getTime()) errors.push("Please select valid start and end dates");
+        if (new Date(start_date).getTime() < new Date().getTime()) errors.push("Invalid start date. Coder must be given at least 24 hour notice prior to start date");
+        if (new Date(end_date).getTime() < new Date().getTime()) errors.push("Please select an end date in the future");
+
         setValidationErrors(errors)
 
         if (!errors.length) {
@@ -174,42 +180,44 @@ function EditProjectForm() {
                             />
                         </label> */}
 
-                        <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }} />
-                        <label> Python</label>
-                        <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }} />
-                        <label> Javascript</label>
-                        <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }}
-                        />
-                        <label> C++</label>
-                        <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }} />
-                        <label> Ruby</label>
-                        <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }} />
-                        <label> Java</label>
-                        <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }} />
-                        <label> React</label>
-                        <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
-                            setValidationErrors([]);
-                            handleSelect(e.target.value)
-                        }} />
-                        <label> Camel</label>
+<div className= "check-box-box">
+            <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Python"> Python</label>
+            <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Javascript"> Javascript</label>
+            <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="C++"> C++</label>
+            <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Ruby"> Ruby</label>
+            <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Java"> Java</label>
+            <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="React"> React</label>
+            <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
+              setValidationErrors([]);
+              handleSelect(e.target.value)
+            }} />
+            <label className="coding-name" htmlFor="Camel"> Camel</label>
+</div>
+
                     </div>
                     <div className="button-container">
                         <button className="Create-Spot-button"
