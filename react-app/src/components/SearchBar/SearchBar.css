@@ -7,14 +7,13 @@
 
 
 .search-bar{
-margin: 5%;
+/* margin: 5%; */
 display: flex;
 position: relative;
-flex-direction: column;
-justify-content: space-center;
+flex-direction: row;
 align-items: center;
-/* border-color: rgb(0, 255, 76);
-border-style: solid; */
+border-color: rgb(0, 255, 76);
+border-style: solid;
 /* margin-top: 70%;
 margin-left: 90%; */
 z-index: 1;
@@ -26,6 +25,8 @@ align-items: center;
 justify-content: center;
 background-color: white;
 cursor: pointer;
+border-color: rgb(255, 68, 0);
+border-style: solid;
 }
 
 .search-input{
@@ -53,7 +54,6 @@ cursor: pointer;
     background-color: rgb(1, 61, 1);
     color:white;
     width: 30%
-
 
 
 }

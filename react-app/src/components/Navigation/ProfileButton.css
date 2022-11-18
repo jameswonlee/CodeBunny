@@ -6,7 +6,7 @@
     border-style: solid;
     border-color: rgb(216, 214, 214);
     border-width: thin;
-    border-radius: 25px;
+    border-radius: 0px;
     background-color: white;
     cursor: pointer;
 }
@@ -14,7 +14,7 @@
 .actual-button{
     border:none;
     background-color: white;
-    border-radius: 25px;
+    border-radius: 0px;
 }
 
 .fa-solid{
@@ -33,7 +33,7 @@
     padding-bottom: 5px;
     z-index: 3;
     top: 75%;
-    border-radius: 5px;
+    border-radius: 0px;
     right: 11%;
 }
 
@@ -45,7 +45,7 @@
     cursor: pointer;
     /* padding: 5px; */
     width:125px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 
 .log-out{
@@ -59,7 +59,7 @@
     cursor: pointer;
     /* padding: 5px; */
     width:125px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 
 .my-spots{
@@ -77,7 +77,7 @@
     cursor: pointer;
     /* padding: 5px; */
     width:125px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 
 
@@ -88,7 +88,7 @@
     cursor: pointer;
     /* padding: 5px; */
     width:125px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 
 #pink:hover{
@@ -106,7 +106,7 @@
     cursor: pointer;
     /* padding: 5px; */
     width:125px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 
 .log-in-text{
@@ -120,5 +120,5 @@
     cursor: pointer;
     /* padding: 5px; */
     width:125px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
