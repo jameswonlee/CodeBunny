@@ -12,11 +12,11 @@ const CoderInfo = () => {
     const dispatch = useDispatch();
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
-
+    coderId = parseInt(coderId)
 
     const sessionUser = useSelector(state => state.session.user);
 
-    coderId = parseInt(coderId)
+
     let sessionUserId
 
     if (sessionUser) {
@@ -39,15 +39,16 @@ const CoderInfo = () => {
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
-        dispatch(loadOneCoder(coderId))
+        // dispatch(loadOneCoder(coderId))
     }, [dispatch, coderId])
 
     let girlNames = ['Marnie']
 
 
     const history = useHistory()
-    let coder = useSelector(state => state.coders)
-
+    let allCoders = useSelector(state => Object.values(state.coders))
+    let coder = allCoders.filter(coder => coder.id === coderId)
+    coder = coder[0]
 
     console.log("CODER IS", coder)
 
@@ -181,6 +182,7 @@ const CoderInfo = () => {
 
     )
 }
+
 
 
 export default CoderInfo;
