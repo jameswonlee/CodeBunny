@@ -10,9 +10,9 @@ function UpdateCoderForm() {
   const { coderId } = useParams()
   const dispatch = useDispatch();
   const history = useHistory()
-  const [isLoaded, setIsLoaded] = useState(false)
   const coderInfo = useSelector(state => state.coders[coderId])
-
+  
+  const [isLoaded, setIsLoaded] = useState(false)
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
   const [daily_rate, setDailyRate] = useState('')

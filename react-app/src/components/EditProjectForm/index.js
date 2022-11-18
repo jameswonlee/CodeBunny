@@ -4,40 +4,45 @@ import { Link, NavLink, Route, useHistory, useParams } from 'react-router-dom';
 import { updateproject, getprojects } from '../../store/projects'
 import { loadAllCoders } from '../../store/coders'
 
+
+
 function EditProjectForm() {
     let { projectId } = useParams()
-    projectId = parseInt(projectId)
+    // projectId = parseInt(projectId)
     const dispatch = useDispatch();
     const history = useHistory();
 
     let allProjects = useSelector(state => Object.values(state.projects));
     let currProject = allProjects.filter(project => project.id === projectId);
+
+    console.log('currProject', currProject)
     
     let projectSkills = currProject[0]?.skills.map(({ skill_name }) => {
         return skill_name
     })
-
-    const [name, setName] = useState(currProject[0]?.name)
-    console.log('currProject[0].name', currProject[0]?.name)
-    const [description, setDescription] = useState(currProject[0]?.description)
-    const [start_date, setStartDate] = useState(currProject[0]?.start_date)
-    const [end_date, setEndDate] = useState(currProject[0]?.end_date)
-    const [skills, setSkills] = useState(projectSkills)
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [validationErrors, setValidationErrors] = useState([])
     
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [start_date, setStartDate] = useState("")
+    const [end_date, setEndDate] = useState("")
+    const [skills, setSkills] = useState([])
+    const [validationErrors, setValidationErrors] = useState([])
+    // console.log('currProject[0].name', currProject[0]?.name)
+    
+
     useEffect(() => {
         dispatch(getprojects())
-        setName(currProject[0]?.name)
-    }, [dispatch, allProjects])
+        .then(() => setIsLoaded(true))
+    }, [dispatch])
 
     useEffect(() => {
-        setName(currProject[0]?.name)
-        setDescription(currProject[0]?.description)
-        setStartDate(currProject[0]?.start_date)
-        setEndDate(currProject[0]?.end_date)
+        setName(currProject[0] && currProject[0]?.name)
+        setDescription(currProject[0] && currProject[0]?.description)
+        setStartDate(currProject[0] && currProject[0]?.start_date)
+        setEndDate(currProject[0] && currProject[0]?.end_date)
         setSkills(projectSkills)
-      }, [])
+      }, [projectId])
 
    
     // Get project ID
@@ -86,15 +91,15 @@ function EditProjectForm() {
     // }, [currProject])
     // // doesnt work
 
-    let handleSelect = (value) => {
-        if (projectSkills.includes(value)) {
-            setSkills(projectSkills.filter((skill) => {
-                return skill !== value
-            }))
+    const handleSelect = (value) => {
+        if (skills.includes(value)) {
+          setSkills(skills.filter((skill) => {
+            return skill !== value
+          }))
         } else {
-            setSkills(projectSkills => projectSkills.concat(value))
+          setSkills(skills => skills.concat(value))
         }
-    }
+      }
 
 
     const submitHandler = async (e) => {
