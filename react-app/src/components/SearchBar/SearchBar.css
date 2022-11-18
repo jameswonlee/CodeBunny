@@ -69,6 +69,7 @@ border-style: solid; */
     flex-direction: column;
     justify-content: center;
     align-content:center;
+    align-items: center;
     border: 2px solid black;
     margin: 2%;
     padding: 2%;
@@ -83,6 +84,9 @@ border-style: solid; */
     color: black;
     font-size: 2rem;
     font-weight: bold;
+    border-bottom: 2px solid rgb(2, 67, 2);
+    padding: 3%;
+    margin: 3%
 }
 
 .search-results-button-link{
@@ -106,6 +110,9 @@ border-style: solid; */
 .coder-details{
     margin:3%;
     display: flex;
+    display:flex;
+    align-items: center;
+    padding:3%
 }
 
 .coder-results-name{
@@ -113,6 +120,7 @@ text-align: center;
 padding: 4%;
 border-bottom: 2px solid white;
 display:flex;
+margin: 3%
 }
 
 .button-profile{
@@ -125,6 +133,7 @@ display:flex;
 .coder-results-details-title{
     font-weight:bold;
     display: flex;
+    margin: 2%;
 
 }
 
@@ -134,4 +143,9 @@ display:flex;
     font-size: 40px;
     border:0px solid rgb(1, 76, 25)
 
+}
+
+
+.coder-results-details{
+    margin: 3%
 }
