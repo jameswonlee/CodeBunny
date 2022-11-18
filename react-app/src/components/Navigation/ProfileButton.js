@@ -19,9 +19,9 @@ function ProfileButton({ user }) {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showLogInModal, setShowLogInModal] = useState(false);
 
-  // const coderId = useSelector(state => state.user.coders.id)
-  const CodersUserId = useSelector(state => state.coders.user_id)
+  const allCoders = useSelector(state => Object.values(state.coders))
 
+  let currCoder = allCoders.filter(coder => coder.user_id === user.id)[0]
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -48,15 +48,14 @@ function ProfileButton({ user }) {
 
   const myCoder = (e) => {
     e.preventDefault();
-    if (user.id === CodersUserId) {
-      history.push('/coders/CodersUserId')
+    if (user.id === currCoder.user_id) {
+      history.push(`/coders/${currCoder.id}`)
     } else {
       history.push("/coder/new")
     }
 
 
   };
-
   const myProjects = (e) => {
     e.preventDefault();
     history.push(`/current/user/projects`);
@@ -85,9 +84,11 @@ function ProfileButton({ user }) {
         {showMenu && (
           <div className="dropdown-content">
             <div>
-              {CodersUserId
+              {currCoder
                 ?
+
                 (<div className="my-spots" onClick={myCoder}>My Coder Profile</div>)
+
                 :
                 null
               }
