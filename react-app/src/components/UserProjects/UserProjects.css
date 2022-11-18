@@ -46,7 +46,9 @@
 }
 
 
-.coder-profile-button, .delete-project-button{
+.coder-profile-button,
+.delete-project-button,
+.edit-delete-button {
     color: white;
     background-color: rgb(2, 70, 2);
     margin: 5%;

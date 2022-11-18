@@ -22,6 +22,7 @@ function SelectCoderForProject() {
 
     let allProjects = useSelector(state => Object.values(state.projects))
     let allCoders = useSelector(state => Object.values(state.coders))
+    let sessionUser = useSelector(state => state.session.user)
 
     if(!allCoders) return null
     if(!allProjects) return null
@@ -109,10 +110,13 @@ function SelectCoderForProject() {
 
     // console.log("ALL CODERS IS", allCoders)
 
+    let isUser = []
+    for(let i = 0; i<allCoders.length; i++){
+        if(allCoders[i].user_id === sessionUser.id) isUser.push(1)
+    }
 
 
     const handleCoderSubmit = (coderId) => {
-
         console.log("Coder id being sent in is", coderId)
         console.log("project id being sent in is ", projectId)
 
@@ -133,7 +137,7 @@ function SelectCoderForProject() {
                         <div>Bio: {coder.bio}</div>
                         <div>Experience: {coder.experience}</div>
                         {/* <button className="view-coder-profile-button"><NavLink className="view-coder-profile-button" to={`/coders/${coder.id}`}>View Profile</NavLink></button> */}
-                        <button className = 'choose-coder-profile-button' onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
+                        {coder.user_id !== sessionUser.id ? <button className = 'choose-coder-profile-button' onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button> : null}
                     </div>
 
                     )
