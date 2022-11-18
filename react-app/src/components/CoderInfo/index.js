@@ -15,23 +15,31 @@ const CoderInfo = () => {
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
     coderId = parseInt(coderId)
-    console.log('coderId', coderId)
-    const sessionUser = useSelector(state => state.session.user);
-    const reviewInfo = useSelector(state => state.reviews)
-    const CodersUserId = useSelector(state => state.coders.user_id)
-    let allCoders = useSelector(state => Object.values(state.coders))
-    let currCoder = allCoders.filter(coder => coder.id === coderId)[0]
-    console.log('currCoder', currCoder)
-
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
         // dispatch(loadOneCoder(coderId))
     }, [dispatch, coderId])
 
+    console.log('coderId', coderId)
+    const sessionUser = useSelector(state => state.session.user);
+    const reviewInfo = useSelector(state => state.reviews)
+    const CodersUserId = useSelector(state => state.coders.user_id)
+    let allCoders = useSelector(state => Object.values(state.coders))
     if (!allCoders) {
         return null
     }
+
+    let currCoder = allCoders.filter(coder => coder.id === coderId)[0]
+    console.log('currCoder', currCoder)
+
+
+
+
+
+    // if (!currCoder){
+    //     return null
+    // }
 
     if (!sessionUser){
         return null
@@ -63,19 +71,19 @@ const CoderInfo = () => {
 
 
 
-    let coder = allCoders.filter(coder => coder.id === coderId)
-    coder = coder[0]
+    // let coder = allCoders.filter(coder => coder.id === coderId)
+    // coder = coder[0]
 
-    console.log("CODER IS", coder)
+    // console.log("CODER IS", coder)
 
 
-    if (!coder) {
-        return null
-    }
+    // if (!coder) {
+    //     return null
+    // }
 
-    if (!coder.user) {
-        return null
-    }
+    // if (!coder.user) {
+    //     return null
+    // }
 
 
     const deleteHandler = async (e) => {
@@ -139,37 +147,37 @@ const CoderInfo = () => {
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
                     <div className='coder-header-name-container'>
-                        <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
+                        <h1 className="coder-info-title">{currCoder.user.first_name} {currCoder.user.last_name}</h1>
                     </div>
 
                     <div>
                         <img
                             width={300}
                             height={300}
-                            src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name) ? "women" : "men"}/${coder.id}.jpg`}
+                            src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoder.user.first_name) ? "women" : "men"}/${currCoder.id}.jpg`}
                             alt="random portrait"
                             className="user-image">
                         </img>
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>CONTACT:</div>
-                        {coder.user.email}
+                        {currCoder.user.email}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>BIO:</div>
-                        {coder.bio}
+                        {currCoder.bio}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>EXPERIENCE:</div>
-                        {coder.experience}
+                        {currCoder.experience}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>DAILY RATE:</div>
-                        {`$${coder.daily_rate}`}
+                        {`$${currCoder.daily_rate}`}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>SKILLS:</div>
-                        {coder.skills.map(skill => {
+                        {currCoder.skills.map(skill => {
                             return (
                                 <div key={skill.id}>{skill.skill_name}</div>
                             )
