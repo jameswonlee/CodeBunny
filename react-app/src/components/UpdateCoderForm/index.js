@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
-import { editCoder,loadAllCoders } from '../../store/coders'
+import { editCoder, loadAllCoders } from '../../store/coders'
 // INTERESTEDING THAT LOADONECODER DOESNT Worker, BUT I CAN WORK WITH LOAD ALL CODESR
 import "./UpdateCoderForm.css"
 
@@ -11,7 +11,8 @@ function UpdateCoderForm() {
   const dispatch = useDispatch();
   const history = useHistory()
   const coderInfo = useSelector(state => state.coders[coderId])
-  
+  let sessionUser = useSelector(state => state.session.user);
+
   const [isLoaded, setIsLoaded] = useState(false)
   const [bio, setBio] = useState('')
   const [experience, setExperience] = useState('')
@@ -35,6 +36,14 @@ function UpdateCoderForm() {
   }, [coderInfo])
 
   if (!coderInfo) return null
+
+  if (!sessionUser) {
+    return null
+  }
+  let sessionUserId;
+  if (sessionUser) {
+    sessionUserId = sessionUser.id
+  }
 
   const handleSelect = (value) => {
     if (skills.includes(value)) {
@@ -71,6 +80,10 @@ function UpdateCoderForm() {
 
       history.push(`/coders/${coderId}`)
     }
+  }
+
+  if (sessionUserId !== coderInfo?.user_id) {
+    return <h2><strong>You do not have access to this page</strong></h2>
   }
 
   return (
@@ -150,43 +163,43 @@ function UpdateCoderForm() {
               /> */}
             </label>
             <label><strong>Choose your skills</strong></label>
-            <div className= "check-box-box">
-            <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="Python"> Python</label>
-            <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="Javascript"> Javascript</label>
-            <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="C++"> C++</label>
-            <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="Ruby"> Ruby</label>
-            <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="Java"> Java</label>
-            <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="React"> React</label>
-            <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
-              setValidationErrors([]);
-              handleSelect(e.target.value)
-            }} />
-            <label className="coding-name" htmlFor="Camel"> Camel</label>
-</div>
+            <div className="check-box-box">
+              <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="Python"> Python</label>
+              <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="Javascript"> Javascript</label>
+              <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="C++"> C++</label>
+              <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="Ruby"> Ruby</label>
+              <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="Java"> Java</label>
+              <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="React"> React</label>
+              <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
+                setValidationErrors([]);
+                handleSelect(e.target.value)
+              }} />
+              <label className="coding-name" htmlFor="Camel"> Camel</label>
+            </div>
 
           </div>
           <div className="button-container">
