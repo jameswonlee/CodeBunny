@@ -65,6 +65,7 @@ function NewProjectConfirmation() {
             <div>Description: {confirmProject.description}</div>
             <div>Start Date: {confirmProject.start_date}</div>
             <div>End Date: {confirmProject.end_date}</div>
+
             <h3>Coder Details:</h3>
             <div>Coder Name: {coderDetails.user.first_name} {coderDetails.user.last_name}</div>
             <div>Coder Contact: {coderDetails.user.email}</div>
