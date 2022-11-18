@@ -19,13 +19,9 @@ function ProfileButton({ user }) {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showLogInModal, setShowLogInModal] = useState(false);
 
-  const allCoders = useSelector(state => Object.values(state.coders))
 
-  let currCoder = allCoders.filter(coder => coder.user_id === user.id)[0]
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+
+  
 
   useEffect(() => {
     if (!showMenu) return;
@@ -38,6 +34,19 @@ function ProfileButton({ user }) {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
+  const allCoders = useSelector(state => Object.values(state.coders))
+
+  if (!allCoders) {
+    return null
+  }
+
+  let currCoder = allCoders.filter(coder => coder.user_id === user?.id)[0]
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
 
   const logout = (e) => {
     e.preventDefault();
