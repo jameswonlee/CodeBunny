@@ -8,7 +8,7 @@ import { loadAllCoders } from '../../store/coders'
 
 function EditProjectForm() {
     let { projectId } = useParams()
-    // projectId = parseInt(projectId)
+    projectId = parseInt(projectId, 10)
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -16,90 +16,62 @@ function EditProjectForm() {
     let currProject = allProjects.filter(project => project.id === projectId);
 
     console.log('currProject', currProject)
-    
-    let projectSkills = currProject[0]?.skills.map(({ skill_name }) => {
-        return skill_name
-    })
-    
+
+    // let projectSkills = currProject[0]?.skills.map(({ skill_name }) => {
+    //     return skill_name
+    // })
     const [isLoaded, setIsLoaded] = useState(false)
+    const [skills, setSkills] = useState()
+
+    useEffect(() => {
+        setName(currProject[0]?.name)
+        setDescription(currProject[0]?.description)
+        setStartDate(currProject[0]?.start_date)
+        setEndDate(currProject[0]?.end_date)
+        setSkills(currProject[0]?.skills.map(({ skill_name }) => {
+            // console.log('skilllllls', currProject[0]?.skills)
+            return skill_name
+        }))
+    }, [projectId, isLoaded])
+
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [start_date, setStartDate] = useState("")
     const [end_date, setEndDate] = useState("")
-    const [skills, setSkills] = useState([])
     const [validationErrors, setValidationErrors] = useState([])
-    // console.log('currProject[0].name', currProject[0]?.name)
+
+ 
+
+    // console.log('projectSkills', projectSkills)
+
+    console.log('currProject[0].name', currProject[0]?.name)
+
+    console.log('skills', skills)
+
+
+    useEffect(() => {
+        dispatch(getprojects())
+            .then(() => setIsLoaded(true))
+    }, [])
+
+
     
-
-    useEffect(() => {
-        dispatch(getprojects())
-        .then(() => setIsLoaded(true))
-    }, [dispatch])
-
-    useEffect(() => {
-        setName(currProject[0] && currProject[0]?.name)
-        setDescription(currProject[0] && currProject[0]?.description)
-        setStartDate(currProject[0] && currProject[0]?.start_date)
-        setEndDate(currProject[0] && currProject[0]?.end_date)
-        setSkills(projectSkills)
-      }, [projectId])
-
-   
-    // Get project ID
-    // Key into skills and get currProject Skills Array
-    // Loop through array and push skill_name into new array
-
-
-    useEffect(() => {
-        dispatch(getprojects())
-          .then(() => setIsLoaded(true))
-      }, [dispatch])
 
 
     if (!currProject) {
         return null
     }
 
-    // useEffect(() => {
-    // setName(currProject && currProject[0].name)
-    // setDescription(currProject[0] && currProject[0].description)
-    // }, [currProject])
-
-    //      console.log("curr proj is", currProject)
-
-    //         // useEffect(() => {
-    //         //     dispatch(loadAllCoders())
-    //         // }, [dispatch])
-
-    //         // const currentUser = useSelector(state => state.session.user)
-    //         // let allCoders = useSelector(state => Object.values(state.coders))
-
-    //         // console.log("this is currentUser", currentUser)
-    //         // console.log("the start date is ", start_date)
-    //         // console.log("end date is ", end_date)
-    //         console.log("this is skills", currProject.skills)
-
-
-    // useEffect(() => {
-    //     setName(currProject && currProject.name)
-    //     setDescription(currProject && currProject.description)
-    //     setStartDate(currProject && currProject.start_date)
-    //     setEndDate(currProject && currProject.end_date)
-    //     setSkills(currProject && currProject.skills.map(({skill_name}) => {
-    //         return skill_name
-    //     }))
-    // }, [currProject])
-    // // doesnt work
-
     const handleSelect = (value) => {
-        if (skills.includes(value)) {
-          setSkills(skills.filter((skill) => {
-            return skill !== value
-          }))
-        } else {
-          setSkills(skills => skills.concat(value))
+        if (skills?.includes(value)) {
+            setSkills(skills?.filter((skill) => {
+                return skill !== value
+            }))
         }
-      }
+        else {
+            setSkills(skills => skills.concat(value))
+        }
+    }
 
 
     const submitHandler = async (e) => {
@@ -111,10 +83,10 @@ function EditProjectForm() {
         if (!description) errors.push("Please provide a description for your project");
         if (!start_date) errors.push("Please provide a start date for your project");
         if (!end_date) errors.push("Please provide an end date for your project");
-        if (!skills.length) errors.push("Please select the skills required for your project")
+        if (!skills) errors.push("Please select the skills required for your project")
         setValidationErrors(errors)
 
-        if (!validationErrors.length) {
+        if (!errors.length) {
             const editPayload = {
                 name,
                 description,
@@ -128,7 +100,7 @@ function EditProjectForm() {
             if (createdProject) {
                 // setFormSubmitted(true)
                 let createdProjectId = createdProject.id;
-                history.push(`/projects/${createdProjectId}`)
+                history.push(`/current/user/projects`)
             }
         }
     }
@@ -211,22 +183,42 @@ function EditProjectForm() {
                             />
                         </label> */}
 
-                        <input type="checkbox" id="Python" name="Python" value="Python" checked={projectSkills?.includes("Python")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Python</label>
-                        <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={projectSkills?.includes("Javascript")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Javascript" name="Javascript" value="Javascript" checked={skills?.includes("Javascript")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Javascript</label>
-                        <input type="checkbox" id="C++" name="C++" value="C++" checked={projectSkills?.includes("C++")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="C++" name="C++" value="C++" checked={skills?.includes("C++")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }}
+                        />
                         <label> C++</label>
-                        <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={projectSkills?.includes("Ruby")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Ruby" name="Ruby" value="Ruby" checked={skills?.includes("Ruby")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Ruby</label>
-                        <input type="checkbox" id="Java" name="Java" value="Java" checked={projectSkills?.includes("Java")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Java" name="Java" value="Java" checked={skills?.includes("Java")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Java</label>
-                        <input type="checkbox" id="React" name="React" value="React" checked={projectSkills?.includes("React")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="React" name="React" value="React" checked={skills?.includes("React")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> React</label>
-                        <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={projectSkills?.includes("Camel")} onChange={(e) => handleSelect(e.target.value)} />
+                        <input type="checkbox" id="Camel" name="Camel" value="Camel" checked={skills?.includes("Camel")} onChange={(e) => {
+                            setValidationErrors([]);
+                            handleSelect(e.target.value)
+                        }} />
                         <label> Camel</label>
-
-
                     </div>
                     <div className="button-container">
                         <button className="Create-Spot-button"
