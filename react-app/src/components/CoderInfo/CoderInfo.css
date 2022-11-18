@@ -24,11 +24,16 @@ h1 {
 
 
 .coder-details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 2% 0%;
 
 }
 
 .coder-details-headings{
+    /* display: flex;
+    flex-direction: column; */
     font-weight: bold;
     text-decoration: underline;
     padding: 2% 0%;

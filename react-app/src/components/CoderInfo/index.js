@@ -188,7 +188,7 @@ if(currCoder){
                         <div className='coder-details-headings'>SKILLS:</div>
                         {currCoder && currCoder.skills.map(skill => {
                             return (
-                                <div key={skill.id}>{skill.skill_name}</div>
+                                <div key={skill.id}>{skill.skill_name} </div>
                             )
                         })}
                     </div>

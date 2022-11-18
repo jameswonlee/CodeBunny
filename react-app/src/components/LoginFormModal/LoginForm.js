@@ -10,10 +10,16 @@ function LoginForm() {
   const [email, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  // const [validationErrors, setValidationErrors] = useState([])
 // console.log("this is password",password)
   const handleSubmit = (e) => {
     e.preventDefault();
+    // const errors =[]
     setErrors([]);
+
+    // if(email.includes("@") !== true || email.includes(".com") !== true){
+    //   errors.push("Please provide a valid email")
+    // }
 
     return dispatch(sessionActions.login({ email, password })).catch(
       async (res) => {
