@@ -54,38 +54,39 @@ if (!codersArray){
     const filteredCoders = getFilteredItems(search, codersArray)
     // console.log("this is filteredCoders", filteredCoders)
     return (
-<>
+
         <div className="search-bar-container">
-            <div className="search-bar">
+        <div className="search-bar">
                 <input className="search-input"
                     type="search"
-                    placeholder="Search for coders with the coding skills you need!"
+                    placeholder="Start your search!"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <div className="icon-container">
                 <i className="icon fa fa-search fa-2x" onClick= {() => submitHandler()}></i>
                 </div>
-            </div>
-        </div>
-
-        <div className="Display-card-container">
-        <div className='search-results-cards'>
+                <div>
+        {search ==='' ? null: (<h2 className='search-header'>Here are coders that match your search results</h2>)}
+            <div className='search-results-cards'>
 
                 {filteredCoders.map(coder => {
                     return (
                     <div className="coder-shortbio-container">
-                        <div>{coder.user.first_name} {coder.user.last_name}</div>
-                        <div>Bio: {coder.bio}</div>
-                        <div>Experience: {coder.experience}</div>
-                        <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+                        <div className='coder-details-title  coder-results-name' >{coder.user.first_name} {coder.user.last_name}</div>
+                        <div className='coder-details-title'>Bio:</div>
+                         <div className = 'coder-details' >{coder.bio}</div>
+                        <div className='coder-details-title'>Experience: </div>
+                         <div className = 'coder-details'>{coder.experience}</div>
+                        <button className="search-results-button"><NavLink className = 'search-results-button-link' to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+
                     </div>
                     )
                 })}
+
         </div>
         </div>
-        </>
+        </div>
+        </div>
     )
 }
-
-        // {search ==='' ? null: (<h2 className='search-header'>Here are coders that match your search results</h2>)}
