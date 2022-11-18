@@ -190,7 +190,7 @@ def undo_projects():
 
 def seed_reviews():
     review1 = Review(
-        user_id=2,
+        user_id=3,
         coder_id=1,
         rating=9,
         review="This coder was incredible and efficient! Highly recommend"

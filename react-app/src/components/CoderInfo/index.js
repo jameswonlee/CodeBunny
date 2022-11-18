@@ -37,9 +37,9 @@ const CoderInfo = () => {
 
 
 
-    // if (!currCoder){
-    //     return null
-    // }
+    if (!currCoder){
+        return null
+    }
 
     // if (!sessionUser){
     //     return null
