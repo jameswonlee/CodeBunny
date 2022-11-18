@@ -67,7 +67,7 @@ const CoderInfo = () => {
             id: coderId
         }
         let deletedCoder;
-        deletedCoder = dispatch(deleteCoder(payload)).then(() => history.push("/")
+        deletedCoder = dispatch(deleteCoder(payload)).then(() => dispatch(loadAllCoders())).then(() => history.push("/")
         )
     }
 

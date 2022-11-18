@@ -13,15 +13,24 @@ import codebunny from './Images/codebunny.png'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  const allCoders = useSelector(state => Object.values(state.coders))
+
+  if(!allCoders) return null
+
 
 
   let sessionLinks;
   if (sessionUser) {
+    const sessionUserId = sessionUser.id
+    let userCoder = allCoders.filter(coder => coder.user_id === sessionUserId )
+
+
+
     sessionLinks = (
       <>
        <div className= "Create-a-spot-Button">
         <NavLink to="/coder/new">
-      <button className= "become-host-button">Become a Coder</button>
+        {sessionUser && userCoder.length === 0 ? <button className= "become-host-button">Become a Coder</button>: null}
       </NavLink>
       </div>
       <div className= "profile-button">

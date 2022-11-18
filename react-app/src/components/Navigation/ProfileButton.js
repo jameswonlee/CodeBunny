@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { useHistory } from 'react-router-dom';
 import { Modal } from '../../context/Modal'
@@ -18,6 +18,9 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showLogInModal, setShowLogInModal] = useState(false);
+
+  // const coderId = useSelector(state => state.user.coders.id)
+  const CodersUserId = useSelector(state => state.coders.user_id)
 
   const openMenu = () => {
     if (showMenu) return;
@@ -43,9 +46,15 @@ function ProfileButton({ user }) {
     history.push("/");
   };
 
-  const mySpots = (e) => {
+  const myCoder = (e) => {
     e.preventDefault();
-    history.push(`/current/user`);
+    if (user.id === CodersUserId){
+      history.push(`/coders/${1}`)
+    } else {
+      history.push("/coder/new")
+    }
+
+
   };
 
   const myProjects = (e) => {
@@ -76,7 +85,7 @@ if (user){
       {showMenu && (
         <div className="dropdown-content">
           <div>
-          <div className="my-spots" onClick={mySpots}>My Profile</div>
+          <div className="my-spots" onClick={myCoder}>My Coder Profile</div>
           </div>
           <div>
           <div className="my-reviews" onClick={myProjects}>My Projects</div>

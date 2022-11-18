@@ -47,6 +47,10 @@ cursor: pointer;
 
 }
 .coder-shortbio-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content:center;
     border: 2px solid black;
     margin: 4%;
     padding: 4%;
@@ -54,11 +58,38 @@ cursor: pointer;
     color:white;
     width: 30%
 
-
-
 }
 
 .search-header{
     background-color: white;
     padding:5%;
+}
+
+
+.search-results-button-link{
+    color:black;
+
+}
+
+.search-results-button{
+    margin: 5%;
+    padding: 3%;
+    width:auto
+
+}
+
+.coder-details-title{
+    font-weight:bold;
+    margin: 3% 0%;
+    padding: 4%;
+}
+
+.coder-details{
+    margin:3%
+}
+
+.coder-results-name{
+text-align: center;
+padding: 4%;
+border-bottom: 2px solid white;
 }
