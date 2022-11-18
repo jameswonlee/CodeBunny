@@ -23,9 +23,10 @@ const DeleteProjectForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let deletedProject = await dispatch(deleteproject(projectId)).then(history.push("/current/user/projects"))
+        let deletedProject = await dispatch(deleteproject(projectId)).then(() => history.push("/current/user/projects"))
         if (deletedProject){
             dispatch(getprojects())
+
         }
 
     }

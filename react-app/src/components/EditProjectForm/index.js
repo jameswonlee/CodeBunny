@@ -3,18 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useHistory, useParams } from 'react-router-dom';
 import { updateproject, getprojects } from '../../store/projects'
 import { loadAllCoders } from '../../store/coders'
-
-
-
 function EditProjectForm() {
     let { projectId } = useParams()
     projectId = parseInt(projectId, 10)
     const dispatch = useDispatch();
     const history = useHistory();
-
     let allProjects = useSelector(state => Object.values(state.projects));
     let currProject = allProjects.filter(project => project.id === projectId);
-
     const [isLoaded, setIsLoaded] = useState(false)
     const [skills, setSkills] = useState()
     const [name, setName] = useState("")
@@ -22,7 +17,6 @@ function EditProjectForm() {
     const [start_date, setStartDate] = useState("")
     const [end_date, setEndDate] = useState("")
     const [validationErrors, setValidationErrors] = useState([])
-
     useEffect(() => {
         setName(currProject[0]?.name)
         setDescription(currProject[0]?.description)
@@ -33,26 +27,16 @@ function EditProjectForm() {
             return skill_name
         }))
     }, [projectId, isLoaded])
-
-
- 
-
     // console.log('projectSkills', projectSkills)
-
     console.log('currProject[0].name', currProject[0]?.name)
-
     console.log('skills', skills)
-
-
     useEffect(() => {
         dispatch(getprojects())
             .then(() => setIsLoaded(true))
     }, [])
-
     if (!currProject) {
         return null
     }
-
     const handleSelect = (value) => {
         if (skills?.includes(value)) {
             setSkills(skills?.filter((skill) => {
@@ -63,20 +47,20 @@ function EditProjectForm() {
             setSkills(skills => skills.concat(value))
         }
     }
-
-
     const submitHandler = async (e) => {
         e.preventDefault()
-
         const errors = []
-
         if (!name) errors.push("Please provide a name for your project");
         if (!description) errors.push("Please provide a description for your project");
         if (!start_date) errors.push("Please provide a start date for your project");
         if (!end_date) errors.push("Please provide an end date for your project");
-        if (!skills) errors.push("Please select the skills required for your project")
+        if (!skills) errors.push("Please select the skills required for your project");
+        if (!start_date) errors.push("Please select a start date");
+        if (!end_date) errors.push("Please select an end date");
+        if (new Date(end_date).getTime() < new Date(start_date).getTime()) errors.push("Please select valid start and end dates");
+        if (new Date(start_date).getTime() < new Date().getTime()) errors.push("Invalid start date. Coder must be given at least 24 hour notice prior to start date");
+        if (new Date(end_date).getTime() < new Date().getTime()) errors.push("Please select an end date in the future");
         setValidationErrors(errors)
-
         if (!errors.length) {
             const editPayload = {
                 name,
@@ -86,7 +70,6 @@ function EditProjectForm() {
                 end_date,
                 projectId
             }
-
             let createdProject = await dispatch(updateproject(editPayload))
             if (createdProject) {
                 // setFormSubmitted(true)
@@ -95,11 +78,7 @@ function EditProjectForm() {
             }
         }
     }
-
-
-
     return (
-
         <div className="Outer-Container">
             <div className="Inner-Container">
                 <form
@@ -173,7 +152,6 @@ function EditProjectForm() {
                                 placeholder="Select Skills"
                             />
                         </label> */}
-
                         <input type="checkbox" id="Python" name="Python" value="Python" checked={skills?.includes("Python")} onChange={(e) => {
                             setValidationErrors([]);
                             handleSelect(e.target.value)
@@ -225,6 +203,4 @@ function EditProjectForm() {
         </div>
     );
 }
-
-
 export default EditProjectForm;

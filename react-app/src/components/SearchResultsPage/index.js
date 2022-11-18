@@ -34,7 +34,7 @@ if (!allCoders) return null
                         <div>{coder.user.first_name} {coder.user.last_name}</div>
                         <div>Bio: {coder.bio}</div>
                         <div>Experience: {coder.experience}</div>
-                        <button><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+                        <button className='view-profile-search-results'><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
                         <button onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button>
                     </div>
                     )

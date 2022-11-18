@@ -21,7 +21,7 @@ function ProfileButton({ user }) {
 
   const allCoders = useSelector(state => Object.values(state.coders))
 
-  let currCoder = allCoders.filter(coder => coder.user_id === user.id)[0]
+  let currCoder = allCoders.filter(coder => coder.user_id === user?.id)[0]
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
