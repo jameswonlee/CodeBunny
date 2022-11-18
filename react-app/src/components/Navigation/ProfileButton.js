@@ -48,8 +48,8 @@ function ProfileButton({ user }) {
 
   const myCoder = (e) => {
     e.preventDefault();
-    if (user.id === CodersUserId){
-      history.push(`/coders/${1}`)
+    if (user.id === CodersUserId) {
+      history.push('/coders/CodersUserId')
     } else {
       history.push("/coder/new")
     }
@@ -72,68 +72,73 @@ function ProfileButton({ user }) {
     history.push('/project/new');
   };
 
-let loggedInOrNot;
-if (user){
-  loggedInOrNot =(
-    <>
-    <button className="actual-button" onClick={openMenu}>
-        <div className="profile-button-container" id="pink">
-      <span className="fa-solid fa-bars fa-2x" id="pink"></span>
-      <span className="fa-solid fa-circle-user fa-2x" id="pink"></span>
-      </div>
-      </button>
-      {showMenu && (
-        <div className="dropdown-content">
-          <div>
-          <div className="my-spots" onClick={myCoder}>My Coder Profile</div>
+  let loggedInOrNot;
+  if (user) {
+    loggedInOrNot = (
+      <>
+        <button className="actual-button" onClick={openMenu}>
+          <div className="profile-button-container" id="pink">
+            <span className="fa-solid fa-bars fa-2x" id="pink"></span>
+            <span className="fa-solid fa-circle-user fa-2x" id="pink"></span>
           </div>
-          <div>
-          <div className="my-reviews" onClick={myProjects}>My Projects</div>
+        </button>
+        {showMenu && (
+          <div className="dropdown-content">
+            <div>
+              {CodersUserId
+                ?
+                (<div className="my-spots" onClick={myCoder}>My Coder Profile</div>)
+                :
+                null
+              }
+            </div>
+            <div>
+              <div className="my-reviews" onClick={myProjects}>My Projects</div>
+            </div>
+            <div>
+              <div className="my-reviews" onClick={myJobs}>My Jobs</div>
+            </div>
+            <div>
+              <div className="my-reviews" onClick={createProject}>Start a Project</div>
+            </div>
+            <div>
+              <div className="log-out" onClick={logout}>Log Out</div>
+            </div>
           </div>
-          <div>
-          <div className="my-reviews" onClick={myJobs}>My Jobs</div>
+        )}
+      </>
+    )
+  } else {
+    loggedInOrNot = (
+      <>
+        <button className="actual-button" onClick={openMenu}>
+          <div className="profile-button-container" id="pink">
+            <span className="fa-solid fa-bars fa-2x"></span>
+            <span className="fa-solid fa-circle-user fa-2x"></span>
           </div>
-          <div>
-          <div className="my-reviews" onClick={createProject}>Start a Project</div>
+        </button>
+        {showMenu && (
+          <div className="dropdown-content">
+            <div className="sign-up-text" style={{ zIndex: 3 }} onClick={() => setShowSignUpModal(true)}>Sign Up</div>
+            <div className="log-in-text" style={{ zIndex: 3 }} onClick={() => setShowLogInModal(true)}>Log In</div>
           </div>
-          <div>
-            <div className="log-out" onClick={logout}>Log Out</div>
-          </div>
-        </div>
-      )}
-    </>
-  )
-} else{
-  loggedInOrNot = (
-    <>
-    <button className="actual-button" onClick={openMenu}>
-        <div className="profile-button-container" id="pink">
-      <span className="fa-solid fa-bars fa-2x"></span>
-      <span className="fa-solid fa-circle-user fa-2x"></span>
-      </div>
-      </button>
-      {showMenu && (
-        <div className="dropdown-content">
-        <div className="sign-up-text" style={{zIndex:3}} onClick={() => setShowSignUpModal(true)}>Sign Up</div>
-        <div className="log-in-text"  style={{zIndex:3}} onClick={() => setShowLogInModal(true)}>Log In</div>
-        </div>
         )}
         {showSignUpModal && (
-        <Modal onClose={() => setShowSignUpModal(false)}>
-          <SignupForm />
+          <Modal onClose={() => setShowSignUpModal(false)}>
+            <SignupForm />
 
-        </Modal>
-      )}
-      {showLogInModal && (
-        <Modal onClose={() => setShowLogInModal(false)}>
+          </Modal>
+        )}
+        {showLogInModal && (
+          <Modal onClose={() => setShowLogInModal(false)}>
 
-          <LoginForm />
-        </Modal>
-      )}
+            <LoginForm />
+          </Modal>
+        )}
 
-    </>
-  )
-}
+      </>
+    )
+  }
 
   return (
     <>

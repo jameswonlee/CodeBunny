@@ -15,13 +15,13 @@ function EditProjectForm() {
     let allProjects = useSelector(state => Object.values(state.projects));
     let currProject = allProjects.filter(project => project.id === projectId);
 
-    console.log('currProject', currProject)
-
-    // let projectSkills = currProject[0]?.skills.map(({ skill_name }) => {
-    //     return skill_name
-    // })
     const [isLoaded, setIsLoaded] = useState(false)
     const [skills, setSkills] = useState()
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [start_date, setStartDate] = useState("")
+    const [end_date, setEndDate] = useState("")
+    const [validationErrors, setValidationErrors] = useState([])
 
     useEffect(() => {
         setName(currProject[0]?.name)
@@ -34,11 +34,6 @@ function EditProjectForm() {
         }))
     }, [projectId, isLoaded])
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [start_date, setStartDate] = useState("")
-    const [end_date, setEndDate] = useState("")
-    const [validationErrors, setValidationErrors] = useState([])
 
  
 
@@ -53,10 +48,6 @@ function EditProjectForm() {
         dispatch(getprojects())
             .then(() => setIsLoaded(true))
     }, [])
-
-
-    
-
 
     if (!currProject) {
         return null
