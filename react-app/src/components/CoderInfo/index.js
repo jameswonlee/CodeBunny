@@ -39,7 +39,6 @@ const CoderInfo = () => {
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
-        dispatch(loadOneCoder(coderId))
     }, [dispatch, coderId])
 
     let girlNames = ['Marnie']
