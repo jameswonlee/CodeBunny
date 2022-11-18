@@ -1,5 +1,5 @@
-.my-projects-page-container{
-    display:flex;
+.my-projects-page-container {
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: rgb(255, 255, 255);
@@ -7,11 +7,11 @@
 
 }
 
-.projects-container{
+.projects-container {
     border: 2px solid rgb(0, 62, 31);
     padding: 5%;
     margin: 5%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgb(255, 255, 255);
@@ -28,20 +28,23 @@
 }
 
 
-.completed-container{
-     border-top: 3px solid rgb(4, 98, 65);
-     padding: 4%;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
+.completed-container {
+    border-top: 3px solid rgb(4, 98, 65);
+    padding: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.user-projects-header, h1, h2{
-    display:block;
+
+.user-projects-header,
+h1,
+h2 {
+    display: block;
     text-align: center;
 
 }
 
-.projects-title{
+.projects-title {
     border-bottom: 2px solid rgb(3, 97, 66);
     padding-bottom: 10%;
 }
@@ -55,31 +58,34 @@
     margin: 10%;
     padding: 3%;
 }
+
 a {
     color: white;
     text-decoration: none;
 }
 
-.projects-buttons-container{
+.projects-buttons-container {
     flex-direction: column;
     justify-content: center;
     margin-left: 10%;
     border: 2px solid black;
     padding: 5%;
-    display:flex;
+    display: flex;
 
 }
 
-.project-card{
-    display:flex;
+.project-card {
+    display: flex;
     justify-content: center;
     /* flex-direction: column; */
     align-items: center;
     margin: 10% 0%
-
-
 }
-.project-details-container{
+
+.project-details-container {
     border: 2px solid black;
     padding: 5%;
+}
+.detail-heading{
+    font-weight: bold;
 }
