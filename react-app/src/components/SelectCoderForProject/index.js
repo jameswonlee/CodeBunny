@@ -29,7 +29,7 @@ function SelectCoderForProject() {
 
     if(!allCoders) return null
     if(!allProjects) return null
-
+    if(!sessionUser) return null
 
     // console.log("All projects is", allProjects)
     let currProject = allProjects.filter(project => project.id === +projectId)[0]

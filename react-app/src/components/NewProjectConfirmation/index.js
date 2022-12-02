@@ -69,11 +69,11 @@ function NewProjectConfirmation() {
         </div>
         <div className="project-details-confirmation-container">
             <h3>Coder Details:</h3>
-            <div>Coder Name: {coderDetails.user.first_name} {coderDetails.user.last_name}</div>
-            <div>Coder Contact: {coderDetails.user.email}</div>
-            <div>Coder Rate: ${coderDetails.daily_rate}</div>
+            <div>Coder Name: {coderDetails && coderDetails.user.first_name} {coderDetails && coderDetails.user.last_name}</div>
+            <div>Coder Contact: {coderDetails && coderDetails.user.email}</div>
+            <div>Coder Rate: ${coderDetails && coderDetails.daily_rate}</div>
             <div>Total days: {projectDays}</div>
-            <div>Cost: ${coderDetails.daily_rate * projectDays}</div>
+            <div>Cost: ${coderDetails && coderDetails.daily_rate * projectDays}</div>
         </div>
             <button className="looks-great-button" onClick = {() => handleSubmit() }>Looks Great!</button>
         </div>

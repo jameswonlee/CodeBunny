@@ -79,7 +79,7 @@ function EditProjectForm() {
         if (!description) errors.push("Please provide a description for your project");
         if (!start_date) errors.push("Please provide a start date for your project");
         if (!end_date) errors.push("Please provide an end date for your project");
-        if (!skills) errors.push("Please select the skills required for your project");
+        if (!skills.length) errors.push("Please select the skills required for your project");
         if (!start_date) errors.push("Please select a start date");
         if (!end_date) errors.push("Please select an end date");
         if (new Date(end_date).getTime() < new Date(start_date).getTime()) errors.push("Please select valid start and end dates");
