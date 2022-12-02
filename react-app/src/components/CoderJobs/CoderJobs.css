@@ -53,9 +53,38 @@ h2 {
 .delete-project-button,
 .edit-delete-button {
     color: white;
-    background-color: rgb(2, 70, 2);
-    margin: 10%;
+    margin: 7%;
     padding: 3%;
+
+    width: 100%;
+    background-color: rgba(21,122,95,255);
+    border-radius: 5px;
+    color: white;
+    border-radius:5px;
+    border-width: thin;
+    border-color: rgba(21,122,95,255);
+    /* padding:10px; */
+    /* margin-top:2%; */
+    cursor: pointer;
+}
+
+.coder-profile-button:hover,
+.delete-project-button:hover,
+.edit-delete-button:hover {
+    color: white;
+    margin: 7%;
+    padding: 3%;
+
+    width: 100%;
+    background-color: rgb(3, 97, 66);
+    border-radius: 5px;
+    color: white;
+    border-radius:5px;
+    border-width: thin;
+    border-color: rgb(3, 97, 66);
+    /* padding:10px; */
+    /* margin-top:2%; */
+    cursor: pointer;
 }
 
 a {

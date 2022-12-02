@@ -56,13 +56,28 @@ border-color: rgb(0, 0, 0);
 
 .Create-Spot-button{
     width: 100%;
-    background-color: rgb(11, 58,13);
+    background-color: rgba(21,122,95,255);
+    border-radius: 5px;
     color: white;
-    border-radius:0px;
+    border-radius:5px;
     border-width: thin;
     padding:10px;
     margin-top:2%;
-    border: none
+    cursor: pointer;
+    /* border: none */
+}
+
+.Create-Spot-button:hover{
+    width: 100%;
+    background-color: rgb(15, 80, 18);
+    border-radius: 5px;
+    color: white;
+    border-radius:5px;
+    border-width: thin;
+    padding:10px;
+    margin-top:2%;
+    cursor: pointer;
+    /* border: none */
 }
 
 .check-box-box{
