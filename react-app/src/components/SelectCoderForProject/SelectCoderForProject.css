@@ -22,25 +22,66 @@
     color:black
 }
 
-.coder-shortbio-container{
+.select-coder-shortbio-container{
     display:flex;
     flex-direction: column;
     justify-content: center;
+    align-content:center;
+    align-items: center;
+    border: 2px solid black;
+    margin: 2%;
+    padding: 2%;
+    background-color: rgb(1, 61, 1);
+    color:white;
+    width: 90%
 
 }
 
-.coder-cards-container{
+.select-coder-details{
+    display: flex;
+    /* align-content: center; */
+    justify-content: center;
+    margin: 2%;
+}
+
+.select-coder-cards-container{
     display: flex;
     justify-content: center;
+    align-items: center;
+    width:400px;
     flex-wrap: wrap;
+    /* border-color: yellow;
+    border-style: solid; */
 }
 
 h1{
     border-bottom: 2px solid black;
+}
+.select-coder-titles{
+    display: flex;
+    /* text-align:center; */
+    align-self: center;
+    font-weight:bold;
+    margin: 2%;
 }
 
 .select-coder-page-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 50%;
+    /* border-color: red;
+    border-style: solid; */
+}
+
+.select-coder-jason-whole-page{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    /* border-color: green;
+    border-style: solid; */
 }

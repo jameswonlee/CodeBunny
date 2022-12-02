@@ -2,7 +2,7 @@ import React, {useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { getprojects } from '../../store/projects';
-import '../UserProjects/UserProjects.css'
+import './CoderJobs.css'
 
 
 
@@ -41,7 +41,7 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
 
                                 return(
                                     <>
-                                        <div>
+                                        <div className="job-card">
                                             <div className='detail-heading'>Project Name:</div><div>{project.name}</div>
                                             <div className = 'detail-heading'>Start-Date:</div><div>{project.start_date}</div >
                                             <div className='detail-heading'>End-Date:</div><div>{project.end_date}</div>
@@ -59,7 +59,7 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                         </div>
 
                     </div>
-                    <div className='completed-container'>
+                    <div className='completed-jobs-container'>
                         <h1 className = 'projects-title' >Completed Jobs</h1>
                         {completedProjects.length? completedProjects.map(project=>{
 

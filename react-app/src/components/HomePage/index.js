@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import "./HomePage.css"
 // import groupcoding from './Images/groupcoding.png'
 import whitebackground from './Images/whitebackground.png'
+// import binary from './Images/binary.png'
 import SearchBar from '../SearchBar/SearchBar'
 import {loadAllCoders} from '../../store/coders'
 
@@ -26,7 +27,7 @@ const GetAllSpots = () => {
     return (
         <div className="home-container">
             <div className= "image-one-container">
-                <img className= "group-coding" src= {whitebackground} alt="coding background" ></img>
+                <img className= "group-coding" src= {whitebackground} alt="coding letters" ></img>
             </div>
             <div><SearchBar/></div>
         </div>

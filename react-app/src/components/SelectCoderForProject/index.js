@@ -22,7 +22,10 @@ function SelectCoderForProject() {
 
     let allProjects = useSelector(state => Object.values(state.projects))
     let allCoders = useSelector(state => Object.values(state.coders))
+
+
     let sessionUser = useSelector(state => state.session.user)
+    console.log('allCoders!!!!!!!!!!!!!!!', allCoders)
 
     if(!allCoders) return null
     if(!allProjects) return null
@@ -35,13 +38,15 @@ function SelectCoderForProject() {
     let neededSkills = []
     let currProjectSkills = currProject.skills.map(skill => neededSkills.push(skill.skill_name))
     // console.log("current project skills" , currProjectSkills)
-    console.log("neededSkilss is", neededSkills)
+    // console.log("neededSkilss is", neededSkills)
     let neededSkillslength = neededSkills.length
     let coderSkills = []
-    let skillsofCoders = allCoders.map(coder => coderSkills.push(coder.skills))
+    allCoders.map(coder => coderSkills.push(coder.skills))
+
     // console.log("what is skills of Coders", skillsofCoders)
     // console.log("skills of Coders", coderSkills)
     let coderSkillss = []
+    console.log('coderSkills', coderSkills)
     for (let i = 0; i < coderSkills.length; i++){
         let arr = []
         for(let j=0; j<coderSkills[i].length; j++){
@@ -61,7 +66,7 @@ function SelectCoderForProject() {
           if(containsAll) eligiblecoderskills.push(coderSkillss[i])
     }
 
-    console.log("eligibile coder skills without coder id attached ", eligiblecoderskills)
+    // console.log("eligibile coder skills without coder id attached ", eligiblecoderskills)
 
     //works up to there
     let allcodersskillsobj = {}
@@ -76,10 +81,10 @@ function SelectCoderForProject() {
 
     }
 
-    console.log("allcokerskillsobj", allcodersskillsobj)
+    // console.log("allcokerskillsobj", allcodersskillsobj)
     let entries = Object.entries(allcodersskillsobj)
 
-    console.log("entries are", entries)
+    // console.log("entries are", entries)
 
     let validCoderIds = []
 
@@ -95,7 +100,7 @@ function SelectCoderForProject() {
 
     }
 
-    console.log("valid coder ids is", validCoderIds)
+    // console.log("valid coder ids is", validCoderIds)
 
     let validCoders = []
 
@@ -104,9 +109,9 @@ function SelectCoderForProject() {
         validCoders.push(validCoder)
     }
 
-    console.log("valid coders are" , validCoders)
+    // console.log("valid coders are" , validCoders)
 
-    console.log("coder Skillsssss", coderSkillss)
+    // console.log("coder Skillsssss", coderSkillss)
 
     // console.log("ALL CODERS IS", allCoders)
 
@@ -125,17 +130,21 @@ function SelectCoderForProject() {
     }
 
     return (
-
+<div className="select-coder-jason-whole-page">
         <div className="select-coder-page-container">
         <h1 classname='select-a-coder-title'>Select A Coder</h1>
 
-            <div className="coder-cards-container">
+            <div className="select-coder-cards-container">
                 {validCoders.map(coder => {
                     return (
-                    <div className="coder-shortbio-container">
-                        <div>{coder.user.first_name} {coder.user.last_name}</div>
-                        <div>Bio: {coder.bio}</div>
-                        <div>Experience: {coder.experience}</div>
+                    <div className="select-coder-shortbio-container">
+                        <div className="select-coder-titles">{coder.user.first_name} {coder.user.last_name}</div>
+                        <div className="select-coder-titles">Bio:</div>
+                        <div className="select-coder-details">{coder.bio}</div>
+                        <div className="select-coder-titles">Experience:</div>
+                        <div className="select-coder-details">{coder.experience}</div>
+                        <div className="select-coder-titles">Skills:</div>
+                        <div className="search-skills-wrap-container">{coder.skills.map(skill=> (<div className='skill-name'>| {skill.skill_name} |</div>))}</div>
                         {/* <button className="view-coder-profile-button"><NavLink className="view-coder-profile-button" to={`/coders/${coder.id}`}>View Profile</NavLink></button> */}
                         {coder.user_id !== sessionUser.id ? <button className = 'choose-coder-profile-button' onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button> : null}
                     </div>
@@ -145,7 +154,7 @@ function SelectCoderForProject() {
 
         </div>
         </div>
-
+</div>
 
     )
 

@@ -8,25 +8,53 @@ import './CoderInfo.css'
 
 
 
+
 const CoderInfo = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
     // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
-
-
-    const sessionUser = useSelector(state => state.session.user);
-
     coderId = parseInt(coderId)
-    let sessionUserId
+    useEffect(() => {
+        dispatch(loadAllCoders())
+        dispatch(loadAllReviews())
+        // dispatch(loadOneCoder(coderId))
+    }, [dispatch, coderId])
+
+    console.log('coderId', coderId)
+    const sessionUser = useSelector(state => state.session.user);
+    const reviewInfo = useSelector(state => state.reviews)
+    const CodersUserId = useSelector(state => state.coders.user_id)
+    let allCoders = useSelector(state => Object.values(state.coders))
+    if (!allCoders) {
+        return null
+    }
+
+    let currCoder = allCoders.filter(coder => coder.id === coderId)[0]
+    console.log('currCoder', currCoder)
+
+
+
+
+
+    if (!currCoder){
+        return null
+    }
+
+    // if (!sessionUser){
+    //     return null
+    // }
+
+    let sessionUserId;
 
     if (sessionUser) {
         sessionUserId = sessionUser.id
     }
 
     // console.log("this is UserId", sessionUser.id)
-    const CodersUserId = useSelector(state => state.coders.user_id)
+
     // const reviewsData = useSelector(state => state.reviews);
-    const reviewInfo = useSelector(state => state.reviews)
+
     const reviewInfoArray = Object.values(reviewInfo)
     const reviewsByUserId = reviewInfoArray.filter(item => item.user_id === sessionUserId)
     const reviewsByCoderId = reviewsByUserId.filter(element => element.coder_id === +coderId)
@@ -36,28 +64,33 @@ const CoderInfo = () => {
     // console.log("this is reviewInfo", reviewInfo)
     // console.log("this is the Object values of review Info", reviewInfoArray)
     // console.log("this is reviewsByUserId", reviewsByUserId)
+<<<<<<< HEAD
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
     }, [dispatch, coderId])
+=======
+
+>>>>>>> 6e2fbcccf9191e8d52bbdddbcfa1a688e43e6bbb
 
     let girlNames = ['Marnie']
 
 
-    const history = useHistory()
-    let coder = useSelector(state => state.coders)
 
 
-    console.log("CODER IS", coder)
+    // let coder = allCoders.filter(coder => coder.id === coderId)
+    // coder = coder[0]
+
+    // console.log("CODER IS", coder)
 
 
-    if (!coder) {
-        return null
-    }
+    // if (!coder) {
+    //     return null
+    // }
 
-    if (!coder.user) {
-        return null
-    }
+    // if (!coder.user) {
+    //     return null
+    // }
 
 
     const deleteHandler = async (e) => {
@@ -71,9 +104,9 @@ const CoderInfo = () => {
     }
 
     let deleteButton;
-    if (sessionUser && sessionUser.id === CodersUserId) {
+    if (sessionUser && sessionUser.id === currCoder.user_id) {
         deleteButton = (
-            < div className = "Edit-Delete-Button-container" >
+            < div className="Edit-Delete-Button-container" >
                 <button className="Edit-Delete-Button" onClick={() => deleteHandler()}>Remove My Profile</button>
             </div>
         )
@@ -84,11 +117,16 @@ const CoderInfo = () => {
         )
     }
     let seeCreateReviewButton;
-    seeCreateReviewButton = (
-        <div className='create-button-container'>
-            <button className="Create-Review-Button" type="submit">Leave A Review!</button>
-        </div>
-    )
+    if (sessionUser && currCoder.user_id !== sessionUserId) {
+        seeCreateReviewButton = (
+            <div className='create-button-container'>
+                <button className="Create-Review-Button" type="submit">Leave A Review!</button>
+            </div>
+        )
+    } else {
+        <>
+        </>
+    }
 
     // let seeCreateUpdateButton;
     // seeCreateUpdateButton = (
@@ -98,9 +136,9 @@ const CoderInfo = () => {
     // )
 
     let editButton;
-    if (sessionUser && sessionUser.id === CodersUserId) {
+    if (sessionUser && sessionUser.id === currCoder.user_id) {
         editButton = (
-            < div className = "Edit-Delete-Button-container" >
+            < div className="Edit-Delete-Button-container" >
                 <button className="Edit-Delete-Button" onClick={() => history.push(`/coder/${coderId}/edit`)}>Edit My Profile</button>
             </div>
         )
@@ -110,67 +148,76 @@ const CoderInfo = () => {
             </>
         )
     }
+let currCoderfirst_name
+let currCoderId
+let currCoderDailyRate
+if(currCoder){
+    currCoderfirst_name = currCoder.user.first_name
+    currCoderId = currCoder.id
+    currCoderDailyRate = currCoder.daily_rate
+}
+
 
     return (
         <>
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
                     <div className='coder-header-name-container'>
-                        <h1 className="coder-info-title">{coder.user.first_name} {coder.user.last_name}</h1>
+                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
                     </div>
 
                     <div>
                         <img
                             width={300}
                             height={300}
-                            src={`https://randomuser.me/api/portraits/${girlNames.includes(coder.user.first_name) ? "women" : "men"}/${coder.id}.jpg`}
+                            src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoderfirst_name) ? "women" : "men"}/${currCoderId}.jpg`}
                             alt="random portrait"
                             className="user-image">
                         </img>
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>CONTACT:</div>
-                        {coder.user.email}
+                        {currCoder && currCoder.user.email}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>BIO:</div>
-                        {coder.bio}
+                        {currCoder && currCoder.bio}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>EXPERIENCE:</div>
-                        {coder.experience}
+                        {currCoder && currCoder.experience}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>DAILY RATE:</div>
-                        {`$${coder.daily_rate}`}
+                        {`$${currCoderDailyRate}`}
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>SKILLS:</div>
-                        {coder.skills.map(skill => {
+                        {currCoder && currCoder.skills.map(skill => {
                             return (
-                                <div key={skill.id}>{skill.skill_name}</div>
+                                <div key={skill.id}>{skill.skill_name} </div>
                             )
                         })}
                     </div>
                     <NavLink to={`/review/${coderId}/new`}>
-                    {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
-                         {seeCreateReviewButton}
+                        {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
+                        {seeCreateReviewButton}
                     </NavLink>
 
-                     <div>
+                    <div>
 
-                    {/* <NavLink to={`/review/${coderId}/new`}>
+                        {/* <NavLink to={`/review/${coderId}/new`}>
                                     {sessionUserId  && !reviewsByUserId && sessionUserId  !== spotInfoOwnerId ? seeCreateReviewButton : null}
                                     </NavLink> */}
                         {editButton}
                         {deleteButton}
 
-                </div>
+                    </div>
 
                 </div>
 
                 <div>
-                    <Reviews coderId={coderId}/>
+                    <Reviews coderId={coderId} />
                 </div>
 
 
