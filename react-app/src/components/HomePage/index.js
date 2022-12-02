@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import "./HomePage.css"
 // import groupcoding from './Images/groupcoding.png'
 import whitebackground from './Images/whitebackground.png'
+import binary from './Images/binary.png'
 // import binary from './Images/binary.png'
 import SearchBar from '../SearchBar/SearchBar'
 import {loadAllCoders} from '../../store/coders'

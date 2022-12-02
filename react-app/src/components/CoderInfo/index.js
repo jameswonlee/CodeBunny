@@ -64,14 +64,6 @@ const CoderInfo = () => {
     // console.log("this is reviewInfo", reviewInfo)
     // console.log("this is the Object values of review Info", reviewInfoArray)
     // console.log("this is reviewsByUserId", reviewsByUserId)
-<<<<<<< HEAD
-    useEffect(() => {
-        dispatch(loadAllCoders())
-        dispatch(loadAllReviews())
-    }, [dispatch, coderId])
-=======
-
->>>>>>> 6e2fbcccf9191e8d52bbdddbcfa1a688e43e6bbb
 
     let girlNames = ['Marnie']
 

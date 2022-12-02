@@ -138,13 +138,13 @@ function SelectCoderForProject() {
                 {validCoders.map(coder => {
                     return (
                     <div className="select-coder-shortbio-container">
-                        <div className="select-coder-titles">{coder.user.first_name} {coder.user.last_name}</div>
-                        <div className="select-coder-titles">Bio:</div>
+                        <h3 className="select-coder-name">{coder.user.first_name} {coder.user.last_name}</h3>
+                        <div className="select-coder-titles">Bio</div>
                         <div className="select-coder-details">{coder.bio}</div>
-                        <div className="select-coder-titles">Experience:</div>
+                        <div className="select-coder-titles">Experience</div>
                         <div className="select-coder-details">{coder.experience}</div>
-                        <div className="select-coder-titles">Skills:</div>
-                        <div className="search-skills-wrap-container">{coder.skills.map(skill=> (<div className='skill-name'>| {skill.skill_name} |</div>))}</div>
+                        <div className="select-coder-titles">Skills</div>
+                        <div className="search-skills-wrap-container">{coder.skills.map(skill=> (<div className='skill-name'> {skill.skill_name} </div>))}</div>
                         {/* <button className="view-coder-profile-button"><NavLink className="view-coder-profile-button" to={`/coders/${coder.id}`}>View Profile</NavLink></button> */}
                         {coder.user_id !== sessionUser.id ? <button className = 'choose-coder-profile-button' onClick = {() => handleCoderSubmit(coder.id)}>Choose this coder</button> : null}
                     </div>

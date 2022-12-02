@@ -1,9 +1,26 @@
 .choose-coder-profile-button{
-    background-color: white;
-    color:black;
-     margin: 10%;
-     padding:10px;
-     width: auto
+    background-color: rgba(21,122,95,255);
+    color:white;
+    font-weight: bold;
+     margin: 5%;
+     padding:15px;
+     width: auto;
+     border: rgba(21,122,95,255);
+     border-radius: 5px;
+     cursor: pointer;
+
+}
+
+.choose-coder-profile-button:hover{
+    background-color: rgb(15, 80, 18);
+    color:white;
+    font-weight: bold;
+     margin: 5%;
+     padding:15px;
+     width: auto;
+     border: rgba(21,122,95,255);
+     border-radius: 5px;
+     cursor: pointer;
 
 }
 
@@ -28,40 +45,48 @@
     justify-content: center;
     align-content:center;
     align-items: center;
-    border: 2px solid black;
+    border: 1px solid black;
+    border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: rgb(1, 61, 1);
-    color:white;
-    width: 90%
+    background-color: white;
+    color:black;
+    width: 120%
 
 }
 
 .select-coder-details{
     display: flex;
     /* align-content: center; */
+    text-align: center;
     justify-content: center;
     margin: 2%;
 }
+
+.select-coder-name{
+    font-weight: bold;
+    font-size: 25px;
+}
+
 
 .select-coder-cards-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    width:400px;
+    width:700px;
     flex-wrap: wrap;
     /* border-color: yellow;
     border-style: solid; */
 }
 
-h1{
-    border-bottom: 2px solid black;
-}
+
 .select-coder-titles{
     display: flex;
-    /* text-align:center; */
-    align-self: center;
+    text-align:center;
+    /* vertical-align: middle; */
+    /* align-self: center; */
     font-weight:bold;
+    font-size: 18px;
     margin: 2%;
 }
 
@@ -84,4 +109,18 @@ h1{
     align-items: center;
     /* border-color: green;
     border-style: solid; */
+}
+
+.skill-name{
+    border: 1px solid black;
+    border-radius: 5px;
+    /* text-align: center; */
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px;
+    font-size: 14px;
+    
 }
