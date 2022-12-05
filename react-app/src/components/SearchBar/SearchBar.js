@@ -64,9 +64,9 @@ if (!codersArray){
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <div className="icon-container">
+                {/* <div className="icon-container">
                 <i className="icon fa fa-search fa-2x" onClick= {() => submitHandler()}></i>
-                </div>
+                </div> */}
             </div>
         </div>
 
@@ -89,5 +89,3 @@ if (!codersArray){
         </>
     )
 }
-
-

@@ -3,83 +3,124 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color:rgb(4, 72, 4);
-    border:2px solid rgb(4, 72, 4);
-    width: 30%;
-    height: 50%;
-    padding: 2%;
-    margin: 5% 5%
+    align-items:center;
+    color: rgb(4, 72, 4);
+    /* border:2px solid rgb(4, 72, 4); */
+    width: 40%;
+    height: 1300px;
+    margin-left: 100px;
+
 }
 
 h1 {
-    display:flex;
-    justify-content: flex-start;
+    display: flex;
+    justify-content: center;
+    /* background-color: white; */
+    width:fit-content;
+    font-weight: bolder;
+    color:white;
+    font-size: 70px;
+    text-shadow: 1px 1px 2px grey;
+
+}
+.coder-container > div {
+    margin-top: -1px;
+}
+.coder-user-image {
+    border-radius: 50%;
+    /* margin: 0% 7%; */
+    background-color: white;
+    opacity: 1.0;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 25px;
+    box-shadow:1px 1px 4px 1.5px rgb(71, 71, 71);
 
 }
 
-.user-image{
-    border-radius: 4%;
-    margin: 5% 0%;
-}
 
-
-.coder-details{
+.coder-details {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 2% 0%;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.7);
+    width: 350px;
+    color:rgb(0, 0, 0);
+
+    /* border: 1px solid rgb(150, 150, 150); */
+    box-shadow:1px 1px 4px 1.5px rgb(208, 208, 208);
 
 }
 
-.coder-details-headings{
+.coder-details-headings {
     /* display: flex;
     flex-direction: column; */
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
     font-weight: bold;
-    text-decoration: underline;
-    padding: 2% 0%;
+    /* text-decoration: underline; */
+    margin-bottom: 1px solid rgb(0, 0, 0);
+    padding: 10px;
+    font-size: 20px;
+    font-weight:bold;
+
 }
 
-.coder-detail-page-container{
+.coder-detail-page-container {
     display: flex;
     flex-direction: row;
+    background-image: url("https://d32ijn7u0aqfv4.cloudfront.net/wp/wp-content/uploads/raw/SOMN0721067_1560x880_desktop.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
 
-.user-photo{
+.user-photo {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    background-color: white;
 }
 
-.user-image{
-    padding-right: 5%
+.user-image {
+    /* padding-right: 5%; */
+    background-color: white;
 }
 
-.review-user-name{
+.review-user-name {
     font-weight: bolder;
+    background-color: white;
 }
 
-.review-card{
+.review-card {
     border: 2px solid rgb(3, 85, 3);
     padding: 5%;
-    margin:5%;
-    display:flex;
+    margin: 5%;
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: white;
 }
 
 .review-header {
-        margin: 5%;
-        padding: 5%;
-        border-bottom: 2px solid black;
-        text-align: center;
-        font-size: 35px;
+    margin: 5%;
+    padding: 5%;
+    border-bottom: 2px solid black;
+    text-align: center;
+    font-size: 25px;
+    background-color: white;
 
 }
 
-.Review-Delete-Button{
+.Review-Delete-Button {
     display: flex;
 
     align-self: center;
@@ -89,17 +130,38 @@ h1 {
 .Create-Review-Button,
 .Edit-Delete-Button,
 .Review-Delete-Button {
-    background-color: rgb(3, 85, 3);
+    background-color: rgba(12, 62, 2, 0.8);
     border: 1px solid black;
-    color:white;
+    color: white;
+    font-weight: bold;
     display: flex;
-    align-self:center;
+    align-self: center;
     justify-self: center;
-    padding:3%;
-    margin: 3%
-}
-
-.create-button-container, .Edit-Delete-Button-container {
+    padding: 12px;
+    margin: 3%;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 200px;
+    height: 50px;
     display: flex;
     justify-content: center;
+    box-shadow:0px 0px 0px 0.7px rgb(119, 119, 119);
+}
+
+.create-button-container,
+.Edit-Delete-Button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.coder-details-content{
+    font-weight:bold;
+    text-align: center;
+    /* border-top: 1px solid black; */
+    padding: 8px;
+    font-size: 18px;
+    line-height: 1.5;
+    width: 100%;
+    color:rgb(65, 96, 65)
 }

@@ -2,6 +2,7 @@
     display: flex;
     /* border-color: rgb(255, 0, 81);
     border-style: solid; */
+    justify-content: center;
 
 }
 .whole-container{
@@ -9,7 +10,9 @@
     border-style: solid; */
     width: 100vh;
     height: 100vh;
-    /* flex-wrap: wrap; */
+    display: flex;
+    justify-content: center;
+
 }
 
 .search-bar{
@@ -19,7 +22,7 @@ margin-left: 4.5%;
 display: flex;
 position: relative;
 flex-direction: row;
-align-items: center;
+/* align-items: center; */
 /* border-color: rgb(0, 255, 76);
 border-style: solid; */
 /* margin-top: 70%;
@@ -27,23 +30,14 @@ margin-left: 90%; */
 z-index: 1;
 }
 
-.icon-container{
-/* display: flex;
-align-items: center;
-justify-content: center;
-background-color: white;
-cursor: pointer; */
-/* border-color: rgb(255, 0, 111);
-border-style: solid; */
-}
-
 .search-input{
     /* margin:10%; */
-    width: 500px;
+    width: 550px;
     height: 50px;
     /* border: hidden; */
     border-color: black;
     font-size:larger;
+    padding: 5px;
     /* border-color: rgb(72, 0, 255);
 border-style: solid; */
 }
@@ -61,8 +55,9 @@ border-style: solid; */
     background-color: white;
     border: 2px solid black;
     padding: 3%;
-    margin-left: 2%;
-    width:20%
+    margin: 100px 20px 0px 20px;
+
+    width:425px;
 
 }
 .coder-shortbio-container{
