@@ -2,6 +2,7 @@
     display: flex;
     /* border-color: rgb(255, 0, 81);
     border-style: solid; */
+    justify-content: center;
 
 }
 .whole-container{
@@ -9,7 +10,9 @@
     border-style: solid; */
     width: 100vh;
     height: 100vh;
-    /* flex-wrap: wrap; */
+    display: flex;
+    justify-content: center;
+
 }
 
 .search-bar{
@@ -19,33 +22,43 @@ margin-left: 4.5%;
 display: flex;
 position: relative;
 flex-direction: row;
-align-items: center;
+/* align-items: center; */
 /* border-color: rgb(0, 255, 76);
 border-style: solid; */
 /* margin-top: 70%;
 margin-left: 90%; */
-z-index: 1;
-}
-
-.icon-container{
-/* display: flex;
-align-items: center;
-justify-content: center;
-background-color: white;
-cursor: pointer; */
-/* border-color: rgb(255, 0, 111);
-border-style: solid; */
+/* z-index: 1; */
 }
 
 .search-input{
     /* margin:10%; */
-    width: 500px;
+    width: 550px;
     height: 50px;
     /* border: hidden; */
     border-color: black;
     font-size:larger;
+    padding: 5px;
     /* border-color: rgb(72, 0, 255);
 border-style: solid; */
+}
+
+.search-results-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-height:800px;
+    width: 350px;
+     background-color: rgba(255, 255, 255, 0.5);
+     /* border: 2px solid rgb(0, 0, 0); */
+     box-shadow: 0px 0px 1.5px rgb(137, 135, 135);
+
+        justify-content: center;
+        align-content:center;
+        align-items: center;
+        background-color: white;
+
+        width: 90%
 }
 
 .search-results-cards{
@@ -54,15 +67,12 @@ border-style: solid; */
     position:absolute;
     justify-content: center;
     align-content: center;
-    z-index:2;
+    /* z-index:2; */
     /* border: 4px solid green; */
     align-items: center;
     color:white;
-    background-color: white;
-    border: 2px solid black;
-    padding: 3%;
-    margin-left: 2%;
-    width:20%
+    padding: 15px;
+    width:325px
 
 }
 .coder-shortbio-container{
@@ -127,10 +137,16 @@ margin: 3%
 }
 
 .button-profile{
-    background-color: grey;
+    background-color: rgb(255, 255, 255);
     margin: 5% 0%;
-    /* padding: 2%; */
+    padding: 10px;
     font-weight:bold;
+    border-radius: 5px;
+    font-size: 15px;
+
+}
+.button-profile-link{
+    color:black
 
 }
 .coder-results-details-title{
@@ -160,7 +176,21 @@ margin: 3%
     flex-wrap: wrap;
 }
 
-.skill-name{
+.search-results-skill-name {
     display: flex;
     justify-self: flex-start;
+    border: none;
+    background-color: white;
+    color:black;
+    cursor:not-allowed;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    font-weight: bold
+}
+
+
+.no-search-bar{
+margin-top: 85px;
+color:white;
 }

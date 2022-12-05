@@ -61,19 +61,19 @@ function NewProjectConfirmation() {
         <div className="confirmation-page-container">
             <h1>Booked!</h1>
         <div className="project-details-confirmation-container">
-            <h3>Project Details:</h3>
-            <div>Project Name: {confirmProject.name}</div>
-            <div>Description: {confirmProject.description}</div>
-            <div>Start Date: {confirmProject.start_date}</div>
-            <div>End Date: {confirmProject.end_date}</div>
-        </div>
-        <div className="project-details-confirmation-container">
-            <h3>Coder Details:</h3>
-            <div>Coder Name: {coderDetails && coderDetails.user.first_name} {coderDetails && coderDetails.user.last_name}</div>
-            <div>Coder Contact: {coderDetails && coderDetails.user.email}</div>
-            <div>Coder Rate: ${coderDetails && coderDetails.daily_rate}</div>
-            <div>Total days: {projectDays}</div>
-            <div>Cost: ${coderDetails && coderDetails.daily_rate * projectDays}</div>
+            <h3 className = "deets">Project Details:</h3>
+            <div className = "project-stats"><strong>Project Name:</strong> {confirmProject.name}</div>
+            <div className = "project-stats"><strong>Description:</strong> {confirmProject.description}</div>
+            <div className = "project-stats"><strong>Start Date:</strong> {confirmProject.start_date}</div>
+            <div className = "project-stats"><strong>End Date:</strong> {confirmProject.end_date}</div>
+        {/* </div>
+        <div className="project-details-confirmation-container"> */}
+            <h3 className = "deets">Coder Details:</h3>
+            <div className = "project-stats"><strong>Coder Name:</strong> {coderDetails && coderDetails.user.first_name} {coderDetails && coderDetails.user.last_name}</div>
+            <div className = "project-stats"><strong>Coder Contact:</strong> {coderDetails && coderDetails.user.email}</div>
+            <div className = "project-stats"><strong>Coder Rate:</strong> ${coderDetails && coderDetails.daily_rate}</div>
+            <div className = "project-stats"><strong>Total days:</strong> {projectDays}</div>
+            <div className = "project-stats"><strong>Cost:</strong> ${coderDetails && coderDetails.daily_rate * projectDays}</div>
         </div>
             <button className="looks-great-button" onClick = {() => handleSubmit() }>Looks Great!</button>
         </div>

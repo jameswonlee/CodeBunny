@@ -1,28 +1,15 @@
 .home-container{
     display: flex;
     width: 100%;
+    height:100%;
     justify-content: center;
     flex-direction: row;
     /* border-color: rgb(124, 0, 128);
     border-style: solid; */
-}
+    background-image: url("https://bigthink.com/wp-content/uploads/2022/06/AdobeStock_323910609.jpeg");
 
-.image-one-container{
-    /* position:absolute; */
-    width: 100%;
-    height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
 
-    margin-top: 15%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    /* border-color: green;
-    border-style: solid; */
-}
-
-.group-coding{
-    width: 100%;
-    object-fit: fill;
 }
