@@ -72,20 +72,21 @@ if (!codersArray){
 
 
             <div className='search-results-cards'>
-            {search ==='' ? (<h2 className='no-search-bar'>What Skills Are You Looking For?</h2>): (<div className='search-header'>Here are coders that match your search results</div>)}
+            {search ==='' ? (<h1 className='no-search-bar'>What Skills Are You Looking For?</h1>): (<div className='search-header'>Here are coders that match your search results</div>)}
                 {filteredCoders.map(coder => {
                     return (
                     <div className="coder-shortbio-container">
                         <div className="coder-results-details-title">{coder.user.first_name} {coder.user.last_name}</div>
                         <div className="coder-results-details-title">Bio:</div><div className='coder-results-details'>{coder.bio}</div>
                         <div className="coder-results-details-title">Experience:</div><div className='coder-results-details'> {coder.experience}</div>
-                        <div className="coder-results-details-title skills-results-container">Skills:</div><div className="search-skills-wrap-container">{coder.skills.map(skill=> (<div className='skill-name'>| {skill.skill_name} |</div>))}</div>
-                        <button className="button-profile"><NavLink to={`/coders/${coder.id}`}>View Profile</NavLink></button>
+                        <div className="coder-results-details-title skills-results-container">Skills:</div><div className="search-skills-wrap-container">{coder.skills.map(skill=> (<div className='search-results-skill-name'>{skill.skill_name}</div>))}</div>
+                        <button className="button-profile"><NavLink className={"button-profile-link"} to={`/coders/${coder.id}`}>View Profile</NavLink></button>
                     </div>
                     )
                 })}
+
             </div>
-</div>
+        </div>
         </>
     )
 }
