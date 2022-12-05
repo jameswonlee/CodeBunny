@@ -12,7 +12,7 @@
 
 }
 
-h1 {
+.coder-info-title {
     display: flex;
     justify-content: center;
     /* background-color: white; */
