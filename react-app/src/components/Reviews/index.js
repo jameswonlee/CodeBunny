@@ -56,7 +56,7 @@ const Reviews = ({ coderId }) => {
                             alt="random portrait"
                             className="user-image">
                         </img>
-                        <span className="review-user-name">{review.user?.first_name}</span>
+                        <div className="review-user-name">{review.user?.first_name}</div>
                     </div>
                     <div className="review">
                         {review.review}
@@ -75,10 +75,3 @@ const Reviews = ({ coderId }) => {
 
 
 export default Reviews
-
-
-
-
-
-
-

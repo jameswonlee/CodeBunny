@@ -87,36 +87,34 @@ h1 {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    background-color: white;
+    margin: 10px;
 }
 
-.user-image {
-    /* padding-right: 5%; */
-    background-color: white;
-}
 
 .review-user-name {
     font-weight: bolder;
-    background-color: white;
+    margin: 10px;
 }
 
 .review-card {
-    border: 2px solid rgb(3, 85, 3);
+    border-radius: 5px;
     padding: 5%;
     margin: 5%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 .review-header {
-    margin: 5%;
+    margin: 10%;
     padding: 5%;
-    border-bottom: 2px solid black;
+    /* border: 2px solid black; */
     text-align: center;
-    font-size: 25px;
-    background-color: white;
+    font-size: 45px;
+    color:white;
+
 
 }
 
@@ -158,10 +156,18 @@ h1 {
 .coder-details-content{
     font-weight:bold;
     text-align: center;
-    /* border-top: 1px solid black; */
+
     padding: 8px;
     font-size: 18px;
     line-height: 1.5;
     width: 100%;
+    color:rgb(65, 96, 65)
+}
+
+.review{
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.5;
     color:rgb(65, 96, 65)
 }
