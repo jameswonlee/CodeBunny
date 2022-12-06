@@ -60,7 +60,7 @@ if (!codersArray){
             <div className="search-bar">
                 <input className="search-input"
                     type="search"
-                    placeholder="Search for coders with the coding skills you need!"
+                    placeholder="Ex. Python, Javascript, React, Java, Camel, C++..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />

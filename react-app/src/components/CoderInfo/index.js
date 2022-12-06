@@ -154,9 +154,7 @@ if(currCoder){
         <>
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
-                    <div className='coder-header-name-container'>
-                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
-                    </div>
+                <div className='coder-profile-image-name-container'>
 
                     <div>
                         <img
@@ -167,6 +165,12 @@ if(currCoder){
                             className="coder-user-image">
                         </img>
                     </div>
+
+                    <div className='coder-header-name-container'>
+                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
+                    </div>
+
+                </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>Contact</div>
                        <div className='coder-details-content'> {currCoder && currCoder.user.email}</div>
@@ -210,7 +214,7 @@ if(currCoder){
                 </div>
 
                 <div>
-                    <Reviews coderId={coderId} />
+                    <Reviews coderName = {currCoder.user.first_name} coderId={coderId} />
                 </div>
 
 
