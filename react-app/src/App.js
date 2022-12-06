@@ -105,26 +105,26 @@ function App() {
         </div>
         <div className="footer-links">
           <div>
-            <a id="github" className="links-github" href="https://github.com/Keerthana-Yellapragada">Keerthana &nbsp;
+            <a id="github"  target="_blank" className="links-github" href="https://github.com/Keerthana-Yellapragada">Keerthana &nbsp;
               <i className="fa-brands fa-github fa-xl"></i>
             </a>
-            <a id="linkedin" className="links-linkedin" href="https://www.linkedin.com/in/keerthana-yellapragada/">
+            <a id="linkedin"  target="_blank" className="links-linkedin" href="https://www.linkedin.com/in/keerthana-yellapragada/">
               <i className="fa-brands fa-linkedin fa-xl"></i>
             </a>
           </div>
           <div>
-            <a id="github" className="links-github" href="https://github.com/ashramki96">Ashwin &nbsp;
+            <a id="github"  target="_blank" className="links-github" href="https://github.com/ashramki96">Ashwin &nbsp;
               <i className="fa-brands fa-github fa-xl"></i>
             </a>
-            <a id="linkedin" className="links-linkedin" href="https://www.linkedin.com/in/ashwin-ramakrishnan-4910b9b1/">
+            <a id="linkedin"  target="_blank" className="links-linkedin" href="https://www.linkedin.com/in/ashwin-ramakrishnan-4910b9b1/">
               <i className="fa-brands fa-linkedin fa-xl"></i>
             </a>
           </div>
           <div>
-            <a id="github" className="links-github" href="https://github.com/jrkong216">Jason &nbsp;
+            <a id="github"  target="_blank" className="links-github" href="https://github.com/jrkong216">Jason &nbsp;
               <i className="fa-brands fa-github fa-xl"></i>
             </a>
-            <a id="linkedin" className="links-linkedin" href="https://www.linkedin.com/in/jason-kong-39552922/">
+            <a id="linkedin"  target="_blank" className="links-linkedin" href="https://www.linkedin.com/in/jason-kong-39552922/">
               <i className="fa-brands fa-linkedin fa-xl"></i>
             </a>
           </div>
