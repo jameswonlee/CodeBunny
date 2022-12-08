@@ -1,7 +1,7 @@
 .home-container{
     display: flex;
     width: 100%;
-    height:100%;
+    /* height:100%; */
     justify-content: center;
     flex-direction: row;
     /* border-color: rgb(124, 0, 128);
@@ -11,5 +11,9 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-  overflow:scroll
+      /* overflow:scroll */
+}
+
+.whole-container{
+  margin-bottom: 200px;
 }
