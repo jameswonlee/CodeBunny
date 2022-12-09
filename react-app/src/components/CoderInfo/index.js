@@ -65,7 +65,6 @@ const CoderInfo = () => {
     // console.log("this is the Object values of review Info", reviewInfoArray)
     // console.log("this is reviewsByUserId", reviewsByUserId)
 
-
     let girlNames = ['Marnie']
 
 
@@ -155,9 +154,7 @@ if(currCoder){
         <>
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
-                    <div className='coder-header-name-container'>
-                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
-                    </div>
+                <div className='coder-profile-image-name-container'>
 
                     <div>
                         <img
@@ -165,32 +162,39 @@ if(currCoder){
                             height={300}
                             src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoderfirst_name) ? "women" : "men"}/${currCoderId}.jpg`}
                             alt="random portrait"
-                            className="user-image">
+                            className="coder-user-image">
                         </img>
                     </div>
+
+                    <div className='coder-header-name-container'>
+                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
+                    </div>
+
+                </div>
                     <div className='coder-details'>
-                        <div className='coder-details-headings'>CONTACT:</div>
-                        {currCoder && currCoder.user.email}
+                        <div className='coder-details-headings'>Contact</div>
+                       <div className='coder-details-content'> {currCoder && currCoder.user.email}</div>
                     </div>
                     <div className='coder-details'>
-                        <div className='coder-details-headings'>BIO:</div>
-                        {currCoder && currCoder.bio}
+                        <div className='coder-details-headings'>Bio:</div>
+                        <div className='coder-details-content'>{currCoder && currCoder.bio}</div>
                     </div>
                     <div className='coder-details'>
-                        <div className='coder-details-headings'>EXPERIENCE:</div>
-                        {currCoder && currCoder.experience}
+                        <div className='coder-details-headings'>Experience</div>
+                       <div className='coder-details-content'>{currCoder && currCoder.experience}</div>
                     </div>
                     <div className='coder-details'>
-                        <div className='coder-details-headings'>DAILY RATE:</div>
-                        {`$${currCoderDailyRate}`}
+                        <div className='coder-details-headings'>Daily Rate</div>
+                        <div className='coder-details-content'>{`$${currCoderDailyRate}`}</div>
                     </div>
                     <div className='coder-details'>
-                        <div className='coder-details-headings'>SKILLS:</div>
-                        {currCoder && currCoder.skills.map(skill => {
+                        <div className='coder-details-headings'>Skills</div>
+                       <div className='coder-details-content'>{currCoder && currCoder.skills.map(skill => {
                             return (
                                 <div key={skill.id}>{skill.skill_name} </div>
                             )
                         })}
+                        </div>
                     </div>
                     <NavLink to={`/review/${coderId}/new`}>
                         {/* {sessionUserId && reviewsByCoderId.length === 0 ? seeCreateReviewButton : null} */}
@@ -210,7 +214,7 @@ if(currCoder){
                 </div>
 
                 <div>
-                    <Reviews coderId={coderId} />
+                    <Reviews coderName = {currCoder.user.first_name} coderId={coderId} />
                 </div>
 
 

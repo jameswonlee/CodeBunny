@@ -5,7 +5,7 @@ import {useParams} from 'react-router-dom';
 import { loadAllReviews, deleteReview } from '../../store/reviews';
 
 
-const Reviews = ({ coderId }) => {
+const Reviews = ({ coderId, coderName }) => {
     const dispatch = useDispatch();
     // const history = useHistory()
     // let {coderId} = useParams()
@@ -44,8 +44,8 @@ const Reviews = ({ coderId }) => {
     // console.log("reviews", reviews)
     return (
         <div className="reviews-container">
-            <h2 className='review-header'>Reviews</h2>
-            <div className="reviews">{coderReviews?.map((review, index) => (
+           <div className='review-header'>Reviews for {coderName}</div>
+            <div className="reviews-cards-container">{coderReviews?.map((review, index) => (
             <>
                 <div key={review.id} className="review-card">
                     <div className="user-photo">
@@ -56,7 +56,7 @@ const Reviews = ({ coderId }) => {
                             alt="random portrait"
                             className="user-image">
                         </img>
-                        <span className="review-user-name">{review.user?.first_name}</span>
+                        <div className="review-user-name">{review.user?.first_name}</div>
                     </div>
                     <div className="review">
                         {review.review}
@@ -75,10 +75,3 @@ const Reviews = ({ coderId }) => {
 
 
 export default Reviews
-
-
-
-
-
-
-

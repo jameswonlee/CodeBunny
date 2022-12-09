@@ -100,14 +100,43 @@ function App() {
         </Route>
       </Switch>
       <footer className="footer">
-          <div className="footer-about">
-            <strong>CodeBunny, inspired by TaskRabbit: [ Keerthana, Ashwin, Jason, James ]</strong>
-          </div>
-          <div className="footer-links">
-            <a id="github" className="links-github" href="https://github.com/jameswonlee/CodeBunny">
+        <div className="footer-about">
+          <strong>CodeBunny -  Inspired by TaskRabbit</strong>
+        </div>
+        <div className="footer-links">
+          <div>
+            <a id="github"  target="_blank" className="links-github" href="https://github.com/Keerthana-Yellapragada">Keerthana &nbsp;
               <i className="fa-brands fa-github fa-xl"></i>
             </a>
+            <a id="linkedin"  target="_blank" className="links-linkedin" href="https://www.linkedin.com/in/keerthana-yellapragada/">
+              <i className="fa-brands fa-linkedin fa-xl"></i>
+            </a>
           </div>
+          <div>
+            <a id="github"  target="_blank" className="links-github" href="https://github.com/ashramki96">Ashwin &nbsp;
+              <i className="fa-brands fa-github fa-xl"></i>
+            </a>
+            <a id="linkedin"  target="_blank" className="links-linkedin" href="https://www.linkedin.com/in/ashwin-ramakrishnan-4910b9b1/">
+              <i className="fa-brands fa-linkedin fa-xl"></i>
+            </a>
+          </div>
+          <div>
+            <a id="github"  target="_blank" className="links-github" href="https://github.com/jrkong216">Jason &nbsp;
+              <i className="fa-brands fa-github fa-xl"></i>
+            </a>
+            <a id="linkedin"  target="_blank" className="links-linkedin" href="https://www.linkedin.com/in/jason-kong-39552922/">
+              <i className="fa-brands fa-linkedin fa-xl"></i>
+            </a>
+          </div>
+          <div>
+            <a id="github" className="links-github" href="https://github.com/jameswonlee">James &nbsp;
+              <i className="fa-brands fa-github fa-xl"></i>
+            </a>
+            <a id="linkedin" className="links-linkedin" href="https://www.linkedin.com/in/jameswonlee/">
+              <i className="fa-brands fa-linkedin fa-xl"></i>
+            </a>
+          </div>
+        </div>
       </footer>
     </>
     // </BrowserRouter>

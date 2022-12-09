@@ -1,14 +1,15 @@
-.confirmation-page-container{
+.confirmation-page-container {
     /* border: 2px solid black; */
     display: flex;
     flex-direction: column;
-    align-content:center;
-    justify-content:center;
-    align-items:center
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.project-details-confirmation-container{
-    display: flex;
+.project-details-confirmation-container {
+    /* display: flex;
     flex-direction: column;
     border: 2px solid rgb(1, 61, 3);
     justify-self: center;
@@ -19,12 +20,52 @@
     margin: 5%;
     padding: 5%;
     background-color: rgb(255, 255, 255);
+    align-items: center; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 2%;
+    background-color: white;
+    color: black;
+    /* width: 70% */
 }
 
-.looks-great-button{
+.looks-great-button {
+    width: 10%;
+    background-color: rgba(21, 122, 95, 255);
+    border-radius: 5px;
     color: white;
-    background-color:rgb(2, 69, 2);
-    padding: 2%;
-    margin: 2%
+    border-radius: 5px;
+    border-width: thin;
+    padding: 10px;
+    margin-top: 2%;
+    cursor: pointer;
+    /* border: none */
+}
+
+.looks-great-button:hover {
+    width: 10%;
+    background-color: rgb(15, 80, 18);
+    border-radius: 5px;
+    color: white;
+    border-radius: 5px;
+    border-width: thin;
+    padding: 10px;
+    margin-top: 2%;
+    cursor: pointer;
+    /* border: none */
+}
+
+.project-stats {
+    padding: 5px;
+}
+
+.deets {
+    border-bottom: 1px solid black
 }
