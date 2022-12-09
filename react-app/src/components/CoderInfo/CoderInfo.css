@@ -9,6 +9,7 @@
     width: 40%;
     height: 70vh;
     margin-left: 100px;
+    margin-bottom: 100px;
 
 }
 .coder-profile-image-name-container{
@@ -24,7 +25,7 @@
     width:fit-content;
     font-weight: bolder;
     color:white;
-    font-size: 70px;
+    font-size: 50px;
     text-shadow: 1px 1px 2px grey;
     margin-bottom: 10px;
 
@@ -37,8 +38,8 @@
     /* margin: 0% 7%; */
     background-color: white;
     opacity: 1.0;
-    width: 160px;
-    height: 160px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 35px;
     margin-right: 20px;
     box-shadow:1px 1px 4px 1.5px rgb(71, 71, 71);
@@ -81,7 +82,7 @@
     display: flex;
     flex-direction: row;
     background-image: url("https://d32ijn7u0aqfv4.cloudfront.net/wp/wp-content/uploads/raw/SOMN0721067_1560x880_desktop.jpg");
-    height: 90vh;
+    /* height: 90vh; */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -178,7 +179,7 @@
     text-align: center;
 
     padding: 8px;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 1.5;
     width: 100%;
     color:rgb(121, 118, 118);
