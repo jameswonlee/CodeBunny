@@ -7,7 +7,7 @@
     color: rgb(81, 81, 81);
     /* border:2px solid rgb(4, 72, 4); */
     width: 40%;
-    /* height: 100vh; */
+    height: 70vh;
     margin-left: 100px;
 
 }
@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    padding-top: 160px;
 }
 .coder-info-title {
     display: flex;
@@ -84,7 +85,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: scroll;
+
 }
 
 
@@ -111,7 +112,7 @@
 .review-card {
     border-radius: 5px;
     padding: 5%;
-    margin: 5% 0% ;
+    margin: 10px 20px 10px 10px ;
     width: 350px;
     display: flex;
     flex-direction: column;
@@ -121,10 +122,11 @@
 
 .review-header {
     text-align:center;
-    margin: 70px 0px;
+    margin: 70px 15px;
     font-size: 40px;
     color:rgb(242, 237, 237);
     font-weight:bold;
+    display:flex;
 
 
 }
@@ -197,9 +199,12 @@
 .reviews-container{
     display: flex;
     flex-direction: column;
-    margin-top: 80px;
+    justify-content: center;
+    /* margin-left:180px; */
     width: 800px;
     height:1000px;
+    margin-top: 80px;
+    align-items: center;
     /* background-color: red; */
 
 }
@@ -207,10 +212,28 @@
 .reviews-cards-container{
     display:flex;
     flex-direction: column;
-
-     height: 1000px;
+    /* flex-wrap:wrap; */
+    height: 100%;
     align-items: center;
+    justify-content: flex-start;
+     width: 450px;
+     overflow:auto;
 
-     width: 400px;
 
+}
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(184, 195, 189);
+    border-radius: 10px;
 }
