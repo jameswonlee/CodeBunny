@@ -3,83 +3,135 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color:rgb(4, 72, 4);
-    border:2px solid rgb(4, 72, 4);
-    width: 30%;
-    height: 50%;
-    padding: 2%;
-    margin: 5% 5%
-}
-
-h1 {
-    display:flex;
-    justify-content: flex-start;
+    align-items:center;
+    color: rgb(81, 81, 81);
+    /* border:2px solid rgb(4, 72, 4); */
+    width: 40%;
+    height: 70vh;
+    margin-left: 100px;
 
 }
-
-.user-image{
-    border-radius: 4%;
-    margin: 5% 0%;
-}
-
-
-.coder-details{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2% 0%;
-
-}
-
-.coder-details-headings{
-    /* display: flex;
-    flex-direction: column; */
-    font-weight: bold;
-    text-decoration: underline;
-    padding: 2% 0%;
-}
-
-.coder-detail-page-container{
+.coder-profile-image-name-container{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 160px;
+}
+.coder-info-title {
+    display: flex;
+    justify-content: center;
+    /* background-color: white; */
+    width:fit-content;
+    font-weight: bolder;
+    color:white;
+    font-size: 70px;
+    text-shadow: 1px 1px 2px grey;
+    margin-bottom: 10px;
+
+}
+.coder-container > div {
+    margin-top: -1px;
+}
+.coder-user-image {
+    border-radius: 50%;
+    /* margin: 0% 7%; */
+    background-color: white;
+    opacity: 1.0;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 35px;
+    margin-right: 20px;
+    box-shadow:1px 1px 4px 1.5px rgb(71, 71, 71);
+
+}
+
+
+.coder-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 0.7);
+    width: 350px;
+    color:rgb(85, 83, 83);
+
+    /* border: 1px solid rgb(150, 150, 150); */
+    box-shadow:1px 1px 4px 1.5px rgb(208, 208, 208);
+
+}
+
+.coder-details-headings {
+    /* display: flex;
+    flex-direction: column; */
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: bold;
+    /* text-decoration: underline; */
+    margin-bottom: 1px solid rgb(76, 75, 75);
+    padding: 10px;
+    font-size: 20px;
+    font-weight:bold;
+
+}
+
+.coder-detail-page-container {
+    display: flex;
+    flex-direction: row;
+    background-image: url("https://d32ijn7u0aqfv4.cloudfront.net/wp/wp-content/uploads/raw/SOMN0721067_1560x880_desktop.jpg");
+    height: 90vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 
 
 
-.user-photo{
+.user-photo {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin: 10px;
 }
 
 .user-image{
-    padding-right: 5%
+    border-radius: 50%;
 }
 
-.review-user-name{
+.review-user-name {
     font-weight: bolder;
+    margin: 10px;
+    color:whitesmoke;
+    font-size: 18px;
 }
 
-.review-card{
-    border: 2px solid rgb(3, 85, 3);
+.review-card {
+    border-radius: 5px;
     padding: 5%;
-    margin:5%;
-    display:flex;
+    margin: 10px 20px 10px 10px ;
+    width: 350px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .review-header {
-        margin: 5%;
-        padding: 5%;
-        border-bottom: 2px solid black;
-        text-align: center;
-        font-size: 35px;
+    text-align:center;
+    margin: 70px 15px;
+    font-size: 40px;
+    color:rgb(242, 237, 237);
+    font-weight:bold;
+    display:flex;
+
 
 }
 
-.Review-Delete-Button{
+.Review-Delete-Button {
     display: flex;
 
     align-self: center;
@@ -89,17 +141,99 @@ h1 {
 .Create-Review-Button,
 .Edit-Delete-Button,
 .Review-Delete-Button {
-    background-color: rgb(3, 85, 3);
-    border: 1px solid black;
-    color:white;
+    background-color: rgba(12, 62, 2, 0.8);
+    border: 1px solid rgb(49, 74, 49);
+    color: white;
+    font-weight: bold;
     display: flex;
-    align-self:center;
+    align-self: center;
     justify-self: center;
-    padding:3%;
-    margin: 3%
-}
-
-.create-button-container, .Edit-Delete-Button-container {
+    padding: 12px;
+    margin: 3%;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 200px;
+    height: 50px;
     display: flex;
     justify-content: center;
+    box-shadow:0px 0px 0px 0.7px rgb(119, 119, 119);
+}
+
+.Create-Review-Button:hover,
+.Edit-Delete-Button:hover,
+.Review-Delete-Button:hover{
+    background-color: rgb(82, 112, 82);
+    cursor:pointer
+}
+
+.create-button-container,
+.Edit-Delete-Button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.coder-details-content{
+    font-weight:bold;
+    text-align: center;
+
+    padding: 8px;
+    font-size: 18px;
+    line-height: 1.5;
+    width: 100%;
+    color:rgb(121, 118, 118);
+
+
+}
+
+.review{
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.5;
+    color:rgb(215, 213, 213);
+    word-break: break-word;
+
+}
+
+.reviews-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin-left:180px; */
+    width: 800px;
+    height:1000px;
+    margin-top: 80px;
+    align-items: center;
+    /* background-color: red; */
+
+}
+
+.reviews-cards-container{
+    display:flex;
+    flex-direction: column;
+    /* flex-wrap:wrap; */
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+     width: 450px;
+     overflow:auto;
+
+
+}
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(184, 195, 189);
+    border-radius: 10px;
 }

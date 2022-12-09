@@ -1,5 +1,5 @@
-.my-projects-page-container{
-    display:flex;
+.my-projects-page-container {
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: rgb(255, 255, 255);
@@ -7,15 +7,22 @@
 
 }
 
-.projects-container{
+.projects-container {
     border: 2px solid rgb(0, 62, 31);
     padding: 5%;
     margin: 5%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgb(255, 255, 255);
-    /* width: 70%; */
+
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 2%;
+    background-color: white;
+    color: black;
+    width: 50%;
 
 }
 
@@ -25,23 +32,27 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 
-.completed-container{
-     border-top: 3px solid rgb(4, 98, 65);
-     padding: 4%;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
+.completed-container {
+    border-top: 3px solid rgb(4, 98, 65);
+    padding: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.user-projects-header, h1, h2{
-    display:block;
+
+.user-projects-header,
+h1,
+h2 {
+    display: block;
     text-align: center;
 
 }
 
-.projects-title{
+.projects-title {
     border-bottom: 2px solid rgb(3, 97, 66);
     padding-bottom: 10%;
 }
@@ -51,35 +62,60 @@
 .delete-project-button,
 .edit-delete-button {
     color: white;
-    background-color: rgb(2, 70, 2);
     margin: 10%;
     padding: 3%;
+
+    width: 70%;
+    background-color: rgba(21, 122, 95, 255);
+    border-radius: 5px;
+    color: white;
+    border-radius: 5px;
+    border-width: thin;
+    /* padding:10px; */
+    /* margin-top:2%; */
+    cursor: pointer;
 }
+
 a {
     color: white;
     text-decoration: none;
 }
 
-.projects-buttons-container{
+.projects-buttons-container {
     flex-direction: column;
     justify-content: center;
     margin-left: 10%;
-    border: 2px solid black;
     padding: 5%;
-    display:flex;
+    display: flex;
+
+    /* border: 1px solid black;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 2%;
+    background-color: white;
+    color:black; */
 
 }
 
-.project-card{
-    display:flex;
+.project-card {
+    display: flex;
     justify-content: center;
     /* flex-direction: column; */
     align-items: center;
-    margin: 10% 0%
-
-
+    margin: 5% 0%
 }
-.project-details-container{
-    border: 2px solid black;
+
+.project-details-container {
     padding: 5%;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 2%;
+    background-color: white;
+    color: black;
+    width: 100%;
+}
+
+.detail-heading-user-proj {
+    padding: 5px;
 }

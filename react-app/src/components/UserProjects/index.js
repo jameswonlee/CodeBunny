@@ -49,10 +49,10 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                 <>
                                     <div className='project-card'>
                                         <div className='project-details-container'>
-                                            <div className='detail-heading'>Project Name:</div><div>{project.name}</div>
-                                            <div className = 'detail-heading'>Start-Date:</div><div>{project.start_date}</div >
-                                            <div className='detail-heading'>End-Date:</div><div>{project.end_date}</div>
-                                            <div className='detail-heading'>Owner:</div><div>{project.owner.first_name} {project.owner.last_name}</div>
+                                            <div className='detail-heading-user-proj'><strong>Project Name:</strong> {project.name}</div>
+                                            <div className = 'detail-heading-user-proj'><strong>Start-Date:</strong> {project.start_date}</div >
+                                            <div className='detail-heading-user-proj'><strong>End-Date:</strong> {project.end_date}</div>
+                                            <div className='detail-heading-user-proj'><strong>Owner:</strong> {project.owner.first_name} {project.owner.last_name}</div>
 
                                             {/* <div className='detail-heading'>Coder: </div><div>{project.coder.user.first_name} {project.coder.user.last_name}</div>
                                             <div className = 'detail-heading' > Coder's Contact Info</div><div>{project.coder.user.email}</div> */}
@@ -77,14 +77,14 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                 <>
                                     <div className='project-card'>
                                         <div className='project-details-container'>
-                                        <div className='detail-heading'>Project Name: </div>
-                                            <div>{project.name}</div>
-                                        <div className='detail-heading'>Start-Date: </div>
-                                            <div>{project.start_date}</div>
-                                        <div className='detail-heading'>End-Date: </div>
-                                            <div>{project.end_date}</div>
-                                        <div className='detail-heading'>Owner: </div>
-                                            <div>{project.owner.first_name} {project.owner.last_name}</div>
+                                        <div className='detail-heading-user-proj'><strong>Project Name:</strong> {project.name} </div>
+
+                                        <div className='detail-heading-user-proj'><strong>Start-Date:</strong> {project.start_date} </div>
+
+                                        <div className='detail-heading-user-proj'><strong>End-Date:</strong> {project.end_date} </div>
+
+                                        <div className='detail-heading-user-proj'><strong>Owner:</strong> {project.owner.first_name} {project.owner.last_name}</div>
+
                                     </div>
                                             <div className='projects-buttons-container'>
                                                     <button className='coder-profile-button'> <NavLink to={`/coders/${project.coder_id}`}>See More Info on your Coder</NavLink></button>
