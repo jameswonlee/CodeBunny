@@ -9,6 +9,9 @@
     border-radius: 0px;
     background-color: white;
     cursor: pointer;
+    background-color: rgb(0, 65, 0);
+    border-radius: 15px;
+    color: white;
 }
 
 .actual-button{

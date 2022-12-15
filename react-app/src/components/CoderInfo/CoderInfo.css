@@ -7,17 +7,20 @@
     color: rgb(81, 81, 81);
     /* border:2px solid rgb(4, 72, 4); */
     width: 40%;
-    height: 70vh;
+    /* height: 70px; */
+    margin-top: -80px;
     margin-left: 100px;
     margin-bottom: 100px;
 
 }
+
 .coder-profile-image-name-container{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     padding-top: 160px;
 }
+
 .coder-info-title {
     display: flex;
     justify-content: center;
@@ -204,7 +207,7 @@
     /* margin-left:180px; */
     width: 800px;
     height:1000px;
-    margin-top: 80px;
+    margin-top: 50px;
     align-items: center;
     /* background-color: red; */
 
@@ -213,6 +216,7 @@
 .reviews-cards-container{
     display:flex;
     flex-direction: column;
+    margin-left: 17px;
     /* flex-wrap:wrap; */
     height: 100%;
     align-items: center;

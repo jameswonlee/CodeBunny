@@ -2,9 +2,7 @@
     display: flex;
     justify-content: center;
     padding-top: 2%;
-    /* border-color: rgb(0, 255, 76);
-    border-style: solid; */
-
+    height: 770px;
 }
 
 .Inner-Container {
@@ -48,10 +46,6 @@
 
 .button-container {
     text-align: center;
-    /* border-color: rgb(255, 0, 247);
-    border-style: solid; */
-    /* align-content: center;
-    align-items: center; */
 }
 
 .Create-Spot-button {
@@ -64,7 +58,6 @@
     padding: 10px;
     margin-top: 2%;
     cursor: pointer;
-    /* border: none */
 }
 
 .Create-Spot-button:hover {
@@ -77,7 +70,6 @@
     padding: 10px;
     margin-top: 2%;
     cursor: pointer;
-    /* border: none */
 }
 
 .check-box-box {
