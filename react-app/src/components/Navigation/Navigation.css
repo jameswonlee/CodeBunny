@@ -3,7 +3,6 @@
 .navbar-main{
 display: flex;
 flex-direction: row;
-/* position: sticky; this is suppose to maintain the container stuck to thee top but not working */
 border-color: rgb(164, 165, 165);
 border-bottom-style: solid;
 justify-content: center;
@@ -11,14 +10,13 @@ position:sticky;
 z-index:4;
 top:0px;
 background-color: white;
+height: 70px;
 }
 
 .navbar-inner-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* border-color: grey; */
-    /* border-style: solid; */
     width:80%;
 }
 
@@ -26,14 +24,11 @@ background-color: white;
 .Home-Container{
     display: flex;
     align-items: center;
-    /* margin-left: 8% */
 }
 
 .logo{
     max-height: 200px;
     max-width: 200px;
-    /* border-color: rgb(255, 0, 144);
-    border-style: solid; */
 }
 
 
@@ -43,16 +38,11 @@ background-color: white;
 
 .Create-a-spot-Button{
     display: flex;
-
-/* border-color: rgb(255, 0, 144);
-    border-style: solid; */
 }
 
 .logged-out-profile-container{
     display: flex;
     justify-content: flex-end;
-    /* border-style: solid;
-    border-color: green; */
     width: 100%;
 }
 
@@ -61,27 +51,25 @@ background-color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* margin-right: 300px; */
-    /* border-color: rgb(255, 0, 144);
-    border-style: solid; */
     width: 25%;
     justify-content: space-between;
 
 }
 
 .become-host-button{
-    background-color: white;
-    color: rgb(11, 58,13);
+    background-color: transparent;
     border-radius:0px;
     padding: 15px;
     font-size: larger;
     border: 0 solid #ddd;
     cursor: pointer;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .become-host-button:hover{
-    background-color: rgb(11, 58,13);
-    color: white;
+    background-color: rgb(236, 235, 235);
+    color: rgb(11, 58,13);
     border: none;
+    border-radius: 15px;
 }

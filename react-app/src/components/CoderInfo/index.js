@@ -12,16 +12,13 @@ import './CoderInfo.css'
 const CoderInfo = () => {
     const dispatch = useDispatch();
     const history = useHistory()
-    // const [isLoaded, setIsLoaded] = useState(false)
     let { coderId } = useParams();
     coderId = parseInt(coderId)
     useEffect(() => {
         dispatch(loadAllCoders())
         dispatch(loadAllReviews())
-        // dispatch(loadOneCoder(coderId))
     }, [dispatch, coderId])
 
-    console.log('coderId', coderId)
     const sessionUser = useSelector(state => state.session.user);
     const reviewInfo = useSelector(state => state.reviews)
     const CodersUserId = useSelector(state => state.coders.user_id)
@@ -31,19 +28,10 @@ const CoderInfo = () => {
     }
 
     let currCoder = allCoders.filter(coder => coder.id === coderId)[0]
-    console.log('currCoder', currCoder)
 
-
-
-
-
-    if (!currCoder){
+    if (!currCoder) {
         return null
     }
-
-    // if (!sessionUser){
-    //     return null
-    // }
 
     let sessionUserId;
 
@@ -51,38 +39,11 @@ const CoderInfo = () => {
         sessionUserId = sessionUser.id
     }
 
-    // console.log("this is UserId", sessionUser.id)
-
-    // const reviewsData = useSelector(state => state.reviews);
-
     const reviewInfoArray = Object.values(reviewInfo)
     const reviewsByUserId = reviewInfoArray.filter(item => item.user_id === sessionUserId)
     const reviewsByCoderId = reviewsByUserId.filter(element => element.coder_id === +coderId)
-    // const reviewOfUser = reviewsByUserId.find(element => element.userId === sessionUserId)
-    // console.log("this is codersUserID", CodersUserId)
-    // console.log("this si reviewsByCoderId", reviewsByCoderId)
-    // console.log("this is reviewInfo", reviewInfo)
-    // console.log("this is the Object values of review Info", reviewInfoArray)
-    // console.log("this is reviewsByUserId", reviewsByUserId)
 
     let girlNames = ['Marnie']
-
-
-
-
-    // let coder = allCoders.filter(coder => coder.id === coderId)
-    // coder = coder[0]
-
-    // console.log("CODER IS", coder)
-
-
-    // if (!coder) {
-    //     return null
-    // }
-
-    // if (!coder.user) {
-    //     return null
-    // }
 
 
     const deleteHandler = async (e) => {
@@ -120,13 +81,6 @@ const CoderInfo = () => {
         </>
     }
 
-    // let seeCreateUpdateButton;
-    // seeCreateUpdateButton = (
-    //     <div className='create-button-container'>
-    //         <button className="Create-Review-Button" type="submit">Edit Your Profile!</button>
-    //     </div>
-    // )
-
     let editButton;
     if (sessionUser && sessionUser.id === currCoder.user_id) {
         editButton = (
@@ -140,40 +94,39 @@ const CoderInfo = () => {
             </>
         )
     }
-let currCoderfirst_name
-let currCoderId
-let currCoderDailyRate
-if(currCoder){
-    currCoderfirst_name = currCoder.user.first_name
-    currCoderId = currCoder.id
-    currCoderDailyRate = currCoder.daily_rate
-}
+    let currCoderfirst_name
+    let currCoderId
+    let currCoderDailyRate
+    if (currCoder) {
+        currCoderfirst_name = currCoder.user.first_name
+        currCoderId = currCoder.id
+        currCoderDailyRate = currCoder.daily_rate
+    }
 
 
     return (
         <>
             <div className="coder-detail-page-container">
                 <div className='coder-container'>
-                <div className='coder-profile-image-name-container'>
+                    <div className='coder-profile-image-name-container'>
+                        <div>
+                            <img
+                                width={300}
+                                height={300}
+                                src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoderfirst_name) ? "women" : "men"}/${currCoderId}.jpg`}
+                                alt="random portrait"
+                                className="coder-user-image">
+                            </img>
+                        </div>
 
-                    <div>
-                        <img
-                            width={300}
-                            height={300}
-                            src={`https://randomuser.me/api/portraits/${girlNames.includes(currCoderfirst_name) ? "women" : "men"}/${currCoderId}.jpg`}
-                            alt="random portrait"
-                            className="coder-user-image">
-                        </img>
+                        <div className='coder-header-name-container'>
+                            <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
+                        </div>
+
                     </div>
-
-                    <div className='coder-header-name-container'>
-                        <h1 className="coder-info-title">{currCoder && currCoder.user.first_name} {currCoder && currCoder.user.last_name}</h1>
-                    </div>
-
-                </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>Contact</div>
-                       <div className='coder-details-content'> {currCoder && currCoder.user.email}</div>
+                        <div className='coder-details-content'> {currCoder && currCoder.user.email}</div>
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>Bio:</div>
@@ -181,7 +134,7 @@ if(currCoder){
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>Experience</div>
-                       <div className='coder-details-content'>{currCoder && currCoder.experience}</div>
+                        <div className='coder-details-content'>{currCoder && currCoder.experience}</div>
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>Daily Rate</div>
@@ -189,7 +142,7 @@ if(currCoder){
                     </div>
                     <div className='coder-details'>
                         <div className='coder-details-headings'>Skills</div>
-                       <div className='coder-details-content'>{currCoder && currCoder.skills.map(skill => {
+                        <div className='coder-details-content'>{currCoder && currCoder.skills.map(skill => {
                             return (
                                 <div key={skill.id}>{skill.skill_name} </div>
                             )
@@ -214,7 +167,7 @@ if(currCoder){
                 </div>
 
                 <div>
-                    <Reviews coderName = {currCoder.user.first_name} coderId={coderId} />
+                    <Reviews coderName={currCoder.user.first_name} coderId={coderId} />
                 </div>
 
 

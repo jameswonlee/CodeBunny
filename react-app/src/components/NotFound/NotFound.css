@@ -1,20 +1,10 @@
-.home-container{
-    display: flex;
+.not-found-container{
     width: 100%;
-    /* border-color: rgb(124, 0, 128);
-    border-style: solid; */
-}
+    height: 800px;
+    background-color: rgb(238, 237, 237);
+    background-image: url('./Images/notfoundimage.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:calc(80% - 100px)
 
-.image-one-container{
-    position:absolute;
-    width: 82%;
-    z-index: auto;
-    margin-top: 100px;
-    /* border-color: green;
-    border-style: solid; */
-}
-
-.group-coding{
-    width: 100%;
-    object-fit: fill;
 }
