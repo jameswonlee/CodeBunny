@@ -5,6 +5,7 @@ import {createproject, getprojects} from "../../store/projects"
 import { loadAllCoders } from "../../store/coders";
 import { useParams } from 'react-router-dom';
 import './NewProjectConfirmation.css'
+import dayjs from "dayjs"
 function NewProjectConfirmation() {
 
     function to_integer(date){
@@ -64,8 +65,8 @@ function NewProjectConfirmation() {
             <h3 className = "deets">Project Details:</h3>
             <div className = "project-stats"><strong>Project Name:</strong> {confirmProject.name}</div>
             <div className = "project-stats"><strong>Description:</strong> {confirmProject.description}</div>
-            <div className = "project-stats"><strong>Start Date:</strong> {confirmProject.start_date}</div>
-            <div className = "project-stats"><strong>End Date:</strong> {confirmProject.end_date}</div>
+            <div className = "project-stats"><strong>Start Date:</strong> {dayjs(confirmProject.start_date).format("MM-DD-YYYY")}</div>
+            <div className = "project-stats"><strong>End Date:</strong> {dayjs(confirmProject.end_date).format("MM-DD-YYYY")}</div>
         {/* </div>
         <div className="project-details-confirmation-container"> */}
             <h3 className = "deets">Coder Details:</h3>
