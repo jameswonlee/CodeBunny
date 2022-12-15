@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: rgb(255, 255, 255);
-
-
+    background-image: url("./user-projects-background.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .projects-container {
@@ -14,25 +15,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
-
+    background-color: black;
+    opacity: 90%;
     border: 1px solid black;
     border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: white;
-    color: black;
+    color: white;
     width: 50%;
-
 }
 
 .upcoming-container {
-    /* border: 2px solid rgb(3, 97, 66); */
     padding: 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    opacity: 100%;
 }
 
 
@@ -42,6 +40,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    opacity: 100%;
 }
 
 .user-projects-header,
@@ -49,7 +48,6 @@ h1,
 h2 {
     display: block;
     text-align: center;
-
 }
 
 .projects-title {
@@ -57,13 +55,12 @@ h2 {
     padding-bottom: 10%;
 }
 
-
 .coder-profile-button,
 .delete-project-button,
 .edit-delete-button {
     color: white;
     margin: 10%;
-    padding: 3%;
+    padding: 15px;
 
     width: 70%;
     background-color: rgba(21, 122, 95, 255);
@@ -71,8 +68,6 @@ h2 {
     color: white;
     border-radius: 5px;
     border-width: thin;
-    /* padding:10px; */
-    /* margin-top:2%; */
     cursor: pointer;
 }
 
@@ -87,14 +82,6 @@ a {
     margin-left: 10%;
     padding: 5%;
     display: flex;
-
-    /* border: 1px solid black;
-    border-radius: 5px;
-    margin: 2%;
-    padding: 2%;
-    background-color: white;
-    color:black; */
-
 }
 
 .project-card {

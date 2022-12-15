@@ -106,7 +106,7 @@ export const deleteReview = (payload) => async dispatch => {
 
 /* ******************************** REDUCER *********************************** */
 
-const initialState = { }
+const initialState = {}
 
 const reviews = (state = initialState, action) => {
     let newState = {}
