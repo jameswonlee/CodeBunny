@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-image: url("./user-projects-background.jpeg");
-    background-position: center;
+    background-image: url("https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-HD-Solid-Color-Wallpaper-Download.jpg");
+    /* background-position: center; */
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     background-color: black;
-    opacity: 90%;
+    opacity: 80%;
     border: 1px solid black;
     border-radius: 5px;
     margin: 2%;
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    opacity: 100%;
+ 
 }
 
 
@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    opacity: 100%;
+    
 }
 
 .user-projects-header,
@@ -89,17 +89,17 @@ a {
     justify-content: center;
     /* flex-direction: column; */
     align-items: center;
-    margin: 5% 0%
+    margin: 0% 
 }
 
 .project-details-container {
-    padding: 5%;
+    padding: 0%;
     border: 1px solid black;
     border-radius: 5px;
     margin: 2%;
-    padding: 2%;
-    background-color: white;
-    color: black;
+    /* padding: 2%; */
+    /* background-color: white; */
+    color: white;
     width: 100%;
 }
 
