@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { getprojects } from '../../store/projects';
 import './CoderJobs.css'
+import dayjs from "dayjs"
 
 
 
@@ -43,8 +44,8 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                     <>
                                         <div className="job-card">
                                             <div className='detail-heading'>Project Name:</div><div>{project.name}</div>
-                                            <div className = 'detail-heading'>Start-Date:</div><div>{project.start_date}</div >
-                                            <div className='detail-heading'>End-Date:</div><div>{project.end_date}</div>
+                                            <div className = 'detail-heading'>Start-Date:</div><div>{dayjs(project.start_date).format("MM-DD-YYYY")}</div >
+                                            <div className='detail-heading'>End-Date:</div><div>{dayjs(project.end_date).format("MM-DD-YYYY")}</div>
                                             <div className='detail-heading'>Owner:</div><div>{project.owner.first_name} {project.owner.last_name}</div>
 
                                             {/* <div className='detail-heading'>Coder: </div><div>{project.coder.user.first_name} {project.coder.user.last_name}</div>

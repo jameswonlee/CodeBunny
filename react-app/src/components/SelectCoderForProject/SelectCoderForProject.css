@@ -48,8 +48,9 @@
     border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: white;
-    color: black;
+    background-color: black;
+    opacity: 80%;
+    color: white;
     width: 120%
 }
 
@@ -59,6 +60,7 @@
     text-align: center;
     justify-content: center;
     margin: 2%;
+    
 }
 
 .select-coder-name {
@@ -73,6 +75,7 @@
     align-items: center;
     width: 700px;
     flex-wrap: wrap;
+    
     /* border-color: yellow;
     border-style: solid; */
 }
@@ -121,4 +124,13 @@
     margin: 5px;
     font-size: 14px;
 
+}
+
+.select-coder-jason-whole-page{
+background-image: url("https://cdn.wallpapersafari.com/95/53/TGPwar.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+}
+.select-a-coder-title{
+    color: white;
 }

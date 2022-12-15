@@ -94,8 +94,9 @@ function ProjectForm() {
               )}
           </div>
           <div className="form-container">
-            <label>
+            <label className = "labels">
               Project Name
+              </label>
               <input
                 className="form-inputs"
                 required
@@ -105,9 +106,10 @@ function ProjectForm() {
                 value={name}
                 placeholder="Project Name"
               />
-            </label>
-            <label>
+            
+            <label className = "labels">
               Description
+              </label>
               <input
                 className="form-inputs"
                 required
@@ -115,11 +117,12 @@ function ProjectForm() {
                 name="description"
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
-                placeholder="Tell us about all your Project!"
+                placeholder="Tell us about your project!"
               />
-            </label>
-            <label>
+            
+            <label className = "labels">
               Start Date
+              </label>
               <input
                 className="form-inputs"
                 required
@@ -131,9 +134,10 @@ function ProjectForm() {
                 }}
                 value={start_date}
               />
-            </label>
-            <label>
+            
+            <label className = "labels">
               End Date
+              </label>
               <input
                 className="form-inputs"
                 required
@@ -145,9 +149,9 @@ function ProjectForm() {
                 }}
                 value={end_date}
               />
-            </label>
-            <label>
-              <strong>Select Your Coding Skills</strong>
+            
+            <label className = "labels">
+              <strong>Select the skills required</strong>
               {/* <input
         className="form-inputs"
         required
