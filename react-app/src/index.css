@@ -7,8 +7,6 @@
     text-decoration: none;
 }
 
-
-
 .footer {
     display: flex;
     flex-direction: column;
@@ -16,7 +14,7 @@
     align-items: center;
     position: sticky;
     bottom: 0;
-    background-color: rgb(243, 250, 243);
+    background-color: rgba(221, 251, 220, 0.9);
     height: 20px;
     padding-bottom: 30px;
     padding-top: 30px;
