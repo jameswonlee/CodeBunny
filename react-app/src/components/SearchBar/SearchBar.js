@@ -54,13 +54,13 @@ if (!codersArray){
     const filteredCoders = getFilteredItems(search, codersArray)
     // console.log("this is filteredCoders", filteredCoders)
     return (
-<>
+
 <div className = "whole-container">
         <div className="search-bar-container">
             <div className="search-bar">
                 <input className="search-input"
                     type="search"
-                    placeholder="Search for coders with the coding skills you need!"
+                    placeholder="Ex. Python, Javascript, React, Java, Camel, C++..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
@@ -71,9 +71,9 @@ if (!codersArray){
         </div>
 
 
-            <div className='search-results-cards'>
-            {search ==='' ? (<h1 className='no-search-bar'>What Skills Are You Looking For?</h1>): (<div className='search-header'>Here are coders that match your search results</div>)}
-                {filteredCoders.map(coder => {
+        <div className='search-results-cards'>
+            {search ==='' ? (<h1 className='no-search-bar'>What Skills Are You Looking For?</h1>):
+               (filteredCoders?.map(coder => {
                     return (
                     <div className="coder-shortbio-container">
                         <div className="coder-results-details-title">{coder.user.first_name} {coder.user.last_name}</div>
@@ -83,10 +83,10 @@ if (!codersArray){
                         <button className="button-profile"><NavLink className={"button-profile-link"} to={`/coders/${coder.id}`}>View Profile</NavLink></button>
                     </div>
                     )
-                })}
+                }))}
 
             </div>
         </div>
-        </>
+
     )
 }

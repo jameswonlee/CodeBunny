@@ -26,9 +26,6 @@ const GetAllSpots = () => {
 
     return (
         <div className="home-container">
-            {/* <div className= "image-one-container">
-                <img className= "group-coding" src= {whitebackground} alt="coding letters" ></img>
-            </div> */}
             <div><SearchBar/></div>
         </div>
 
