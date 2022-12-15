@@ -6,6 +6,10 @@
     justify-content: center;
     align-items: center;
 
+    background-image: url("https://wallpaperaccess.com/full/1218147.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+
 }
 
 .project-details-confirmation-container {
@@ -31,8 +35,9 @@
     border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: white;
-    color: black;
+    background-color: black;
+    opacity: 80%;
+    color: white;
     /* width: 70% */
 }
 
@@ -64,6 +69,7 @@
 
 .project-stats {
     padding: 5px;
+    color: white;
 }
 
 .deets {

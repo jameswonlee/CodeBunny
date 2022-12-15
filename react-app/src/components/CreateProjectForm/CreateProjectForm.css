@@ -3,16 +3,19 @@
     justify-content: center;
     padding-top: 2%;
     height: 770px;
-}
+     background-image: url("https://images.unsplash.com/photo-1504253163759-c23fccaebb55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
+     background-size: 100%;
+
+    }
 
 .Inner-Container {
     justify-content: center;
     width: 40%;
-    border-color: rgb(0, 0, 0);
+    /* border-color: rgb(0, 0, 0); */
     border-style: solid;
     border-radius: 0px;
     border-width: thin;
-    border: none;
+    
 }
 
 .title-box {
@@ -41,7 +44,7 @@
     font-family: "Montserrat";
     padding: 10px;
     border-radius: 0px;
-    border-width: thin
+    border-width: thin;
 }
 
 .button-container {
@@ -78,4 +81,8 @@
 
 .coding-name {
     margin-right: 10px;
+}
+
+.labels {
+    font-weight: bold;
 }
