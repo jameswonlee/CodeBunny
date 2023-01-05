@@ -42,7 +42,7 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
 
                                 return(
                                     <>
-                                        <div className="job-card">
+                                        <div className="job-card2">
                                             <div className='detail-heading'>Project Name:</div><div>{project.name}</div>
                                             <div className = 'detail-heading'>Start-Date:</div><div>{dayjs(project.start_date).format("MM-DD-YYYY")}</div >
                                             <div className='detail-heading'>End-Date:</div><div>{dayjs(project.end_date).format("MM-DD-YYYY")}</div>

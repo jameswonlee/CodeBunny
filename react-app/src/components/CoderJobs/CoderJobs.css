@@ -110,7 +110,7 @@ a {
     align-items: center;
     margin: 10% 0%;
     padding: 10%;
-    border: 2px solid black;
+    border-bottom: 2px solid rgb(0, 62, 31);
 }
 
 .jobs-details-container {
