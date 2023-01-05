@@ -68,8 +68,8 @@ let upcomingProjects = userProjects.filter(project => project.completed === fals
                                 <>
                                     <div>
                                         <div>Project Name: {project.name}</div>
-                                        <div>Start-Date:{project.start_date}</div>
-                                        <div>End-Date: {project.end_date}</div>
+                                        <div>Start-Date:{dayjs(project.start_date).format("MM-DD-YYYY")}</div>
+                                        <div>End-Date: {dayjs(project.end_date).format("MM-DD-YYYY")}</div>
                                         <div>Owner: {project.owner.first_name} {project.owner.last_name}</div>
                                         {/* <div>Coder: {project.coder.user.first_name} {project.coder.user.last_name}</div>
                                         <div>Coder's Contact Info: {project.coder.user.email}</div> */}
