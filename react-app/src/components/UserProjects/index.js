@@ -76,9 +76,9 @@ const UserProjects = () => {
                                         <div className='project-details-container'>
                                             <div className='detail-heading-user-proj'><strong>Project Name:</strong> {project.name} </div>
 
-                                            <div className='detail-heading-user-proj'><strong>Start-Date:</strong> {project.start_date} </div>
+                                            <div className='detail-heading-user-proj'><strong>Start-Date:</strong> {dayjs(project.start_date).format("MM-DD-YYYY")} </div>
 
-                                            <div className='detail-heading-user-proj'><strong>End-Date:</strong> {project.end_date} </div>
+                                            <div className='detail-heading-user-proj'><strong>End-Date:</strong> {dayjs(project.end_date).format("MM-DD-YYYY")} </div>
 
                                             <div className='detail-heading-user-proj'><strong>Owner:</strong> {project.owner.first_name} {project.owner.last_name}</div>
 
