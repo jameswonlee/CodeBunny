@@ -36,8 +36,7 @@ height: 850px;
     border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: black;
-    opacity: 80%;
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
     /* width: 70% */
 }
