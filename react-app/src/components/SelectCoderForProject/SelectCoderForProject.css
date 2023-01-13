@@ -106,6 +106,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    min-height: 725px;;
     /* border-color: green;
     border-style: solid; */
 }
