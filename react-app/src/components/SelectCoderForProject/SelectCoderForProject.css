@@ -48,15 +48,13 @@
     border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: black;
-    opacity: 80%;
+    background-color: rgba(0, 0, 0, .7);
     color: white;
     width: 120%
 }
 
 .select-coder-details {
     display: flex;
-    /* align-content: center; */
     text-align: center;
     justify-content: center;
     margin: 2%;
@@ -113,7 +111,7 @@
 }
 
 .skill-name {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
     /* text-align: center; */
     font-weight: bold;
