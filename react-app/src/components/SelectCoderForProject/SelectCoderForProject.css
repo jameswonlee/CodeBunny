@@ -48,7 +48,7 @@
     border-radius: 5px;
     margin: 2%;
     padding: 2%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, .7);
     color: white;
     width: 120%
 }
@@ -111,7 +111,7 @@
 }
 
 .skill-name {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
     /* text-align: center; */
     font-weight: bold;
